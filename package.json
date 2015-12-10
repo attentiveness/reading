@@ -6,6 +6,7 @@
     "start": "react-native start"
   },
   "dependencies": {
+    "immutable": "^3.7.5",
     "react-native": "^0.16.0"
   }
 }
