@@ -4,6 +4,8 @@ var React = require('react-native');
 var {
   StyleSheet,
   ListView,
+  PullToRefreshViewAndroid,
+  Platform,
   Text,
   View,
 } = React;
@@ -20,6 +22,7 @@ var App = React.createClass({
 
   getInitialState: function() {
     return {
+      isRefreshing: false,
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
@@ -31,6 +34,13 @@ var App = React.createClass({
     this.fetchData();
   },
 
+  _onRefresh: function() {
+    this.setState({
+      isRefreshing: true,
+    });
+    this.fetchData();
+  },
+
   fetchData: function() {
     Request.request(WEXIN_ARTICLE_LIST, 'get')
       .then((articleList) => {
@@ -38,6 +48,7 @@ var App = React.createClass({
           dataSource: this.state.dataSource.cloneWithRows(articleList.showapi_res_body.pagebean.contentlist),
           loaded: true,
           ds: articleList.showapi_res_body.pagebean.contentlist,
+          isRefreshing: false,
         });
       })
       .catch((error) => {
@@ -58,14 +69,30 @@ var App = React.createClass({
         </View>
       );
     }
-    return (
-      <RefreshableListView
-        dataSource={this.state.dataSource}
-        renderRow={this.renderItem}
-        loadData={this.fetchData}
-        refreshDescription="Refreshing articles"
-      />
-    );
+    if (Platform.OS === 'android') {
+      return (
+        <PullToRefreshViewAndroid
+          style={ {flex: 1} }
+          refreshing={ this.state.isRefreshing }
+          onRefresh={ this._onRefresh }
+          colors={ ['#ffaa66cc', '#ff00ddff', '#ffffbb33', '#ffff4444'] }>
+          <ListView
+            dataSource={ this.state.dataSource }
+            renderRow={ this.renderItem }
+            style={ styles.listView } />
+        </PullToRefreshViewAndroid>
+      );
+    } else {
+      return (
+        <RefreshableListView
+          dataSource={this.state.dataSource}
+          renderRow={this.renderItem}
+          style={ styles.listView }
+          loadData={this.fetchData}
+          refreshDescription="Refreshing articles"
+        />
+      );
+    }
   },
 
   renderItem: function(article, sectionID, rowID) {
