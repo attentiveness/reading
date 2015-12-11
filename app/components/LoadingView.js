@@ -22,7 +22,7 @@ var LoadingView = React.createClass({
     } else {
       return (
         <View style={ styles.loading }>
-              <ProgressViewIOS />
+              <ProgressViewIOS progress={1}/>
               <Text style={ styles.loadingText }>数据加载中...</Text>
             </View>
       );

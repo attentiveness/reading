@@ -7,6 +7,7 @@ var {
   Text,
   View,
 } = React;
+var RefreshableListView = require('react-native-refreshable-listview')
 var RequestService = require('../service/RequestService');
 var LoadingView = require('../components/LoadingView');
 
@@ -58,9 +59,12 @@ var App = React.createClass({
       );
     }
     return (
-      <ListView dataSource={ this.state.dataSource }
-                renderRow={ this.renderItem }
-                style={ styles.listView } />
+      <RefreshableListView
+        dataSource={this.state.dataSource}
+        renderRow={this.renderItem}
+        loadData={this.fetchData}
+        refreshDescription="Refreshing articles"
+      />
     );
   },
 
