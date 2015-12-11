@@ -1,5 +1,5 @@
 # reading
-Reading App  Write In React-Native
+Reading App  Write In React-Native（studying and programing）
 
 ## How to install
 ```
