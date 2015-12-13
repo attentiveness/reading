@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react-native');
-var {
+import React from 'react-native';
+let {
   StyleSheet,
   ListView,
   PullToRefreshViewAndroid,
@@ -9,9 +9,9 @@ var {
   Text,
   View,
 } = React;
-var RefreshableListView = require('react-native-refreshable-listview')
-var RequestService = require('../service/RequestService');
-var LoadingView = require('../components/LoadingView');
+import RefreshableListView from 'react-native-refreshable-listview';
+import RequestService from '../service/RequestService';
+import LoadingView from '../components/LoadingView';
 
 var Request = new RequestService();
 
@@ -106,7 +106,7 @@ var App = React.createClass({
   }
 });
 
-var styles = StyleSheet.create({
+let styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',

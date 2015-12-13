@@ -1,7 +1,7 @@
 'use strict';
 
-var React = require('react-native');
-var {
+import React from 'react-native';
+let {
   ProgressBarAndroid,
   ProgressViewIOS,
   Platform,
@@ -30,7 +30,7 @@ var LoadingView = React.createClass({
   },
 });
 
-var styles = StyleSheet.create({
+let styles = StyleSheet.create({
   loading: {
     flex: 1,
     alignItems: 'center',

@@ -1,10 +1,10 @@
 'use strict';
 
-var React = require('react-native');
-var App = require('./app/containers/app');
+import React from 'react-native';
+import App from './app/containers/app'
 
-var {
-  AppRegistry,
+let {
+	AppRegistry,
 } = React;
 
 AppRegistry.registerComponent('reading', () => App);

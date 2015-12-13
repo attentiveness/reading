@@ -1,6 +1,6 @@
 'use strict'
 
-var HOST = 'http://apis.baidu.com/';
+let HOST = 'http://apis.baidu.com/';
 
 function RequestService() { // Singleton pattern
 	if (typeof RequestService.instance === 'object') {
