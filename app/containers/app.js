@@ -1,13 +1,13 @@
 'use strict';
 
 import React from 'react-native';
-let {
+const {
   StyleSheet,
   ListView,
   PullToRefreshViewAndroid,
   Platform,
   Text,
-  View,
+  View
 } = React;
 import RefreshableListView from 'react-native-refreshable-listview';
 import RequestService from '../service/RequestService';
@@ -17,31 +17,31 @@ var Request = new RequestService();
 
 var WEXIN_ARTICLE_LIST = 'showapi_open_bus/weixin/weixin_article_list';
 
-var App = React.createClass({
-  mixins: [React.addons.PureRenderMixin],
-
-  getInitialState: function() {
-    return {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       isRefreshing: false,
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
-      loaded: false,
+      loaded: false
     };
-  },
+    this.onRefresh = this.onRefresh.bind(this);
+  }
 
-  componentDidMount: function() {
+  componentDidMount() {
     this.fetchData();
-  },
+  }
 
-  _onRefresh: function() {
+  onRefresh() {
     this.setState({
-      isRefreshing: true,
+      isRefreshing: true
     });
     this.fetchData();
-  },
+  }
 
-  fetchData: function() {
+  fetchData() {
     Request.request(WEXIN_ARTICLE_LIST, 'get')
       .then((articleList) => {
         this.setState({
@@ -56,9 +56,19 @@ var App = React.createClass({
           loaded: true,
         });
       })
-  },
+  }
 
-  render: function() {
+  renderItem(article, sectionID, rowID) {
+    return (
+      <View style={ styles.container }>
+        <Text style={ styles.title }>
+          { article.title }
+        </Text>
+      </View>
+    )
+  }
+
+  render() {
     if (!this.state.loaded) {
       return <LoadingView/>;
     }
@@ -93,18 +103,8 @@ var App = React.createClass({
         />
       );
     }
-  },
-
-  renderItem: function(article, sectionID, rowID) {
-    return (
-      <View style={ styles.container }>
-          <Text style={ styles.title }>
-                  { article.title }
-          </Text>
-      </View>
-    )
   }
-});
+}
 
 let styles = StyleSheet.create({
   container: {
@@ -132,6 +132,6 @@ let styles = StyleSheet.create({
     justifyContent: 'center',
     paddingBottom: 100,
   },
-});
+})
 
-module.exports = App;
+export default App;

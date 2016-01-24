@@ -3,7 +3,7 @@
 import React from 'react-native';
 import App from './app/containers/app'
 
-let {
+const {
 	AppRegistry,
 } = React;
 
