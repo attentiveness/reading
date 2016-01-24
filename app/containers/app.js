@@ -115,23 +115,23 @@ let styles = StyleSheet.create({
     backgroundColor: '#eeeeec',
     padding: 15,
     borderBottomColor: '#ddd',
-    borderBottomWidth: 1,
+    borderBottomWidth: 1
   },
   title: {
     flex: 3,
     fontSize: 18,
     textAlign: 'left',
-    color: '#aaaaaa',
+    color: '#aaaaaa'
   },
   listView: {
-    backgroundColor: '#eeeeec',
+    backgroundColor: '#eeeeec'
   },
   no_data: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 100,
-  },
+    paddingBottom: 100
+  }
 })
 
 export default App;

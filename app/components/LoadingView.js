@@ -34,11 +34,11 @@ let styles = StyleSheet.create({
 	loading: {
 		flex: 1,
 		alignItems: 'center',
-		justifyContent: 'center',
+		justifyContent: 'center'
 	},
 	loadingText: {
 		marginTop: 10,
-		textAlign: 'center',
+		textAlign: 'center'
 	}
 })
 
