@@ -12,6 +12,12 @@ const {
 } = React;
 import LoadingView from '../components/LoadingView';
 import {fetchArticles} from '../actions/read';
+import ReadingTabBar from './ReadingTabBar';
+import ReadingToolbar from './ReadingToolbar';
+
+let toolbarActions = [
+  {title: '分享', show: 'always'}
+]
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -27,29 +33,30 @@ class Main extends React.Component {
       })
     };
     this.onRefresh = this.onRefresh.bind(this);
+    this.renderItem = this.renderItem.bind(this);
   }
 
   componentDidMount() {
     const {dispatch} = this.props;
-    dispatch(fetchArticles(false, true))
+    dispatch(fetchArticles(false, true));
   }
 
   onRefresh() {
     const {dispatch} = this.props;
-    dispatch(fetchArticles(true, false))
+    dispatch(fetchArticles(true, false));
   }
 
   renderItem(article, sectionID, rowID) {
     return (
-      <View style={styles.container}>
+      <View style={styles.containerItem}>
         <Text style={styles.title}>
           {article.title}
         </Text>
       </View>
-    )
+    );
   }
 
-  render() {
+  renderContent() {
     const {read} = this.props;
     if (read.loading) {
       return <LoadingView/>;
@@ -95,10 +102,27 @@ class Main extends React.Component {
       />
     );
   }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <ReadingToolbar
+          actions={toolbarActions}
+          onActionSelected={this.onActionSelected}
+          title={'Reading'}
+        />
+        {this.renderContent()}
+      </View>
+    );
+  }
 }
 
 let styles = StyleSheet.create({
   container: {
+    flex: 1,
+    flexDirection: 'column'
+  },
+  containerItem: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
