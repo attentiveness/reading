@@ -1,10 +1,10 @@
 'use strict';
 
 import React from 'react-native';
-import App from './app/containers/app'
+import Root from './app/root';
 
 const {
 	AppRegistry,
 } = React;
 
-AppRegistry.registerComponent('reading', () => App);
+AppRegistry.registerComponent('reading', () => Root);

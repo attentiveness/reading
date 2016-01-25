@@ -4,16 +4,13 @@ import React from 'react-native';
 const {
   StyleSheet,
   ListView,
-  PullToRefreshViewAndroid,
-  Platform,
+  RefreshControl,
+  ScrollView,
   Text,
   View
 } = React;
-import RefreshableListView from 'react-native-refreshable-listview';
-import RequestService from '../service/RequestService';
 import LoadingView from '../components/LoadingView';
-
-var Request = new RequestService();
+import {request} from '../utils/RequestUtils';
 
 var WEXIN_ARTICLE_LIST = 'showapi_open_bus/weixin/weixin_article_list';
 
@@ -42,18 +39,18 @@ class App extends React.Component {
   }
 
   fetchData() {
-    Request.request(WEXIN_ARTICLE_LIST, 'get')
+    request(WEXIN_ARTICLE_LIST, 'get')
       .then((articleList) => {
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(articleList.showapi_res_body.pagebean.contentlist),
           loaded: true,
           ds: articleList.showapi_res_body.pagebean.contentlist,
-          isRefreshing: false,
+          isRefreshing: false
         });
       })
       .catch((error) => {
         this.setState({
-          loaded: true,
+          loaded: true
         });
       })
   }
@@ -74,35 +71,43 @@ class App extends React.Component {
     }
     if (this.state.ds == undefined || this.state.ds.length == 0) {
       return (
-        <View style={ styles.no_data }>
-          <Text style={ {fontSize: 16} }>没有数据</Text>
-        </View>
+        <ScrollView
+          automaticallyAdjustContentInsets={false}
+          horizontal={false}
+          contentContainerStyle={styles.no_data}
+          style={{flex: 1}}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.isRefreshing}
+              onRefresh={this.onRefresh}
+              title="Loading..."
+              colors={['#ffaa66cc', '#ff00ddff', '#ffffbb33', '#ffff4444']}
+            />
+          }
+        >
+          <View style={{alignItems: 'center'}}>
+            <Text style={{fontSize: 16}}>
+              目前没有数据
+            </Text>
+          </View>
+        </ScrollView>
       );
     }
-    if (Platform.OS === 'android') {
-      return (
-        <PullToRefreshViewAndroid
-          style={ {flex: 1} }
-          refreshing={ this.state.isRefreshing }
-          onRefresh={ this._onRefresh }
-          colors={ ['#ffaa66cc', '#ff00ddff', '#ffffbb33', '#ffff4444'] }>
-          <ListView
-            dataSource={ this.state.dataSource }
-            renderRow={ this.renderItem }
-            style={ styles.listView } />
-        </PullToRefreshViewAndroid>
-      );
-    } else {
-      return (
-        <RefreshableListView
-          dataSource={this.state.dataSource}
-          renderRow={this.renderItem}
-          style={ styles.listView }
-          loadData={this.fetchData}
-          refreshDescription="Refreshing articles"
-        />
-      );
-    }
+    return (
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this.renderItem}
+        style={styles.listView}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.isRefreshing}
+            onRefresh={this.onRefresh}
+            title="Loading..."
+            colors={['#ffaa66cc', '#ff00ddff', '#ffffbb33', '#ffff4444']}
+          />
+        }
+      />
+    );
   }
 }
 
