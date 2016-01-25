@@ -14,6 +14,8 @@ import LoadingView from '../components/LoadingView';
 import {fetchArticles} from '../actions/read';
 import ReadingTabBar from './ReadingTabBar';
 import ReadingToolbar from './ReadingToolbar';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
+import {ToastShort} from '../utils/ToastUtils';
 
 let toolbarActions = [
   {title: '分享', show: 'always'}
@@ -34,11 +36,16 @@ class Main extends React.Component {
     };
     this.onRefresh = this.onRefresh.bind(this);
     this.renderItem = this.renderItem.bind(this);
+    this.onActionSelected = this.onActionSelected.bind(this);
   }
 
   componentDidMount() {
     const {dispatch} = this.props;
     dispatch(fetchArticles(false, true));
+  }
+
+  onActionSelected(){
+    ToastShort('分享！');
   }
 
   onRefresh() {
@@ -111,7 +118,32 @@ class Main extends React.Component {
           onActionSelected={this.onActionSelected}
           title={'Reading'}
         />
-        {this.renderContent()}
+        <ScrollableTabView 
+          renderTabBar={() => <ReadingTabBar />}
+          tabBarBackgroundColor="#fcfcfc"
+          tabBarUnderlineColor="#3e9ce9"
+          tabBarActiveTextColor="#3e9ce9"
+        >
+          <View 
+            tabLabel="热门" 
+            style={{flex: 1}}
+          >
+            {this.renderContent()}
+          </View>
+          <View 
+            tabLabel="互联网"
+            style={{flex: 1}}
+          >
+            {this.renderContent()}
+          </View>
+          <View 
+            tabLabel="健康"
+            style={{flex: 1}}
+          >
+            {this.renderContent()}
+          </View>
+        </ScrollableTabView>
+        
       </View>
     );
   }
