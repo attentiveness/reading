@@ -8,7 +8,7 @@ import {WEXIN_ARTICLE_LIST} from '../constants/Urls';
 export function fetchArticles(isRefreshing, loading) {
 	return dispatch => {
 		dispatch(fetchArticleList(isRefreshing, loading));
-		return request(WEXIN_ARTICLE_LIST, 'get')
+		return request(WEXIN_ARTICLE_LIST + '?typeId=9', 'get')
       .then((articleList) => {
         dispatch(receiveArticleList(articleList.showapi_res_body.pagebean.contentlist));
       })
