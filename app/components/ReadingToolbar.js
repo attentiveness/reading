@@ -34,12 +34,8 @@ class ReadingToolbar extends React.Component {
 	onIconClicked() {
 		const {navigator} = this.props;
 		if (navigator) {
-			if (!NaviGoBack(navigator)) {
-				BackAndroid.exitApp();
-			};
-		} else {
-			BackAndroid.exitApp();
-		};
+			NaviGoBack(navigator);
+		}
 	}
 
 	onActionSelected(position) {
@@ -47,6 +43,7 @@ class ReadingToolbar extends React.Component {
 	}
 
 	render() {
+		const {navigator} = this.props;
 		if (this.props.customView) {
 			return (
 				<ToolbarAndroid style={styles.toolbar}>
@@ -60,7 +57,7 @@ class ReadingToolbar extends React.Component {
 					actions={this.props.actions}
 	        onActionSelected={this.onActionSelected}
 	        onIconClicked={this.onIconClicked}
-	        navIcon={require('../img/icon_left.png')}
+	        navIcon={NaviGoBack(navigator) ? require('../img/icon_left.png') : require('../img/R_logo.png')}
 	        titleColor='#fff'
 	        title={this.props.title}
 	      />

@@ -116,7 +116,7 @@ class Main extends React.Component {
         <ReadingToolbar
           actions={toolbarActions}
           onActionSelected={this.onActionSelected}
-          title={'Reading'}
+          title={'eading'}
         />
         <ScrollableTabView 
           renderTabBar={() => <ReadingTabBar />}
