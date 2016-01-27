@@ -5,7 +5,7 @@ const {
 } = React;
 import {connect} from 'react-redux';
 
-import Main from '../components/Main';
+import Main from '../pages/Main';
 
 class MainContainer extends Component {
   render() {

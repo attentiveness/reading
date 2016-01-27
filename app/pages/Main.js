@@ -12,8 +12,8 @@ const {
 } = React;
 import LoadingView from '../components/LoadingView';
 import {fetchArticles} from '../actions/read';
-import ReadingTabBar from './ReadingTabBar';
-import ReadingToolbar from './ReadingToolbar';
+import ReadingTabBar from '../components/ReadingTabBar';
+import ReadingToolbar from '../components/ReadingToolbar';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import {ToastShort} from '../utils/ToastUtils';
 
@@ -41,7 +41,9 @@ class Main extends React.Component {
 
   componentDidMount() {
     const {dispatch} = this.props;
-    dispatch(fetchArticles(false, true));
+    dispatch(fetchArticles(false, true, 0));
+    dispatch(fetchArticles(false, true, 9));
+    dispatch(fetchArticles(false, true, 18));
   }
 
   onActionSelected(){
@@ -50,7 +52,7 @@ class Main extends React.Component {
 
   onRefresh() {
     const {dispatch} = this.props;
-    dispatch(fetchArticles(true, false));
+    dispatch(fetchArticles(true, false, 18));
   }
 
   renderItem(article, sectionID, rowID) {
@@ -63,12 +65,26 @@ class Main extends React.Component {
     );
   }
 
-  renderContent() {
+  renderContent(dataSource, typeId) {
     const {read} = this.props;
     if (read.loading) {
       return <LoadingView/>;
     }
-    if (read.articleList == undefined || read.articleList.length == 0) {
+    let isEmpty = false;
+    switch (typeId) {
+      case 0:
+        isEmpty = read.hotList == undefined || read.hotList.length == 0;
+        break;
+      case 9:
+        isEmpty = read.itList == undefined || read.itList.length == 0;
+        break;
+      case 18:
+        isEmpty = read.constellationList == undefined || read.constellationList.length == 0;
+        break;
+      default:
+        break;
+    }
+    if (isEmpty) {
       return (
         <ScrollView
           automaticallyAdjustContentInsets={false}
@@ -86,13 +102,12 @@ class Main extends React.Component {
         >
           <View style={{alignItems: 'center'}}>
             <Text style={{fontSize: 16}}>
-              目前没有数据
+              目前没有数据，请刷新重试……
             </Text>
           </View>
         </ScrollView>
       );
     }
-    let dataSource = this.state.dataSource.cloneWithRows(read.articleList);
     return (
       <ListView
         dataSource={dataSource}
@@ -111,6 +126,10 @@ class Main extends React.Component {
   }
 
   render() {
+    const {read} = this.props;
+    let hotSource = this.state.dataSource.cloneWithRows(read.hotList);
+    let itSource = this.state.dataSource.cloneWithRows(read.itList);
+    let constellationSource = this.state.dataSource.cloneWithRows(read.constellationList);
     return (
       <View style={styles.container}>
         <ReadingToolbar
@@ -118,32 +137,32 @@ class Main extends React.Component {
           onActionSelected={this.onActionSelected}
           title={'eading'}
         />
-        <ScrollableTabView 
+        <ScrollableTabView
           renderTabBar={() => <ReadingTabBar />}
           tabBarBackgroundColor="#fcfcfc"
           tabBarUnderlineColor="#3e9ce9"
           tabBarActiveTextColor="#3e9ce9"
         >
-          <View 
-            tabLabel="热门" 
+          <View
+            tabLabel="热门"
             style={{flex: 1}}
           >
-            {this.renderContent()}
+            {this.renderContent(hotSource, 0)}
           </View>
-          <View 
-            tabLabel="互联网"
+          <View
+            tabLabel="科技"
             style={{flex: 1}}
           >
-            {this.renderContent()}
+            {this.renderContent(itSource, 9)}
           </View>
-          <View 
-            tabLabel="健康"
+          <View
+            tabLabel="星座"
             style={{flex: 1}}
           >
-            {this.renderContent()}
+            {this.renderContent(constellationSource, 18)}
           </View>
         </ScrollableTabView>
-        
+
       </View>
     );
   }
