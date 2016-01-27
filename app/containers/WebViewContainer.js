@@ -7,12 +7,12 @@ const {
 } = React;
 import {connect} from 'react-redux';
 
-import Main from '../pages/Main';
+import WebViewPage from '../pages/WebViewPage';
 
-class MainContainer extends Component {
+class WebViewContainer extends Component {
   render() {
     return (
-      <Main {...this.props} />
+      <WebViewPage {...this.props} />
     );
   }
 }
@@ -24,4 +24,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(MainContainer);
+export default connect(mapStateToProps)(WebViewContainer);

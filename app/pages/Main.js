@@ -7,7 +7,9 @@ const {
   RefreshControl,
   ScrollView,
   Text,
+  TouchableOpacity,
   PropTypes,
+  InteractionManager,
   View
 } = React;
 import LoadingView from '../components/LoadingView';
@@ -15,11 +17,7 @@ import {fetchArticles} from '../actions/read';
 import ReadingTabBar from '../components/ReadingTabBar';
 import ReadingToolbar from '../components/ReadingToolbar';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
-import {ToastShort} from '../utils/ToastUtils';
-
-let toolbarActions = [
-  {title: '分享', show: 'always'}
-]
+import WebViewContainer from '../containers/WebViewContainer';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -34,9 +32,7 @@ class Main extends React.Component {
         rowHasChanged: (row1, row2) => row1 !== row2,
       })
     };
-    this.onRefresh = this.onRefresh.bind(this);
     this.renderItem = this.renderItem.bind(this);
-    this.onActionSelected = this.onActionSelected.bind(this);
   }
 
   componentDidMount() {
@@ -46,22 +42,44 @@ class Main extends React.Component {
     dispatch(fetchArticles(false, true, 18));
   }
 
-  onActionSelected(){
-    ToastShort('分享！');
+  onRefresh(typeId) {
+    const {dispatch} = this.props;
+    switch (typeId) {
+      case 0:
+        dispatch(fetchArticles(true, false, 0));
+        break;
+      case 9:
+        dispatch(fetchArticles(true, false, 9));
+        break;
+      case 18:
+        dispatch(fetchArticles(true, false, 18));
+        break;
+      default:
+        break;
+    }
   }
 
-  onRefresh() {
-    const {dispatch} = this.props;
-    dispatch(fetchArticles(true, false, 18));
+  onPress(article) {
+    const {navigator} = this.props;
+    InteractionManager.runAfterInteractions(() => {
+      navigator.push({
+        component: WebViewContainer,
+        name: 'WebViewPage',
+        url: article.url,
+        title: article.userName
+      });
+    });
   }
 
   renderItem(article, sectionID, rowID) {
     return (
-      <View style={styles.containerItem}>
-        <Text style={styles.title}>
-          {article.title}
-        </Text>
-      </View>
+      <TouchableOpacity onPress={this.onPress.bind(this, article)}>
+        <View style={styles.containerItem}>
+          <Text style={styles.title}>
+            {article.title}
+          </Text>
+        </View>
+      </TouchableOpacity>
     );
   }
 
@@ -94,7 +112,7 @@ class Main extends React.Component {
           refreshControl={
             <RefreshControl
               refreshing={read.isRefreshing}
-              onRefresh={this.onRefresh}
+              onRefresh={this.onRefresh.bind(this, typeId)}
               title="Loading..."
               colors={['#ffaa66cc', '#ff00ddff', '#ffffbb33', '#ffff4444']}
             />
@@ -116,7 +134,7 @@ class Main extends React.Component {
         refreshControl={
           <RefreshControl
             refreshing={read.isRefreshing}
-            onRefresh={this.onRefresh}
+            onRefresh={this.onRefresh.bind(this, typeId)}
             title="Loading..."
             colors={['#ffaa66cc', '#ff00ddff', '#ffffbb33', '#ffff4444']}
           />
@@ -126,16 +144,15 @@ class Main extends React.Component {
   }
 
   render() {
-    const {read} = this.props;
+    const {read, navigator} = this.props;
     let hotSource = this.state.dataSource.cloneWithRows(read.hotList);
     let itSource = this.state.dataSource.cloneWithRows(read.itList);
     let constellationSource = this.state.dataSource.cloneWithRows(read.constellationList);
     return (
       <View style={styles.container}>
         <ReadingToolbar
-          actions={toolbarActions}
-          onActionSelected={this.onActionSelected}
           title={'eading'}
+          navigator={navigator}
         />
         <ScrollableTabView
           renderTabBar={() => <ReadingTabBar />}
@@ -178,7 +195,7 @@ let styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#eeeeec',
+    backgroundColor: '#fcfcfc',
     padding: 15,
     borderBottomColor: '#ddd',
     borderBottomWidth: 1
