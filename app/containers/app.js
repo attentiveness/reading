@@ -2,18 +2,26 @@ import React from 'react-native';
 const {
   StyleSheet,
   Navigator,
+  BackAndroid,
   PropTypes
 } = React;
 
 import MainContainer from './MainContainer';
+import {NaviGoBack} from '../utils/CommonUtils';
+
+var _navigator;
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+    BackAndroid.addEventListener('hardwareBackPress', function() {
+    	return NaviGoBack(_navigator);
+    });
   }
 
   renderScene(route, navigator) {
     let Component = route.component;
+    _navigator = navigator;
     return (
       <Component navigator={navigator} route={route} />
     );
