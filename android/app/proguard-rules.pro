@@ -65,3 +65,7 @@
 # stetho
 
 -dontwarn com.facebook.stetho.**
+
+-keep class com.tencent.mm.sdk.** {
+   *;
+}

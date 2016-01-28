@@ -10,6 +10,7 @@ const {
   TouchableOpacity,
   PropTypes,
   InteractionManager,
+  Image,
   View
 } = React;
 import LoadingView from '../components/LoadingView';
@@ -24,6 +25,9 @@ const propTypes = {
   read: PropTypes.object.isRequired
 }
 
+var canLoadMore;
+var page = 1;
+
 class Main extends React.Component {
   constructor(props) {
     super(props);
@@ -33,6 +37,8 @@ class Main extends React.Component {
       })
     };
     this.renderItem = this.renderItem.bind(this);
+    this.onScroll = this.onScroll.bind(this);
+    canLoadMore = false;
   }
 
   componentDidMount() {
@@ -71,13 +77,51 @@ class Main extends React.Component {
     });
   }
 
+  onScroll() {
+    canLoadMore = true;
+  }
+
+  onEndReached(typeId) {
+    if (canLoadMore) {
+      page++;
+      const {dispatch} = this.props;
+      switch (typeId) {
+        case 0:
+          dispatch(fetchArticles(true, false, 0, true, page));
+          break;
+        case 9:
+          dispatch(fetchArticles(true, false, 9, true, page));
+          break;
+        case 18:
+          dispatch(fetchArticles(true, false, 18, true, page));
+          break;
+        default:
+          break;
+      }
+    };
+  }
+
   renderItem(article, sectionID, rowID) {
     return (
       <TouchableOpacity onPress={this.onPress.bind(this, article)}>
         <View style={styles.containerItem}>
-          <Text style={styles.title}>
-            {article.title}
-          </Text>
+          <Image
+            style={{width: 88, height: 66, marginRight: 10}}
+            source={{uri: article.contentImg}}
+          />
+          <View style={{flex: 1, flexDirection: 'column'}} >
+            <Text style={styles.title}>
+              {article.title}
+            </Text>
+            <View style={{flex: 1, flexDirection: 'row'}} >
+              <Text style={{fontSize: 14, color: '#aaaaaa', marginTop: 5}}>
+                来自微信公众号：
+              </Text>
+              <Text style={{fontSize: 14, color: '#87CEFA', marginTop: 5}}>
+                {article.userName}
+              </Text>
+            </View>
+          </View>
         </View>
       </TouchableOpacity>
     );
@@ -131,6 +175,9 @@ class Main extends React.Component {
         dataSource={dataSource}
         renderRow={this.renderItem}
         style={styles.listView}
+        onEndReached={this.onEndReached.bind(this, typeId)}
+        onEndReachedThreshold={50}
+        onScroll={this.onScroll}
         refreshControl={
           <RefreshControl
             refreshing={read.isRefreshing}
@@ -159,6 +206,7 @@ class Main extends React.Component {
           tabBarBackgroundColor="#fcfcfc"
           tabBarUnderlineColor="#3e9ce9"
           tabBarActiveTextColor="#3e9ce9"
+          tabBarInactiveTextColor="#aaaaaa"
         >
           <View
             tabLabel="热门"
@@ -196,7 +244,7 @@ let styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fcfcfc',
-    padding: 15,
+    padding: 10,
     borderBottomColor: '#ddd',
     borderBottomWidth: 1
   },
@@ -204,7 +252,7 @@ let styles = StyleSheet.create({
     flex: 3,
     fontSize: 18,
     textAlign: 'left',
-    color: '#aaaaaa'
+    color: 'black'
   },
   listView: {
     backgroundColor: '#eeeeec'

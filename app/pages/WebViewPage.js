@@ -11,6 +11,7 @@ const {
 import ReadingToolbar from '../components/ReadingToolbar';
 import {ToastShort} from '../utils/ToastUtils';
 import LoadingView from '../components/LoadingView';
+import WeChat from 'react-native-wechat';
 
 let toolbarActions = [
   {title: '分享', show: 'always'}
