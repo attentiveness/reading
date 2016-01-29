@@ -271,7 +271,6 @@ class Main extends React.Component {
             {this.renderContent(constellationSource, 18)}
           </View>
         </ScrollableTabView>
-
       </View>
     );
   }
