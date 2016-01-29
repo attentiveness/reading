@@ -55,7 +55,7 @@ class Main extends React.Component {
   componentWillReceiveProps(nextProps) {
     const {read} = this.props;
     let isNoData;
-    if (read.isLoadMore && !nextProps.read.isLoadMore) {
+    if (read.isLoadMore && !nextProps.read.isLoadMore && nextProps.read.isRefreshing) {
       switch (currentTypeId) {
         case 0:
           isNoData = read.hotList.length == nextProps.read.hotList.length;

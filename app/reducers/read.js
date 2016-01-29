@@ -23,21 +23,18 @@ export default function read(state = initialState, action) {
 			return Object.assign({}, state, {
 				isRefreshing: false,
 				loading: false,
-				isLoadMore: action.isLoadMore,
 				hotList: state.isLoadMore ? state.hotList.concat(action.hotList) : action.hotList
 			});
 		case types.RECEIVE_IT_LIST:
 			return Object.assign({}, state, {
 				isRefreshing: false,
 				loading: false,
-				isLoadMore: action.isLoadMore,
 				itList: state.isLoadMore ? state.itList.concat(action.itList) : action.itList
 			});
 		case types.RECEIVE_CONSTELLATION_LIST:
 			return Object.assign({}, state, {
 				isRefreshing: false,
 				loading: false,
-				isLoadMore: action.isLoadMore,
 				constellationList: state.isLoadMore ? state.constellationList.concat(action.constellationList) : action.constellationList
 			});
 		default:
