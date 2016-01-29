@@ -49,7 +49,7 @@ class Main extends React.Component {
     const {dispatch} = this.props;
     dispatch(fetchArticles(false, true, 0));
     dispatch(fetchArticles(false, true, 9));
-    dispatch(fetchArticles(false, true, 18));
+    dispatch(fetchArticles(false, true, 2));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -61,10 +61,10 @@ class Main extends React.Component {
           isNoData = read.hotList.length == nextProps.read.hotList.length;
           break;
         case 9:
-          isNoData = read.hotList.length == nextProps.read.hotList.length;
+          isNoData = read.itList.length == nextProps.read.itList.length;
           break;
-        case 18:
-          isNoData = read.hotList.length == nextProps.read.hotList.length;
+        case 2:
+          isNoData = read.jokeList.length == nextProps.read.jokeList.length;
           break;
         default:
           isNoData = false;
@@ -85,8 +85,8 @@ class Main extends React.Component {
       case 9:
         dispatch(fetchArticles(true, false, 9));
         break;
-      case 18:
-        dispatch(fetchArticles(true, false, 18));
+      case 2:
+        dispatch(fetchArticles(true, false, 2));
         break;
       default:
         break;
@@ -121,8 +121,8 @@ class Main extends React.Component {
         case 9:
           dispatch(fetchArticles(true, false, 9, true, page));
           break;
-        case 18:
-          dispatch(fetchArticles(true, false, 18, true, page));
+        case 2:
+          dispatch(fetchArticles(true, false, 2, true, page));
           break;
         default:
           break;
@@ -183,8 +183,8 @@ class Main extends React.Component {
       case 9:
         isEmpty = read.itList == undefined || read.itList.length == 0;
         break;
-      case 18:
-        isEmpty = read.constellationList == undefined || read.constellationList.length == 0;
+      case 2:
+        isEmpty = read.jokeList == undefined || read.jokeList.length == 0;
         break;
       default:
         break;
@@ -238,7 +238,7 @@ class Main extends React.Component {
     const {read, navigator} = this.props;
     let hotSource = this.state.dataSource.cloneWithRows(read.hotList);
     let itSource = this.state.dataSource.cloneWithRows(read.itList);
-    let constellationSource = this.state.dataSource.cloneWithRows(read.constellationList);
+    let jokeSource = this.state.dataSource.cloneWithRows(read.jokeList);
     return (
       <View style={styles.container}>
         <ReadingToolbar
@@ -265,10 +265,10 @@ class Main extends React.Component {
             {this.renderContent(itSource, 9)}
           </View>
           <View
-            tabLabel="星座"
+            tabLabel="段子"
             style={{flex: 1}}
           >
-            {this.renderContent(constellationSource, 18)}
+            {this.renderContent(jokeSource, 2)}
           </View>
         </ScrollableTabView>
       </View>

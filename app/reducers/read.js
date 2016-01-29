@@ -8,7 +8,7 @@ const initialState = {
 	isLoadMore: false,
 	hotList: {},
 	itList: {},
-	constellationList: {}
+	jokeList: {}
 }
 
 export default function read(state = initialState, action) {
@@ -31,11 +31,11 @@ export default function read(state = initialState, action) {
 				loading: false,
 				itList: state.isLoadMore ? state.itList.concat(action.itList) : action.itList
 			});
-		case types.RECEIVE_CONSTELLATION_LIST:
+		case types.RECEIVE_JOKE_LIST:
 			return Object.assign({}, state, {
 				isRefreshing: false,
 				loading: false,
-				constellationList: state.isLoadMore ? state.constellationList.concat(action.constellationList) : action.constellationList
+				jokeList: state.isLoadMore ? state.jokeList.concat(action.jokeList) : action.jokeList
 			});
 		default:
 			return state;

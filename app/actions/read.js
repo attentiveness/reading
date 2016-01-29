@@ -39,15 +39,15 @@ function receiveArticleList(articleList, typeId) {
 				type: types.RECEIVE_HOT_LIST,
 				hotList: articleList
 			}
+		case 2:
+			return {
+				type: types.RECEIVE_JOKE_LIST,
+				jokeList: articleList
+			}
 		case 9:
 			return {
 				type: types.RECEIVE_IT_LIST,
 				itList: articleList
-			}
-		case 18:
-			return {
-				type: types.RECEIVE_CONSTELLATION_LIST,
-				constellationList: articleList
 			}
 		default:
 			break;

@@ -24,7 +24,7 @@ class WebViewPage extends React.Component {
   }
 
   onActionSelected() {
-  	ToastShort('分享！');
+  	ToastShort('敬请期待');
   }
 
   renderLoading() {
