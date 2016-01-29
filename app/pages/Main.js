@@ -10,6 +10,7 @@ const {
   TouchableOpacity,
   PropTypes,
   InteractionManager,
+  ProgressBarAndroid,
   Image,
   View
 } = React;
@@ -19,6 +20,7 @@ import ReadingTabBar from '../components/ReadingTabBar';
 import ReadingToolbar from '../components/ReadingToolbar';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import WebViewContainer from '../containers/WebViewContainer';
+import {ToastShort} from '../utils/ToastUtils';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -27,6 +29,7 @@ const propTypes = {
 
 var canLoadMore;
 var page = 1;
+var currentTypeId;
 
 class Main extends React.Component {
   constructor(props) {
@@ -37,6 +40,7 @@ class Main extends React.Component {
       })
     };
     this.renderItem = this.renderItem.bind(this);
+    this.renderFooter = this.renderFooter.bind(this);
     this.onScroll = this.onScroll.bind(this);
     canLoadMore = false;
   }
@@ -46,6 +50,30 @@ class Main extends React.Component {
     dispatch(fetchArticles(false, true, 0));
     dispatch(fetchArticles(false, true, 9));
     dispatch(fetchArticles(false, true, 18));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {read} = this.props;
+    let isNoData;
+    if (read.isLoadMore && !nextProps.read.isLoadMore) {
+      switch (currentTypeId) {
+        case 0:
+          isNoData = read.hotList.length == nextProps.read.hotList.length;
+          break;
+        case 9:
+          isNoData = read.hotList.length == nextProps.read.hotList.length;
+          break;
+        case 18:
+          isNoData = read.hotList.length == nextProps.read.hotList.length;
+          break;
+        default:
+          isNoData = false;
+          break;
+      }
+      if (isNoData) {
+        ToastShort('没有更多数据了');
+      }
+    }
   }
 
   onRefresh(typeId) {
@@ -84,6 +112,7 @@ class Main extends React.Component {
   onEndReached(typeId) {
     if (canLoadMore) {
       page++;
+      currentTypeId = typeId;
       const {dispatch} = this.props;
       switch (typeId) {
         case 0:
@@ -99,6 +128,20 @@ class Main extends React.Component {
           break;
       }
     };
+  }
+
+  renderFooter() {
+    const {read} = this.props;
+    if (read.isLoadMore) {
+      return (
+        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+          <ProgressBarAndroid styleAttr='Inverse' color='#3e9ce9' />
+          <Text style={{textAlign: 'center', fontSize: 16}}>
+            数据加载中……
+          </Text>
+        </View>
+      );
+    }
   }
 
   renderItem(article, sectionID, rowID) {
@@ -176,8 +219,9 @@ class Main extends React.Component {
         renderRow={this.renderItem}
         style={styles.listView}
         onEndReached={this.onEndReached.bind(this, typeId)}
-        onEndReachedThreshold={50}
+        onEndReachedThreshold={10}
         onScroll={this.onScroll}
+        renderFooter={this.renderFooter}
         refreshControl={
           <RefreshControl
             refreshing={read.isRefreshing}
