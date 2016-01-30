@@ -26,15 +26,14 @@ const propTypes = {
 class ReadingToolbar extends React.Component {
 	constructor(props) {
 		super(props);
-
 		this.onIconClicked = this.onIconClicked.bind(this);
 		this.onActionSelected = this.onActionSelected.bind(this);
 	}
 
 	onIconClicked() {
 		const {navigator} = this.props;
-		if (navigator) {
-			NaviGoBack(navigator);
+		if (NaviGoBack(navigator)) {
+			BackAndroid.exitApp();
 		}
 	}
 
