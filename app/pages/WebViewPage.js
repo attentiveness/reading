@@ -41,7 +41,7 @@ class WebViewPage extends React.Component {
   }
 
   onActionSelected() {
-  	ToastShort('敬请期待');
+  	ToastShort('敬请期待上线');
   }
 
   onNavigationStateChange(navState) {

@@ -4,9 +4,7 @@ import React from 'react-native';
 const {
 	StyleSheet,
 	PropTypes,
-	View,
-	ToolbarAndroid,
-	BackAndroid
+	ToolbarAndroid
 } = React;
 import StyleSheetPropType from 'StyleSheetPropType';
 import ViewStylePropTypes from 'ViewStylePropTypes';
@@ -32,8 +30,8 @@ class ReadingToolbar extends React.Component {
 
 	onIconClicked() {
 		const {navigator} = this.props;
-		if (NaviGoBack(navigator)) {
-			BackAndroid.exitApp();
+		if (navigator) {
+			NaviGoBack(navigator);
 		}
 	}
 

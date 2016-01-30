@@ -3,7 +3,7 @@
 import React from 'react-native';
 const {
 	ProgressBarAndroid,
-	ProgressViewIOS,
+	ActivityIndicatorIOS,
 	Platform,
 	Text,
 	StyleSheet,
@@ -22,7 +22,7 @@ class LoadingView extends React.Component {
 		} else {
 			return (
 				<View style={ styles.loading }>
-        	<ProgressViewIOS progress={1}/>
+        	<ActivityIndicatorIOS size='large' />
           	<Text style={ styles.loadingText }>数据加载中...</Text>
         </View>
 			);

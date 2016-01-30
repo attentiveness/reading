@@ -2,7 +2,6 @@
 
 import React from 'react-native';
 const {
-  View,
   Component
 } = React;
 import {connect} from 'react-redux';
