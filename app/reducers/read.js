@@ -8,7 +8,8 @@ const initialState = {
 	isLoadMore: false,
 	hotList: {},
 	itList: {},
-	jokeList: {}
+	jokeList: {},
+	zanList: {}
 }
 
 export default function read(state = initialState, action) {
@@ -36,6 +37,12 @@ export default function read(state = initialState, action) {
 				isRefreshing: false,
 				loading: false,
 				jokeList: state.isLoadMore ? state.jokeList.concat(action.jokeList) : action.jokeList
+			});
+		case types.RECEIVE_ZAN_LIST:
+			return Object.assign({}, state, {
+				isRefreshing: false,
+				loading: false,
+				zanList: state.isLoadMore ? state.zanList.concat(action.zanList) : action.zanList
 			});
 		default:
 			return state;

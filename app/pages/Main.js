@@ -48,6 +48,7 @@ class Main extends React.Component {
   componentDidMount() {
     const {dispatch} = this.props;
     dispatch(fetchArticles(false, true, 0));
+    dispatch(fetchArticles(false, true, 12));
     dispatch(fetchArticles(false, true, 9));
     dispatch(fetchArticles(false, true, 2));
   }
@@ -59,6 +60,9 @@ class Main extends React.Component {
       switch (currentTypeId) {
         case 0:
           isNoData = read.hotList.length == nextProps.read.hotList.length;
+          break;
+        case 12:
+          isNoData = read.zanList.length == nextProps.read.zanList.length;
           break;
         case 9:
           isNoData = read.itList.length == nextProps.read.itList.length;
@@ -81,6 +85,9 @@ class Main extends React.Component {
     switch (typeId) {
       case 0:
         dispatch(fetchArticles(true, false, 0));
+        break;
+      case 12:
+        dispatch(fetchArticles(true, false, 12));
         break;
       case 9:
         dispatch(fetchArticles(true, false, 9));
@@ -117,6 +124,9 @@ class Main extends React.Component {
       switch (typeId) {
         case 0:
           dispatch(fetchArticles(true, false, 0, true, page));
+          break;
+        case 12:
+          dispatch(fetchArticles(true, false, 12, true, page));
           break;
         case 9:
           dispatch(fetchArticles(true, false, 9, true, page));
@@ -180,6 +190,8 @@ class Main extends React.Component {
       case 0:
         isEmpty = read.hotList == undefined || read.hotList.length == 0;
         break;
+      case 12:
+        isEmpty = read.zanList == undefined || read.zanList.length == 0;
       case 9:
         isEmpty = read.itList == undefined || read.itList.length == 0;
         break;
@@ -237,6 +249,7 @@ class Main extends React.Component {
   render() {
     const {read, navigator} = this.props;
     let hotSource = this.state.dataSource.cloneWithRows(read.hotList);
+    let zanSource = this.state.dataSource.cloneWithRows(read.zanList);
     let itSource = this.state.dataSource.cloneWithRows(read.itList);
     let jokeSource = this.state.dataSource.cloneWithRows(read.jokeList);
     return (
@@ -257,6 +270,12 @@ class Main extends React.Component {
             style={{flex: 1}}
           >
             {this.renderContent(hotSource, 0)}
+          </View>
+          <View
+            tabLabel="点赞"
+            style={{flex: 1}}
+          >
+            {this.renderContent(zanSource, 12)}
           </View>
           <View
             tabLabel="科技"
