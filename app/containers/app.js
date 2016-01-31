@@ -5,7 +5,7 @@ const {
   PropTypes
 } = React;
 
-import MainContainer from './MainContainer';
+import Splash from '../pages/Splash';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class App extends React.Component {
     );
   }
 
-  configureScene(route) {
+  configureScene(route, routeStack) {
     return Navigator.SceneConfigs.PushFromRight;
   }
 
@@ -31,8 +31,8 @@ class App extends React.Component {
         configureScene={this.configureScene}
         renderScene={this.renderScene}
         initialRoute={{
-          component: MainContainer,
-          name: 'Main'
+          component: Splash,
+          name: 'Splash'
         }}
       />
     );

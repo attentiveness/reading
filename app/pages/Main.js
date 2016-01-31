@@ -20,7 +20,12 @@ import ReadingTabBar from '../components/ReadingTabBar';
 import ReadingToolbar from '../components/ReadingToolbar';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import WebViewContainer from '../containers/WebViewContainer';
+import AboutContainer from '../containers/AboutContainer';
 import {ToastShort} from '../utils/ToastUtils';
+
+let toolbarActions = [
+  {title: '设置', icon: require('../img/settings.png'), show: 'always'}
+];
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -41,6 +46,7 @@ class Main extends React.Component {
     };
     this.renderItem = this.renderItem.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
+    this.onActionSelected = this.onActionSelected.bind(this);
     this.onScroll = this.onScroll.bind(this);
     canLoadMore = false;
   }
@@ -108,6 +114,16 @@ class Main extends React.Component {
         name: 'WebViewPage',
         url: article.url,
         title: article.userName
+      });
+    });
+  }
+
+  onActionSelected() {
+    const {navigator} = this.props;
+    InteractionManager.runAfterInteractions(() => {
+      navigator.push({
+        component: AboutContainer,
+        name: 'About'
       });
     });
   }
@@ -256,7 +272,9 @@ class Main extends React.Component {
       <View style={styles.container}>
         <ReadingToolbar
           title={'eading'}
+          actions={toolbarActions}
           navigator={navigator}
+          onActionSelected={this.onActionSelected}
         />
         <ScrollableTabView
           renderTabBar={() => <ReadingTabBar />}

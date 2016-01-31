@@ -16,7 +16,7 @@ import {NaviGoBack} from '../utils/CommonUtils';
 import {getApiVersion} from 'react-native-wechat';
 
 let toolbarActions = [
-  {title: '分享', show: 'always'}
+  {title: '分享', icon: require('../img/share.png'), show: 'always'}
 ];
 var canGoBack = false;
 let webviewRef;
