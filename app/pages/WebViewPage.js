@@ -25,13 +25,13 @@ let toolbarActions = [
   {title: '分享', icon: require('../img/share.png'), show: 'always'}
 ];
 var canGoBack = false;
-let webviewRef;
 
 class WebViewPage extends React.Component {
 	constructor(props) {
     super(props);
     this.onActionSelected = this.onActionSelected.bind(this);
     this.onNavigationStateChange = this.onNavigationStateChange.bind(this);
+    this.goBack = this.goBack.bind(this);
   }
 
   componentWillMount() {
@@ -41,18 +41,11 @@ class WebViewPage extends React.Component {
   }
 
   componentDidMount() {
-    const {navigator} = this.props;
-    webviewRef = this.refs.webview;
-    BackAndroid.addEventListener('hardwareBackPress', function() {
-      if (Portal.getOpenModals().length != 0) {
-        Portal.closeModal(tag);
-        return true;
-      } else if (canGoBack) {
-        webviewRef.goBack();
-        return true;
-      }
-      return NaviGoBack(navigator);
-    });
+    BackAndroid.addEventListener('hardwareBackPress', this.goBack);
+  }
+
+  componentWillUnmount() {
+    BackAndroid.removeEventListener('hardwareBackPress', this.goBack);
   }
 
   onActionSelected() {
@@ -61,6 +54,17 @@ class WebViewPage extends React.Component {
 
   onNavigationStateChange(navState) {
     canGoBack = navState.canGoBack;
+  }
+
+  goBack() {
+    if (Portal.getOpenModals().length != 0) {
+      Portal.closeModal(tag);
+      return true;
+    } else if (canGoBack) {
+      this.refs.webview.goBack();
+      return true;
+    }
+    return NaviGoBack(this.props.navigator);
   }
 
   renderLoading() {

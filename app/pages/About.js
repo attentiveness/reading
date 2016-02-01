@@ -8,15 +8,10 @@ const {
 } = React;
 
 import ReadingToolbar from '../components/ReadingToolbar';
-import {NaviGoBack} from '../utils/CommonUtils';
 
 class About extends React.Component {
   constructor(props) {
     super(props);
-    const {navigator} = this.props;
-    BackAndroid.addEventListener('hardwareBackPress', function() {
-      return NaviGoBack(navigator);
-    });
   }
 
   render() {
