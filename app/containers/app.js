@@ -6,10 +6,12 @@ const {
 } = React;
 
 import Splash from '../pages/Splash';
+import {registerApp} from 'react-native-wechat';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+    registerApp('wxb24c445773822c79');
   }
 
   renderScene(route, navigator) {

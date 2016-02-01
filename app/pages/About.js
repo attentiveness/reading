@@ -27,7 +27,7 @@ class About extends React.Component {
           title={'关于Reading'}
           navigator={navigator}
         />
-        <View style={{flex: 1, justifyContent: 'center', marginBottom: 10}}>
+        <View style={styles.content}>
           <View style={{flex: 1, alignItems: 'center'}}>
             <Image
               style={{width: 110, height: 110, marginTop: 50}}
@@ -63,8 +63,10 @@ let styles = StyleSheet.create({
     flexDirection: 'column',
   },
   content: {
+    flex: 1,
     backgroundColor: '#fcfcfc',
-
+    justifyContent: 'center',
+    paddingBottom: 10
   }
 })
 

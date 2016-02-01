@@ -112,8 +112,7 @@ class Main extends React.Component {
       navigator.push({
         component: WebViewContainer,
         name: 'WebViewPage',
-        url: article.url,
-        title: article.userName
+        article: article
       });
     });
   }

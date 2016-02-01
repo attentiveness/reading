@@ -6,6 +6,8 @@ const {
   PropTypes,
   WebView,
   BackAndroid,
+  Text,
+  Platform,
   View
 } = React;
 
@@ -13,7 +15,7 @@ import ReadingToolbar from '../components/ReadingToolbar';
 import {ToastShort} from '../utils/ToastUtils';
 import LoadingView from '../components/LoadingView';
 import {NaviGoBack} from '../utils/CommonUtils';
-import {getApiVersion} from 'react-native-wechat';
+import {shareToTimeline, shareToSession} from 'react-native-wechat';
 
 let toolbarActions = [
   {title: '分享', icon: require('../img/share.png'), show: 'always'}
@@ -41,7 +43,23 @@ class WebViewPage extends React.Component {
   }
 
   onActionSelected() {
-  	ToastShort('敬请期待上线');
+    // const {route} = this.props;
+    // shareToTimeline({
+    //   title: 'Reading:' + route.article.title,
+    //   thumbImage: route.article.contentImg,
+    //   type: 'news',
+    //   webpageUrl: route.article.url
+    // })
+    // .catch((error) => {ToastShort(error.message)});
+
+    // shareToSession({
+    //   title: 'Reading',
+    //   description: route.article.title,
+    //   thumbImage: route.article.contentImg,
+    //   type: 'news',
+    //   webpageUrl: route.article.url
+    // })
+    // .catch((error) => {ToastShort(error.message)});
   }
 
   onNavigationStateChange(navState) {
@@ -59,14 +77,14 @@ class WebViewPage extends React.Component {
         <ReadingToolbar
           actions={toolbarActions}
           onActionSelected={this.onActionSelected}
-          title={route.title}
+          title={route.article.userName}
           navigator={navigator}
         />
         <WebView
           ref='webview'
 	        automaticallyAdjustContentInsets={false}
 	        style={{flex: 1}}
-	        url={route.url}
+	        url={route.article.url}
 	        javaScriptEnabledAndroid={true}
 	        domStorageEnabledAndroid={true}
 	        startInLoadingState={true}
