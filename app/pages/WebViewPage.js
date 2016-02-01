@@ -6,6 +6,7 @@ const {
   PropTypes,
   WebView,
   BackAndroid,
+  Dimensions,
   Text,
   Image,
   Platform,
@@ -173,18 +174,16 @@ let styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.65)'
   },
   spinnerContent: {
-    width: 200,
-    height: 150,
+    justifyContent: 'center',
+    width: Dimensions.get('window').width * (7 / 10),
+    height: Dimensions.get('window').width * (7 / 10) * 0.68,
     backgroundColor: '#fcfcfc',
     padding: 20,
-    borderBottomColor: '#ddd',
-    borderLeftColor: '#ddd',
-    borderRightColor: '#ddd',
-    borderTopColor: '#ddd',
-    borderWidth: 2
+    borderRadius: 5
   },
   spinnerTitle: {
     fontSize: 18,
