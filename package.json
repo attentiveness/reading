@@ -12,7 +12,7 @@
     "react-native-scrollable-tab-view": "^0.3.5",
     "react-native-wechat": "^1.2.4",
     "react-redux": "^4.1.2",
-    "redux": "^3.1.6",
+    "redux": "^3.1.7",
     "redux-thunk": "^1.0.3"
   },
   "devDependencies": {

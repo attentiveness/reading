@@ -6,7 +6,7 @@ const {
   Text,
   TouchableOpacity,
   View,
-  Animated,
+  Animated
 } = React;
 
 const propTypes = {
