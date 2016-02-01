@@ -112,7 +112,7 @@ class WebViewPage extends React.Component {
               style={{flex: 1}}
               onPress={() => {
                 shareToTimeline({
-                  title: '[Reading]' + route.article.title,
+                  title: '[@Reading]' + route.article.title,
                   thumbImage: route.article.contentImg,
                   type: 'news',
                   webpageUrl: route.article.url
