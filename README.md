@@ -1,5 +1,13 @@
-# reading
-Reading App  Write In React-Native(with Redux)（Studying and Programing）
+# Reading
+![Reading_Logo](./Reading_Logo.png)
+Reading App Write In React-Native（Studying and Programing）
+
+> No Profit, No Advertisement, Only Feelings
+
+## Screenshot
+![Reading_Splash](./screenshot/Reading_Splash.png) ![Reading_Main](./screenshot/Reading_Main.png)
+![Reading_Article](./screenshot/Reading_Article.png) ![Reading_Share](./screenshot/Reading_Share.png)
+![Reading_About](./screenshot/Reading_About.png)
 
 ## Dependency
 ```
@@ -7,21 +15,35 @@ Reading App  Write In React-Native(with Redux)（Studying and Programing）
     "immutable": "^3.7.5",
     "react-native": "^0.18.0",
     "react-native-scrollable-tab-view": "^0.3.5",
-    "react-redux": "^4.0.6",
-    "redux": "^3.0.5",
+    "react-native-wechat": "^1.2.5",
+    "react-redux": "^4.1.2",
+    "redux": "^3.1.7",
     "redux-thunk": "^1.0.3"
   }
 ```
-
-## How to run
+## How To Build And Run
+### Step One
 ```
 npm install -g react-native-cli
 ```
-than
+### Step Two
 ```
 npm install
 ```
-than
+### Step Three
 ```
 react-native start
 ```
+### Optional Step
+```
+npm run setup
+```
+
+## Welcome
+>* Star
+>* Fork
+>* PR
+>* Issue
+
+## Thanks All!
+*@Reading_Team*
