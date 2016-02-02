@@ -9,6 +9,9 @@ Reading App Write In React-Native（Studying and Programing）
 ![Reading_Article](./screenshot/Reading_Article.png) ![Reading_Share](./screenshot/Reading_Share.png)
 ![Reading_About](./screenshot/Reading_About.png)
 
+## Download From Android Market
+*From 360 Android Market:* [Download Reading](http://zhushou.360.cn/detail/index/soft_id/3217938?recrefer=SE_D_Reading)
+
 ## Dependency
 ```
 "dependencies": {
