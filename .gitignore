@@ -23,6 +23,7 @@ DerivedData
 project.xcworkspace
 
 # Android/IJ
+#
 .idea
 .gradle
 local.properties
@@ -30,5 +31,6 @@ app/app.iml
 app/reading.keystore
 
 # node.js
+#
 node_modules/
 npm-debug.log
