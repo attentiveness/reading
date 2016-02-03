@@ -10,7 +10,12 @@ import Main from '../pages/Main';
 
 class MainContainer extends Component {
   componentDidMount() {
-    codePush.sync({updateDialog: true, installMode: codePush.InstallMode.IMMEDIATE});
+    codePush.sync({updateDialog: {
+      optionalIgnoreButtonLabel: '稍后更新',
+      optionalInstallButtonLabel: '现在更新',
+      optionalUpdateMessage: 'Reading有新版本了，是否更新安装？',
+      title: '更新提示'
+    }, installMode: codePush.InstallMode.IMMEDIATE});
   }
 
   render() {
