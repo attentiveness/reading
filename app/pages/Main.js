@@ -88,22 +88,7 @@ class Main extends React.Component {
 
   onRefresh(typeId) {
     const {dispatch} = this.props;
-    switch (typeId) {
-      case 0:
-        dispatch(fetchArticles(true, false, 0));
-        break;
-      case 12:
-        dispatch(fetchArticles(true, false, 12));
-        break;
-      case 9:
-        dispatch(fetchArticles(true, false, 9));
-        break;
-      case 2:
-        dispatch(fetchArticles(true, false, 2));
-        break;
-      default:
-        break;
-    }
+    dispatch(fetchArticles(true, false, typeId));
   }
 
   onPress(article) {
@@ -136,22 +121,7 @@ class Main extends React.Component {
       page++;
       currentTypeId = typeId;
       const {dispatch} = this.props;
-      switch (typeId) {
-        case 0:
-          dispatch(fetchArticles(true, false, 0, true, page));
-          break;
-        case 12:
-          dispatch(fetchArticles(true, false, 12, true, page));
-          break;
-        case 9:
-          dispatch(fetchArticles(true, false, 9, true, page));
-          break;
-        case 2:
-          dispatch(fetchArticles(true, false, 2, true, page));
-          break;
-        default:
-          break;
-      }
+      dispatch(fetchArticles(true, false, typeId, true, page));
     };
   }
 
