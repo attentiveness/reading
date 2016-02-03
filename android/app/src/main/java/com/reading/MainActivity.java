@@ -3,12 +3,16 @@ package com.reading;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
+import com.microsoft.codepush.react.CodePush;
 import com.theweflex.react.WeChatPackage;
 
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 public class MainActivity extends ReactActivity {
+    private CodePush codePush;
 
     /**
      * Returns the name of the main component registered from JavaScript.
@@ -28,14 +32,22 @@ public class MainActivity extends ReactActivity {
         return BuildConfig.DEBUG;
     }
 
+    @Nullable
+    @Override
+    protected String getJSBundleFile() {
+        return this.codePush.getBundleUrl("index.android.bundle");
+    }
+
     /**
      * A list of packages used by the app. If the app uses additional views
      * or modules besides the default ones, add more packages here.
      */
     @Override
     protected List<ReactPackage> getPackages() {
+        this.codePush = new CodePush("U7ZF2kYt5EzV14JyIB22SLRhQ2KBV1Ifekvul", this, BuildConfig.DEBUG);
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
-                new WeChatPackage());
+                new WeChatPackage(),
+                this.codePush.getReactPackage());
     }
 }

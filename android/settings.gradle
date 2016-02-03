@@ -1,4 +1,5 @@
 rootProject.name = 'reading'
 
-include ':app', ':RCTWeChat'
+include ':app', ':RCTWeChat', ':react-native-code-push'
 project(':RCTWeChat').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-wechat/android')
+project(':react-native-code-push').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-code-push/android/app')
