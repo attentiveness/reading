@@ -11,6 +11,7 @@ Reading App Write In React-Native（Studying and Programing）
 
 ## Download From Android Market
 *From 360 Android Market:* [Download Reading](http://zhushou.360.cn/detail/index/soft_id/3217938?recrefer=SE_D_Reading)
+
 *From Wandou Labs:* [Download Reading](http://www.wandoujia.com/apps/com.reading)
 
 ## Dependency

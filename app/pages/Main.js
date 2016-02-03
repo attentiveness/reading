@@ -181,11 +181,11 @@ class Main extends React.Component {
             <Text style={styles.title}>
               {article.title}
             </Text>
-            <View style={{flex: 1, flexDirection: 'row'}} >
+            <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}} >
               <Text style={{fontSize: 14, color: '#aaaaaa', marginTop: 5}}>
                 来自微信公众号：
               </Text>
-              <Text style={{fontSize: 14, color: '#87CEFA', marginTop: 5}}>
+              <Text style={{flex: 1, fontSize: 14, color: '#87CEFA', marginTop: 5, marginRight: 5}}>
                 {article.userName}
               </Text>
             </View>
