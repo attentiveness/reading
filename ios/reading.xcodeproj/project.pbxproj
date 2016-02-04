@@ -21,6 +21,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		17185DB61C63409800AD7D90 /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17185DAA1C63406900AD7D90 /* libCodePush.a */; };
 		176D7AC81C61D2F8004C465D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 176D7AC71C61D2F8004C465D /* SystemConfiguration.framework */; };
 		176D7ACA1C61D302004C465D /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 176D7AC91C61D302004C465D /* CoreTelephony.framework */; };
 		176D7ACC1C61D30B004C465D /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 176D7ACB1C61D30B004C465D /* libsqlite3.0.tbd */; };
@@ -94,6 +95,13 @@
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
 		};
+		17185DA91C63406900AD7D90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17185DA51C63406900AD7D90 /* CodePush.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = CodePush;
+		};
 		176D7AC41C61D2DB004C465D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F0B2CC04DB544443BD6D4763 /* RCTWeChat.xcodeproj */;
@@ -137,6 +145,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = reading/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = reading/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		17185DA51C63406900AD7D90 /* CodePush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/CodePush.xcodeproj"; sourceTree = "<group>"; };
 		176D7AC71C61D2F8004C465D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		176D7AC91C61D302004C465D /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		176D7ACB1C61D30B004C465D /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -160,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17185DB61C63409800AD7D90 /* libCodePush.a in Frameworks */,
 				176D7AD01C61D31C004C465D /* libz.tbd in Frameworks */,
 				176D7ACE1C61D315004C465D /* libc++.tbd in Frameworks */,
 				176D7ACC1C61D30B004C465D /* libsqlite3.0.tbd in Frameworks */,
@@ -277,6 +287,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		17185DA61C63406900AD7D90 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				17185DAA1C63406900AD7D90 /* libCodePush.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		176D7AB81C61D2DB004C465D /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,6 +314,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				17185DA51C63406900AD7D90 /* CodePush.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
@@ -412,6 +431,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 17185DA61C63406900AD7D90 /* Products */;
+					ProjectRef = 17185DA51C63406900AD7D90 /* CodePush.xcodeproj */;
+				},
+				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
 				},
@@ -519,6 +542,13 @@
 			fileType = archive.ar;
 			path = libReact.a;
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		17185DAA1C63406900AD7D90 /* libCodePush.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCodePush.a;
+			remoteRef = 17185DA91C63406900AD7D90 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		176D7AC51C61D2DB004C465D /* libRCTWeChat.a */ = {
@@ -676,6 +706,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-code-push",
 				);
 				INFOPLIST_FILE = reading/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -693,6 +724,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-code-push",
 				);
 				INFOPLIST_FILE = reading/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

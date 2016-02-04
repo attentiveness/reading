@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 
 #import "RCTRootView.h"
+#import "CodePush.h"
 
 @implementation AppDelegate
 
