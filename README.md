@@ -18,12 +18,12 @@ Reading App Write In React-Native（Studying and Programing）
 ```
 "dependencies": {
     "immutable": "^3.7.5",
-    "react-native": "^0.18.0",
-    "react-native-code-push": "^1.6.0-beta",
+    "react-native": "^0.19.0",
+    "react-native-code-push": "^1.7.0-beta",
     "react-native-scrollable-tab-view": "^0.3.5",
     "react-native-wechat": "^1.2.5",
-    "react-redux": "^4.1.2",
-    "redux": "^3.1.7",
+    "react-redux": "^4.2.1",
+    "redux": "^3.2.1",
     "redux-thunk": "^1.0.3"
   }
 ```

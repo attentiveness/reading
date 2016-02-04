@@ -152,8 +152,8 @@ class WebViewPage extends React.Component {
 	        automaticallyAdjustContentInsets={false}
 	        style={{flex: 1}}
 	        url={route.article.url}
-	        javaScriptEnabledAndroid={true}
-	        domStorageEnabledAndroid={true}
+	        javaScriptEnabled={true}
+	        domStorageEnabled={true}
 	        startInLoadingState={true}
 	        scalesPageToFit={true}
           onShouldStartLoadWithRequest={true}

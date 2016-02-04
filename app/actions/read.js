@@ -28,33 +28,16 @@ function fetchArticleList(isRefreshing, loading, isLoadMore) {
 	};
 	return {
 		type: types.FETCH_ARTICLE_LIST,
+		isRefreshing: isRefreshing,
+		loading: loading,
 		isLoadMore: isLoadMore
 	}
 }
 
 function receiveArticleList(articleList, typeId) {
-	switch (typeId) {
-		case 0:
-			return {
-				type: types.RECEIVE_HOT_LIST,
-				hotList: articleList
-			}
-		case 12:
-			return {
-				type: types.RECEIVE_ZAN_LIST,
-				zanList: articleList
-			}
-		case 9:
-			return {
-				type: types.RECEIVE_IT_LIST,
-				itList: articleList
-			}
-		case 2:
-			return {
-				type: types.RECEIVE_JOKE_LIST,
-				jokeList: articleList
-			}
-		default:
-			break;
+	return {
+		type: types.RECEIVE_ARTICLE_LIST,
+		articleList: articleList,
+		typeId: typeId
 	}
 }

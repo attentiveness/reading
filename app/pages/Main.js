@@ -22,6 +22,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import WebViewContainer from '../containers/WebViewContainer';
 import AboutContainer from '../containers/AboutContainer';
 import {ToastShort} from '../utils/ToastUtils';
+import {isEmptyObject} from '../utils/CommonUtils';
 
 let toolbarActions = [
   {title: '设置', icon: require('../img/settings.png'), show: 'always'}
@@ -35,6 +36,7 @@ const propTypes = {
 var canLoadMore;
 var page = 1;
 var currentTypeId;
+let articles = [0, 12, 9, 2];
 
 class Main extends React.Component {
   constructor(props) {
@@ -53,36 +55,17 @@ class Main extends React.Component {
 
   componentDidMount() {
     const {dispatch} = this.props;
-    dispatch(fetchArticles(false, true, 0));
-    dispatch(fetchArticles(false, true, 12));
-    dispatch(fetchArticles(false, true, 9));
-    dispatch(fetchArticles(false, true, 2));
+    articles.forEach((typeId) => {
+      dispatch(fetchArticles(false, true, typeId));
+    })
   }
 
   componentWillReceiveProps(nextProps) {
     const {read} = this.props;
-    let isNoData;
-    if (read.isLoadMore && !nextProps.read.isLoadMore && nextProps.read.isRefreshing) {
-      switch (currentTypeId) {
-        case 0:
-          isNoData = read.hotList.length == nextProps.read.hotList.length;
-          break;
-        case 12:
-          isNoData = read.zanList.length == nextProps.read.zanList.length;
-          break;
-        case 9:
-          isNoData = read.itList.length == nextProps.read.itList.length;
-          break;
-        case 2:
-          isNoData = read.jokeList.length == nextProps.read.jokeList.length;
-          break;
-        default:
-          isNoData = false;
-          break;
-      }
-      if (isNoData) {
+    if (read.isLoadMore && !nextProps.read.isLoadMore && !nextProps.read.isRefreshing) {
+      if (nextProps.read.noMore) {
         ToastShort('没有更多数据了');
-      }
+      };
     }
   }
 
@@ -113,7 +96,9 @@ class Main extends React.Component {
   }
 
   onScroll() {
-    canLoadMore = true;
+    if (!canLoadMore) {
+      canLoadMore = true;
+    };
   }
 
   onEndReached(typeId) {
@@ -121,7 +106,8 @@ class Main extends React.Component {
       page++;
       currentTypeId = typeId;
       const {dispatch} = this.props;
-      dispatch(fetchArticles(true, false, typeId, true, page));
+      dispatch(fetchArticles(false, false, typeId, true, page));
+      canLoadMore = false;
     };
   }
 
@@ -170,22 +156,7 @@ class Main extends React.Component {
     if (read.loading) {
       return <LoadingView/>;
     }
-    let isEmpty = false;
-    switch (typeId) {
-      case 0:
-        isEmpty = read.hotList == undefined || read.hotList.length == 0;
-        break;
-      case 12:
-        isEmpty = read.zanList == undefined || read.zanList.length == 0;
-      case 9:
-        isEmpty = read.itList == undefined || read.itList.length == 0;
-        break;
-      case 2:
-        isEmpty = read.jokeList == undefined || read.jokeList.length == 0;
-        break;
-      default:
-        break;
-    }
+    let isEmpty = read.articleList[typeId] == undefined || read.articleList[typeId].length == 0;
     if (isEmpty) {
       return (
         <ScrollView
@@ -216,7 +187,7 @@ class Main extends React.Component {
         renderRow={this.renderItem}
         style={styles.listView}
         onEndReached={this.onEndReached.bind(this, typeId)}
-        onEndReachedThreshold={10}
+        onEndReachedThreshold={15}
         onScroll={this.onScroll}
         renderFooter={this.renderFooter}
         refreshControl={
@@ -233,10 +204,15 @@ class Main extends React.Component {
 
   render() {
     const {read, navigator} = this.props;
-    let hotSource = this.state.dataSource.cloneWithRows(read.hotList);
-    let zanSource = this.state.dataSource.cloneWithRows(read.zanList);
-    let itSource = this.state.dataSource.cloneWithRows(read.itList);
-    let jokeSource = this.state.dataSource.cloneWithRows(read.jokeList);
+    let hotSource, zanSource, itSource, jokeSource;
+    if (isEmptyObject(read.articleList)) {
+      hotSource = zanSource = itSource = jokeSource = this.state.dataSource.cloneWithRows([]);
+    } else {
+      hotSource = this.state.dataSource.cloneWithRows(read.articleList[0] == undefined ? [] : read.articleList[0]);
+      zanSource = this.state.dataSource.cloneWithRows(read.articleList[12] == undefined ? [] : read.articleList[12]);
+      itSource = this.state.dataSource.cloneWithRows(read.articleList[9] == undefined ? [] : read.articleList[9]);
+      jokeSource = this.state.dataSource.cloneWithRows(read.articleList[2] == undefined ? [] : read.articleList[2]);
+    }
     return (
       <View style={styles.container}>
         <ReadingToolbar

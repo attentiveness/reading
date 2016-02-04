@@ -6,10 +6,8 @@ const initialState = {
 	isRefreshing: false,
 	loading: false,
 	isLoadMore: false,
-	hotList: {},
-	itList: {},
-	jokeList: {},
-	zanList: {}
+	noMore: false,
+	articleList: {}
 }
 
 export default function read(state = initialState, action) {
@@ -20,31 +18,25 @@ export default function read(state = initialState, action) {
 				loading: action.loading,
 				isLoadMore: action.isLoadMore
 			});
-		case types.RECEIVE_HOT_LIST:
+		case types.RECEIVE_ARTICLE_LIST:
 			return Object.assign({}, state, {
 				isRefreshing: false,
 				loading: false,
-				hotList: state.isLoadMore ? state.hotList.concat(action.hotList) : action.hotList
-			});
-		case types.RECEIVE_IT_LIST:
-			return Object.assign({}, state, {
-				isRefreshing: false,
-				loading: false,
-				itList: state.isLoadMore ? state.itList.concat(action.itList) : action.itList
-			});
-		case types.RECEIVE_JOKE_LIST:
-			return Object.assign({}, state, {
-				isRefreshing: false,
-				loading: false,
-				jokeList: state.isLoadMore ? state.jokeList.concat(action.jokeList) : action.jokeList
-			});
-		case types.RECEIVE_ZAN_LIST:
-			return Object.assign({}, state, {
-				isRefreshing: false,
-				loading: false,
-				zanList: state.isLoadMore ? state.zanList.concat(action.zanList) : action.zanList
+				isLoadMore: false,
+				noMore: action.articleList.length == 0,
+				articleList: state.isLoadMore ? loadMore(state, action) : combine(state, action)
 			});
 		default:
 			return state;
 	}
+}
+
+function combine(state, action) {
+	state.articleList[action.typeId] = action.articleList
+	return state.articleList;
+}
+
+function loadMore(state, action) {
+	state.articleList[action.typeId] = state.articleList[action.typeId].concat(action.articleList)
+	return state.articleList;
 }
