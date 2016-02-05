@@ -33,10 +33,10 @@ const propTypes = {
   read: PropTypes.object.isRequired
 }
 
-var canLoadMore;
+var canLoadMore, currentTypeId;
 var page = 1;
-var currentTypeId;
-let articles = [0, 12, 9, 2];
+let typeIds = [0, 12, 9, 2];
+let category = {0: "热门", 12: "点赞", 9: "科技", 2: "段子"};
 
 class Main extends React.Component {
   constructor(props) {
@@ -55,7 +55,7 @@ class Main extends React.Component {
 
   componentDidMount() {
     const {dispatch} = this.props;
-    articles.forEach((typeId) => {
+    typeIds.forEach((typeId) => {
       dispatch(fetchArticles(false, true, typeId));
     })
   }
@@ -205,14 +205,17 @@ class Main extends React.Component {
   render() {
     const {read, navigator} = this.props;
     let hotSource, zanSource, itSource, jokeSource;
-    if (isEmptyObject(read.articleList)) {
-      hotSource = zanSource = itSource = jokeSource = this.state.dataSource.cloneWithRows([]);
-    } else {
-      hotSource = this.state.dataSource.cloneWithRows(read.articleList[0] == undefined ? [] : read.articleList[0]);
-      zanSource = this.state.dataSource.cloneWithRows(read.articleList[12] == undefined ? [] : read.articleList[12]);
-      itSource = this.state.dataSource.cloneWithRows(read.articleList[9] == undefined ? [] : read.articleList[9]);
-      jokeSource = this.state.dataSource.cloneWithRows(read.articleList[2] == undefined ? [] : read.articleList[2]);
-    }
+    var lists = [];
+    typeIds.forEach((typeId) => {
+      lists.push(
+        <View
+          key={typeId}
+          tabLabel={category[typeId]}
+          style={{flex: 1}}
+        >
+          {this.renderContent(this.state.dataSource.cloneWithRows(read.articleList[typeId] == undefined ? [] : read.articleList[typeId]), typeId)}
+        </View>);
+    });
     return (
       <View style={styles.container}>
         <ReadingToolbar
@@ -228,30 +231,7 @@ class Main extends React.Component {
           tabBarActiveTextColor="#3e9ce9"
           tabBarInactiveTextColor="#aaaaaa"
         >
-          <View
-            tabLabel="热门"
-            style={{flex: 1}}
-          >
-            {this.renderContent(hotSource, 0)}
-          </View>
-          <View
-            tabLabel="点赞"
-            style={{flex: 1}}
-          >
-            {this.renderContent(zanSource, 12)}
-          </View>
-          <View
-            tabLabel="科技"
-            style={{flex: 1}}
-          >
-            {this.renderContent(itSource, 9)}
-          </View>
-          <View
-            tabLabel="段子"
-            style={{flex: 1}}
-          >
-            {this.renderContent(jokeSource, 2)}
-          </View>
+        {lists}
         </ScrollableTabView>
       </View>
     );
