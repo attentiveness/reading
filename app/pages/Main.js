@@ -22,7 +22,6 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import WebViewContainer from '../containers/WebViewContainer';
 import AboutContainer from '../containers/AboutContainer';
 import {ToastShort} from '../utils/ToastUtils';
-import {isEmptyObject} from '../utils/CommonUtils';
 
 let toolbarActions = [
   {title: '设置', icon: require('../img/settings.png'), show: 'always'}
@@ -35,6 +34,7 @@ const propTypes = {
 
 var canLoadMore, currentTypeId;
 var page = 1;
+let typeIds = [0, 12, 9, 2];
 let categories = {0: "热门", 12: "点赞", 9: "科技", 2: "段子"};
 
 class Main extends React.Component {
@@ -54,9 +54,9 @@ class Main extends React.Component {
 
   componentDidMount() {
     const {dispatch} = this.props;
-    Object.keys(categories).forEach((typeId) => {
+    typeIds.forEach((typeId) => {
       dispatch(fetchArticles(false, true, typeId));
-    })
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -205,7 +205,7 @@ class Main extends React.Component {
     const {read, navigator} = this.props;
     let hotSource, zanSource, itSource, jokeSource;
     var lists = [];
-    Object.keys(categories).forEach((typeId) => {
+    typeIds.forEach((typeId) => {
       lists.push(
         <View
           key={typeId}

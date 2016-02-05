@@ -44,7 +44,7 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected List<ReactPackage> getPackages() {
-        this.codePush = new CodePush("U7ZF2kYt5EzV14JyIB22SLRhQ2KBV1Ifekvul", this, BuildConfig.DEBUG);
+        this.codePush = new CodePush("RGOUfyINiLicZnld67aD0nrbRvyLV1Ifekvul", this, BuildConfig.DEBUG);
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
                 new WeChatPackage(),

@@ -21,10 +21,10 @@ export default function read(state = initialState, action) {
 		case types.RECEIVE_ARTICLE_LIST:
 			return Object.assign({}, state, {
 				isRefreshing: false,
-				loading: false,
 				isLoadMore: false,
 				noMore: action.articleList.length == 0,
-				articleList: state.isLoadMore ? loadMore(state, action) : combine(state, action)
+				articleList: state.isLoadMore ? loadMore(state, action) : combine(state, action),
+				loading: state.articleList[0] == undefined
 			});
 		default:
 			return state;
