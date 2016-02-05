@@ -66,6 +66,11 @@
 
 -dontwarn com.facebook.stetho.**
 
+-keep class com.facebook.imagepipeline.gif.** { *; }
+-keep class com.facebook.imagepipeline.webp.** { *; }
+
 -keep class com.tencent.mm.sdk.** {
    *;
 }
+
+-keep public class com.tencent.bugly.**{*;}
