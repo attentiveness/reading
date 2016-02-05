@@ -11,7 +11,7 @@ import Main from '../pages/Main';
 class MainContainer extends Component {
   componentDidMount() {
     codePush.sync({
-      deploymentKey: "U7ZF2kYt5EzV14JyIB22SLRhQ2KBV1Ifekvul",
+      deploymentKey: "RGOUfyINiLicZnld67aD0nrbRvyLV1Ifekvul",
       updateDialog: {
         optionalIgnoreButtonLabel: '稍后',
         optionalInstallButtonLabel: '后台更新',
