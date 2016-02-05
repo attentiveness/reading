@@ -35,6 +35,7 @@ const propTypes = {
 var canLoadMore, currentTypeId;
 var page = 1;
 let typeIds = [0, 12, 9, 2];
+var loadMoreTime = 0;
 let categories = {0: "热门", 12: "点赞", 9: "科技", 2: "段子"};
 
 class Main extends React.Component {
@@ -101,12 +102,14 @@ class Main extends React.Component {
   }
 
   onEndReached(typeId) {
-    if (canLoadMore) {
+    let time = Date.parse(new Date()) / 1000;
+    if (canLoadMore && time - loadMoreTime > 1) {
       page++;
       currentTypeId = typeId;
       const {dispatch} = this.props;
       dispatch(fetchArticles(false, false, typeId, true, page));
       canLoadMore = false;
+      loadMoreTime = Date.parse(new Date()) / 1000;
     };
   }
 
@@ -186,7 +189,7 @@ class Main extends React.Component {
         renderRow={this.renderItem}
         style={styles.listView}
         onEndReached={this.onEndReached.bind(this, typeId)}
-        onEndReachedThreshold={15}
+        onEndReachedThreshold={10}
         onScroll={this.onScroll}
         renderFooter={this.renderFooter}
         refreshControl={
