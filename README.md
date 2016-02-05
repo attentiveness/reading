@@ -45,6 +45,12 @@ react-native start
 npm run setup
 ```
 
+## Release Note
+[Reading Release Note](./Reading_Release_Note.md)
+
+## OnLine Accident
+[Reading Online Accident](./Reading线上事故复盘.md)
+
 ## Welcome
 >* Star
 >* Fork
