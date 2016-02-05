@@ -35,8 +35,7 @@ const propTypes = {
 
 var canLoadMore, currentTypeId;
 var page = 1;
-let typeIds = [0, 12, 9, 2];
-let category = {0: "热门", 12: "点赞", 9: "科技", 2: "段子"};
+let categories = {0: "热门", 12: "点赞", 9: "科技", 2: "段子"};
 
 class Main extends React.Component {
   constructor(props) {
@@ -55,7 +54,7 @@ class Main extends React.Component {
 
   componentDidMount() {
     const {dispatch} = this.props;
-    typeIds.forEach((typeId) => {
+    Object.keys(categories).forEach((typeId) => {
       dispatch(fetchArticles(false, true, typeId));
     })
   }
@@ -206,11 +205,11 @@ class Main extends React.Component {
     const {read, navigator} = this.props;
     let hotSource, zanSource, itSource, jokeSource;
     var lists = [];
-    typeIds.forEach((typeId) => {
+    Object.keys(categories).forEach((typeId) => {
       lists.push(
         <View
           key={typeId}
-          tabLabel={category[typeId]}
+          tabLabel={categories[typeId]}
           style={{flex: 1}}
         >
           {this.renderContent(this.state.dataSource.cloneWithRows(read.articleList[typeId] == undefined ? [] : read.articleList[typeId]), typeId)}
