@@ -5,9 +5,9 @@ Reading App Write In React-Native（Studying and Programing）
 > No Profit, No Advertisement, Only Feelings
 
 ## Screenshot
-![Reading_Splash](./screenshot/Reading_Splash.png) ![Reading_Main](./screenshot/Reading_Main.png)
-![Reading_Article](./screenshot/Reading_Article.png) ![Reading_Share](./screenshot/Reading_Share.png)
-![Reading_About](./screenshot/Reading_About.png)
+![Reading_Splash](./screenshot/Reading_Splash.jpg) ![Reading_Main](./screenshot/Reading_Main.jpg)
+![Reading_Article](./screenshot/Reading_Article.jpg) ![Reading_Share](./screenshot/Reading_Share.jpg)
+![Reading_About](./screenshot/Reading_About.jpg)
 
 ## Download From Android Market
 *From 360 Android Market:* [Download Reading](http://zhushou.360.cn/detail/index/soft_id/3217938?recrefer=SE_D_Reading)
