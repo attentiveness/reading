@@ -12,6 +12,8 @@ const {
   InteractionManager,
   ProgressBarAndroid,
   Image,
+  DrawerLayoutAndroid,
+  Dimensions,
   View
 } = React;
 import LoadingView from '../components/LoadingView';
@@ -48,7 +50,9 @@ class Main extends React.Component {
     };
     this.renderItem = this.renderItem.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
+    this.renderNavigationView = this.renderNavigationView.bind(this);
     this.onActionSelected = this.onActionSelected.bind(this);
+    this.onIconClicked = this.onIconClicked.bind(this);
     this.onScroll = this.onScroll.bind(this);
     canLoadMore = false;
   }
@@ -93,6 +97,10 @@ class Main extends React.Component {
         name: 'About'
       });
     });
+  }
+
+  onIconClicked() {
+    this.refs.drawer.openDrawer();
   }
 
   onScroll() {
@@ -204,6 +212,60 @@ class Main extends React.Component {
     );
   }
 
+  renderNavigationView() {
+    return (
+      <View style={[styles.container, {backgroundColor: '#fcfcfc'}]}>
+        <Image
+          style={{width: Dimensions.get('window').width / 5 * 3, height: 100, justifyContent: 'center'}}
+          source={require('../img/drawerlayout.png')}
+        >
+          <Text style={{fontSize: 20, textAlign: 'center', color: '#fcfcfc'}}>
+            Reading
+          </Text>
+          <Text style={{fontSize: 20, textAlign: 'center', color: '#fcfcfc'}}>
+            让生活更精彩
+          </Text>
+        </Image>
+        <TouchableOpacity style={styles.drawerContent}>
+          <Image
+            style={styles.drawerIcon}
+            source={require('../img/home.png')}
+          />
+          <Text style={styles.drawerText}>
+            首页
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.drawerContent}>
+          <Image
+            style={styles.drawerIcon}
+            source={require('../img/category.png')}
+          />
+          <Text style={styles.drawerText}>
+            分类
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.drawerContent}>
+          <Image
+            style={styles.drawerIcon}
+            source={require('../img/inspection.png')}
+          />
+          <Text style={styles.drawerText}>
+            建议
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.drawerContent}>
+          <Image
+            style={styles.drawerIcon}
+            source={require('../img/info.png')}
+          />
+          <Text style={styles.drawerText}>
+            关于
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   render() {
     const {read, navigator} = this.props;
     let hotSource, zanSource, itSource, jokeSource;
@@ -219,23 +281,31 @@ class Main extends React.Component {
         </View>);
     });
     return (
-      <View style={styles.container}>
-        <ReadingToolbar
-          title={'eading'}
-          actions={toolbarActions}
-          navigator={navigator}
-          onActionSelected={this.onActionSelected}
-        />
-        <ScrollableTabView
-          renderTabBar={() => <ReadingTabBar />}
-          tabBarBackgroundColor="#fcfcfc"
-          tabBarUnderlineColor="#3e9ce9"
-          tabBarActiveTextColor="#3e9ce9"
-          tabBarInactiveTextColor="#aaaaaa"
-        >
-        {lists}
-        </ScrollableTabView>
-      </View>
+      <DrawerLayoutAndroid
+        ref='drawer'
+        drawerWidth={Dimensions.get('window').width / 5 * 3}
+        drawerPosition={DrawerLayoutAndroid.positions.Left}
+        renderNavigationView={this.renderNavigationView}
+      >
+        <View style={styles.container}>
+          <ReadingToolbar
+            title={'Reading'}
+            actions={toolbarActions}
+            navigator={navigator}
+            onActionSelected={this.onActionSelected}
+            onIconClicked={this.onIconClicked}
+          />
+          <ScrollableTabView
+            renderTabBar={() => <ReadingTabBar />}
+            tabBarBackgroundColor="#fcfcfc"
+            tabBarUnderlineColor="#3e9ce9"
+            tabBarActiveTextColor="#3e9ce9"
+            tabBarInactiveTextColor="#aaaaaa"
+          >
+          {lists}
+          </ScrollableTabView>
+        </View>
+      </DrawerLayoutAndroid>
     );
   }
 }
@@ -269,6 +339,24 @@ let styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: 100
+  },
+  drawerContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd'
+  },
+  drawerIcon: {
+    width: 30,
+    height: 30,
+    marginLeft: 5
+  },
+  drawerText: {
+    fontSize: 18,
+    marginLeft: 15,
+    textAlign: 'center',
+    color: 'black'
   }
 })
 
