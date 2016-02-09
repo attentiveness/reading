@@ -28,7 +28,7 @@ class About extends React.Component {
     return (
       <View style={styles.container}>
         <ReadingToolbar
-          title={'关于Reading'}
+          title={'关于'}
           navigator={navigator}
         />
         <View style={styles.content}>
@@ -52,7 +52,7 @@ class About extends React.Component {
               <Text style={{fontSize: 14, textAlign: 'center', color: '#aaaaaa'}}>
                 免责声明：所有内容均来自
               </Text>
-              <Text
+              <Button
                 style={{fontSize: 14, textAlign: 'center', color: '#3e9ce9'}}
                 text={API_STORE}
                 onPress={this.onPress.bind(this, API_STORE)}

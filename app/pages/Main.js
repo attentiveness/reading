@@ -25,10 +25,6 @@ import WebViewContainer from '../containers/WebViewContainer';
 import AboutContainer from '../containers/AboutContainer';
 import {ToastShort} from '../utils/ToastUtils';
 
-let toolbarActions = [
-  {title: '设置', icon: require('../img/settings.png'), show: 'always'}
-];
-
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
   read: PropTypes.object.isRequired
@@ -51,7 +47,6 @@ class Main extends React.Component {
     this.renderItem = this.renderItem.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
     this.renderNavigationView = this.renderNavigationView.bind(this);
-    this.onActionSelected = this.onActionSelected.bind(this);
     this.onIconClicked = this.onIconClicked.bind(this);
     this.onScroll = this.onScroll.bind(this);
     canLoadMore = false;
@@ -89,14 +84,20 @@ class Main extends React.Component {
     });
   }
 
-  onActionSelected() {
+  onPressDrawerItem(index) {
     const {navigator} = this.props;
-    InteractionManager.runAfterInteractions(() => {
-      navigator.push({
-        component: AboutContainer,
-        name: 'About'
-      });
-    });
+    switch (index) {
+      case 3:
+        InteractionManager.runAfterInteractions(() => {
+          navigator.push({
+            component: AboutContainer,
+            name: 'About'
+          });
+        });
+        break;
+      default:
+        break;
+    }
   }
 
   onIconClicked() {
@@ -216,13 +217,13 @@ class Main extends React.Component {
     return (
       <View style={[styles.container, {backgroundColor: '#fcfcfc'}]}>
         <Image
-          style={{width: Dimensions.get('window').width / 5 * 3, height: 100, justifyContent: 'center'}}
+          style={{width: Dimensions.get('window').width / 5 * 3, height: 120, justifyContent: 'flex-end', paddingBottom: 10}}
           source={require('../img/drawerlayout.png')}
         >
-          <Text style={{fontSize: 20, textAlign: 'center', color: '#fcfcfc'}}>
+          <Text style={{fontSize: 20, textAlign: 'left', color: '#fcfcfc', marginLeft: 10}}>
             Reading
           </Text>
-          <Text style={{fontSize: 20, textAlign: 'center', color: '#fcfcfc'}}>
+          <Text style={{fontSize: 20, textAlign: 'left', color: '#fcfcfc', marginLeft: 10}}>
             让生活更精彩
           </Text>
         </Image>
@@ -253,7 +254,10 @@ class Main extends React.Component {
             建议
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.drawerContent}>
+        <TouchableOpacity
+          style={styles.drawerContent}
+          onPress={this.onPressDrawerItem.bind(this, 3)}
+        >
           <Image
             style={styles.drawerIcon}
             source={require('../img/info.png')}
@@ -290,9 +294,7 @@ class Main extends React.Component {
         <View style={styles.container}>
           <ReadingToolbar
             title={'Reading'}
-            actions={toolbarActions}
             navigator={navigator}
-            onActionSelected={this.onActionSelected}
             onIconClicked={this.onIconClicked}
           />
           <ScrollableTabView
