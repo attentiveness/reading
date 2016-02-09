@@ -88,8 +88,8 @@ class WebViewPage extends React.Component {
               style={{flex: 1}}
               onPress={() => {
                 shareToSession({
-                  title: 'Reading',
-                  description: route.article.title,
+                  title: route.article.title,
+                  description: '分享自：Reading',
                   thumbImage: route.article.contentImg,
                   type: 'news',
                   webpageUrl: route.article.url

@@ -4,14 +4,23 @@ const {
   Image,
   Text,
   BackAndroid,
+  IntentAndroid,
   View
 } = React;
 
 import ReadingToolbar from '../components/ReadingToolbar';
+import Button from '../components/Button';
+
+let API_STORE = 'http://apistore.baidu.com/'
+let READING_REPO = 'https://github.com/attentiveness/reading';
 
 class About extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  onPress(url) {
+    IntentAndroid.openURL(url);
   }
 
   render() {
@@ -38,13 +47,27 @@ class About extends React.Component {
               让生活更精彩
             </Text>
           </View>
-          <View >
-            <Text style={{fontSize: 14, textAlign: 'center', color: '#aaaaaa'}}>
-              免责声明：所有内容均来自http://apistore.baidu.com/
-            </Text>
-            <Text style={{fontSize: 12, textAlign: 'center', color: '#aaaaaa'}}>
-              @Team：https://github.com/attentiveness/reading
-            </Text>
+          <View style={{alignItems: 'center'}}>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={{fontSize: 14, textAlign: 'center', color: '#aaaaaa'}}>
+                免责声明：所有内容均来自
+              </Text>
+              <Text
+                style={{fontSize: 14, textAlign: 'center', color: '#3e9ce9'}}
+                text={API_STORE}
+                onPress={this.onPress.bind(this, API_STORE)}
+              />
+            </View>
+            <View style={{flexDirection: 'row'}}>
+              <Text style={{fontSize: 12, textAlign: 'center', color: '#aaaaaa'}}>
+                @Reading Team：
+              </Text>
+              <Button
+                style={{fontSize: 12, textAlign: 'center', color: '#3e9ce9'}}
+                text={READING_REPO}
+                onPress={this.onPress.bind(this, READING_REPO)}
+              />
+            </View>
           </View>
         </View>
       </View>
