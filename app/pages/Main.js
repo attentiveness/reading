@@ -23,6 +23,7 @@ import ReadingToolbar from '../components/ReadingToolbar';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import WebViewContainer from '../containers/WebViewContainer';
 import AboutContainer from '../containers/AboutContainer';
+import FeedbackContainer from '../containers/FeedbackContainer';
 import {ToastShort} from '../utils/ToastUtils';
 
 const propTypes = {
@@ -86,7 +87,16 @@ class Main extends React.Component {
 
   onPressDrawerItem(index) {
     const {navigator} = this.props;
+    this.refs.drawer.closeDrawer();
     switch (index) {
+      case 2:
+        InteractionManager.runAfterInteractions(() => {
+          navigator.push({
+            component: FeedbackContainer,
+            name: 'Feedback'
+          });
+        });
+        break;
       case 3:
         InteractionManager.runAfterInteractions(() => {
           navigator.push({
@@ -227,7 +237,10 @@ class Main extends React.Component {
             让生活更精彩
           </Text>
         </Image>
-        <TouchableOpacity style={styles.drawerContent}>
+        <TouchableOpacity
+          style={styles.drawerContent}
+          onPress={this.onPressDrawerItem.bind(this, 0)}
+        >
           <Image
             style={styles.drawerIcon}
             source={require('../img/home.png')}
@@ -236,7 +249,10 @@ class Main extends React.Component {
             首页
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.drawerContent}>
+        <TouchableOpacity
+          style={styles.drawerContent}
+          onPress={this.onPressDrawerItem.bind(this, 1)}
+        >
           <Image
             style={styles.drawerIcon}
             source={require('../img/category.png')}
@@ -245,7 +261,10 @@ class Main extends React.Component {
             分类
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.drawerContent}>
+        <TouchableOpacity
+          style={styles.drawerContent}
+          onPress={this.onPressDrawerItem.bind(this, 2)}
+        >
           <Image
             style={styles.drawerIcon}
             source={require('../img/inspection.png')}

@@ -3,7 +3,6 @@ const {
   StyleSheet,
   Image,
   Text,
-  BackAndroid,
   IntentAndroid,
   View
 } = React;

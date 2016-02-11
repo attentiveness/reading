@@ -5,12 +5,13 @@ const {
   Component
 } = React;
 import {connect} from 'react-redux';
-import codePush from "react-native-code-push";
+import CodePush from 'react-native-code-push';
+import AV from 'avoscloud-sdk';
 import Main from '../pages/Main';
 
 class MainContainer extends Component {
   componentDidMount() {
-    codePush.sync({
+    CodePush.sync({
       deploymentKey: "RGOUfyINiLicZnld67aD0nrbRvyLV1Ifekvul",
       updateDialog: {
         optionalIgnoreButtonLabel: '稍后',
@@ -18,8 +19,9 @@ class MainContainer extends Component {
         optionalUpdateMessage: 'Reading有新版本了，是否更新？',
         title: '更新提示'
       },
-      installMode: codePush.InstallMode.ON_NEXT_RESTART
+      installMode: CodePush.InstallMode.ON_NEXT_RESTART
     });
+    AV.initialize('Tfi1z7dN9sjMwSul8sYaTEvg-gzGzoHsz', '57qmeEJonefntNqRe17dAgi4');
   }
 
   render() {
