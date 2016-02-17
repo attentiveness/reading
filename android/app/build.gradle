@@ -133,4 +133,5 @@ dependencies {
     compile 'com.tencent.bugly:crashreport:latest.release'
     compile project(':RCTWeChat')
     compile project(':react-native-code-push')
+    compile project(':RNDeviceInfo')
 }

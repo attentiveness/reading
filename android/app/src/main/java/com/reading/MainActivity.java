@@ -3,6 +3,7 @@ package com.reading;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.microsoft.codepush.react.CodePush;
 import com.theweflex.react.WeChatPackage;
 
@@ -48,6 +49,7 @@ public class MainActivity extends ReactActivity {
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
                 new WeChatPackage(),
-                this.codePush.getReactPackage());
+                this.codePush.getReactPackage(),
+                new RNDeviceInfo());
     }
 }
