@@ -151,7 +151,7 @@ class WebViewPage extends React.Component {
           ref='webview'
 	        automaticallyAdjustContentInsets={false}
 	        style={{flex: 1}}
-	        url={route.article.url}
+          source={{uri: route.article.url}}
 	        javaScriptEnabled={true}
 	        domStorageEnabled={true}
 	        startInLoadingState={true}

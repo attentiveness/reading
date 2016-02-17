@@ -129,7 +129,7 @@ android {
 dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.1.1"
-    compile "com.facebook.react:react-native:0.19.+"
+    compile "com.facebook.react:react-native:0.20.+"
     compile 'com.tencent.bugly:crashreport:latest.release'
     compile project(':RCTWeChat')
     compile project(':react-native-code-push')
