@@ -34,9 +34,9 @@ class Feedback extends React.Component {
       var feedback = AV.Object.new('Feedback');
       feedback.set('manufacturer', DeviceInfo.getManufacturer());
       feedback.set('system', DeviceInfo.getSystemName());
-      feedback.set('device_version', DeviceInfo.getSystemVersion());
-      feedback.set('device_model', DeviceInfo.getModel());
-      feedback.set('app_version', DeviceInfo.getVersion());
+      feedback.set('deviceVersion', DeviceInfo.getSystemVersion());
+      feedback.set('deviceModel', DeviceInfo.getModel());
+      feedback.set('appVersion', DeviceInfo.getVersion());
       feedback.set('feedback', feedbackText);
       feedback.save();
       navigator.pop();
