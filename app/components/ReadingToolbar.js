@@ -19,6 +19,7 @@ const propTypes = {
 	navigator: PropTypes.object,
 	onActionSelected: PropTypes.func,
 	onIconClicked: PropTypes.func,
+	navIcon: PropTypes.number,
 	customView: PropTypes.object
 }
 
@@ -59,7 +60,7 @@ class ReadingToolbar extends React.Component {
 					actions={this.props.actions}
 	        onActionSelected={this.onActionSelected}
 	        onIconClicked={this.onIconClicked}
-	        navIcon={NaviGoBack(navigator) ? require('../img/icon_left.png') : require('../img/menu.png')}
+	        navIcon={this.props.navIcon ? this.props.navIcon : require('../img/icon_left.png')}
 	        titleColor='#fff'
 	        title={this.props.title}
 	      />

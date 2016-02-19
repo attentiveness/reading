@@ -49,7 +49,7 @@ class Feedback extends React.Component {
     return (
       <View style={styles.container}>
         <ReadingToolbar
-          title={'建议'}
+          title="建议"
           actions={toolbarActions}
           onActionSelected={this.onActionSelected}
           navigator={navigator}

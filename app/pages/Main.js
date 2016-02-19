@@ -24,6 +24,7 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import WebViewContainer from '../containers/WebViewContainer';
 import AboutContainer from '../containers/AboutContainer';
 import FeedbackContainer from '../containers/FeedbackContainer';
+import CategoryContainer from '../containers/CategoryContainer';
 import {ToastShort} from '../utils/ToastUtils';
 
 const propTypes = {
@@ -89,6 +90,14 @@ class Main extends React.Component {
     const {navigator} = this.props;
     this.refs.drawer.closeDrawer();
     switch (index) {
+      case 1:
+        InteractionManager.runAfterInteractions(() => {
+          navigator.push({
+            component: CategoryContainer,
+            name: 'Category'
+          });
+        });
+        break;
       case 2:
         InteractionManager.runAfterInteractions(() => {
           navigator.push({
@@ -291,7 +300,6 @@ class Main extends React.Component {
 
   render() {
     const {read, navigator} = this.props;
-    let hotSource, zanSource, itSource, jokeSource;
     var lists = [];
     typeIds.forEach((typeId) => {
       lists.push(
@@ -312,8 +320,9 @@ class Main extends React.Component {
       >
         <View style={styles.container}>
           <ReadingToolbar
-            title={'Reading'}
+            title="Reading"
             navigator={navigator}
+            navIcon={require('../img/menu.png')}
             onIconClicked={this.onIconClicked}
           />
           <ScrollableTabView

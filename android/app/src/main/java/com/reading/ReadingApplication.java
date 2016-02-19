@@ -11,6 +11,8 @@ public class ReadingApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        CrashReport.initCrashReport(getApplicationContext(), "900019562", false);
+        if (!BuildConfig.DEBUG) {
+            CrashReport.initCrashReport(getApplicationContext(), "900019562", false);
+        }
     }
 }

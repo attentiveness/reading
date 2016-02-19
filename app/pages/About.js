@@ -27,7 +27,7 @@ class About extends React.Component {
     return (
       <View style={styles.container}>
         <ReadingToolbar
-          title={'关于'}
+          title="关于"
           navigator={navigator}
         />
         <View style={styles.content}>
