@@ -8,6 +8,9 @@ import {connect} from 'react-redux';
 import CodePush from 'react-native-code-push';
 import AV from 'avoscloud-sdk';
 import Main from '../pages/Main';
+import Storage from '../utils/Storage';
+
+let typeIds = [0, 12, 9, 2];
 
 class MainContainer extends Component {
   componentDidMount() {
@@ -22,6 +25,7 @@ class MainContainer extends Component {
       installMode: CodePush.InstallMode.ON_NEXT_RESTART
     });
     AV.initialize('Tfi1z7dN9sjMwSul8sYaTEvg-gzGzoHsz', '57qmeEJonefntNqRe17dAgi4');
+    Storage.save('typeIds', typeIds);
   }
 
   render() {

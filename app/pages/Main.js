@@ -26,6 +26,7 @@ import AboutContainer from '../containers/AboutContainer';
 import FeedbackContainer from '../containers/FeedbackContainer';
 import CategoryContainer from '../containers/CategoryContainer';
 import {ToastShort} from '../utils/ToastUtils';
+import Storage from '../utils/Storage';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -33,8 +34,8 @@ const propTypes = {
 }
 
 var canLoadMore, currentTypeId;
+var _typeIds = new Array();
 var page = 1;
-let typeIds = [0, 12, 9, 2];
 var loadMoreTime = 0;
 let categories = {0: "热门", 12: "点赞", 9: "科技", 2: "段子"};
 
@@ -56,9 +57,13 @@ class Main extends React.Component {
 
   componentDidMount() {
     const {dispatch} = this.props;
-    typeIds.forEach((typeId) => {
-      dispatch(fetchArticles(false, true, typeId));
-    });
+    Storage.get('typeIds')
+      .then((typeIds) => {
+        _typeIds = typeIds;
+        typeIds.forEach((typeId) => {
+          dispatch(fetchArticles(false, true, typeId));
+        });
+      });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -301,7 +306,7 @@ class Main extends React.Component {
   render() {
     const {read, navigator} = this.props;
     var lists = [];
-    typeIds.forEach((typeId) => {
+    _typeIds.forEach((typeId) => {
       lists.push(
         <View
           key={typeId}
