@@ -27,6 +27,7 @@ import FeedbackContainer from '../containers/FeedbackContainer';
 import CategoryContainer from '../containers/CategoryContainer';
 import {ToastShort} from '../utils/ToastUtils';
 import Storage from '../utils/Storage';
+import {CATEGORIES} from '../constants/Alias';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -37,7 +38,6 @@ var canLoadMore, currentTypeId;
 var _typeIds = new Array();
 var page = 1;
 var loadMoreTime = 0;
-let categories = {0: "热门", 12: "点赞", 9: "科技", 2: "段子"};
 
 class Main extends React.Component {
   constructor(props) {
@@ -310,7 +310,7 @@ class Main extends React.Component {
       lists.push(
         <View
           key={typeId}
-          tabLabel={categories[typeId]}
+          tabLabel={CATEGORIES[typeId]}
           style={{flex: 1}}
         >
           {this.renderContent(this.state.dataSource.cloneWithRows(read.articleList[typeId] == undefined ? [] : read.articleList[typeId]), typeId)}
