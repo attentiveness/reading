@@ -3,7 +3,7 @@ const {
   StyleSheet,
   Image,
   Text,
-  IntentAndroid,
+  Linking,
   View
 } = React;
 
@@ -19,7 +19,7 @@ class About extends React.Component {
   }
 
   onPress(url) {
-    IntentAndroid.openURL(url);
+    Linking.openURL(url);
   }
 
   render() {
