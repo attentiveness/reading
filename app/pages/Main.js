@@ -34,7 +34,7 @@ const propTypes = {
   read: PropTypes.object.isRequired
 }
 
-var canLoadMore, currentTypeId;
+var canLoadMore;
 var _typeIds = new Array();
 var page = 1;
 var loadMoreTime = 0;
@@ -138,7 +138,6 @@ class Main extends React.Component {
     let time = Date.parse(new Date()) / 1000;
     if (canLoadMore && time - loadMoreTime > 1) {
       page++;
-      currentTypeId = typeId;
       const {dispatch} = this.props;
       dispatch(fetchArticles(false, false, typeId, true, page));
       canLoadMore = false;
