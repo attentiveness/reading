@@ -25,7 +25,13 @@ class MainContainer extends Component {
       installMode: CodePush.InstallMode.ON_NEXT_RESTART
     });
     AV.initialize('Tfi1z7dN9sjMwSul8sYaTEvg-gzGzoHsz', '57qmeEJonefntNqRe17dAgi4');
-    Storage.save('typeIds', typeIds);
+    Storage.get('isInit')
+      .then((isInit) => {
+        if (!isInit) {
+          Storage.save('typeIds', typeIds);
+          Storage.save('isInit', true);
+        }
+      });
   }
 
   render() {

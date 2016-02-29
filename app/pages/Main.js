@@ -77,6 +77,7 @@ class Main extends React.Component {
 
   onRefresh(typeId) {
     const {dispatch} = this.props;
+    canLoadMore = false;
     dispatch(fetchArticles(true, false, typeId));
   }
 
