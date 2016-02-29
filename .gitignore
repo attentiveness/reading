@@ -36,3 +36,4 @@ node_modules/
 npm-debug.log
 reading.keystore
 app.iml
+android.iml
