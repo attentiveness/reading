@@ -60,6 +60,10 @@ class Category extends React.Component {
         _typeIds.push(parseInt(type.id));
       }
     } else {
+      if (_typeIds.length <= 3) {
+        ToastShort('不要少于3个类别哦');
+        return;
+      }
       _typeIds.splice(pos, 1);
     }
     this.setState({
@@ -69,17 +73,26 @@ class Category extends React.Component {
 
   resetRoute() {
     const {navigator} = this.props;
-    InteractionManager.runAfterInteractions(() => {
-      navigator.resetTo({
-        component: MainContainer,
-        name: 'Main'
-      })
-    });
+    navigator.resetTo({
+      component: MainContainer,
+      name: 'Main'
+    })
   }
 
   onActionSelected() {
-    Storage.save('typeIds', this.state.typeIds)
-      .then(this.resetRoute);
+    const {navigator} = this.props;
+    InteractionManager.runAfterInteractions(() => {
+      Storage.get('typeIds')
+      .then((typeIds) => {
+        if (typeIds.sort().toString() == _typeIds.sort().toString()) {
+          navigator.pop();
+          return;
+        }
+        Storage.save('typeIds', this.state.typeIds)
+          .then(this.resetRoute);
+      });
+
+    });
   }
 
   renderItem(item) {

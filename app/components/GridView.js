@@ -60,6 +60,7 @@ class GridView extends React.Component {
 		});
 		return (
 			<ListView
+				initialListSize={1}
       	dataSource={ds.cloneWithRows(groups)}
         renderRow={this.renderGroup}
         style={this.props.style}

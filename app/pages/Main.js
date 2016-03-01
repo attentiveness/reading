@@ -57,13 +57,18 @@ class Main extends React.Component {
 
   componentDidMount() {
     const {dispatch} = this.props;
+    // InteractionManager.runAfterInteractions(() => {
     Storage.get('typeIds')
       .then((typeIds) => {
+        if (!typeIds) {
+          typeIds = [0, 12, 9, 2];
+        }
         _typeIds = typeIds;
         typeIds.forEach((typeId) => {
           dispatch(fetchArticles(false, true, typeId));
         });
       });
+    // });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -218,6 +223,7 @@ class Main extends React.Component {
     }
     return (
       <ListView
+        initialListSize={1}
         dataSource={dataSource}
         renderRow={this.renderItem}
         style={styles.listView}
