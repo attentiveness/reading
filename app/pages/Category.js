@@ -84,14 +84,13 @@ class Category extends React.Component {
     InteractionManager.runAfterInteractions(() => {
       Storage.get('typeIds')
       .then((typeIds) => {
-        if (typeIds.sort().toString() == _typeIds.sort().toString()) {
+        if (typeIds.sort().toString() == Array.from(_typeIds).sort().toString()) {
           navigator.pop();
           return;
         }
         Storage.save('typeIds', this.state.typeIds)
           .then(this.resetRoute);
       });
-
     });
   }
 

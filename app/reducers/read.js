@@ -24,7 +24,7 @@ export default function read(state = initialState, action) {
 				isLoadMore: false,
 				noMore: action.articleList.length == 0,
 				articleList: state.isLoadMore ? loadMore(state, action) : combine(state, action),
-				loading: state.articleList[0] == undefined
+				loading: state.articleList[action.typeId] == undefined
 			});
 		default:
 			return state;
