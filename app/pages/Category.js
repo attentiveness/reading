@@ -118,7 +118,7 @@ class Category extends React.Component {
           onActionSelected={this.onActionSelected}
         />
         <View style={{padding: 10, backgroundColor: '#fcfcfc'}}>
-          <Text style={{color: 'black', color: 18}}>
+          <Text style={{color: 'black', fontSize: 16}}>
             选择您感兴趣的3-5个类别
           </Text>
         </View>
