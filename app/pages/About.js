@@ -37,7 +37,7 @@ class About extends React.Component {
               source={require('../img/about_logo.png')}
             />
             <Text style={{fontSize: 16, textAlign: 'center', color: '#aaaaaa', marginTop: 5}}>
-              v0.1.3
+              v0.1.4
             </Text>
             <Text style={{fontSize: 28, textAlign: 'center', color: '#313131', marginTop: 10}}>
               Reading
