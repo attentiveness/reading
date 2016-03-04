@@ -9,6 +9,7 @@ const {
 
 import ReadingToolbar from '../components/ReadingToolbar';
 import Button from '../components/Button';
+import DeviceInfo from 'react-native-device-info';
 
 let API_STORE = 'http://apistore.baidu.com/'
 let READING_REPO = 'https://github.com/attentiveness/reading';
@@ -37,7 +38,7 @@ class About extends React.Component {
               source={require('../img/about_logo.png')}
             />
             <Text style={{fontSize: 16, textAlign: 'center', color: '#aaaaaa', marginTop: 5}}>
-              v0.1.4
+              {'v' + DeviceInfo.getVersion()}
             </Text>
             <Text style={{fontSize: 28, textAlign: 'center', color: '#313131', marginTop: 10}}>
               Reading
