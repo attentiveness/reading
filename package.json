@@ -10,7 +10,7 @@
     "avoscloud-sdk": "^1.0.0-rc6",
     "immutable": "^3.7.5",
     "react-native": "^0.21.0",
-    "react-native-code-push": "^1.7.0-beta",
+    "react-native-code-push": "^1.7.3-beta",
     "react-native-device-info": "^0.8.4",
     "react-native-scrollable-tab-view": "^0.4.0",
     "react-native-wechat": "^1.3.0",

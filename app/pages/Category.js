@@ -101,7 +101,7 @@ class Category extends React.Component {
                   .then(this.resetRoute);
                 BackAndroid.exitApp();
               }
-            }, ]
+            }]
           )
         });
     });

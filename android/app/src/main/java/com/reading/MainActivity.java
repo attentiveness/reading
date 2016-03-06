@@ -45,7 +45,13 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected List<ReactPackage> getPackages() {
-        this.codePush = new CodePush("RGOUfyINiLicZnld67aD0nrbRvyLV1Ifekvul", this, BuildConfig.DEBUG);
+        String deploymentKey;
+        if (BuildConfig.DEBUG) {
+            deploymentKey = "U7ZF2kYt5EzV14JyIB22SLRhQ2KBV1Ifekvul";
+        } else {
+            deploymentKey = "RGOUfyINiLicZnld67aD0nrbRvyLV1Ifekvul";
+        }
+        this.codePush = new CodePush(deploymentKey, this, BuildConfig.DEBUG);
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
                 new WeChatPackage(),
