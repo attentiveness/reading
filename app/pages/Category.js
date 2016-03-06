@@ -6,6 +6,8 @@ const {
   InteractionManager,
   StyleSheet,
   Text,
+  Alert,
+  BackAndroid,
   View
 } = React;
 
@@ -53,17 +55,8 @@ class Category extends React.Component {
   onPress(type) {
     let pos = _typeIds.indexOf(parseInt(type.id));
     if (pos == -1) {
-      if (_typeIds.length >= 5) {
-        ToastShort('不要超过5个类别哦');
-        return;
-      } else {
-        _typeIds.push(parseInt(type.id));
-      }
+      _typeIds.push(parseInt(type.id));
     } else {
-      if (_typeIds.length <= 3) {
-        ToastShort('不要少于3个类别哦');
-        return;
-      }
       _typeIds.splice(pos, 1);
     }
     this.setState({
@@ -80,17 +73,37 @@ class Category extends React.Component {
   }
 
   onActionSelected() {
+    if (_typeIds.length > 5) {
+      ToastShort('不要超过5个类别哦');
+      return;
+    }
+    if (_typeIds.length < 3) {
+      ToastShort('不要少于3个类别哦');
+      return;
+    }
     const {navigator} = this.props;
     InteractionManager.runAfterInteractions(() => {
       Storage.get('typeIds')
-      .then((typeIds) => {
-        if (typeIds.sort().toString() == Array.from(_typeIds).sort().toString()) {
-          navigator.pop();
-          return;
-        }
-        Storage.save('typeIds', this.state.typeIds)
-          .then(this.resetRoute);
-      });
+        .then((typeIds) => {
+          if (typeIds.sort().toString() == Array.from(_typeIds).sort().toString()) {
+            navigator.pop();
+            return;
+          }
+          Alert.alert(
+            '提醒',
+            '应用即将关闭，再次打开分类生效', [{
+              text: '取消',
+              style: 'cancel'
+            }, {
+              text: '确认',
+              onPress: () => {
+                Storage.save('typeIds', this.state.typeIds)
+                  .then(this.resetRoute);
+                BackAndroid.exitApp();
+              }
+            }, ]
+          )
+        });
     });
   }
 
