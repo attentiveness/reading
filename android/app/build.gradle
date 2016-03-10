@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply plugin: 'AndResGuard'
 
 import com.android.build.OutputFile
 
@@ -109,7 +110,9 @@ android {
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
-            shrinkResources true
+            shrinkResources enableProguardInReleaseBuilds
+            zipAlignEnabled true
+            pseudoLocalesEnabled true
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
         }
@@ -127,6 +130,28 @@ android {
             }
         }
     }
+}
+
+andResGuard {
+    mappingFile = null
+    use7zip = true
+    keepRoot = false
+    // add <yourpackagename>.R.drawable.icon into whitelist.
+    // because the launcher will get thgge icon with his name
+    whiteList = [
+            "com.reading.R.drawable.ic_launcher",
+            "com.reading.R.drawable.app_img*",
+            "com.reading.R.drawable.node_modules*"
+    ]
+    compressFilePattern = [
+            "*.png",
+            "*.jpg",
+            "*.jpeg",
+            "*.gif",
+            "resources.arsc"
+    ]
+    zipAlignPath = 'app/doc/zipalign'
+    sevenZipPath = '/usr/local/bin/7za'
 }
 
 dependencies {
