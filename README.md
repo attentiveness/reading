@@ -23,7 +23,7 @@ Reading App Write In React-Native（Studying and Programing）
     "react-native-code-push": "^1.7.3-beta",
     "react-native-device-info": "^0.8.4",
     "react-native-scrollable-tab-view": "^0.4.0",
-    "react-native-wechat": "^1.3.0",
+    "react-native-wechat": "^1.3.1",
     "react-redux": "^4.4.0",
     "redux": "^3.3.1",
     "redux-thunk": "^1.0.3"
@@ -61,3 +61,6 @@ npm run setup
 
 ## Thanks All!
 *@Reading_Team*
+
+## Contributors
+*[@Richard-Cao](https://github.com/Richard-Cao)*
