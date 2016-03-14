@@ -2,7 +2,7 @@
 ![Reading_Logo](./Reading_Logo.png)
 
 [![Join the chat at https://gitter.im/attentiveness/reading](https://badges.gitter.im/attentiveness/reading.svg)](https://gitter.im/attentiveness/reading)
-[![License Apache2.0](https://img.shields.io/hexpm/l/plug.svg)](license)
+[![License Apache2.0](https://img.shields.io/hexpm/l/plug.svg)](./license)
 
 Reading App Write In React-Native（Studying and Programing）
 
@@ -70,3 +70,6 @@ npm run setup
 
 ## Contributors
 *[@Richard-Cao](https://github.com/Richard-Cao)*
+
+## License
+Apache License 2.0
