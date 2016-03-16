@@ -54,7 +54,7 @@ npm run setup
 ```
 
 ## Release Note
-[Reading Release Note](./Reading_Release_Note.md)
+[Reading Release Note](https://github.com/attentiveness/reading/releases)
 
 ## OnLine Accident
 [Reading Online Accident](./Reading线上事故复盘.md)
