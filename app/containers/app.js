@@ -2,7 +2,9 @@ import React from 'react-native';
 const {
   StyleSheet,
   Navigator,
+  StatusBar,
   BackAndroid,
+  View,
   PropTypes
 } = React;
 
@@ -47,16 +49,22 @@ class App extends React.Component {
 
   render() {
     return (
-      <Navigator
-        ref='navigator'
-        style={styles.navigator}
-        configureScene={this.configureScene}
-        renderScene={this.renderScene}
-        initialRoute={{
-          component: Splash,
-          name: 'Splash'
-        }}
-      />
+      <View style={{flex: 1}}>
+        <StatusBar
+         backgroundColor="#3e9ce9"
+         barStyle="default"
+       />
+        <Navigator
+          ref='navigator'
+          style={styles.navigator}
+          configureScene={this.configureScene}
+          renderScene={this.renderScene}
+          initialRoute={{
+            component: Splash,
+            name: 'Splash'
+          }}
+        />
+      </View>
     );
   }
 }
