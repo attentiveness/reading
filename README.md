@@ -25,9 +25,10 @@ Reading App Write In React-Native（Studying and Programing）
 "dependencies": {
     "avoscloud-sdk": "^1.0.0-rc7",
     "immutable": "^3.7.5",
-    "react-native": "^0.21.0",
+    "react": "^0.14.5",
+    "react-native": "^0.22.2",
     "react-native-code-push": "^1.7.3-beta",
-    "react-native-device-info": "^0.8.4",
+    "react-native-device-info": "^0.9.1",
     "react-native-scrollable-tab-view": "^0.4.0",
     "react-native-wechat": "^1.3.2",
     "react-redux": "^4.4.1",
