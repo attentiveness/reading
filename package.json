@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-native start",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
     "setup": "cd node_modules; find . -name .babelrc | grep -v packager | xargs rm"
   },
   "dependencies": {
     "avoscloud-sdk": "^1.0.0-rc7",
     "immutable": "^3.7.5",
-    "react-native": "^0.21.0",
+    "react": "^0.14.5",
+    "react-native": "^0.22.2",
     "react-native-code-push": "^1.7.3-beta",
     "react-native-device-info": "^0.9.0",
     "react-native-scrollable-tab-view": "^0.4.0",
@@ -19,6 +20,6 @@
     "redux-thunk": "^2.0.1"
   },
   "devDependencies": {
-    "redux-devtools": "^3.0.1"
+    "redux-devtools": "^3.2.0"
   }
 }

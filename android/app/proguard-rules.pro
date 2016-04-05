@@ -66,6 +66,9 @@
 
 -dontwarn com.facebook.stetho.**
 
+# https://github.com/facebook/react-native/issues/6624#
+-keep class com.facebook.react.bridge.queue.NativeRunnable { *; }
+
 -keep class com.facebook.imagepipeline.gif.** { *; }
 -keep class com.facebook.imagepipeline.webp.** { *; }
 
@@ -73,4 +76,5 @@
    *;
 }
 
+-dontwarn com.tencent.bugly.**
 -keep public class com.tencent.bugly.**{*;}

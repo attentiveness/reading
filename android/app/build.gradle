@@ -80,6 +80,7 @@ def enableProguardInReleaseBuilds = true
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
+    useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "com.reading"
@@ -110,7 +111,6 @@ android {
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
-            shrinkResources enableProguardInReleaseBuilds
             zipAlignEnabled true
             pseudoLocalesEnabled true
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
