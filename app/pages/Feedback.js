@@ -75,6 +75,6 @@ let styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#fcfcfc'
   }
-})
+});
 
 export default Feedback;

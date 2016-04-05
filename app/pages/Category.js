@@ -1,8 +1,5 @@
 import React from 'react-native';
 const {
-  Dimensions,
-  Image,
-  TouchableOpacity,
   InteractionManager,
   StyleSheet,
   Text,
@@ -11,7 +8,6 @@ const {
   View
 } = React;
 
-import LoadingView from '../components/LoadingView';
 import ReadingToolbar from '../components/ReadingToolbar';
 import {fetchTypes} from '../actions/category';
 import Storage from '../utils/Storage';
@@ -34,7 +30,7 @@ class Category extends React.Component {
     this.resetRoute = this.resetRoute.bind(this);
     this.state = {
       typeIds: _typeIds
-    }
+    };
   }
 
   componentWillMount() {
@@ -69,7 +65,7 @@ class Category extends React.Component {
     navigator.resetTo({
       component: MainContainer,
       name: 'Main'
-    })
+    });
   }
 
   onActionSelected() {
@@ -152,6 +148,6 @@ let styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column'
   }
-})
+});
 
 export default Category;
