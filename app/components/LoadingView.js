@@ -40,6 +40,6 @@ let styles = StyleSheet.create({
 		marginTop: 10,
 		textAlign: 'center'
 	}
-})
+});
 
 export default LoadingView;

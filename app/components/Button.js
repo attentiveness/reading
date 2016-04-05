@@ -3,7 +3,6 @@
 import React from 'react-native';
 const {
 	Text,
-	StyleSheet,
 	PropTypes,
 	TouchableOpacity,
 } = React;
@@ -20,7 +19,7 @@ const propTypes = {
 	style: TextStylePropType,
 	containerStyle: ViewStylePropType,
 	text: PropTypes.string
-}
+};
 
 class Button extends React.Component {
 	constructor(props) {
@@ -54,6 +53,6 @@ Button.propTypes = propTypes;
 Button.defaultProps = {
 	onPress: function() {},
 	disabled: false
-}
+};
 
 export default Button;

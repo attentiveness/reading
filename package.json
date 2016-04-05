@@ -20,6 +20,9 @@
     "redux-thunk": "^2.0.1"
   },
   "devDependencies": {
+    "babel-eslint": "^6.0.2",
+    "eslint": "^2.7.0",
+    "eslint-plugin-react": "^4.2.3",
     "redux-devtools": "^3.2.0"
   }
 }

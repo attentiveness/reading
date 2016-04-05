@@ -22,7 +22,7 @@ const propTypes = {
 	color: React.PropTypes.string,
 	size: React.PropTypes.oneOf(SIZES),
 	overlayColor: React.PropTypes.string
-}
+};
 
 class Loading extends React.Component {
 	constructor(props) {
@@ -119,7 +119,7 @@ class Loading extends React.Component {
 
   render() {
     if (Platform.OS === 'android') {
-      return <View/>
+      return <View/>;
     }
     return this.renderSpinner();
   }
@@ -157,7 +157,7 @@ let styles = StyleSheet.create({
     textAlign: 'center',
     color: '#fcfcfc'
   }
-})
+});
 
 Loading.propTypes = propTypes;
 
@@ -166,6 +166,6 @@ Loading.defaultProps = {
 	color: 'white',
 	size: 'large',
 	overlayColor: 'transparent'
-}
+};
 
 export default Loading;

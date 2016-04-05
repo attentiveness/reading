@@ -3,7 +3,6 @@
 import React from 'react-native';
 const {
 	Image,
-	StyleSheet,
 	PropTypes,
 	TouchableOpacity,
 } = React;
@@ -21,7 +20,7 @@ const propTypes = {
 	isUri: PropTypes.bool,
 	style: stylePropType,
 	containerStyle: stylePropType
-}
+};
 
 class ImageButton extends React.Component {
 	constructor(props) {
@@ -47,8 +46,8 @@ class ImageButton extends React.Component {
 				style={this.props.containerStyle}
 				onPress={this.onPress}>
 				<Image
-				  style={this.props.style}
-				  source={source}
+ 	  		  style={this.props.style}
+		 		  source={source}
 				/>
 			</TouchableOpacity>
 		);
@@ -63,6 +62,6 @@ ImageButton.defaultProps = {
 	isStatic: false,
 	uri: '',
 	isUri: true
-}
+};
 
 export default ImageButton;

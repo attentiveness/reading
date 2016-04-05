@@ -2,7 +2,6 @@
 
 import React from 'react-native';
 const {
-  AppRegistry,
   View,
   StyleSheet,
   ListView,
@@ -15,7 +14,7 @@ const propTypes = {
 	style: PropTypes.func,
 	itemsPerRow: PropTypes.number,
 	onEndReached: PropTypes.func
-}
+};
 
 class GridView extends React.Component {
   constructor(props) {
@@ -42,7 +41,7 @@ class GridView extends React.Component {
 	}
 
 	renderGroup(group) {
-		var that = this;
+		let that = this;
 		var items = group.map(function(item) {
 			return that.props.renderItem(item);
 		});
@@ -70,14 +69,14 @@ class GridView extends React.Component {
       />
     );
 	}
-};
+}
 
 let styles = StyleSheet.create({
   group: {
     flexDirection: 'row',
     alignItems: 'center'
   }
-})
+});
 
 GridView.propTypes = propTypes;
 
@@ -87,6 +86,6 @@ GridView.defaultProps = {
 	style: undefined,
 	itemsPerRow: 1,
 	onEndReached: undefined
-}
+};
 
 export default GridView;

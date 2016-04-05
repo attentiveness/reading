@@ -17,13 +17,13 @@ const propTypes = {
   backgroundColor: React.PropTypes.string,
   activeTextColor: React.PropTypes.string,
   inactiveTextColor: React.PropTypes.string
-}
+};
 
 class ReadingTabBar extends React.Component {
   renderTabOption(name, page) {
     var isTabActive = this.props.activeTab === page;
-    var activeTextColor = this.props.activeTextColor || "navy";
-    var inactiveTextColor = this.props.inactiveTextColor || "black";
+    var activeTextColor = this.props.activeTextColor || 'navy';
+    var inactiveTextColor = this.props.inactiveTextColor || 'black';
     return (
       <TouchableOpacity style={[styles.tab]} key={name} onPress={() => this.props.goToPage(page)}>
         <View>
@@ -42,7 +42,7 @@ class ReadingTabBar extends React.Component {
       position: 'absolute',
       width: containerWidth / numberOfTabs,
       height: 2,
-      backgroundColor: this.props.underlineColor || "navy",
+      backgroundColor: this.props.underlineColor || 'navy',
       bottom: 0,
     };
     var left = this.props.scrollValue.interpolate({
@@ -73,7 +73,7 @@ let styles = StyleSheet.create({
     borderRightWidth: 0,
     borderBottomColor: '#ccc'
   }
-})
+});
 
 ReadingTabBar.propTypes = propTypes;
 
