@@ -4,8 +4,7 @@ const {
   Navigator,
   StatusBar,
   BackAndroid,
-  View,
-  PropTypes
+  View
 } = React;
 
 import Splash from '../pages/Splash';
@@ -36,7 +35,7 @@ class App extends React.Component {
     } else {
       if (isRemoved) {
         BackAndroid.addEventListener('hardwareBackPress', this.goBack);
-      };
+      }
     }
     return (
       <Component navigator={navigator} route={route} />
@@ -73,6 +72,6 @@ let styles = StyleSheet.create({
   navigator: {
     flex: 1
   }
-})
+});
 
 export default App;
