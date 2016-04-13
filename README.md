@@ -29,8 +29,8 @@ Reading App Write In React-Native（Studying and Programing）
     "react-native": "^0.23.0",
     "react-native-code-push": "^1.7.3-beta",
     "react-native-device-info": "^0.9.1",
-    "react-native-scrollable-tab-view": "^0.4.0",
-    "react-native-wechat": "^1.3.2",
+    "react-native-scrollable-tab-view": "^0.4.1",
+    "react-native-wechat": "^1.4.0",
     "react-redux": "^4.4.1",
     "redux": "^3.3.1",
     "redux-thunk": "^2.0.1"
