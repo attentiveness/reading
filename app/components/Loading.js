@@ -12,69 +12,44 @@ const {
   ProgressBarAndroid
 } = React;
 
-import Portal from 'react-native/Libraries/Portal/Portal.js';
-
 const SIZES = ['small', 'normal', 'large'];
-let tag;
 
 const propTypes = {
-	visible: React.PropTypes.bool,
-	color: React.PropTypes.string,
-	size: React.PropTypes.oneOf(SIZES),
-	overlayColor: React.PropTypes.string
+  visible: React.PropTypes.bool,
+  color: React.PropTypes.string,
+  size: React.PropTypes.oneOf(SIZES),
+  overlayColor: React.PropTypes.string,
+  onRequestClose: React.PropTypes.func
 };
 
 class Loading extends React.Component {
-	constructor(props) {
+  constructor(props) {
     super(props);
     this.renderLoading = this.renderLoading.bind(this);
-    this.renderSpinner = this.renderSpinner.bind(this);
   }
 
-	componentWillMount() {
-		if (Platform.OS === 'android') {
-			tag = Portal.allocateTag();
-		}
-	}
+  renderLoading() {
+    let styleAttr = 'Inverse';
+    let size = 'large';
 
-  componentDidUpdate(prevProps) {
-    if (Platform.OS !== 'android') {
-      return;
+    switch (this.props.size) {
+      case 'small':
+        styleAttr = 'SmallInverse';
+        size = 'small';
+        break;
+      case 'large':
+        styleAttr = 'LargeInverse';
+        size = 'large';
+        break;
     }
-    if (!prevProps.visible && this.props.visible) {
-      return Portal.showModal(tag, this.renderSpinner());
-    }
-    Portal.closeModal(tag);
-  }
-
-	componentWillUnmount() {
-		if (Platform.OS === 'android') {
-			tag = null;
-		}
-	}
-
-	renderLoading() {
-		let styleAttr = 'Inverse';
-		let size = 'large';
-
-		switch (this.props.size) {
-			case 'small':
-				styleAttr = 'SmallInverse';
-				size = 'small';
-				break;
-			case 'large':
-				styleAttr = 'LargeInverse';
-				size = 'large';
-				break;
-		}
-		if (Platform.OS === 'android') {
+    if (Platform.OS === 'android') {
       return (
-      	<View style={styles.loading}>
-	        <ProgressBarAndroid
-	          styleAttr={styleAttr}
-	          color={this.props.color}
-	        />
-	        <Text style={styles.loadingText}>数据加载中...</Text>
+        <View style={styles.loading}>
+          <ProgressBarAndroid
+            styleAttr={styleAttr}
+            color={this.props.color}
+          />
+          <Text style={styles.loadingText}>数据加载中...</Text>
         </View>
       );
     } else {
@@ -86,47 +61,38 @@ class Loading extends React.Component {
         />
       );
     }
-	}
+  }
 
-	renderSpinner() {
-		if (!this.props.visible){
-			return (
+  render() {
+    if (!this.props.visible){
+      return (
         <View key={'spinner'}/>
       );
-		}
+    }
     let spinner = (
       <View
-      	key={'spinner'}
-      	style={styles.container}
+        key={'spinner'}
+        style={styles.container}
       >
         <View style={[styles.background, {backgroundColor: this.props.overlayColor}]}>
-        	{this.renderLoading()}
+          {this.renderLoading()}
         </View>
       </View>
     );
-    if (Platform.OS === 'android') {
-      return spinner;
-    }
     return (
       <Modal
-      	visible={this.props.visible}
-      	transparent={true}
+        visible={this.props.visible}
+        transparent={true}
+        onRequestClose={this.props.onRequestClose}
       >
         {spinner}
       </Modal>
     );
-	}
-
-  render() {
-    if (Platform.OS === 'android') {
-      return <View/>;
-    }
-    return this.renderSpinner();
   }
 }
 
 let styles = StyleSheet.create({
-	container: {
+  container: {
     flex: 1,
     backgroundColor: 'transparent',
     position: 'absolute',
@@ -149,7 +115,7 @@ let styles = StyleSheet.create({
     justifyContent: 'center',
     width: Dimensions.get('window').width / 2.5,
     height: Dimensions.get('window').width / 2.5,
-  	borderRadius: 10,
+    borderRadius: 10,
     backgroundColor: 'rgba(0, 0, 0, 0.25)'
   },
   loadingText: {
@@ -162,10 +128,11 @@ let styles = StyleSheet.create({
 Loading.propTypes = propTypes;
 
 Loading.defaultProps = {
-	visible: false,
-	color: 'white',
-	size: 'large',
-	overlayColor: 'transparent'
+  visible: false,
+  color: 'white',
+  size: 'large',
+  overlayColor: 'transparent',
+  onRequestClose: function() {}
 };
 
 export default Loading;

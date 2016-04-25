@@ -24,15 +24,15 @@ Reading App Write In React-Native（Studying and Programing）
 ```
 "dependencies": {
     "avoscloud-sdk": "^1.0.0-rc5",
-    "immutable": "^3.7.5",
+    "immutable": "^3.7.6",
     "react": "^0.14.8",
-    "react-native": "^0.23.0",
+    "react-native": "^0.24.1",
     "react-native-code-push": "^1.7.3-beta",
-    "react-native-device-info": "^0.9.1",
+    "react-native-device-info": "^0.9.3",
     "react-native-scrollable-tab-view": "^0.4.1",
-    "react-native-wechat": "^1.4.0",
-    "react-redux": "^4.4.1",
-    "redux": "^3.3.1",
+    "react-native-wechat": "^1.4.1",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.1",
     "redux-thunk": "^2.0.1"
   }
 ```
