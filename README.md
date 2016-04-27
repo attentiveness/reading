@@ -54,6 +54,9 @@ react-native start
 npm run setup
 ```
 
+## Importance
+[Why unknow module "http"](https://github.com/attentiveness/reading/issues/4)
+
 ## Release Note
 [Reading Release Note](https://github.com/attentiveness/reading/releases)
 
