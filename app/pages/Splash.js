@@ -1,10 +1,10 @@
+'use strict';
+
 import React from 'react-native';
 const {
   Dimensions,
   Image,
-  InteractionManager,
-  TouchableOpacity,
-  View
+  InteractionManager
 } = React;
 
 import MainContainer from '../containers/MainContainer';

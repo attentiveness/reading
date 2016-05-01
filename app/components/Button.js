@@ -4,7 +4,7 @@ import React from 'react-native';
 const {
 	Text,
 	PropTypes,
-	TouchableOpacity,
+	TouchableOpacity
 } = React;
 import StyleSheetPropType from 'StyleSheetPropType';
 import ViewStylePropTypes from 'ViewStylePropTypes';

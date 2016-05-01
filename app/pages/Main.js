@@ -32,7 +32,7 @@ import {CATEGORIES} from '../constants/Alias';
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
   read: PropTypes.object.isRequired
-}
+};
 
 var canLoadMore;
 var _typeIds = new Array();

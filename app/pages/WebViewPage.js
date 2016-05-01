@@ -3,7 +3,6 @@
 import React from 'react-native';
 const {
   StyleSheet,
-  PropTypes,
   WebView,
   BackAndroid,
   Dimensions,
