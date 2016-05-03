@@ -25,7 +25,6 @@ const propTypes = {
 class Loading extends React.Component {
   constructor(props) {
     super(props);
-    this.renderLoading = this.renderLoading.bind(this);
   }
 
   renderLoading() {
@@ -64,9 +63,9 @@ class Loading extends React.Component {
   }
 
   render() {
-    if (!this.props.visible){
+    if (!this.props.visible) {
       return (
-        <View key={'spinner'}/>
+        <View key={'spinner'} />
       );
     }
     let spinner = (
@@ -123,7 +122,7 @@ let styles = StyleSheet.create({
     textAlign: 'center',
     color: '#fcfcfc'
   }
-});
+})
 
 Loading.propTypes = propTypes;
 
@@ -133,6 +132,6 @@ Loading.defaultProps = {
   size: 'large',
   overlayColor: 'transparent',
   onRequestClose: function() {}
-};
+}
 
 export default Loading;

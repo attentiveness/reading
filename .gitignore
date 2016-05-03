@@ -34,6 +34,13 @@ app/reading.keystore
 #
 node_modules/
 npm-debug.log
+
 reading.keystore
 app.iml
 android.iml
+
+# BUCK
+buck-out/
+\.buckd/
+android/app/libs
+android/keystores/debug.keystore
