@@ -122,7 +122,7 @@ let styles = StyleSheet.create({
     textAlign: 'center',
     color: '#fcfcfc'
   }
-})
+});
 
 Loading.propTypes = propTypes;
 
@@ -132,6 +132,6 @@ Loading.defaultProps = {
   size: 'large',
   overlayColor: 'transparent',
   onRequestClose: function() {}
-}
+};
 
 export default Loading;
