@@ -1,9 +1,8 @@
 'use strict';
 
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {
 	Image,
-	PropTypes,
 	TouchableOpacity
 } from 'react-native';
 import StyleSheetPropType from 'StyleSheetPropType';

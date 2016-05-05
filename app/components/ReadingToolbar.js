@@ -1,9 +1,8 @@
 'use strict';
 
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {
 	StyleSheet,
-	PropTypes,
 	ToolbarAndroid
 } from 'react-native';
 

@@ -1,6 +1,6 @@
 'use strict';
 
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {
   StyleSheet,
   ListView,
@@ -8,7 +8,6 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
-  PropTypes,
   InteractionManager,
   ProgressBarAndroid,
   Image,
@@ -28,6 +27,8 @@ import CategoryContainer from '../containers/CategoryContainer';
 import {ToastShort} from '../utils/ToastUtils';
 import Storage from '../utils/Storage';
 import {CATEGORIES} from '../constants/Alias';
+
+import WebViewPage from '../pages/WebViewPage';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -90,7 +91,7 @@ class Main extends React.Component {
     const {navigator} = this.props;
     InteractionManager.runAfterInteractions(() => {
       navigator.push({
-        component: WebViewContainer,
+        component: WebViewPage,
         name: 'WebViewPage',
         article: article
       });

@@ -1,6 +1,6 @@
 'use strict';
 
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {
   InteractionManager,
   StyleSheet,
@@ -23,6 +23,11 @@ let toolbarActions = [
   {title: '提交', icon: require('../img/check.png'), show: 'always'}
 ];
 var _typeIds = new Array();
+
+const propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  category: PropTypes.object.isRequired
+};
 
 class Category extends React.Component {
   constructor(props) {
@@ -151,5 +156,7 @@ let styles = StyleSheet.create({
     flexDirection: 'column'
   }
 });
+
+Category.propTypes = propTypes;
 
 export default Category;
