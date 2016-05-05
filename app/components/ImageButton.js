@@ -1,11 +1,11 @@
 'use strict';
 
-import React from 'react-native';
-const {
+import React from 'react';
+import {
 	Image,
 	PropTypes,
 	TouchableOpacity
-} = React;
+} from 'react-native';
 import StyleSheetPropType from 'StyleSheetPropType';
 import ViewStylePropTypes from 'ViewStylePropTypes';
 

@@ -1,17 +1,13 @@
 'use strict';
 
-import React from 'react-native';
-const {
+import React from 'react';
+import {
 	StyleSheet,
 	PropTypes,
 	ToolbarAndroid
-} = React;
-import StyleSheetPropType from 'StyleSheetPropType';
-import ViewStylePropTypes from 'ViewStylePropTypes';
+} from 'react-native';
 
 import {NaviGoBack} from '../utils/CommonUtils';
-
-let ViewStylePropType = StyleSheetPropType(ViewStylePropTypes);
 
 const propTypes = {
 	title: PropTypes.string,
@@ -21,7 +17,7 @@ const propTypes = {
 	onIconClicked: PropTypes.func,
 	navIcon: PropTypes.number,
 	customView: PropTypes.object
-}
+};
 
 class ReadingToolbar extends React.Component {
 	constructor(props) {
@@ -46,7 +42,6 @@ class ReadingToolbar extends React.Component {
 	}
 
 	render() {
-		const {navigator} = this.props;
 		if (this.props.customView) {
 			return (
 				<ToolbarAndroid style={styles.toolbar}>
@@ -74,7 +69,7 @@ let styles = StyleSheet.create({
     backgroundColor: '#3e9ce9',
     height: 58
   }
-})
+});
 
 ReadingToolbar.propTypes = propTypes;
 
@@ -82,6 +77,6 @@ ReadingToolbar.defaultProps = {
 	onActionSelected: function() {},
 	title: '',
 	actions: []
-}
+};
 
 export default ReadingToolbar;

@@ -1,14 +1,14 @@
 'use strict';
 
-import React from 'react-native';
-const {
+import React from 'react';
+import {
   InteractionManager,
   StyleSheet,
   Text,
   Alert,
   BackAndroid,
   View
-} = React;
+} from 'react-native';
 
 import ReadingToolbar from '../components/ReadingToolbar';
 import {fetchTypes} from '../actions/category';
@@ -100,7 +100,7 @@ class Category extends React.Component {
                 BackAndroid.exitApp();
               }
             }]
-          )
+          );
         });
     });
   }

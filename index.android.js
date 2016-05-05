@@ -1,10 +1,8 @@
 'use strict';
 
-import React from 'react-native';
+import React from 'react';
 import Root from './app/root';
 
-const {
-	AppRegistry,
-} = React;
+import {AppRegistry} from 'react-native';
 
 AppRegistry.registerComponent('reading', () => Root);

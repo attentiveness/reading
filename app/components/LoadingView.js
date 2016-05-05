@@ -1,14 +1,14 @@
 'use strict';
 
-import React from 'react-native';
-const {
+import React from 'react';
+import {
 	ProgressBarAndroid,
 	ActivityIndicatorIOS,
 	Platform,
 	Text,
 	StyleSheet,
 	View
-} = React;
+} from 'react-native';
 
 class LoadingView extends React.Component {
 	render() {

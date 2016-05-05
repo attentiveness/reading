@@ -1,11 +1,11 @@
 'use strict';
 
-import React from 'react-native';
-const {
+import React from 'react';
+import {
   Dimensions,
   Image,
   InteractionManager
-} = React;
+} from 'react-native';
 
 import MainContainer from '../containers/MainContainer';
 

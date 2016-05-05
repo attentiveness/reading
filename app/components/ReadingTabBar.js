@@ -1,13 +1,13 @@
 'use strict';
 
-import React from 'react-native';
-const {
+import React from 'react';
+import {
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
   Animated
-} = React;
+} from 'react-native';
 
 const propTypes = {
 	goToPage: React.PropTypes.func,

@@ -1,9 +1,6 @@
 'use strict';
 
-import React from 'react-native';
-const {
-  Component
-} = React;
+import React from 'react';
 import {connect} from 'react-redux';
 import CodePush from 'react-native-code-push';
 import AV from 'avoscloud-sdk';
@@ -12,7 +9,7 @@ import Storage from '../utils/Storage';
 
 let typeIds = [0, 12, 9, 2];
 
-class MainContainer extends Component {
+class MainContainer extends React.Component {
   componentDidMount() {
     CodePush.sync({
       deploymentKey: "RGOUfyINiLicZnld67aD0nrbRvyLV1Ifekvul",
@@ -45,7 +42,7 @@ function mapStateToProps(state) {
   const {read} = state;
   return {
     read
-  }
+  };
 }
 
 export default connect(mapStateToProps)(MainContainer);

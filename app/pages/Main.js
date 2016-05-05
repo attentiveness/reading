@@ -1,7 +1,7 @@
 'use strict';
 
-import React from 'react-native';
-const {
+import React from 'react';
+import {
   StyleSheet,
   ListView,
   RefreshControl,
@@ -15,7 +15,7 @@ const {
   DrawerLayoutAndroid,
   Dimensions,
   View
-} = React;
+} from 'react-native';
 import LoadingView from '../components/LoadingView';
 import {fetchArticles} from '../actions/read';
 import ReadingTabBar from '../components/ReadingTabBar';
@@ -76,7 +76,7 @@ class Main extends React.Component {
     if (read.isLoadMore && !nextProps.read.isLoadMore && !nextProps.read.isRefreshing) {
       if (nextProps.read.noMore) {
         ToastShort('没有更多数据了');
-      };
+      }
     }
   }
 
@@ -137,7 +137,7 @@ class Main extends React.Component {
   onScroll() {
     if (!canLoadMore) {
       canLoadMore = true;
-    };
+    }
   }
 
   onEndReached(typeId) {
@@ -148,7 +148,7 @@ class Main extends React.Component {
       dispatch(fetchArticles(false, false, typeId, true, page));
       canLoadMore = false;
       loadMoreTime = Date.parse(new Date()) / 1000;
-    };
+    }
   }
 
   renderFooter() {
@@ -196,7 +196,7 @@ class Main extends React.Component {
     if (read.loading) {
       return <LoadingView/>;
     }
-    let isEmpty = read.articleList[typeId] == undefined || read.articleList[typeId].length == 0;
+    let isEmpty = read.articleList[typeId] === undefined || read.articleList[typeId].length === 0;
     if (isEmpty) {
       return (
         <ScrollView
@@ -319,7 +319,7 @@ class Main extends React.Component {
           tabLabel={CATEGORIES[typeId]}
           style={{flex: 1}}
         >
-          {this.renderContent(this.state.dataSource.cloneWithRows(read.articleList[typeId] == undefined ? [] : read.articleList[typeId]), typeId)}
+          {this.renderContent(this.state.dataSource.cloneWithRows(read.articleList[typeId] === undefined ? [] : read.articleList[typeId]), typeId)}
         </View>);
     });
     return (
@@ -399,7 +399,7 @@ let styles = StyleSheet.create({
     textAlign: 'center',
     color: 'black'
   }
-})
+});
 
 Main.propTypes = propTypes;
 

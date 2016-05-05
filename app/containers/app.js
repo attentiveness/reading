@@ -1,11 +1,13 @@
-import React from 'react-native';
-const {
+'use strict';
+
+import React from 'react';
+import {
   StyleSheet,
   Navigator,
   StatusBar,
   BackAndroid,
   View
-} = React;
+} from 'react-native';
 
 import Splash from '../pages/Splash';
 import {registerApp} from 'react-native-wechat';

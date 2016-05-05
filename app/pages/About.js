@@ -1,17 +1,19 @@
-import React from 'react-native';
-const {
+'use strict';
+
+import React from 'react';
+import {
   StyleSheet,
   Image,
   Text,
   Linking,
   View
-} = React;
+} from 'react-native';
 
 import ReadingToolbar from '../components/ReadingToolbar';
 import Button from '../components/Button';
 import DeviceInfo from 'react-native-device-info';
 
-let API_STORE = 'http://apistore.baidu.com/'
+let API_STORE = 'http://apistore.baidu.com/';
 let READING_REPO = 'https://github.com/attentiveness/reading';
 
 class About extends React.Component {
@@ -86,6 +88,6 @@ let styles = StyleSheet.create({
     justifyContent: 'center',
     paddingBottom: 10
   }
-})
+});
 
 export default About;

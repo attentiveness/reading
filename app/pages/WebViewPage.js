@@ -1,7 +1,7 @@
 'use strict';
 
-import React from 'react-native';
-const {
+import React from 'react';
+import {
   StyleSheet,
   WebView,
   BackAndroid,
@@ -11,7 +11,7 @@ const {
   Platform,
   TouchableOpacity,
   View
-} = React;
+} from 'react-native';
 
 import ReadingToolbar from '../components/ReadingToolbar';
 import {ToastShort} from '../utils/ToastUtils';
@@ -57,7 +57,7 @@ class WebViewPage extends React.Component {
   }
 
   goBack() {
-    if (Portal.getOpenModals().length != 0) {
+    if (Portal.getOpenModals().length !== 0) {
       Portal.closeModal(tag);
       return true;
     } else if (canGoBack) {
@@ -200,6 +200,6 @@ let styles = StyleSheet.create({
     width: 40,
     height: 40
   }
-})
+});
 
 export default WebViewPage;

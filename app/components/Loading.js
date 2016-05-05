@@ -1,7 +1,7 @@
 'use strict';
 
-import React from 'react-native';
-const {
+import React from 'react';
+import {
   Platform,
   StyleSheet,
   Dimensions,
@@ -10,7 +10,7 @@ const {
   Modal,
   ActivityIndicatorIOS,
   ProgressBarAndroid
-} = React;
+} from 'react-native';
 
 const SIZES = ['small', 'normal', 'large'];
 
