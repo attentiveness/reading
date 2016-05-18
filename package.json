@@ -7,7 +7,7 @@
     "setup": "cd node_modules; find . -name .babelrc | grep -v packager | xargs rm"
   },
   "dependencies": {
-    "avoscloud-sdk": "^1.0.0-rc5",
+    "avoscloud-sdk": "1.0.0-rc5",
     "immutable": "^3.7.6",
     "react": "^0.14.8",
     "react-native": "^0.25.1",
