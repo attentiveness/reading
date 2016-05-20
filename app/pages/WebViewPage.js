@@ -8,19 +8,17 @@ import {
   Dimensions,
   Text,
   Image,
-  Platform,
   TouchableOpacity,
-  View
+  View,
+  Modal
 } from 'react-native';
 
 import ReadingToolbar from '../components/ReadingToolbar';
 import {ToastShort} from '../utils/ToastUtils';
 import LoadingView from '../components/LoadingView';
 import {NaviGoBack} from '../utils/CommonUtils';
-import {shareToTimeline, shareToSession} from 'react-native-wechat';
-import Portal from 'react-native/Libraries/Portal/Portal.js';
+import * as WeChat from 'react-native-wechat';
 
-let tag;
 let toolbarActions = [
   {title: '分享', icon: require('../img/share.png'), show: 'always'}
 ];
@@ -29,15 +27,12 @@ var canGoBack = false;
 class WebViewPage extends React.Component {
 	constructor(props) {
     super(props);
+    this.state = {
+      isShareModal: false
+    };
     this.onActionSelected = this.onActionSelected.bind(this);
     this.onNavigationStateChange = this.onNavigationStateChange.bind(this);
     this.goBack = this.goBack.bind(this);
-  }
-
-  componentWillMount() {
-    if (Platform.OS === 'android') {
-      tag = Portal.allocateTag();
-    }
   }
 
   componentDidMount() {
@@ -49,7 +44,9 @@ class WebViewPage extends React.Component {
   }
 
   onActionSelected() {
-    Portal.showModal(tag, this.renderSpinner());
+    this.setState({
+      isShareModal: true
+    });
   }
 
   onNavigationStateChange(navState) {
@@ -57,8 +54,10 @@ class WebViewPage extends React.Component {
   }
 
   goBack() {
-    if (Portal.getOpenModals().length !== 0) {
-      Portal.closeModal(tag);
+    if (this.state.isShareModal) {
+      this.setState({
+        isShareModal: false
+      });
       return true;
     } else if (canGoBack) {
       this.refs.webview.goBack();
@@ -86,16 +85,23 @@ class WebViewPage extends React.Component {
             <TouchableOpacity
               style={{flex: 1}}
               onPress={() => {
-                shareToSession({
-                  title: route.article.title,
-                  description: '分享自：Reading',
-                  thumbImage: route.article.contentImg,
-                  type: 'news',
-                  webpageUrl: route.article.url
-                })
-                .catch((error) => {
-                  ToastShort(error.message);
-                });
+                WeChat.isWXAppInstalled()
+                  .then((isInstalled) => {
+                    if (isInstalled) {
+                      WeChat.shareToSession({
+                        title: route.article.title,
+                        description: '分享自：Reading',
+                        thumbImage: route.article.contentImg,
+                        type: 'news',
+                        webpageUrl: route.article.url
+                      })
+                      .catch((error) => {
+                        ToastShort(error.message);
+                      });
+                    } else {
+                      ToastShort('没有安装微信软件，请您安装微信之后再试');
+                    }
+                  });
             }}>
               <View style={styles.shareContent}>
                 <Image
@@ -110,15 +116,22 @@ class WebViewPage extends React.Component {
             <TouchableOpacity
               style={{flex: 1}}
               onPress={() => {
-                shareToTimeline({
-                  title: '[@Reading]' + route.article.title,
-                  thumbImage: route.article.contentImg,
-                  type: 'news',
-                  webpageUrl: route.article.url
-                })
-                .catch((error) => {
-                  ToastShort(error.message);
-                });
+                WeChat.isWXAppInstalled()
+                  .then((isInstalled) => {
+                    if (isInstalled) {
+                      WeChat.shareToTimeline({
+                        title: '[@Reading]' + route.article.title,
+                        thumbImage: route.article.contentImg,
+                        type: 'news',
+                        webpageUrl: route.article.url
+                      })
+                      .catch((error) => {
+                        ToastShort(error.message);
+                      });
+                    } else {
+                      ToastShort('没有安装微信软件，请您安装微信之后再试');
+                    }
+                  });
             }}>
               <View style={styles.shareContent}>
                 <Image
@@ -146,6 +159,16 @@ class WebViewPage extends React.Component {
           title={route.article.userName}
           navigator={navigator}
         />
+        <Modal
+          animationType='fade'
+          visible={this.state.isShareModal}
+          transparent={true}
+          onRequestClose={() => {this.setState({
+            isShareModal: false
+          });}}
+        >
+          {this.renderSpinner()}
+        </Modal>
         <WebView
           ref='webview'
 	        automaticallyAdjustContentInsets={false}
