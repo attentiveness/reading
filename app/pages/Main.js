@@ -10,12 +10,14 @@ import {
   TouchableOpacity,
   InteractionManager,
   ProgressBarAndroid,
-  Image,
   DrawerLayoutAndroid,
+  Image,
   Dimensions,
+  Platform,
   View
 } from 'react-native';
 import LoadingView from '../components/LoadingView';
+import DrawerLayout from 'react-native-drawer-layout';
 import {fetchArticles} from '../actions/read';
 import ReadingTabBar from '../components/ReadingTabBar';
 import ReadingToolbar from '../components/ReadingToolbar';
@@ -247,9 +249,8 @@ class Main extends React.Component {
   renderNavigationView() {
     return (
       <View style={[styles.container, {backgroundColor: '#fcfcfc'}]}>
-        <Image
-          style={{width: Dimensions.get('window').width / 5 * 3, height: 120, justifyContent: 'flex-end', paddingBottom: 10}}
-          source={require('../img/drawerlayout.png')}
+        <View
+          style={{width: Dimensions.get('window').width / 5 * 3, height: 120, justifyContent: 'flex-end', paddingBottom: 10, backgroundColor: '#3e9ce9'}}
         >
           <Text style={{fontSize: 20, textAlign: 'left', color: '#fcfcfc', marginLeft: 10}}>
             Reading
@@ -257,7 +258,7 @@ class Main extends React.Component {
           <Text style={{fontSize: 20, textAlign: 'left', color: '#fcfcfc', marginLeft: 10}}>
             让生活更精彩
           </Text>
-        </Image>
+        </View>
         <TouchableOpacity
           style={styles.drawerContent}
           onPress={this.onPressDrawerItem.bind(this, 0)}
@@ -324,10 +325,10 @@ class Main extends React.Component {
         </View>);
     });
     return (
-      <DrawerLayoutAndroid
+      <DrawerLayout
         ref='drawer'
         drawerWidth={Dimensions.get('window').width / 5 * 3}
-        drawerPosition={DrawerLayoutAndroid.positions.Left}
+        drawerPosition={Platform.OS === 'android' ? DrawerLayoutAndroid.positions.Left : 'left'}
         renderNavigationView={this.renderNavigationView}
       >
         <View style={styles.container}>
@@ -347,7 +348,7 @@ class Main extends React.Component {
           {lists}
           </ScrollableTabView>
         </View>
-      </DrawerLayoutAndroid>
+      </DrawerLayout>
     );
   }
 }

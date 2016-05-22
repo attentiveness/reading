@@ -118,8 +118,8 @@ class Category extends React.Component {
         containerStyle={[{margin: 10, padding: 10, borderRadius: 10, borderWidth: 1, borderColor: '#dddddd'}, isSelect ? {backgroundColor: '#3e9ce9'} : {backgroundColor: '#fcfcfc'}]}
         style={[{fontSize: 16, textAlign: 'center'}, isSelect ? {color: '#fcfcfc'} : {color: 'black'}]}
         text={CATEGORIES[item.id]}
-        onPress={this.onPress.bind(this, item)}>
-      </Button>
+        onPress={this.onPress.bind(this, item)}
+      />
     );
   }
 
