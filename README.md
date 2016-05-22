@@ -6,7 +6,7 @@
 
 Reading App Write In React-Native（Studying and Programing）
 
-**Support: Android 4.1 (API 16)+    IOS(coming soon)**
+**Support: Android 4.1 (API 16)+    IOS(7.0+)**
 
 > No Profit, No Advertisement, Only Feelings
 
