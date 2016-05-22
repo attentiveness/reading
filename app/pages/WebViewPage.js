@@ -9,6 +9,7 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
   Modal
 } from 'react-native';
@@ -73,79 +74,85 @@ class WebViewPage extends React.Component {
   renderSpinner() {
     const {route} = this.props;
     return (
-      <View
-        key={'spinner'}
-        style={styles.spinner}
-      >
-        <View style={styles.spinnerContent}>
-          <Text style={[styles.spinnerTitle, {fontSize: 20, color: 'black'}]}>
-            分享到
-          </Text>
-          <View style={{flexDirection: 'row', marginTop: 20}}>
-            <TouchableOpacity
-              style={{flex: 1}}
-              onPress={() => {
-                WeChat.isWXAppInstalled()
-                  .then((isInstalled) => {
-                    if (isInstalled) {
-                      WeChat.shareToSession({
-                        title: route.article.title,
-                        description: '分享自：Reading',
-                        thumbImage: route.article.contentImg,
-                        type: 'news',
-                        webpageUrl: route.article.url
-                      })
-                      .catch((error) => {
-                        ToastShort(error.message);
-                      });
-                    } else {
-                      ToastShort('没有安装微信软件，请您安装微信之后再试');
-                    }
-                  });
-            }}>
-              <View style={styles.shareContent}>
-                <Image
-                  style={styles.shareIcon}
-                  source={require('../img/share_icon_wechat.png')}
-                />
-                <Text style={styles.spinnerTitle}>
-                  微信
-                </Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{flex: 1}}
-              onPress={() => {
-                WeChat.isWXAppInstalled()
-                  .then((isInstalled) => {
-                    if (isInstalled) {
-                      WeChat.shareToTimeline({
-                        title: '[@Reading]' + route.article.title,
-                        thumbImage: route.article.contentImg,
-                        type: 'news',
-                        webpageUrl: route.article.url
-                      })
-                      .catch((error) => {
-                        ToastShort(error.message);
-                      });
-                    } else {
-                      ToastShort('没有安装微信软件，请您安装微信之后再试');
-                    }
-                  });
-            }}>
-              <View style={styles.shareContent}>
-                <Image
-                  style={styles.shareIcon}
-                  source={require('../img/share_icon_moments.png')}
-                />
-                <Text style={styles.spinnerTitle}>
-                  朋友圈
-                </Text>
-              </View>
-            </TouchableOpacity>
+      <TouchableWithoutFeedback onPress={() => {
+        this.setState({
+          isShareModal: false
+        });
+      }}>
+        <View
+          key={'spinner'}
+          style={styles.spinner}
+        >
+          <View style={styles.spinnerContent}>
+            <Text style={[styles.spinnerTitle, {fontSize: 20, color: 'black'}]}>
+              分享到
+            </Text>
+            <View style={{flexDirection: 'row', marginTop: 20}}>
+              <TouchableOpacity
+                style={{flex: 1}}
+                onPress={() => {
+                  WeChat.isWXAppInstalled()
+                    .then((isInstalled) => {
+                      if (isInstalled) {
+                        WeChat.shareToSession({
+                          title: route.article.title,
+                          description: '分享自：Reading',
+                          thumbImage: route.article.contentImg,
+                          type: 'news',
+                          webpageUrl: route.article.url
+                        })
+                        .catch((error) => {
+                          ToastShort(error.message);
+                        });
+                      } else {
+                        ToastShort('没有安装微信软件，请您安装微信之后再试');
+                      }
+                    });
+              }}>
+                <View style={styles.shareContent}>
+                  <Image
+                    style={styles.shareIcon}
+                    source={require('../img/share_icon_wechat.png')}
+                  />
+                  <Text style={styles.spinnerTitle}>
+                    微信
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{flex: 1}}
+                onPress={() => {
+                  WeChat.isWXAppInstalled()
+                    .then((isInstalled) => {
+                      if (isInstalled) {
+                        WeChat.shareToTimeline({
+                          title: '[@Reading]' + route.article.title,
+                          thumbImage: route.article.contentImg,
+                          type: 'news',
+                          webpageUrl: route.article.url
+                        })
+                        .catch((error) => {
+                          ToastShort(error.message);
+                        });
+                      } else {
+                        ToastShort('没有安装微信软件，请您安装微信之后再试');
+                      }
+                    });
+              }}>
+                <View style={styles.shareContent}>
+                  <Image
+                    style={styles.shareIcon}
+                    source={require('../img/share_icon_moments.png')}
+                  />
+                  <Text style={styles.spinnerTitle}>
+                    朋友圈
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     );
   }
 

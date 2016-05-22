@@ -2,13 +2,29 @@
 
 import React from 'react-native';
 const {
-	ToastAndroid
+	ToastAndroid,
+	Alert,
+	Platform
 } = React;
 
 export function ToastShort(content) {
-	ToastAndroid.show(new String(content), ToastAndroid.SHORT);
+	if (Platform.OS === 'android') {
+		ToastAndroid.show(new String(content), ToastAndroid.SHORT);
+	} else {
+		Alert.alert(
+		  '提示',
+		  content.toString()
+		)
+	}
 }
 
 export function ToastLong(content) {
-	ToastAndroid.show(new String(content), ToastAndroid.LONG);
+	if (Platform.OS === 'android') {
+		ToastAndroid.show(new String(content), ToastAndroid.LONG);
+	} else {
+		Alert.alert(
+		  '提示',
+		  content.toString()
+		)
+	}
 }
