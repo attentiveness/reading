@@ -12,7 +12,7 @@ let typeIds = [0, 12, 9, 2];
 class MainContainer extends React.Component {
   componentDidMount() {
     CodePush.sync({
-      deploymentKey: "RGOUfyINiLicZnld67aD0nrbRvyLV1Ifekvul",
+      deploymentKey: 'RGOUfyINiLicZnld67aD0nrbRvyLV1Ifekvul',
       updateDialog: {
         optionalIgnoreButtonLabel: '稍后',
         optionalInstallButtonLabel: '后台更新',

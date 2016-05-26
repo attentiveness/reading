@@ -186,7 +186,9 @@ class WebViewPage extends React.Component {
 	        startInLoadingState={true}
 	        scalesPageToFit={true}
           decelerationRate="normal"
-          onShouldStartLoadWithRequest={(event) => {return true}}
+          onShouldStartLoadWithRequest={(event) => {
+            return true;
+          }}
           onNavigationStateChange={this.onNavigationStateChange}
           renderLoading={this.renderLoading.bind(this)}
 	      />

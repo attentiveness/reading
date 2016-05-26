@@ -57,7 +57,7 @@ class Category extends React.Component {
 
   onPress(type) {
     let pos = _typeIds.indexOf(parseInt(type.id));
-    if (pos == -1) {
+    if (pos === -1) {
       _typeIds.push(parseInt(type.id));
     } else {
       _typeIds.splice(pos, 1);
@@ -88,7 +88,7 @@ class Category extends React.Component {
     InteractionManager.runAfterInteractions(() => {
       Storage.get('typeIds')
         .then((typeIds) => {
-          if (typeIds.sort().toString() == Array.from(_typeIds).sort().toString()) {
+          if (typeIds.sort().toString() === Array.from(_typeIds).sort().toString()) {
             navigator.pop();
             return;
           }
@@ -111,7 +111,7 @@ class Category extends React.Component {
   }
 
   renderItem(item) {
-    let isSelect = Array.from(this.state.typeIds).indexOf(parseInt(item.id)) != -1;
+    let isSelect = Array.from(this.state.typeIds).indexOf(parseInt(item.id)) !== -1;
     return (
       <Button
         key={item.id}

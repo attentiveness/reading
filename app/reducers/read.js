@@ -8,7 +8,7 @@ const initialState = {
 	isLoadMore: false,
 	noMore: false,
 	articleList: {}
-}
+};
 
 export default function read(state = initialState, action) {
 	switch (action.type) {
@@ -22,9 +22,9 @@ export default function read(state = initialState, action) {
 			return Object.assign({}, state, {
 				isRefreshing: false,
 				isLoadMore: false,
-				noMore: action.articleList.length == 0,
+				noMore: action.articleList.length === 0,
 				articleList: state.isLoadMore ? loadMore(state, action) : combine(state, action),
-				loading: state.articleList[action.typeId] == undefined
+				loading: state.articleList[action.typeId] === undefined
 			});
 		default:
 			return state;
@@ -32,11 +32,11 @@ export default function read(state = initialState, action) {
 }
 
 function combine(state, action) {
-	state.articleList[action.typeId] = action.articleList
+	state.articleList[action.typeId] = action.articleList;
 	return state.articleList;
 }
 
 function loadMore(state, action) {
-	state.articleList[action.typeId] = state.articleList[action.typeId].concat(action.articleList)
+	state.articleList[action.typeId] = state.articleList[action.typeId].concat(action.articleList);
 	return state.articleList;
 }

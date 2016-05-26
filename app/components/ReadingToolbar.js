@@ -92,7 +92,7 @@ class ReadingToolbar extends React.Component {
 		let Toolbar = Platform.select({
 			android: () => this.renderToolbarAndroid(),
 			ios: () => this.renderToolbarIOS()
-		})
+		});
 		return <Toolbar />;
 	}
 }

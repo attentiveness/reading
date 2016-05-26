@@ -22,14 +22,12 @@ import {fetchArticles} from '../actions/read';
 import ReadingTabBar from '../components/ReadingTabBar';
 import ReadingToolbar from '../components/ReadingToolbar';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
-import WebViewContainer from '../containers/WebViewContainer';
-import AboutContainer from '../containers/AboutContainer';
-import FeedbackContainer from '../containers/FeedbackContainer';
+import About from '../pages/About';
+import Feedback from '../pages/Feedback';
 import CategoryContainer from '../containers/CategoryContainer';
 import {ToastShort} from '../utils/ToastUtils';
 import Storage from '../utils/Storage';
 import {CATEGORIES} from '../constants/Alias';
-
 import WebViewPage from '../pages/WebViewPage';
 
 const propTypes = {
@@ -115,7 +113,7 @@ class Main extends React.Component {
       case 2:
         InteractionManager.runAfterInteractions(() => {
           navigator.push({
-            component: FeedbackContainer,
+            component: Feedback,
             name: 'Feedback'
           });
         });
@@ -123,7 +121,7 @@ class Main extends React.Component {
       case 3:
         InteractionManager.runAfterInteractions(() => {
           navigator.push({
-            component: AboutContainer,
+            component: About,
             name: 'About'
           });
         });

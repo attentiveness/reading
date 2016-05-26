@@ -64,7 +64,9 @@ class Feedback extends React.Component {
           numberOfLines={200}
           multiline={true}
           autoFocus={true}
-          onChangeText={(text) => {feedbackText = text}}
+          onChangeText={(text) => {
+            feedbackText = text;
+          }}
         />
       </View>
     );

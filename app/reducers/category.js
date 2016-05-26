@@ -5,7 +5,7 @@ import * as types from '../constants/ActionTypes';
 const initialState = {
 	loading: false,
 	typeList: {}
-}
+};
 
 export default function category(state = initialState, action) {
 	switch (action.type) {
@@ -17,7 +17,7 @@ export default function category(state = initialState, action) {
 			return Object.assign({}, state, {
 				loading: false,
 				typeList: action.typeList
-			})
+			});
 		default:
 			return state;
 	}
