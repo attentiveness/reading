@@ -52,9 +52,9 @@ npm install
 ```
 react-native start
 ```
-### Optional Step
+### Run Test
 ```
-npm run setup
+npm test
 ```
 
 ## Importance
