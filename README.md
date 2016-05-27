@@ -22,10 +22,11 @@ Reading App Write In React-Native（Studying and Programing）
 *From Wandou Labs:* [Download Reading](http://www.wandoujia.com/apps/com.reading)
 
 ## Application Architecture
-[Microsoft Code Push](https://github.com/Microsoft/react-native-code-push) for dynamic update
-[Redux](https://github.com/reactjs/redux) is a predictable state container for reading app, together with [React Native](https://github.com/facebook/react-native)
-[Mocha](https://mochajs.org/) for UT
-[Enzyme](https://github.com/airbnb/enzyme) for testing UI components and mock
+
+* [Microsoft Code Push](https://github.com/Microsoft/react-native-code-push) for dynamic update
+* [Redux](https://github.com/reactjs/redux) is a predictable state container for reading app, together with [React Native](https://github.com/facebook/react-native)
+* [Mocha](https://mochajs.org/) for UT
+* [Enzyme](https://github.com/airbnb/enzyme) for testing UI components and mock
 
 ## Development Workflow
 ### Step One
