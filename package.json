@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "setup": "cd node_modules; find . -name .babelrc | grep -v packager | xargs rm",
+    "clear": "cd node_modules; find . -name .babelrc | grep -v packager | xargs rm",
     "test": "mocha --require react-native-mock/mock.js --compilers js:babel-core/register --recursive app/**/*/*.spec.js"
   },
   "dependencies": {

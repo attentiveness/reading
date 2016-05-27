@@ -21,25 +21,13 @@ Reading App Write In React-Native（Studying and Programing）
 
 *From Wandou Labs:* [Download Reading](http://www.wandoujia.com/apps/com.reading)
 
-## Dependency
-```
-"dependencies": {
-    "avoscloud-sdk": "1.0.0-rc5",
-    "immutable": "^3.7.6",
-    "react": "15.0.2",
-    "react-native": "^0.26.2",
-    "react-native-code-push": "^1.7.3-beta",
-    "react-native-device-info": "^0.9.3",
-    "react-native-drawer-layout": "^1.0.0",
-    "react-native-scrollable-tab-view": "^0.4.3",
-    "react-native-wechat": "^1.4.1",
-    "react-redux": "^4.4.5",
-    "redux": "^3.5.2",
-    "redux-logger": "^2.6.1",
-    "redux-thunk": "^2.1.0"
-  }
-```
-## How To Build And Run
+## Application Architecture
+[Microsoft Code Push](https://github.com/Microsoft/react-native-code-push) for dynamic update
+[Redux](https://github.com/reactjs/redux) is a predictable state container for reading app, together with [React Native](https://github.com/facebook/react-native)
+[Mocha](https://mochajs.org/) for UT
+[Enzyme](https://github.com/airbnb/enzyme) for testing UI components and mock
+
+## Development Workflow
 ### Step One
 ```
 npm install -g react-native-cli
