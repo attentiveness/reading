@@ -7,6 +7,6 @@ import category from  './category';
 const rootReducer = combineReducers({
 	read,
 	category
-})
+});
 
 export default rootReducer;
