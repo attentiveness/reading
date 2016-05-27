@@ -5,10 +5,6 @@ import {
 	Image,
 	TouchableOpacity
 } from 'react-native';
-import StyleSheetPropType from 'StyleSheetPropType';
-import ViewStylePropTypes from 'ViewStylePropTypes';
-
-let stylePropType = StyleSheetPropType(ViewStylePropTypes);
 
 const propTypes = {
 	onPress: PropTypes.func,
@@ -20,8 +16,8 @@ const propTypes = {
 		// Opaque type returned by require('./image.jpg')
 		PropTypes.number,
 	]),
-	style: stylePropType,
-	containerStyle: stylePropType
+	style: PropTypes.object,
+	containerStyle: PropTypes.object
 };
 
 class ImageButton extends React.Component {

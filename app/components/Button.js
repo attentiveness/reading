@@ -5,18 +5,12 @@ import {
 	Text,
 	TouchableOpacity
 } from 'react-native';
-import StyleSheetPropType from 'StyleSheetPropType';
-import ViewStylePropTypes from 'ViewStylePropTypes';
-import TextStylePropTypes from 'TextStylePropTypes';
-
-let ViewStylePropType = StyleSheetPropType(ViewStylePropTypes);
-let TextStylePropType = StyleSheetPropType(TextStylePropTypes);
 
 const propTypes = {
 	onPress: PropTypes.func,
 	disabled: PropTypes.bool,
-	style: TextStylePropType,
-	containerStyle: ViewStylePropType,
+	style: PropTypes.object,
+	containerStyle: PropTypes.object,
 	text: PropTypes.string
 };
 
