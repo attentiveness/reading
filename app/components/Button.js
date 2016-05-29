@@ -2,6 +2,7 @@
 
 import React, {PropTypes} from 'react';
 import {
+	View,
 	Text,
 	TouchableOpacity
 } from 'react-native';
@@ -9,8 +10,8 @@ import {
 const propTypes = {
 	onPress: PropTypes.func,
 	disabled: PropTypes.bool,
-	style: PropTypes.object,
-	containerStyle: PropTypes.object,
+	style: Text.propTypes.style,
+	containerStyle: View.propTypes.style,
 	text: PropTypes.string
 };
 
