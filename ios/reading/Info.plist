@@ -37,7 +37,7 @@
 	<string>1</string>
 	<key>CodePushDeploymentKey</key>
 	<string>U7ZF2kYt5EzV14JyIB22SLRhQ2KBV1Ifekvul</string>
-	<key>LSApplicationQueriesSchemas</key>
+	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>wechat</string>
 		<string>weixin</string>
@@ -65,13 +65,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
-  <key>NSAppTransportSecurity</key>
-  <dict>
-    <!--See http://ste.vn/2015/06/10/configuring-app-transport-security-ios-9-osx-10-11/ -->
-    <key>NSAllowsArbitraryLoads</key>
-    <true/>
-  </dict>
 </dict>
 </plist>
