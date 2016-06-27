@@ -19,9 +19,8 @@ import {
 import LoadingView from '../components/LoadingView';
 import DrawerLayout from 'react-native-drawer-layout';
 import {fetchArticles} from '../actions/read';
-import ReadingTabBar from '../components/ReadingTabBar';
 import ReadingToolbar from '../components/ReadingToolbar';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
+import ScrollableTabView, { ScrollableTabBar} from 'react-native-scrollable-tab-view';
 import About from '../pages/About';
 import Feedback from '../pages/Feedback';
 import CategoryContainer from '../containers/CategoryContainer';
@@ -337,7 +336,7 @@ class Main extends React.Component {
             onIconClicked={this.onIconClicked}
           />
           <ScrollableTabView
-            renderTabBar={() => <ReadingTabBar />}
+            renderTabBar={() => <ScrollableTabBar underlineHeight={2} />}
             tabBarBackgroundColor="#fcfcfc"
             tabBarUnderlineColor="#3e9ce9"
             tabBarActiveTextColor="#3e9ce9"
