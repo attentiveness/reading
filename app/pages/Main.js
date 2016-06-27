@@ -9,7 +9,7 @@ import {
   Text,
   TouchableOpacity,
   InteractionManager,
-  ProgressBarAndroid,
+  ActivityIndicator,
   DrawerLayoutAndroid,
   Image,
   Dimensions,
@@ -20,7 +20,7 @@ import LoadingView from '../components/LoadingView';
 import DrawerLayout from 'react-native-drawer-layout';
 import {fetchArticles} from '../actions/read';
 import ReadingToolbar from '../components/ReadingToolbar';
-import ScrollableTabView, { ScrollableTabBar} from 'react-native-scrollable-tab-view';
+import ScrollableTabView, {DefaultTabBar} from 'react-native-scrollable-tab-view';
 import About from '../pages/About';
 import Feedback from '../pages/Feedback';
 import CategoryContainer from '../containers/CategoryContainer';
@@ -155,9 +155,9 @@ class Main extends React.Component {
     const {read} = this.props;
     if (read.isLoadMore) {
       return (
-        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-          <ProgressBarAndroid styleAttr='Inverse' color='#3e9ce9' />
-          <Text style={{textAlign: 'center', fontSize: 16}}>
+        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 5}}>
+          <ActivityIndicator size='small' color='#3e9ce9' />
+          <Text style={{textAlign: 'center', fontSize: 16, marginLeft: 10}}>
             数据加载中……
           </Text>
         </View>
@@ -336,7 +336,11 @@ class Main extends React.Component {
             onIconClicked={this.onIconClicked}
           />
           <ScrollableTabView
-            renderTabBar={() => <ScrollableTabBar underlineHeight={2} />}
+            renderTabBar={() => 
+              <DefaultTabBar
+                underlineHeight={2}
+                textStyle={{fontSize: 16, marginTop: 6}} />
+            }
             tabBarBackgroundColor="#fcfcfc"
             tabBarUnderlineColor="#3e9ce9"
             tabBarActiveTextColor="#3e9ce9"
