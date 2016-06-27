@@ -67,6 +67,7 @@ import com.android.build.OutputFile
  */
 
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -85,7 +86,7 @@ def enableProguardInReleaseBuilds = true
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "23.0.3"
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
@@ -115,10 +116,14 @@ android {
         }
     }
     buildTypes {
+        debug {
+            buildConfigField "String", "CODEPUSH_KEY", '"U7ZF2kYt5EzV14JyIB22SLRhQ2KBV1Ifekvul"'
+        }
         release {
             minifyEnabled enableProguardInReleaseBuilds
             zipAlignEnabled true
             pseudoLocalesEnabled true
+            buildConfigField "String", "CODEPUSH_KEY", '"RGOUfyINiLicZnld67aD0nrbRvyLV1Ifekvul"'
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
             signingConfig signingConfigs.release
         }
@@ -128,7 +133,7 @@ android {
         variant.outputs.each { output ->
             // For each separate APK per architecture, set a unique version code as described here:
             // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
-            def versionCodes = ["armeabi-v7a":1, "x86":2]
+            def versionCodes = ["armeabi-v7a": 1, "x86": 2]
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =

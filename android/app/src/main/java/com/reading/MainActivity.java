@@ -13,7 +13,6 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 public class MainActivity extends ReactActivity {
-    private CodePush codePush;
 
     /**
      * Returns the name of the main component registered from JavaScript.
@@ -36,7 +35,7 @@ public class MainActivity extends ReactActivity {
     @Nullable
     @Override
     protected String getJSBundleFile() {
-        return this.codePush.getBundleUrl("index.android.bundle");
+        return CodePush.getBundleUrl("index.android.bundle");
     }
 
     /**
@@ -45,17 +44,10 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected List<ReactPackage> getPackages() {
-        String deploymentKey;
-        if (BuildConfig.DEBUG) {
-            deploymentKey = "U7ZF2kYt5EzV14JyIB22SLRhQ2KBV1Ifekvul";
-        } else {
-            deploymentKey = "RGOUfyINiLicZnld67aD0nrbRvyLV1Ifekvul";
-        }
-        this.codePush = new CodePush(deploymentKey, this, BuildConfig.DEBUG);
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
                 new WeChatPackage(),
-                this.codePush.getReactPackage(),
+                new CodePush(BuildConfig.CODEPUSH_KEY, this, BuildConfig.DEBUG),
                 new RNDeviceInfo());
     }
 }
