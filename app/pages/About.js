@@ -50,9 +50,9 @@ class About extends React.Component {
             </Text>
           </View>
           <View style={{alignItems: 'center'}}>
-            <View style={{flexDirection: 'row'}}>
-              <Text style={{fontSize: 14, textAlign: 'center', color: '#aaaaaa'}}>
-                免责声明：所有内容均来自
+            <View style={{flexDirection: 'column'}}>
+              <Text style={{fontSize: 14, textAlign: 'center', color: '#999999'}}>
+                免责声明：所有内容均来自——
               </Text>
               <Button
                 style={{fontSize: 14, textAlign: 'center', color: '#3e9ce9'}}
@@ -60,9 +60,9 @@ class About extends React.Component {
                 onPress={this.onPress.bind(this, API_STORE)}
               />
             </View>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row', marginTop: 8}}>
               <Text style={{fontSize: 12, textAlign: 'center', color: '#aaaaaa'}}>
-                @Reading Team：
+                @Github：
               </Text>
               <Button
                 style={{fontSize: 12, textAlign: 'center', color: '#3e9ce9'}}

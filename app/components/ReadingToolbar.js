@@ -101,6 +101,7 @@ let styles = StyleSheet.create({
 	toolbar: {
 		flexDirection: 'row',
     backgroundColor: '#3e9ce9',
+    alignItems: 'center',
     height: 58
   },
   titleIOS: {
@@ -109,7 +110,7 @@ let styles = StyleSheet.create({
   	color: '#fff',
   	fontWeight: 'bold',
   	fontSize: 20,
-  	marginTop: 25
+  	marginTop: 20
   },
   leftIOS: {
   	height: 15,
