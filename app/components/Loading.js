@@ -8,11 +8,10 @@ import {
   View,
   Text,
   Modal,
-  ActivityIndicatorIOS,
-  ProgressBarAndroid
+  ActivityIndicator
 } from 'react-native';
 
-const SIZES = ['small', 'normal', 'large'];
+const SIZES = ['small', 'large'];
 
 const propTypes = {
   visible: React.PropTypes.bool,
@@ -28,38 +27,15 @@ class Loading extends React.Component {
   }
 
   renderLoading() {
-    let styleAttr = 'Inverse';
-    let size = 'large';
-
-    switch (this.props.size) {
-      case 'small':
-        styleAttr = 'SmallInverse';
-        size = 'small';
-        break;
-      case 'large':
-        styleAttr = 'LargeInverse';
-        size = 'large';
-        break;
-    }
-    if (Platform.OS === 'android') {
-      return (
-        <View style={styles.loading}>
-          <ProgressBarAndroid
-            styleAttr={styleAttr}
-            color={this.props.color}
-          />
-          <Text style={styles.loadingText}>数据加载中...</Text>
-        </View>
-      );
-    } else {
-      return (
-        <ActivityIndicatorIOS
-          animating={true}
-          size={size}
+    return (
+      <View style={styles.loading}>
+        <ActivityIndicator
+          size={this.props.size}
           color={this.props.color}
         />
-      );
-    }
+        <Text style={styles.loadingText}>数据加载中...</Text>
+      </View>
+    );
   }
 
   render() {

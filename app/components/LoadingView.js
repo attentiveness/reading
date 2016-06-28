@@ -17,8 +17,8 @@ class LoadingView extends React.Component {
         	size='large'
         	color='#3e9ce9'
         />
-        <Text style={ styles.loadingText }>数据加载中...</Text>
-       </View>
+        <Text style={styles.loadingText}>数据加载中...</Text>
+      </View>
 		);
 	}
 }
