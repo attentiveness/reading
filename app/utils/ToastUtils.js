@@ -1,30 +1,34 @@
 'use strict';
 
 import React from 'react-native';
-const {
-	ToastAndroid,
-	Alert,
-	Platform
-} = React;
+import Toast from 'react-native-root-toast';
+
+let toast;
 
 export function ToastShort(content) {
-	if (Platform.OS === 'android') {
-		ToastAndroid.show(new String(content), ToastAndroid.SHORT);
-	} else {
-		Alert.alert(
-		  '提示',
-		  content.toString()
-		)
+	if (toast !== undefined) {
+		Toast.hide(toast);
 	}
+	toast = Toast.show(content.toString(), {
+		duration: Toast.durations.SHORT,
+		position: Toast.positions.BOTTOM,
+		shadow: true,
+		animation: true,
+		hideOnPress: true,
+		delay: 0
+	});
 }
 
 export function ToastLong(content) {
-	if (Platform.OS === 'android') {
-		ToastAndroid.show(new String(content), ToastAndroid.LONG);
-	} else {
-		Alert.alert(
-		  '提示',
-		  content.toString()
-		)
+	if (toast !== undefined) {
+		Toast.hide(toast);
 	}
+	toast = Toast.show(content.toString(), {
+		duration: Toast.durations.LONG,
+		position: Toast.positions.BOTTOM,
+		shadow: true,
+		animation: true,
+		hideOnPress: true,
+		delay: 0
+	});
 }

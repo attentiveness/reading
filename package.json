@@ -15,6 +15,7 @@
     "react-native-code-push": "^1.12.2-beta",
     "react-native-device-info": "^0.9.3",
     "react-native-drawer-layout": "^1.0.0",
+    "react-native-root-toast": "^1.0.3",
     "react-native-scrollable-tab-view": "^0.5.1",
     "react-native-wechat": "^1.4.4",
     "react-redux": "^4.4.5",

@@ -22,7 +22,7 @@ import {CATEGORIES} from '../constants/Alias';
 let toolbarActions = [
   {title: '提交', icon: require('../img/check.png'), show: 'always'}
 ];
-var _typeIds = new Array();
+var _typeIds = [];
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -92,20 +92,8 @@ class Category extends React.Component {
             navigator.pop();
             return;
           }
-          Alert.alert(
-            '提醒',
-            '应用即将关闭，再次打开分类生效', [{
-              text: '取消',
-              style: 'cancel'
-            }, {
-              text: '确认',
-              onPress: () => {
-                Storage.save('typeIds', this.state.typeIds)
+          Storage.save('typeIds', this.state.typeIds)
                   .then(this.resetRoute);
-                BackAndroid.exitApp();
-              }
-            }]
-          );
         });
     });
   }
