@@ -220,10 +220,10 @@ let styles = StyleSheet.create({
   spinnerTitle: {
     fontSize: 18,
     color: '#313131',
-    textAlign: 'center'
+    textAlign: 'center',
+    marginTop: 5
   },
   shareContent: {
-    flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'

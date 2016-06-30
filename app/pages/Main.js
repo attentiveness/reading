@@ -35,7 +35,6 @@ const propTypes = {
 };
 
 var canLoadMore;
-var _typeIds = new Array();
 var page = 1;
 var loadMoreTime = 0;
 
@@ -45,7 +44,8 @@ class Main extends React.Component {
     this.state = {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
-      })
+      }),
+      typeIds: []
     };
     this.renderItem = this.renderItem.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
@@ -63,9 +63,11 @@ class Main extends React.Component {
           if (!typeIds) {
             typeIds = [0, 12, 9, 2];
           }
-          _typeIds = typeIds;
           typeIds.forEach((typeId) => {
             dispatch(fetchArticles(false, true, typeId));
+          });
+          this.setState({
+            typeIds: typeIds
           });
         });
     });
@@ -310,17 +312,6 @@ class Main extends React.Component {
 
   render() {
     const {read, navigator} = this.props;
-    var lists = [];
-    _typeIds.forEach((typeId) => {
-      lists.push(
-        <View
-          key={typeId}
-          tabLabel={CATEGORIES[typeId]}
-          style={{flex: 1}}
-        >
-          {this.renderContent(this.state.dataSource.cloneWithRows(read.articleList[typeId] === undefined ? [] : read.articleList[typeId]), typeId)}
-        </View>);
-    });
     return (
       <DrawerLayout
         ref='drawer'
@@ -346,7 +337,16 @@ class Main extends React.Component {
             tabBarActiveTextColor="#3e9ce9"
             tabBarInactiveTextColor="#aaaaaa"
           >
-          {lists}
+          {this.state.typeIds.map((typeId, i) => {
+            return (
+              <View
+                key={typeId}
+                tabLabel={CATEGORIES[typeId]}
+                style={{flex: 1}}
+              >
+                {this.renderContent(this.state.dataSource.cloneWithRows(read.articleList[typeId] === undefined ? [] : read.articleList[typeId]), typeId)}
+              </View>);
+          })}
           </ScrollableTabView>
         </View>
       </DrawerLayout>
@@ -360,7 +360,6 @@ let styles = StyleSheet.create({
     flexDirection: 'column'
   },
   containerItem: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -370,7 +369,6 @@ let styles = StyleSheet.create({
     borderBottomWidth: 1
   },
   title: {
-    flex: 3,
     fontSize: 18,
     textAlign: 'left',
     color: 'black'

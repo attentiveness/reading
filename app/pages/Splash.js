@@ -31,7 +31,7 @@ class Splash extends React.Component {
   render() {
     return (
       <Image
-        style={{flex: 1, width: width, height: height}}
+        style={{width: width, height: height}}
         source={require('../img/splash.png')}
       />
     );
