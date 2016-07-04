@@ -18,7 +18,7 @@ class Splash extends React.Component {
 
   componentDidMount() {
     const {navigator} = this.props;
-    setTimeout(() => {
+    this.timer = setTimeout(() => {
       InteractionManager.runAfterInteractions(() => {
         navigator.resetTo({
           component: MainContainer,
@@ -28,6 +28,10 @@ class Splash extends React.Component {
     }, 2000);
   }
 
+  componentWillUnmount() {
+    this.timer && clearTimeout(this.timer);
+  }
+  
   render() {
     return (
       <Image

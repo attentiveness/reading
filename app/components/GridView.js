@@ -65,6 +65,7 @@ class GridView extends React.Component {
         onEndReached={this.props.onEndReached}
         scrollEnabled={this.props.scrollEnabled}
         pageSize={this.props.pageSize | 1}
+        enableEmptySections={true}
       />
     );
 	}
