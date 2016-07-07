@@ -30,16 +30,16 @@ function fetchArticleList(isRefreshing, loading, isLoadMore) {
   }
   return {
     type: types.FETCH_ARTICLE_LIST,
-    isRefreshing: isRefreshing,
-    loading: loading,
-    isLoadMore: isLoadMore
+    isRefreshing,
+    loading,
+    isLoadMore
   };
 }
 
 function receiveArticleList(articleList, typeId) {
   return {
     type: types.RECEIVE_ARTICLE_LIST,
-    articleList: articleList,
-    typeId: typeId
+    articleList,
+    typeId
   };
 }

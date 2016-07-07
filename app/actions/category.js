@@ -30,6 +30,6 @@ function fetchTypeList() {
 function receiveTypeList(typeList) {
   return {
     type: types.RECEIVE_TYPE_LIST,
-    typeList: typeList
+    typeList
   };
 }

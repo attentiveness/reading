@@ -14,6 +14,8 @@
         "comma-dangle": 0,
         "react/prop-types": 0,
         "no-use-before-define": 0,
-        "prefer-stateless-function": 0
+        "prefer-stateless-function": 0,
+        "radix": ["error", "as-needed"],
+        "react/prefer-stateless-function": 0
     }
 }

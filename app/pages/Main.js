@@ -27,6 +27,11 @@ import Storage from '../utils/Storage';
 import { CATEGORIES } from '../constants/Alias';
 import WebViewPage from '../pages/WebViewPage';
 
+const homeImg = require('../img/home.png');
+const categoryImg = require('../img/category.png');
+const inspectionImg = require('../img/inspection.png');
+const infoImg = require('../img/info.png');
+const menuImg = require('../img/menu.png');
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
   read: PropTypes.object.isRequired
@@ -65,7 +70,7 @@ class Main extends React.Component {
             dispatch(fetchArticles(false, true, typeId));
           });
           this.setState({
-            typeIds: typeIds
+            typeIds
           });
         });
     });
@@ -92,7 +97,7 @@ class Main extends React.Component {
       navigator.push({
         component: WebViewPage,
         name: 'WebViewPage',
-        article: article
+        article
       });
     });
   }
@@ -155,7 +160,10 @@ class Main extends React.Component {
     const { read } = this.props;
     if (read.isLoadMore) {
       return (
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 5 }}>
+        <View
+          style={{ flex: 1, flexDirection: 'row', justifyContent: 'center',
+            alignItems: 'center', padding: 5 }}
+        >
           <ActivityIndicator size="small" color="#3e9ce9" />
           <Text style={{ textAlign: 'center', fontSize: 16, marginLeft: 10 }}>
             数据加载中……
@@ -163,11 +171,12 @@ class Main extends React.Component {
         </View>
       );
     }
+    return null;
   }
 
   renderItem(article) {
     return (
-      <TouchableOpacity onPress={this.onPress.bind(this, article)}>
+      <TouchableOpacity onPress={() => this.onPress(article)}>
         <View style={styles.containerItem}>
           <Image
             style={{ width: 88, height: 66, marginRight: 10 }}
@@ -181,7 +190,10 @@ class Main extends React.Component {
               <Text style={{ fontSize: 14, color: '#aaaaaa', marginTop: 5 }}>
                 来自微信公众号：
               </Text>
-              <Text style={{ flex: 1, fontSize: 14, color: '#87CEFA', marginTop: 5, marginRight: 5 }}>
+              <Text
+                style={{ flex: 1, fontSize: 14, color: '#87CEFA',
+                  marginTop: 5, marginRight: 5 }}
+              >
                 {article.userName}
               </Text>
             </View>
@@ -207,7 +219,7 @@ class Main extends React.Component {
           refreshControl={
             <RefreshControl
               refreshing={read.isRefreshing}
-              onRefresh={this.onRefresh.bind(this, typeId)}
+              onRefresh={() => this.onRefresh(typeId)}
               title="Loading..."
               colors={['#ffaa66cc', '#ff00ddff', '#ffffbb33', '#ffff4444']}
             />
@@ -227,14 +239,14 @@ class Main extends React.Component {
         dataSource={dataSource}
         renderRow={this.renderItem}
         style={styles.listView}
-        onEndReached={this.onEndReached.bind(this, typeId)}
+        onEndReached={() => this.onEndReached(typeId)}
         onEndReachedThreshold={10}
         onScroll={this.onScroll}
         renderFooter={this.renderFooter}
         refreshControl={
           <RefreshControl
             refreshing={read.isRefreshing}
-            onRefresh={this.onRefresh.bind(this, typeId)}
+            onRefresh={() => this.onRefresh(typeId)}
             title="Loading..."
             colors={['#ffaa66cc', '#ff00ddff', '#ffffbb33', '#ffff4444']}
           />
@@ -247,7 +259,8 @@ class Main extends React.Component {
     return (
       <View style={[styles.container, { backgroundColor: '#fcfcfc' }]}>
         <View
-          style={{ width: Dimensions.get('window').width / 5 * 3, height: 120, justifyContent: 'flex-end', paddingBottom: 10, backgroundColor: '#3e9ce9' }}
+          style={{ width: Dimensions.get('window').width / 5 * 3, height: 120,
+            justifyContent: 'flex-end', paddingBottom: 10, backgroundColor: '#3e9ce9' }}
         >
           <Text style={{ fontSize: 20, textAlign: 'left', color: '#fcfcfc', marginLeft: 10 }}>
             Reading
@@ -258,11 +271,11 @@ class Main extends React.Component {
         </View>
         <TouchableOpacity
           style={styles.drawerContent}
-          onPress={this.onPressDrawerItem.bind(this, 0)}
+          onPress={() => this.onPressDrawerItem(0)}
         >
           <Image
             style={styles.drawerIcon}
-            source={require('../img/home.png')}
+            source={homeImg}
           />
           <Text style={styles.drawerText}>
             首页
@@ -270,11 +283,11 @@ class Main extends React.Component {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.drawerContent}
-          onPress={this.onPressDrawerItem.bind(this, 1)}
+          onPress={() => this.onPressDrawerItem(1)}
         >
           <Image
             style={styles.drawerIcon}
-            source={require('../img/category.png')}
+            source={categoryImg}
           />
           <Text style={styles.drawerText}>
             分类
@@ -282,11 +295,11 @@ class Main extends React.Component {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.drawerContent}
-          onPress={this.onPressDrawerItem.bind(this, 2)}
+          onPress={() => this.onPressDrawerItem(2)}
         >
           <Image
             style={styles.drawerIcon}
-            source={require('../img/inspection.png')}
+            source={inspectionImg}
           />
           <Text style={styles.drawerText}>
             建议
@@ -294,11 +307,11 @@ class Main extends React.Component {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.drawerContent}
-          onPress={this.onPressDrawerItem.bind(this, 3)}
+          onPress={() => this.onPressDrawerItem(3)}
         >
           <Image
             style={styles.drawerIcon}
-            source={require('../img/info.png')}
+            source={infoImg}
           />
           <Text style={styles.drawerText}>
             关于
@@ -321,7 +334,7 @@ class Main extends React.Component {
           <ReadingToolbar
             title="Reading"
             navigator={navigator}
-            navIcon={require('../img/menu.png')}
+            navIcon={menuImg}
             onIconClicked={this.onIconClicked}
           />
           <ScrollableTabView
@@ -343,7 +356,8 @@ class Main extends React.Component {
                 tabLabel={CATEGORIES[typeId]}
                 style={{ flex: 1 }}
               >
-                {this.renderContent(this.state.dataSource.cloneWithRows(read.articleList[typeId] === undefined ? [] : read.articleList[typeId]), typeId)}
+                {this.renderContent(this.state.dataSource.cloneWithRows(
+                  read.articleList[typeId] === undefined ? [] : read.articleList[typeId]), typeId)}
               </View>);
           })}
           </ScrollableTabView>
