@@ -1,9 +1,7 @@
-'use strict';
-
-let HOST = 'http://apis.baidu.com/';
+const HOST = 'http://apis.baidu.com/';
 
 export function request(url, method, body) {
-  var isOk;
+  let isOk;
   return new Promise((resolve, reject) => {
     fetch(HOST + url, {
         method: method,
@@ -30,5 +28,5 @@ export function request(url, method, body) {
       .catch((error) => {
         reject(error);
       });
-  })
+  });
 }

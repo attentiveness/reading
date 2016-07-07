@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import {
   StyleSheet,
@@ -10,13 +8,14 @@ import {
 import ReadingToolbar from '../components/ReadingToolbar';
 import AV from 'avoscloud-sdk';
 import DeviceInfo from 'react-native-device-info';
-import {ToastShort} from '../utils/ToastUtils';
+import { toastShort } from '../utils/ToastUtils';
 
+const checkIco = require('../img/check.png');
 let toolbarActions = [
-  {title: '提交', icon: require('../img/check.png'), show: 'always'}
+  { title: '提交', icon: checkIco, show: 'always' }
 ];
 
-var feedbackText;
+let feedbackText;
 
 class Feedback extends React.Component {
   constructor(props) {
@@ -30,10 +29,10 @@ class Feedback extends React.Component {
 
   onActionSelected() {
     if (feedbackText === '') {
-      ToastShort('建议内容为空！');
+      toastShort('建议内容为空！');
     } else {
-      const {navigator} = this.props;
-      var feedback = AV.Object.new('Feedback');
+      const { navigator } = this.props;
+      const feedback = AV.Object.new('Feedback');
       feedback.set('manufacturer', DeviceInfo.getManufacturer());
       feedback.set('system', DeviceInfo.getSystemName());
       feedback.set('deviceVersion', DeviceInfo.getSystemVersion());
@@ -42,12 +41,12 @@ class Feedback extends React.Component {
       feedback.set('feedback', feedbackText);
       feedback.save();
       navigator.pop();
-      ToastShort('您的问题已反馈，我们会及时跟进处理');
+      toastShort('您的问题已反馈，我们会及时跟进处理');
     }
   }
 
   render() {
-    const {navigator} = this.props;
+    const { navigator } = this.props;
     return (
       <View style={styles.container}>
         <ReadingToolbar
@@ -57,13 +56,13 @@ class Feedback extends React.Component {
           navigator={navigator}
         />
         <TextInput
-          style={{flex: 1, fontSize: 18, textAlignVertical: 'top'}}
+          style={{ flex: 1, fontSize: 18, textAlignVertical: 'top' }}
           placeholder="请写下您宝贵的意见或建议，与Reading一起进步！"
           placeholderTextColor="#aaaaaa"
           underlineColorAndroid="transparent"
           numberOfLines={200}
-          multiline={true}
-          autoFocus={true}
+          multiline
+          autoFocus
           onChangeText={(text) => {
             feedbackText = text;
           }}
@@ -73,7 +72,7 @@ class Feedback extends React.Component {
   }
 }
 
-let styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',

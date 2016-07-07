@@ -1,9 +1,13 @@
-'use strict';
-
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {shallow} from 'enzyme';
-import {expect} from 'chai';
+import {
+  Text,
+} from 'react-native';
+import {
+  shallow
+} from 'enzyme';
+import {
+  expect
+} from 'chai';
 import Button from '../Button';
 
 describe('<Button />', () => {
@@ -11,5 +15,4 @@ describe('<Button />', () => {
     const wrapper = shallow(<Button />);
     expect(wrapper.find(Text)).to.have.length(1);
   });
-
 });

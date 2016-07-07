@@ -1,7 +1,5 @@
-'use strict';
-
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import Category from '../pages/Category';
 
@@ -14,7 +12,7 @@ class CategoryContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const {category} = state;
+  const { category } = state;
   return {
     category
   };

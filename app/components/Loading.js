@@ -1,8 +1,5 @@
-'use strict';
-
 import React from 'react';
 import {
-  Platform,
   StyleSheet,
   Dimensions,
   View,
@@ -22,10 +19,6 @@ const propTypes = {
 };
 
 class Loading extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   renderLoading() {
     return (
       <View style={styles.loading}>
@@ -49,7 +42,7 @@ class Loading extends React.Component {
         key={'spinner'}
         style={styles.container}
       >
-        <View style={[styles.background, {backgroundColor: this.props.overlayColor}]}>
+        <View style={[styles.background, { backgroundColor: this.props.overlayColor }]}>
           {this.renderLoading()}
         </View>
       </View>
@@ -57,7 +50,7 @@ class Loading extends React.Component {
     return (
       <Modal
         visible={this.props.visible}
-        transparent={true}
+        transparent
         onRequestClose={this.props.onRequestClose}
       >
         {spinner}
@@ -66,7 +59,7 @@ class Loading extends React.Component {
   }
 }
 
-let styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'transparent',
@@ -107,7 +100,7 @@ Loading.defaultProps = {
   color: 'white',
   size: 'large',
   overlayColor: 'transparent',
-  onRequestClose: function() {}
+  onRequestClose() {}
 };
 
 export default Loading;

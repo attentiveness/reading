@@ -1,13 +1,11 @@
-'use strict';
-
 import React from 'react-native';
 const {
-  AsyncStorage
+	AsyncStorage
 } = React;
 
 class DeviceStorage {
 	static get(key) {
-		return AsyncStorage.getItem(key).then(function(value) {
+		return AsyncStorage.getItem(key).then((value) => {
 			return JSON.parse(value);
 		});
 	}

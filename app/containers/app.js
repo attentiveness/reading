@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import {
   StyleSheet,
@@ -10,10 +8,11 @@ import {
 } from 'react-native';
 
 import Splash from '../pages/Splash';
-import {registerApp} from 'react-native-wechat';
-import {NaviGoBack} from '../utils/CommonUtils';
+import { registerApp } from 'react-native-wechat';
+import { naviGoBack } from '../utils/CommonUtils';
 
-var _navigator, isRemoved = false;
+let tempNavigator;
+let isRemoved = false;
 
 class App extends React.Component {
   constructor(props) {
@@ -25,12 +24,16 @@ class App extends React.Component {
   }
 
   goBack() {
-    return NaviGoBack(_navigator);
+    return naviGoBack(tempNavigator);
+  }
+
+  configureScene() {
+    return Navigator.SceneConfigs.PushFromRight;
   }
 
   renderScene(route, navigator) {
     let Component = route.component;
-    _navigator = navigator;
+    tempNavigator = navigator;
     if (route.name === 'WebViewPage') {
       BackAndroid.removeEventListener('hardwareBackPress', this.goBack);
       isRemoved = true;
@@ -44,19 +47,15 @@ class App extends React.Component {
     );
   }
 
-  configureScene(route, routeStack) {
-    return Navigator.SceneConfigs.PushFromRight;
-  }
-
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <StatusBar
-         backgroundColor="#3e9ce9"
-         barStyle="default"
-       />
+          backgroundColor="#3e9ce9"
+          barStyle="default"
+        />
         <Navigator
-          ref='navigator'
+          ref="navigator"
           style={styles.navigator}
           configureScene={this.configureScene}
           renderScene={this.renderScene}
@@ -70,7 +69,7 @@ class App extends React.Component {
   }
 }
 
-let styles = StyleSheet.create({
+const styles = StyleSheet.create({
   navigator: {
     flex: 1
   }

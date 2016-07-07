@@ -1,13 +1,11 @@
-'use strict';
-
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import CodePush from 'react-native-code-push';
 import AV from 'avoscloud-sdk';
 import Main from '../pages/Main';
 import Storage from '../utils/Storage';
 
-let typeIds = [0, 12, 9, 2];
+const typeIds = [0, 12, 9, 2];
 
 class MainContainer extends React.Component {
   componentDidMount() {
@@ -39,7 +37,7 @@ class MainContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const {read} = state;
+  const { read } = state;
   return {
     read
   };

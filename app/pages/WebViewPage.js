@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import {
   StyleSheet,
@@ -15,18 +13,18 @@ import {
 } from 'react-native';
 
 import ReadingToolbar from '../components/ReadingToolbar';
-import {ToastShort} from '../utils/ToastUtils';
+import { toastShort } from '../utils/ToastUtils';
 import LoadingView from '../components/LoadingView';
-import {NaviGoBack} from '../utils/CommonUtils';
+import { naviGoBack } from '../utils/CommonUtils';
 import * as WeChat from 'react-native-wechat';
 
 let toolbarActions = [
-  {title: '分享', icon: require('../img/share.png'), show: 'always'}
+  { title: '分享', icon: require('../img/share.png'), show: 'always' }
 ];
-var canGoBack = false;
+let canGoBack = false;
 
 class WebViewPage extends React.Component {
-	constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
       isShareModal: false
@@ -64,7 +62,7 @@ class WebViewPage extends React.Component {
       this.refs.webview.goBack();
       return true;
     }
-    return NaviGoBack(this.props.navigator);
+    return naviGoBack(this.props.navigator);
   }
 
   renderLoading() {
@@ -72,7 +70,7 @@ class WebViewPage extends React.Component {
   }
 
   renderSpinner() {
-    const {route} = this.props;
+    const { route } = this.props;
     return (
       <TouchableWithoutFeedback onPress={() => {
         this.setState({
@@ -84,12 +82,12 @@ class WebViewPage extends React.Component {
           style={styles.spinner}
         >
           <View style={styles.spinnerContent}>
-            <Text style={[styles.spinnerTitle, {fontSize: 20, color: 'black'}]}>
+            <Text style={[styles.spinnerTitle, { fontSize: 20, color: 'black' }]}>
               分享到
             </Text>
-            <View style={{flexDirection: 'row', marginTop: 20}}>
+            <View style={{ flexDirection: 'row', marginTop: 20 }}>
               <TouchableOpacity
-                style={{flex: 1}}
+                style={{ flex: 1 }}
                 onPress={() => {
                   WeChat.isWXAppInstalled()
                     .then((isInstalled) => {
@@ -102,10 +100,10 @@ class WebViewPage extends React.Component {
                           webpageUrl: route.article.url
                         })
                         .catch((error) => {
-                          ToastShort(error.message);
+                          toastShort(error.message);
                         });
                       } else {
-                        ToastShort('没有安装微信软件，请您安装微信之后再试');
+                        toastShort('没有安装微信软件，请您安装微信之后再试');
                       }
                     });
               }}>
@@ -120,22 +118,22 @@ class WebViewPage extends React.Component {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity
-                style={{flex: 1}}
+                style={{ flex: 1 }}
                 onPress={() => {
                   WeChat.isWXAppInstalled()
                     .then((isInstalled) => {
                       if (isInstalled) {
                         WeChat.shareToTimeline({
-                          title: '[@Reading]' + route.article.title,
+                          title: `[@Reading]${route.article.title}`,
                           thumbImage: route.article.contentImg,
                           type: 'news',
                           webpageUrl: route.article.url
                         })
                         .catch((error) => {
-                          ToastShort(error.message);
+                          toastShort(error.message);
                         });
                       } else {
-                        ToastShort('没有安装微信软件，请您安装微信之后再试');
+                        toastShort('没有安装微信软件，请您安装微信之后再试');
                       }
                     });
               }}>
@@ -157,9 +155,9 @@ class WebViewPage extends React.Component {
   }
 
   render() {
-  	const {navigator, route} = this.props;
-  	return (
-  		<View style={styles.container}>
+    const { navigator, route } = this.props;
+    return (
+      <View style={styles.container}>
         <ReadingToolbar
           actions={toolbarActions}
           onActionSelected={this.onActionSelected}
@@ -167,9 +165,9 @@ class WebViewPage extends React.Component {
           navigator={navigator}
         />
         <Modal
-          animationType='fade'
+          animationType="fade"
           visible={this.state.isShareModal}
-          transparent={true}
+          transparent
           onRequestClose={() => {this.setState({
             isShareModal: false
           });}}
@@ -177,27 +175,27 @@ class WebViewPage extends React.Component {
           {this.renderSpinner()}
         </Modal>
         <WebView
-          ref='webview'
-	        automaticallyAdjustContentInsets={false}
-	        style={{flex: 1}}
-          source={{uri: route.article.url}}
-	        javaScriptEnabled={true}
-	        domStorageEnabled={true}
-	        startInLoadingState={true}
-	        scalesPageToFit={true}
+          ref="webview"
+          automaticallyAdjustContentInsets={false}
+          style={{ flex: 1 }}
+          source={{ uri: route.article.url }}
+          javaScriptEnabled
+          domStorageEnabled
+          startInLoadingState
+          scalesPageToFit
           decelerationRate="normal"
-          onShouldStartLoadWithRequest={(event) => {
+          onShouldStartLoadWithRequest={() => {
             return true;
           }}
           onNavigationStateChange={this.onNavigationStateChange}
           renderLoading={this.renderLoading.bind(this)}
-	      />
+        />
       </View>
-  	);
+    );
   }
 }
 
-let styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column'

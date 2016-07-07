@@ -1,5 +1,3 @@
-'use strict';
-
 import React from 'react';
 import {
   Dimensions,
@@ -9,15 +7,11 @@ import {
 
 import MainContainer from '../containers/MainContainer';
 
-var {height, width} = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 class Splash extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
-    const {navigator} = this.props;
+    const { navigator } = this.props;
     this.timer = setTimeout(() => {
       InteractionManager.runAfterInteractions(() => {
         navigator.resetTo({
@@ -31,11 +25,11 @@ class Splash extends React.Component {
   componentWillUnmount() {
     this.timer && clearTimeout(this.timer);
   }
-  
+
   render() {
     return (
       <Image
-        style={{width: width, height: height}}
+        style={{ width: width, height: height }}
         source={require('../img/splash.png')}
       />
     );

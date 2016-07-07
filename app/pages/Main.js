@@ -1,6 +1,4 @@
-'use strict';
-
-import React, {PropTypes} from 'react';
+import React, { PropTypes } from 'react';
 import {
   StyleSheet,
   ListView,
@@ -18,15 +16,15 @@ import {
 } from 'react-native';
 import LoadingView from '../components/LoadingView';
 import DrawerLayout from 'react-native-drawer-layout';
-import {fetchArticles} from '../actions/read';
+import { fetchArticles } from '../actions/read';
 import ReadingToolbar from '../components/ReadingToolbar';
-import ScrollableTabView, {DefaultTabBar} from 'react-native-scrollable-tab-view';
+import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import About from '../pages/About';
 import Feedback from '../pages/Feedback';
 import CategoryContainer from '../containers/CategoryContainer';
-import {ToastShort} from '../utils/ToastUtils';
+import { toastShort } from '../utils/ToastUtils';
 import Storage from '../utils/Storage';
-import {CATEGORIES} from '../constants/Alias';
+import { CATEGORIES } from '../constants/Alias';
 import WebViewPage from '../pages/WebViewPage';
 
 const propTypes = {
@@ -34,9 +32,9 @@ const propTypes = {
   read: PropTypes.object.isRequired
 };
 
-var canLoadMore;
-var page = 1;
-var loadMoreTime = 0;
+let canLoadMore;
+let page = 1;
+let loadMoreTime = 0;
 
 class Main extends React.Component {
   constructor(props) {
@@ -56,7 +54,7 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     InteractionManager.runAfterInteractions(() => {
       Storage.get('typeIds')
         .then((typeIds) => {
@@ -74,22 +72,22 @@ class Main extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {read} = this.props;
+    const { read } = this.props;
     if (read.isLoadMore && !nextProps.read.isLoadMore && !nextProps.read.isRefreshing) {
       if (nextProps.read.noMore) {
-        ToastShort('没有更多数据了');
+        toastShort('没有更多数据了');
       }
     }
   }
 
   onRefresh(typeId) {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     canLoadMore = false;
     dispatch(fetchArticles(true, false, typeId));
   }
 
   onPress(article) {
-    const {navigator} = this.props;
+    const { navigator } = this.props;
     InteractionManager.runAfterInteractions(() => {
       navigator.push({
         component: WebViewPage,
@@ -100,7 +98,7 @@ class Main extends React.Component {
   }
 
   onPressDrawerItem(index) {
-    const {navigator} = this.props;
+    const { navigator } = this.props;
     this.refs.drawer.closeDrawer();
     switch (index) {
       case 1:
@@ -143,10 +141,10 @@ class Main extends React.Component {
   }
 
   onEndReached(typeId) {
-    let time = Date.parse(new Date()) / 1000;
+    const time = Date.parse(new Date()) / 1000;
     if (canLoadMore && time - loadMoreTime > 1) {
       page++;
-      const {dispatch} = this.props;
+      const { dispatch } = this.props;
       dispatch(fetchArticles(false, false, typeId, true, page));
       canLoadMore = false;
       loadMoreTime = Date.parse(new Date()) / 1000;
@@ -154,12 +152,12 @@ class Main extends React.Component {
   }
 
   renderFooter() {
-    const {read} = this.props;
+    const { read } = this.props;
     if (read.isLoadMore) {
       return (
-        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 5}}>
-          <ActivityIndicator size='small' color='#3e9ce9' />
-          <Text style={{textAlign: 'center', fontSize: 16, marginLeft: 10}}>
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 5 }}>
+          <ActivityIndicator size="small" color="#3e9ce9" />
+          <Text style={{ textAlign: 'center', fontSize: 16, marginLeft: 10 }}>
             数据加载中……
           </Text>
         </View>
@@ -167,23 +165,23 @@ class Main extends React.Component {
     }
   }
 
-  renderItem(article, sectionID, rowID) {
+  renderItem(article) {
     return (
       <TouchableOpacity onPress={this.onPress.bind(this, article)}>
         <View style={styles.containerItem}>
           <Image
-            style={{width: 88, height: 66, marginRight: 10}}
-            source={{uri: article.contentImg}}
+            style={{ width: 88, height: 66, marginRight: 10 }}
+            source={{ uri: article.contentImg }}
           />
-          <View style={{flex: 1, flexDirection: 'column'}} >
+          <View style={{ flex: 1, flexDirection: 'column' }} >
             <Text style={styles.title}>
               {article.title}
             </Text>
-            <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}} >
-              <Text style={{fontSize: 14, color: '#aaaaaa', marginTop: 5}}>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }} >
+              <Text style={{ fontSize: 14, color: '#aaaaaa', marginTop: 5 }}>
                 来自微信公众号：
               </Text>
-              <Text style={{flex: 1, fontSize: 14, color: '#87CEFA', marginTop: 5, marginRight: 5}}>
+              <Text style={{ flex: 1, fontSize: 14, color: '#87CEFA', marginTop: 5, marginRight: 5 }}>
                 {article.userName}
               </Text>
             </View>
@@ -194,18 +192,18 @@ class Main extends React.Component {
   }
 
   renderContent(dataSource, typeId) {
-    const {read} = this.props;
+    const { read } = this.props;
     if (read.loading) {
-      return <LoadingView/>;
+      return <LoadingView />;
     }
-    let isEmpty = read.articleList[typeId] === undefined || read.articleList[typeId].length === 0;
+    const isEmpty = read.articleList[typeId] === undefined || read.articleList[typeId].length === 0;
     if (isEmpty) {
       return (
         <ScrollView
           automaticallyAdjustContentInsets={false}
           horizontal={false}
           contentContainerStyle={styles.no_data}
-          style={{flex: 1}}
+          style={{ flex: 1 }}
           refreshControl={
             <RefreshControl
               refreshing={read.isRefreshing}
@@ -215,8 +213,8 @@ class Main extends React.Component {
             />
           }
         >
-          <View style={{alignItems: 'center'}}>
-            <Text style={{fontSize: 16}}>
+          <View style={{ alignItems: 'center' }}>
+            <Text style={{ fontSize: 16 }}>
               目前没有数据，请刷新重试……
             </Text>
           </View>
@@ -247,14 +245,14 @@ class Main extends React.Component {
 
   renderNavigationView() {
     return (
-      <View style={[styles.container, {backgroundColor: '#fcfcfc'}]}>
+      <View style={[styles.container, { backgroundColor: '#fcfcfc' }]}>
         <View
-          style={{width: Dimensions.get('window').width / 5 * 3, height: 120, justifyContent: 'flex-end', paddingBottom: 10, backgroundColor: '#3e9ce9'}}
+          style={{ width: Dimensions.get('window').width / 5 * 3, height: 120, justifyContent: 'flex-end', paddingBottom: 10, backgroundColor: '#3e9ce9' }}
         >
-          <Text style={{fontSize: 20, textAlign: 'left', color: '#fcfcfc', marginLeft: 10}}>
+          <Text style={{ fontSize: 20, textAlign: 'left', color: '#fcfcfc', marginLeft: 10 }}>
             Reading
           </Text>
-          <Text style={{fontSize: 20, textAlign: 'left', color: '#fcfcfc', marginLeft: 10}}>
+          <Text style={{ fontSize: 20, textAlign: 'left', color: '#fcfcfc', marginLeft: 10 }}>
             让生活更精彩
           </Text>
         </View>
@@ -311,10 +309,10 @@ class Main extends React.Component {
   }
 
   render() {
-    const {read, navigator} = this.props;
+    const { read, navigator } = this.props;
     return (
       <DrawerLayout
-        ref='drawer'
+        ref="drawer"
         drawerWidth={Dimensions.get('window').width / 5 * 3}
         drawerPosition={Platform.OS === 'android' ? DrawerLayoutAndroid.positions.Left : 'left'}
         renderNavigationView={this.renderNavigationView}
@@ -327,22 +325,23 @@ class Main extends React.Component {
             onIconClicked={this.onIconClicked}
           />
           <ScrollableTabView
-            renderTabBar={() => 
+            renderTabBar={() =>
               <DefaultTabBar
                 underlineHeight={2}
-                textStyle={{fontSize: 16, marginTop: 6}} />
+                textStyle={{ fontSize: 16, marginTop: 6 }}
+              />
             }
             tabBarBackgroundColor="#fcfcfc"
             tabBarUnderlineColor="#3e9ce9"
             tabBarActiveTextColor="#3e9ce9"
             tabBarInactiveTextColor="#aaaaaa"
           >
-          {this.state.typeIds.map((typeId, i) => {
+          {this.state.typeIds.map((typeId) => {
             return (
               <View
                 key={typeId}
                 tabLabel={CATEGORIES[typeId]}
-                style={{flex: 1}}
+                style={{ flex: 1 }}
               >
                 {this.renderContent(this.state.dataSource.cloneWithRows(read.articleList[typeId] === undefined ? [] : read.articleList[typeId]), typeId)}
               </View>);
@@ -354,7 +353,7 @@ class Main extends React.Component {
   }
 }
 
-let styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column'
