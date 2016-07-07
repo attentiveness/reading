@@ -8,6 +8,7 @@ import {
 import MainContainer from '../containers/MainContainer';
 
 const { height, width } = Dimensions.get('window');
+const splashImg = require('../img/splash.png');
 
 class Splash extends React.Component {
   componentDidMount() {
@@ -30,7 +31,7 @@ class Splash extends React.Component {
     return (
       <Image
         style={{ width: width, height: height }}
-        source={require('../img/splash.png')}
+        source={splashImg}
       />
     );
   }

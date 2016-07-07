@@ -18,8 +18,11 @@ import LoadingView from '../components/LoadingView';
 import { naviGoBack } from '../utils/CommonUtils';
 import * as WeChat from 'react-native-wechat';
 
+const shareImg = require('../img/share.png');
+const shareIconWechat = require('../img/share_icon_wechat.png');
+const shareIconMoments = require('../img/share_icon_moments.png');
 let toolbarActions = [
-  { title: '分享', icon: require('../img/share.png'), show: 'always' }
+  { title: '分享', icon: shareImg, show: 'always' }
 ];
 let canGoBack = false;
 
@@ -72,11 +75,13 @@ class WebViewPage extends React.Component {
   renderSpinner() {
     const { route } = this.props;
     return (
-      <TouchableWithoutFeedback onPress={() => {
-        this.setState({
-          isShareModal: false
-        });
-      }}>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          this.setState({
+            isShareModal: false
+          });
+        }}
+      >
         <View
           key={'spinner'}
           style={styles.spinner}
@@ -106,11 +111,12 @@ class WebViewPage extends React.Component {
                         toastShort('没有安装微信软件，请您安装微信之后再试');
                       }
                     });
-              }}>
+                }}
+              >
                 <View style={styles.shareContent}>
                   <Image
                     style={styles.shareIcon}
-                    source={require('../img/share_icon_wechat.png')}
+                    source={shareIconWechat}
                   />
                   <Text style={styles.spinnerTitle}>
                     微信
@@ -136,11 +142,12 @@ class WebViewPage extends React.Component {
                         toastShort('没有安装微信软件，请您安装微信之后再试');
                       }
                     });
-              }}>
+                }}
+              >
                 <View style={styles.shareContent}>
                   <Image
                     style={styles.shareIcon}
-                    source={require('../img/share_icon_moments.png')}
+                    source={shareIconMoments}
                   />
                   <Text style={styles.spinnerTitle}>
                     朋友圈
@@ -168,9 +175,11 @@ class WebViewPage extends React.Component {
           animationType="fade"
           visible={this.state.isShareModal}
           transparent
-          onRequestClose={() => {this.setState({
-            isShareModal: false
-          });}}
+          onRequestClose={() => {
+            this.setState({
+              isShareModal: false
+            });
+          }}
         >
           {this.renderSpinner()}
         </Modal>
@@ -185,10 +194,11 @@ class WebViewPage extends React.Component {
           scalesPageToFit
           decelerationRate="normal"
           onShouldStartLoadWithRequest={() => {
-            return true;
+            const shouldStartLoad = true;
+            return shouldStartLoad;
           }}
           onNavigationStateChange={this.onNavigationStateChange}
-          renderLoading={this.renderLoading.bind(this)}
+          renderLoading={() => this.renderLoading}
         />
       </View>
     );

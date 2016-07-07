@@ -350,7 +350,7 @@ class Main extends React.Component {
             tabBarInactiveTextColor="#aaaaaa"
           >
           {this.state.typeIds.map((typeId) => {
-            return (
+            const typeView = (
               <View
                 key={typeId}
                 tabLabel={CATEGORIES[typeId]}
@@ -359,6 +359,7 @@ class Main extends React.Component {
                 {this.renderContent(this.state.dataSource.cloneWithRows(
                   read.articleList[typeId] === undefined ? [] : read.articleList[typeId]), typeId)}
               </View>);
+            return typeView;
           })}
           </ScrollableTabView>
         </View>

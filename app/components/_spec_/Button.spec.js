@@ -1,13 +1,7 @@
 import React from 'react';
-import {
-  Text,
-} from 'react-native';
-import {
-  shallow
-} from 'enzyme';
-import {
-  expect
-} from 'chai';
+import { Text } from 'react-native';
+import { shallow } from 'enzyme';
+import { expect } from 'chai';
 import Button from '../Button';
 
 describe('<Button />', () => {
