@@ -8,7 +8,7 @@ import {
 import ReadingToolbar from '../components/ReadingToolbar';
 import AV from 'avoscloud-sdk';
 import DeviceInfo from 'react-native-device-info';
-import { toastShort } from '../utils/ToastUtils';
+import { toastShort } from '../utils/ToastUtil';
 
 const checkIco = require('../img/check.png');
 let toolbarActions = [

@@ -22,7 +22,7 @@ import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-vi
 import About from '../pages/About';
 import Feedback from '../pages/Feedback';
 import CategoryContainer from '../containers/CategoryContainer';
-import { toastShort } from '../utils/ToastUtils';
+import { toastShort } from '../utils/ToastUtil';
 import Storage from '../utils/Storage';
 import { CATEGORIES } from '../constants/Alias';
 import WebViewPage from '../pages/WebViewPage';

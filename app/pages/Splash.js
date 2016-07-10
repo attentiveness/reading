@@ -7,7 +7,8 @@ import {
 
 import MainContainer from '../containers/MainContainer';
 
-const { height, width } = Dimensions.get('window');
+const maxHeight = Dimensions.get('window').height;
+const maxWidth = Dimensions.get('window').width;
 const splashImg = require('../img/splash.png');
 
 class Splash extends React.Component {
@@ -24,13 +25,13 @@ class Splash extends React.Component {
   }
 
   componentWillUnmount() {
-    this.timer && clearTimeout(this.timer);
+    clearTimeout(this.timer);
   }
 
   render() {
     return (
       <Image
-        style={{ width: width, height: height }}
+        style={{ width: maxWidth, height: maxHeight }}
         source={splashImg}
       />
     );

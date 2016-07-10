@@ -7,7 +7,7 @@ import {
 	Text
 } from 'react-native';
 
-import { naviGoBack } from '../utils/CommonUtils';
+import { naviGoBack } from '../utils/CommonUtil';
 import ImageButton from './ImageButton';
 import Button from './Button';
 

@@ -13,9 +13,9 @@ import {
 } from 'react-native';
 
 import ReadingToolbar from '../components/ReadingToolbar';
-import { toastShort } from '../utils/ToastUtils';
+import { toastShort } from '../utils/ToastUtil';
 import LoadingView from '../components/LoadingView';
-import { naviGoBack } from '../utils/CommonUtils';
+import { naviGoBack } from '../utils/CommonUtil';
 import * as WeChat from 'react-native-wechat';
 
 const shareImg = require('../img/share.png');
@@ -193,12 +193,13 @@ class WebViewPage extends React.Component {
           startInLoadingState
           scalesPageToFit
           decelerationRate="normal"
+          startInLoadingState
           onShouldStartLoadWithRequest={() => {
             const shouldStartLoad = true;
             return shouldStartLoad;
           }}
           onNavigationStateChange={this.onNavigationStateChange}
-          renderLoading={() => this.renderLoading}
+          renderLoading={this.renderLoading}
         />
       </View>
     );

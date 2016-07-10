@@ -11,7 +11,7 @@ import { fetchTypes } from '../actions/category';
 import Storage from '../utils/Storage';
 import GridView from '../components/GridView';
 import Button from '../components/Button';
-import { toastShort } from '../utils/ToastUtils';
+import { toastShort } from '../utils/ToastUtil';
 import MainContainer from '../containers/MainContainer';
 import { CATEGORIES } from '../constants/Alias';
 

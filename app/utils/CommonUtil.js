@@ -7,8 +7,10 @@ export function naviGoBack(navigator) {
 }
 
 export function isEmptyObject(obj) {
-  for (var name in obj) {
-    return false;
+  for (const name in obj) {
+    if ({}.hasOwnPropetry.call(obj, name)) {
+      return false;
+    }
   }
   return true;
 }

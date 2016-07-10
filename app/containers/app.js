@@ -9,7 +9,7 @@ import {
 
 import Splash from '../pages/Splash';
 import { registerApp } from 'react-native-wechat';
-import { naviGoBack } from '../utils/CommonUtils';
+import { naviGoBack } from '../utils/CommonUtil';
 
 let tempNavigator;
 let isRemoved = false;
