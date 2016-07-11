@@ -22,12 +22,3 @@ export function naviGoBack(navigator) {
   }
   return false;
 }
-
-export function isEmptyObject(obj) {
-  for (const name in obj) {
-    if ({}.hasOwnPropetry.call(obj, name)) {
-      return false;
-    }
-  }
-  return true;
-}
