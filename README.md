@@ -69,10 +69,6 @@ npm test
 
 For more information about contributing PRs and issues, see our [Contribution Guidelines](https://github.com/attentiveness/reading/blob/master/CONTRIBUTING.md).
 
-## Contributors
-
-[@Richard-Cao](https://github.com/Richard-Cao)
-
 ## License
 
 Apache License 2.0
