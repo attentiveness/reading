@@ -1,4 +1,5 @@
 # Reading
+
 ![Reading_Logo](./Reading_Logo.png)
 
 [![Join the chat at https://gitter.im/attentiveness/reading](https://badges.gitter.im/attentiveness/reading.svg)](https://gitter.im/attentiveness/reading)
@@ -11,12 +12,14 @@ Reading App Write In React-Native（Studying and Programing）
 > No Profit, No Advertisement, Only Feelings
 
 ## Screenshot
+
 ![Reading_Splash](./screenshot/Reading_Splash.jpg) ![Reading_Main](./screenshot/Reading_Main.jpg)
 ![Reading_Drawer](./screenshot/Reading_Drawer.jpg) ![Reading_Article](./screenshot/Reading_Article.jpg)
 ![Reading_Share](./screenshot/Reading_Share.jpg) ![Reading_About](./screenshot/Reading_About.jpg)
 ![Reading_IOS_Main](./screenshot/Reading_IOS_Main.jpeg) ![Reading_IOS_Share](./screenshot/Reading_IOS_Share.jpeg)
 
 ## Download From Android Market
+
 *From 360 Android Market:* [Download Reading](http://zhushou.360.cn/detail/index/soft_id/3217938?recrefer=SE_D_Reading)
 
 *From Wandou Labs:* [Download Reading](http://www.wandoujia.com/apps/com.reading)
@@ -29,6 +32,7 @@ Reading App Write In React-Native（Studying and Programing）
 * [Enzyme](https://github.com/airbnb/enzyme) for testing UI components and mock
 
 ## Development Workflow
+
 ### Step One
 ```
 npm install -g react-native-cli
@@ -46,26 +50,29 @@ react-native start
 npm test
 ```
 
-## Importance
-[Why unknow module "http"](https://github.com/attentiveness/reading/issues/4)
-
 ## Release Note
+
 [Reading Release Note](https://github.com/attentiveness/reading/releases)
 
 ## OnLine Accident
+
 [Reading Online Accident](./Reading_OnLine_Accident.md)
 
 ## Welcome
+
 >* Star
 >* Fork
 >* PR
 >* Issue
 
-## Thanks All!
-*@Reading_Team*
+## Contributing
+
+For more information about contributing PRs and issues, see our [Contribution Guidelines](https://github.com/attentiveness/reading/blob/master/CONTRIBUTING.md).
 
 ## Contributors
+
 [@Richard-Cao](https://github.com/Richard-Cao)
 
 ## License
+
 Apache License 2.0
