@@ -24,7 +24,7 @@ Copy and paste this to the top of your new file(s):
 ```JS
 /**
  *
- * Copyright 2015 reading
+ * Copyright 2016-present reading
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
