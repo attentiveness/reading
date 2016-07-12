@@ -94,7 +94,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 4
-        versionName "0.1.5"
+        versionName "0.2.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -143,12 +143,12 @@ android {
     }
 }
 
-andResGuard {
+andResGuard {   // ./gradlew resguard
     mappingFile = null
     use7zip = true
+    useSign = true
     keepRoot = false
     // add <yourpackagename>.R.drawable.icon into whitelist.
-    // because the launcher will get thgge icon with his name
     whiteList = [
             "com.reading.R.drawable.ic_launcher",
             "com.reading.R.drawable.app_img*",
@@ -161,8 +161,11 @@ andResGuard {
             "*.gif",
             "resources.arsc"
     ]
-    zipAlignPath = 'app/doc/zipalign'
-    sevenZipPath = '/usr/local/bin/7za'
+    sevenzip {
+        artifact = 'com.tencent.mm:SevenZip:1.1.9'
+        //在设置sevenzip时, 你只需设置artifact或path. 支持同时设置,总以path的值为优先
+        //path = "/usr/local/bin/7za"
+    }
 }
 
 dependencies {

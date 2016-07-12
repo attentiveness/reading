@@ -11,9 +11,9 @@
   "dependencies": {
     "avoscloud-sdk": "1.0.0-rc5",
     "immutable": "^3.7.6",
-    "react": "~15.1.0",
-    "react-native": "^0.28.0",
-    "react-native-code-push": "^1.12.2-beta",
+    "react": "~15.2.0",
+    "react-native": "^0.29.0",
+    "react-native-code-push": "^1.13.2-beta",
     "react-native-device-info": "^0.9.3",
     "react-native-drawer-layout": "^1.0.0",
     "react-native-root-toast": "^1.0.3",
@@ -36,8 +36,8 @@
     "eslint-plugin-jsx-a11y": "^1.5.5",
     "eslint-plugin-react": "^5.2.2",
     "mocha": "^2.5.3",
-    "react-addons-test-utils": "~15.1.0",
-    "react-dom": "~15.1.0",
+    "react-addons-test-utils": "~15.2.0",
+    "react-dom": "~15.2.0",
     "react-native-mock": "^0.2.4",
     "redux-devtools": "^3.3.1",
     "rnpm-plugin-upgrade": "^0.26.0"
