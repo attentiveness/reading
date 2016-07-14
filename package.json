@@ -9,8 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "avoscloud-sdk": "1.0.0-rc5",
     "immutable": "^3.7.6",
+    "leancloud-storage": "^1.2.1",
     "react": "~15.2.0",
     "react-native": "^0.29.0",
     "react-native-code-push": "^1.13.2-beta",

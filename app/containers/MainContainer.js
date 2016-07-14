@@ -18,7 +18,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CodePush from 'react-native-code-push';
-import AV from 'avoscloud-sdk';
+import AV from 'leancloud-storage';
 import Main from '../pages/Main';
 import Storage from '../utils/Storage';
 
@@ -36,7 +36,10 @@ class MainContainer extends React.Component {
       },
       installMode: CodePush.InstallMode.ON_NEXT_RESTART
     });
-    AV.initialize('Tfi1z7dN9sjMwSul8sYaTEvg-gzGzoHsz', '57qmeEJonefntNqRe17dAgi4');
+    AV.init({
+      appId: 'Tfi1z7dN9sjMwSul8sYaTEvg-gzGzoHsz',
+      appKey: '57qmeEJonefntNqRe17dAgi4'
+    });
     Storage.get('isInit')
       .then((isInit) => {
         if (!isInit) {

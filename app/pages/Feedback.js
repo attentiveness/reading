@@ -23,7 +23,7 @@ import {
 } from 'react-native';
 
 import ReadingToolbar from '../components/ReadingToolbar';
-import AV from 'avoscloud-sdk';
+import AV from 'leancloud-storage';
 import DeviceInfo from 'react-native-device-info';
 import { toastShort } from '../utils/ToastUtil';
 
