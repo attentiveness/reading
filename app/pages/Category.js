@@ -20,7 +20,8 @@ import {
   InteractionManager,
   StyleSheet,
   Text,
-  View
+  View,
+  DeviceEventEmitter
 } from 'react-native';
 
 import ReadingToolbar from '../components/ReadingToolbar';
@@ -29,7 +30,6 @@ import Storage from '../utils/Storage';
 import GridView from '../components/GridView';
 import Button from '../components/Button';
 import { toastShort } from '../utils/ToastUtil';
-import MainContainer from '../containers/MainContainer';
 import { CATEGORIES } from '../constants/Alias';
 
 const checkIno = require('../img/check.png');
@@ -106,10 +106,8 @@ class Category extends React.Component {
 
   resetRoute() {
     const { navigator } = this.props;
-    navigator.resetTo({
-      component: MainContainer,
-      name: 'Main'
-    });
+    DeviceEventEmitter.emit('changeCategory', this.state.typeIds);
+    navigator.pop();
   }
 
   renderItem(item) {

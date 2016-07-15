@@ -23,7 +23,7 @@ export function formatDateString(timestamp) {
   return `${year}-${month}-${day}`;
 }
 
-export function formatStringWithSpace(originString) {
-  const newString = originString.replace(/&nbsp;/g, '');
+export function formatStringWithHtml(originString) {
+  const newString = originString.replace(/&nbsp;/g, ' ').replace(/&quot;/g, '"');
   return newString;
 }

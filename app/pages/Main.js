@@ -29,7 +29,8 @@ import {
   Image,
   Dimensions,
   Platform,
-  View
+  View,
+  DeviceEventEmitter
 } from 'react-native';
 import LoadingView from '../components/LoadingView';
 import DrawerLayout from 'react-native-drawer-layout';
@@ -43,7 +44,7 @@ import { toastShort } from '../utils/ToastUtil';
 import Storage from '../utils/Storage';
 import { CATEGORIES } from '../constants/Alias';
 import WebViewPage from '../pages/WebViewPage';
-import { formatStringWithSpace } from '../utils/FormatUtil';
+import { formatStringWithHtml } from '../utils/FormatUtil';
 
 const homeImg = require('../img/home.png');
 const categoryImg = require('../img/category.png');
@@ -78,6 +79,14 @@ class Main extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
+    DeviceEventEmitter.addListener('changeCategory', (typeIds) => {
+      typeIds.forEach((typeId) => {
+        dispatch(fetchArticles(false, true, typeId));
+      });
+      this.setState({
+        typeIds
+      });
+    });
     InteractionManager.runAfterInteractions(() => {
       Storage.get('typeIds')
         .then((typeIds) => {
@@ -101,6 +110,10 @@ class Main extends React.Component {
         toastShort('没有更多数据了');
       }
     }
+  }
+
+  componentWillUnmount() {
+    DeviceEventEmitter.removeAllListeners('changeCategory');
   }
 
   onRefresh(typeId) {
@@ -202,7 +215,7 @@ class Main extends React.Component {
           />
           <View style={{ flex: 1, flexDirection: 'column' }} >
             <Text style={styles.title}>
-              {formatStringWithSpace(article.title)}
+              {formatStringWithHtml(article.title)}
             </Text>
             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }} >
               <Text style={{ fontSize: 14, color: '#aaaaaa', marginTop: 5 }}>
