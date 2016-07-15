@@ -43,6 +43,7 @@ import { toastShort } from '../utils/ToastUtil';
 import Storage from '../utils/Storage';
 import { CATEGORIES } from '../constants/Alias';
 import WebViewPage from '../pages/WebViewPage';
+import { formatStringWithSpace } from '../utils/FormatUtil';
 
 const homeImg = require('../img/home.png');
 const categoryImg = require('../img/category.png');
@@ -201,7 +202,7 @@ class Main extends React.Component {
           />
           <View style={{ flex: 1, flexDirection: 'column' }} >
             <Text style={styles.title}>
-              {article.title}
+              {formatStringWithSpace(article.title)}
             </Text>
             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }} >
               <Text style={{ fontSize: 14, color: '#aaaaaa', marginTop: 5 }}>

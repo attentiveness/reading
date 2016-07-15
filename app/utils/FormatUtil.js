@@ -22,3 +22,8 @@ export function formatDateString(timestamp) {
   const day = date.getDate();
   return `${year}-${month}-${day}`;
 }
+
+export function formatStringWithSpace(originString) {
+  const newString = originString.replace(/&nbsp;/g, '');
+  return newString;
+}
