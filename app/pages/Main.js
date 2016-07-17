@@ -45,6 +45,8 @@ import Storage from '../utils/Storage';
 import { CATEGORIES } from '../constants/Alias';
 import WebViewPage from '../pages/WebViewPage';
 import { formatStringWithHtml } from '../utils/FormatUtil';
+import TimeAgo from 'react-native-timeago';
+require('moment/locale/zh-cn');
 
 const homeImg = require('../img/home.png');
 const categoryImg = require('../img/category.png');
@@ -218,15 +220,16 @@ class Main extends React.Component {
               {formatStringWithHtml(article.title)}
             </Text>
             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }} >
-              <Text style={{ fontSize: 14, color: '#aaaaaa', marginTop: 5 }}>
-                来自微信公众号：
-              </Text>
               <Text
                 style={{ flex: 1, fontSize: 14, color: '#87CEFA',
                   marginTop: 5, marginRight: 5 }}
               >
                 {article.userName}
               </Text>
+              <TimeAgo
+                style={{ fontSize: 14, color: '#aaaaaa', marginTop: 5 }}
+                time={article.date}
+              />
             </View>
           </View>
         </View>
