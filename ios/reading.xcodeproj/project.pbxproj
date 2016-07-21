@@ -145,7 +145,7 @@
 		00E356F21AD99517003FC87E /* readingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = readingTests.m; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Reading.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reading.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* iReading.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iReading.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = reading/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = reading/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -377,7 +377,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* Reading.app */,
+				13B07F961A680F5B00A75B9A /* iReading.app */,
 				00E356EE1AD99517003FC87E /* readingTests.xctest */,
 			);
 			name = Products;
@@ -419,7 +419,7 @@
 			);
 			name = reading;
 			productName = "Hello World";
-			productReference = 13B07F961A680F5B00A75B9A /* Reading.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* iReading.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -759,8 +759,8 @@
 				INFOPLIST_FILE = reading/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.reading;
-				PRODUCT_NAME = Reading;
+				PRODUCT_BUNDLE_IDENTIFIER = com.richardcao.reading;
+				PRODUCT_NAME = iReading;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -782,8 +782,8 @@
 				INFOPLIST_FILE = reading/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.reading;
-				PRODUCT_NAME = Reading;
+				PRODUCT_BUNDLE_IDENTIFIER = com.richardcao.reading;
+				PRODUCT_NAME = iReading;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;

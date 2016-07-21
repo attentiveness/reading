@@ -297,7 +297,7 @@ class Main extends React.Component {
             justifyContent: 'flex-end', paddingBottom: 10, backgroundColor: '#3e9ce9' }}
         >
           <Text style={{ fontSize: 20, textAlign: 'left', color: '#fcfcfc', marginLeft: 10 }}>
-            Reading
+            iReading
           </Text>
           <Text style={{ fontSize: 20, textAlign: 'left', color: '#fcfcfc', marginLeft: 10 }}>
             让生活更精彩
@@ -366,7 +366,7 @@ class Main extends React.Component {
       >
         <View style={styles.container}>
           <ReadingToolbar
-            title="Reading"
+            title="iReading"
             navigator={navigator}
             navIcon={menuImg}
             onIconClicked={this.onIconClicked}

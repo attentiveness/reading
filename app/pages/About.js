@@ -56,7 +56,7 @@ class About extends React.Component {
               {`v${DeviceInfo.getVersion()}`}
             </Text>
             <Text style={{ fontSize: 28, textAlign: 'center', color: '#313131', marginTop: 10 }}>
-              Reading
+              iReading
             </Text>
             <Text style={{ fontSize: 18, textAlign: 'center', color: '#4e4e4e' }}>
               让生活更精彩
