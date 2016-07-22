@@ -13,10 +13,10 @@ Reading App Write In React-Native（Studying and Programing）
 
 ## Screenshot
 
-![Reading_Splash](./screenshot/Reading_Splash.jpg) ![Reading_Main](./screenshot/Reading_Main.jpg)
-![Reading_Drawer](./screenshot/Reading_Drawer.jpg) ![Reading_Article](./screenshot/Reading_Article.jpg)
-![Reading_Share](./screenshot/Reading_Share.jpg) ![Reading_About](./screenshot/Reading_About.jpg)
-![Reading_IOS_Main](./screenshot/Reading_IOS_Main.jpeg) ![Reading_IOS_Share](./screenshot/Reading_IOS_Share.jpeg)
+![Reading_Splash](./screenshot/Reading_Splash.jpg) ![Reading_Main](./screenshot/Reading_Main.png)
+![Reading_Drawer](./screenshot/Reading_Drawer.png) ![Reading_Article](./screenshot/Reading_Article.jpg)
+![Reading_Share](./screenshot/Reading_Share.jpg) ![Reading_Category](./screenshot/Reading_Category.png)
+![Reading_IOS_Main](./screenshot/Reading_IOS_Main.png) ![Reading_IOS_Share](./screenshot/Reading_IOS_Share.jpeg)
 
 ## Download From Android Market
 
