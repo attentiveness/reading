@@ -30,18 +30,20 @@ const propTypes = {
   onEndReached: PropTypes.func
 };
 
-class GridView extends React.Component {
-  constructor(props) {
-    super(props);
-    this.renderGroup = this.renderGroup.bind(this);
-    this.groupItems = this.groupItems.bind(this);
-  }
-
-  groupItems(items, itemsPerRow) {
+const GridView = ({
+  items,
+  renderItem,
+  style,
+  itemsPerRow,
+  onEndReached,
+  scrollEnabled,
+  pageSize
+}) => {
+  const groupItems = (renderItems, renderItemsPerRow) => {
     const itemsGroups = [];
     let group = [];
-    items.forEach((item) => {
-      if (group.length === itemsPerRow) {
+    renderItems.forEach((item) => {
+      if (group.length === renderItemsPerRow) {
         itemsGroups.push(group);
         group = [item];
       } else {
@@ -52,40 +54,39 @@ class GridView extends React.Component {
       itemsGroups.push(group);
     }
     return itemsGroups;
-  }
+  };
 
-  renderGroup(group) {
-    const that = this;
-    let items = group.map((item) => {
-      const i = that.props.renderItem(item);
+  const renderGroup = (group) => {
+    let itemViews = group.map((item) => {
+      const i = renderItem(item);
       return i;
     });
     return (
       <View style={styles.group}>
-        {items}
+        {itemViews}
       </View>
     );
-  }
+  };
 
-  render() {
-    const groups = this.groupItems(this.props.items, this.props.itemsPerRow);
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    });
-    return (
-      <ListView
-        initialListSize={1}
-        dataSource={ds.cloneWithRows(groups)}
-        renderRow={this.renderGroup}
-        style={this.props.style}
-        onEndReached={this.props.onEndReached}
-        scrollEnabled={this.props.scrollEnabled}
-        pageSize={this.props.pageSize | 1}
-        enableEmptySections
-      />
-    );
-  }
-}
+  const groups = groupItems(items, itemsPerRow);
+
+  const ds = new ListView.DataSource({
+    rowHasChanged: (r1, r2) => r1 !== r2
+  });
+
+  return (
+    <ListView
+      initialListSize={1}
+      dataSource={ds.cloneWithRows(groups)}
+      renderRow={renderGroup}
+      style={style}
+      onEndReached={onEndReached}
+      scrollEnabled={scrollEnabled}
+      pageSize={pageSize | 1}
+      enableEmptySections
+    />
+  );
+};
 
 const styles = StyleSheet.create({
   group: {

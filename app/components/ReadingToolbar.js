@@ -41,85 +41,77 @@ const propTypes = {
   navIcon: PropTypes.number
 };
 
-class ReadingToolbar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onIconClicked = this.onIconClicked.bind(this);
-    this.onActionSelected = this.onActionSelected.bind(this);
-  }
-
-  onIconClicked() {
-    if (this.props.onIconClicked) {
-      this.props.onIconClicked();
+const ReadingToolbar = ({
+  title,
+  actions,
+  navigator,
+  onActionSelected,
+  onIconClicked,
+  navIcon
+}) => {
+  const handleIconClicked = () => {
+    if (onIconClicked) {
+      onIconClicked();
     } else {
-      const {
-        navigator
-      } = this.props;
       if (navigator) {
         naviGoBack(navigator);
       }
     }
-  }
-  onActionSelected() {
-    this.props.onActionSelected();
-  }
+  };
 
-  renderToolbarAndroid() {
-    return (
-      <ToolbarAndroid
-        style={styles.toolbar}
-        actions={this.props.actions}
-        onActionSelected={this.onActionSelected}
-        onIconClicked={this.onIconClicked}
-        navIcon={this.props.navIcon ? this.props.navIcon : iconLeft}
-        titleColor="#fff"
-        title={this.props.title}
-      />
-    );
-  }
+  const renderToolbarAndroid = () => (
+    <ToolbarAndroid
+      style={styles.toolbar}
+      actions={actions}
+      onActionSelected={onActionSelected}
+      onIconClicked={handleIconClicked}
+      navIcon={navIcon === undefined ? iconLeft : navIcon}
+      titleColor="#fff"
+      title={title}
+    />
+  );
 
-  renderToolbarIOS() {
-    const action = this.props.actions[0];
+  const renderToolbarIOS = () => {
+    const action = actions[0];
     showActionButton = action !== undefined;
     return (
       <View style={styles.toolbar}>
         <ImageButton
           containerStyle={{ justifyContent: 'center', alignItems: 'center' }}
-          source={this.props.navIcon ? this.props.navIcon : iconLeftIOS}
+          source={navIcon === undefined ? iconLeftIOS : navIcon}
           style={styles.leftIOS}
-          onPress={this.onIconClicked}
+          onPress={handleIconClicked}
         />
         <Text
           style={[styles.titleIOS,
           showActionButton ? { paddingLeft: 0 } : { paddingLeft: -35 }]}
         >
-          {this.props.title}
+          {title}
         </Text>
         {showActionButton && action.show === 'always' ?
           <ImageButton
             containerStyle={showActionButton ? styles.rightIOS : { height: 0, width: 0 }}
             source={action.icon}
-            onPress={this.onActionSelected}
+            onPress={onActionSelected}
           /> :
           <Button
             containerStyle={showActionButton ? styles.rightIOS : { height: 0, width: 0 }}
             style={styles.rightText}
             text={showActionButton ? action.title : ''}
-            onPress={this.onActionSelected}
+            onPress={onActionSelected}
           />
         }
       </View>
     );
-  }
+  };
 
-  render() {
-    let Toolbar = Platform.select({
-      android: () => this.renderToolbarAndroid(),
-      ios: () => this.renderToolbarIOS()
-    });
-    return <Toolbar />;
-  }
-}
+  const Toolbar = Platform.select({
+    android: () => renderToolbarAndroid(),
+    ios: () => renderToolbarIOS()
+  });
+
+  return <Toolbar />;
+};
 
 const styles = StyleSheet.create({
   toolbar: {

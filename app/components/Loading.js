@@ -35,46 +35,30 @@ const propTypes = {
   onRequestClose: React.PropTypes.func
 };
 
-class Loading extends React.Component {
-  renderLoading() {
-    return (
-      <View style={styles.loading}>
-        <ActivityIndicator
-          size={this.props.size}
-          color={this.props.color}
-        />
-        <Text style={styles.loadingText}>数据加载中...</Text>
-      </View>
-    );
-  }
-
-  render() {
-    if (!this.props.visible) {
-      return (
-        <View key={'spinner'} />
-      );
-    }
-    let spinner = (
+const Loading = ({ visible, color, size, overlayColor, onRequestClose }) => (
+  <Modal
+    visible={visible}
+    transparent
+    onRequestClose={onRequestClose}
+  >
+    {visible ?
       <View
         key={'spinner'}
         style={styles.container}
       >
-        <View style={[styles.background, { backgroundColor: this.props.overlayColor }]}>
-          {this.renderLoading()}
+        <View style={[styles.background, { backgroundColor: overlayColor }]}>
+          <View style={styles.loading}>
+            <ActivityIndicator
+              size={size}
+              color={color}
+            />
+            <Text style={styles.loadingText}>数据加载中...</Text>
+          </View>
         </View>
-      </View>
-    );
-    return (
-      <Modal
-        visible={this.props.visible}
-        transparent
-        onRequestClose={this.props.onRequestClose}
-      >
-        {spinner}
-      </Modal>
-    );
-  }
-}
+      </View> :
+      <View key={'spinner'} />}
+  </Modal>
+);
 
 const styles = StyleSheet.create({
   container: {

@@ -19,7 +19,7 @@ import Toast from 'react-native-root-toast';
 
 let toast;
 
-export function toastShort(content) {
+export const toastShort = (content) => {
   if (toast !== undefined) {
     Toast.hide(toast);
   }
@@ -31,9 +31,9 @@ export function toastShort(content) {
     hideOnPress: true,
     delay: 0
   });
-}
+};
 
-export function toastLong(content) {
+export const toastLong = (content) => {
   if (toast !== undefined) {
     Toast.hide(toast);
   }
@@ -45,4 +45,4 @@ export function toastLong(content) {
     hideOnPress: true,
     delay: 0
   });
-}
+};

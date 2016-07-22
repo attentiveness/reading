@@ -17,7 +17,7 @@
  */
 const HOST = 'http://apis.baidu.com/';
 
-export function request(url, method, body) {
+export const request = (url, method, body) => {
   let isOk;
   return new Promise((resolve, reject) => {
     fetch(HOST + url, {
@@ -46,4 +46,4 @@ export function request(url, method, body) {
         reject(error);
       });
   });
-}
+};
