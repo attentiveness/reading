@@ -50,6 +50,29 @@ react-native start
 npm test
 ```
 
+## Important Issue
+>* if error like this:
+```
+/xxx/reading/node_modules/react-native-wechat/ios/RCTWeChat.h:xxx: 'RCTBridgeModule.h' file not found
+```
+try this to solve:
+```
+change RCTWebChat.xcodeproj → Build Settings → Search Paths → Header Search Paths to
+$(SRCROOT)/../../react-native/React and
+$(SRCROOT)/../../react-native/Libraries
+```
+
+>* if error like this:
+```
+ld: warning: directory not found for option '-F/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulatorx.x.sdk/Developer/Library/Frameworks'
+ld: file not found: /xxx/Library/Developer/Xcode/DerivedData/reading-evusolphipkzgrgghdzjodzlcllk/Build/Products/Debug-iphonesimulator/reading.app/reading
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+```
+try this to solve:
+[directory-not-found-for-option-f-applications-xcode-app-developer-library-f](http://stackoverflow.com/questions/35234373/directory-not-found-for-option-f-applications-xcode-app-developer-library-f)
+
+
+
 ## Release Note
 
 [Reading Release Note](https://github.com/attentiveness/reading/releases)

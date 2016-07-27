@@ -375,7 +375,8 @@ class Main extends React.Component {
             renderTabBar={() =>
               <DefaultTabBar
                 underlineHeight={2}
-                textStyle={{ fontSize: 16, marginTop: 6 }}
+                tabStyle={{ paddingBottom: 0 }}
+                textStyle={{ fontSize: 16 }}
               />
             }
             tabBarBackgroundColor="#fcfcfc"
