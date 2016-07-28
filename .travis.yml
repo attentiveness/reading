@@ -1,61 +1,57 @@
-language: objective-c
-osx_image: xcode7.3
-sudo: false
+matrix:
+  include:
+    - os: osx
+      language: objective-c
+      sudo: false
+      osx_image: xcode7.3
+    - os: linux
+      language: android
+      sudo: required
+      jdk: oraclejdk8
+      android:
+        components:
+          - build-tools-23.0.1
+          - android-23
+          - extra-android-m2repository
+          - extra-android-support
 env:
-  matrix:
-  - TEST_TYPE=js
-  - TEST_TYPE=native
   global:
-  - PROJECT_MOBILE=reading
+    - PROJECT_MOBILE=reading
 cache:
   directories:
-  - reading/node_modules
+    - reading/node_modules
 before_install:
-- openssl aes-256-cbc -K $encrypted_549897007358_key -iv $encrypted_549897007358_iv
-  -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
-- chmod 600 ~/.ssh/id_rsa
-- eval $(ssh-agent)
-- ssh-add ~/.ssh/id_rsa
-- cp .travis/ssh_config ~/.ssh/config
-- git config --global user.name 'Richard-Cao'
-- git config --global user.email '403164405@qq.com'
-- brew update
+  - openssl aes-256-cbc -K $encrypted_549897007358_key -iv $encrypted_549897007358_iv
+    -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
+  - chmod 600 ~/.ssh/id_rsa
+  - eval $(ssh-agent)
+  - ssh-add ~/.ssh/id_rsa
+  - cp .travis/ssh_config ~/.ssh/config
+  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then brew update ; fi
+  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then sudo apt-get update  ; fi
+  - rvm get head
 install:
-- brew reinstall gradle flow watchman xctool
-- mkdir -p /Users/travis/build/reading/.nvm
-- export NVM_DIR="/Users/travis/build/reading/.nvm"
-- brew install nvm
-- source $(brew --prefix nvm)/nvm.sh
-- nvm install 5
-- rm -Rf "${TMPDIR}/jest_preprocess_cache"
-- npm config set spin=false
-- npm config set progress=false
-- travis_wait npm install
+  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then brew reinstall watchman xctool  ; fi
+  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then mkdir -p /Users/travis/build/reading/.nvm ; fi
+  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then export NVM_DIR="/Users/travis/build/reading/.nvm" ; fi
+  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then brew install nvm ; fi
+  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then source $(brew --prefix nvm)/nvm.sh ; fi
+  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.0/install.sh | bash ; fi
+  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then source ~/.bashrc ; fi
+  - nvm install 5
+  - npm config set spin=false
+  - npm config set progress=false
+  - travis_wait npm install
 branches:
   only:
-  - master
+    - master
 script:
-- |
-  if [ "$TEST_TYPE" = js ]
-  then
+# react-native-wechat library maybe throw ios error: 'RCTBridgeModule.h' file not found
+  - npm run lint app
+  - npm test
+  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then xctool \
+        -project ios/$PROJECT_MOBILE.xcodeproj \
+        -scheme $PROJECT_MOBILE -sdk iphonesimulator9.3
+        test ; fi
+  - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then cd android && ./gradlew test --stacktrace ; fi
 
-    npm install
-    npm test
-    npm run lint app
-
-  elif [ "$TEST_TYPE" = native ]
-  then
-
-    npm install
-
-    xctool \
-      -project ios/$PROJECT_MOBILE.xcodeproj \
-      -scheme $PROJECT_MOBILE -sdk iphonesimulator9.3
-      test
-
-    cd android && ./gradlew assembleRelease
-
-  else
-    echo "Unknown test type: $TEST_TYPE"
-    exit 1
-  fi
