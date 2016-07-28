@@ -1,0 +1,61 @@
+language: objective-c
+osx_image: xcode7.3
+sudo: false
+env:
+  matrix:
+  - TEST_TYPE=js
+  - TEST_TYPE=native
+  global:
+  - PROJECT_MOBILE=reading
+cache:
+  directories:
+  - reading/node_modules
+before_install:
+- openssl aes-256-cbc -K $encrypted_549897007358_key -iv $encrypted_549897007358_iv
+  -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
+- chmod 600 ~/.ssh/id_rsa
+- eval $(ssh-agent)
+- ssh-add ~/.ssh/id_rsa
+- cp .travis/ssh_config ~/.ssh/config
+- git config --global user.name 'Richard-Cao'
+- git config --global user.email '403164405@qq.com'
+- brew update
+install:
+- brew reinstall gradle flow watchman xctool
+- mkdir -p /Users/travis/build/reading/.nvm
+- export NVM_DIR="/Users/travis/build/reading/.nvm"
+- brew install nvm
+- source $(brew --prefix nvm)/nvm.sh
+- nvm install 5
+- rm -Rf "${TMPDIR}/jest_preprocess_cache"
+- npm config set spin=false
+- npm config set progress=false
+- travis_wait npm install
+branches:
+  only:
+  - master
+script:
+- |
+  if [ "$TEST_TYPE" = js ]
+  then
+
+    npm install
+    npm test
+    npm run lint app
+
+  elif [ "$TEST_TYPE" = native ]
+  then
+
+    npm install
+
+    xctool \
+      -project ios/$PROJECT_MOBILE.xcodeproj \
+      -scheme $PROJECT_MOBILE -sdk iphonesimulator9.3
+      test
+
+    cd android && ./gradlew assembleRelease
+
+  else
+    echo "Unknown test type: $TEST_TYPE"
+    exit 1
+  fi
