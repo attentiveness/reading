@@ -55,13 +55,15 @@ class Category extends React.Component {
   }
 
   componentWillMount() {
-    Storage.get('typeIds')
-      .then((typeIds) => {
-        tempTypeIds = typeIds;
-        this.setState({
-          typeIds
+    InteractionManager.runAfterInteractions(() => {
+      Storage.get('typeIds')
+        .then((typeIds) => {
+          tempTypeIds = typeIds;
+          this.setState({
+            typeIds
+          });
         });
-      });
+    });
   }
 
   componentDidMount() {

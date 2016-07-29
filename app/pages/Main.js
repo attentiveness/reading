@@ -126,12 +126,10 @@ class Main extends React.Component {
 
   onPress(article) {
     const { navigator } = this.props;
-    InteractionManager.runAfterInteractions(() => {
-      navigator.push({
-        component: WebViewPage,
-        name: 'WebViewPage',
-        article
-      });
+    navigator.push({
+      component: WebViewPage,
+      name: 'WebViewPage',
+      article
     });
   }
 
@@ -140,27 +138,22 @@ class Main extends React.Component {
     this.refs.drawer.closeDrawer();
     switch (index) {
       case 1:
-        InteractionManager.runAfterInteractions(() => {
-          navigator.push({
-            component: CategoryContainer,
-            name: 'Category'
-          });
+        navigator.push({
+          component: CategoryContainer,
+          name: 'Category'
         });
+
         break;
       case 2:
-        InteractionManager.runAfterInteractions(() => {
-          navigator.push({
-            component: Feedback,
-            name: 'Feedback'
-          });
+        navigator.push({
+          component: Feedback,
+          name: 'Feedback'
         });
         break;
       case 3:
-        InteractionManager.runAfterInteractions(() => {
-          navigator.push({
-            component: About,
-            name: 'About'
-          });
+        navigator.push({
+          component: About,
+          name: 'About'
         });
         break;
       default:
