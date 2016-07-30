@@ -31,7 +31,7 @@ before_install:
 - rvm get head
 - gem install fir-cli
 install:
-- if [[ $TRAVIS_OS_NAME == 'osx' ]]; then brew reinstall watchman xctool  ; fi
+- if [[ $TRAVIS_OS_NAME == 'osx' ]]; then brew reinstall watchman  ; fi
 - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then mkdir -p /Users/travis/build/reading/.nvm
   ; fi
 - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then export NVM_DIR="/Users/travis/build/reading/.nvm"
@@ -50,8 +50,11 @@ branches:
 script:
 - npm run lint app
 - npm test
-- if [[ $TRAVIS_OS_NAME == 'osx' ]]; then xctool -project ios/$PROJECT_MOBILE.xcodeproj
-  -scheme $PROJECT_MOBILE -sdk iphonesimulator9.3 test ; fi
+# TODO: We use xcodebuild because xctool would stall when collecting info about
+# the tests before running them. Switch back when this issue with xctool has
+# been resolved.
+- if [[ $TRAVIS_OS_NAME == 'osx' ]]; then xcodebuild -project ios/$PROJECT_MOBILE.xcodeproj
+  -scheme $PROJECT_MOBILE -sdk iphonesimulator9.3 -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean build ; fi
 - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then cd android && ./gradlew clean && ./gradlew resguard --stacktrace
   ; fi
 after_success:

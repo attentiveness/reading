@@ -11,7 +11,7 @@
   "dependencies": {
     "immutable": "^3.7.6",
     "leancloud-storage": "^1.3.2",
-    "react": "~15.2.0",
+    "react": "~15.2.1",
     "react-native": "^0.30.0",
     "react-native-code-push": "^1.13.2-beta",
     "react-native-device-info": "^0.9.3",
@@ -19,7 +19,7 @@
     "react-native-root-toast": "^1.0.3",
     "react-native-scrollable-tab-view": "^0.5.3",
     "react-native-timeago": "^0.3.0",
-    "react-native-wechat": "^1.5.2",
+    "react-native-wechat": "^1.5.3",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
@@ -37,8 +37,8 @@
     "eslint-plugin-jsx-a11y": "~1.5.5",
     "eslint-plugin-react": "^5.2.2",
     "mocha": "^2.5.3",
-    "react-addons-test-utils": "~15.2.0",
-    "react-dom": "~15.2.0",
+    "react-addons-test-utils": "~15.2.1",
+    "react-dom": "~15.2.1",
     "react-native-mock": "^0.2.5",
     "redux-devtools": "^3.3.1",
     "rnpm-plugin-upgrade": "^0.26.0"
