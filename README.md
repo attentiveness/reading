@@ -1,6 +1,6 @@
-# Reading
+# iReading
 
-![Reading_Logo](./Reading_Logo.png)
+![iReading_Logo](./Reading_Logo.png)
 
 [![Build Status](https://travis-ci.org/attentiveness/reading.svg?branch=master)](https://travis-ci.org/attentiveness/reading)
 [![Join the chat at https://gitter.im/attentiveness/reading](https://badges.gitter.im/attentiveness/reading.svg)](https://gitter.im/attentiveness/reading)
@@ -14,16 +14,24 @@ Reading App Write In React-Native（Studying and Programing）
 
 ## Screenshot
 
-![Reading_Splash](./screenshot/Reading_Splash.jpg) ![Reading_Main](./screenshot/Reading_Main.png)
-![Reading_Drawer](./screenshot/Reading_Drawer.png) ![Reading_Article](./screenshot/Reading_Article.jpg)
-![Reading_Share](./screenshot/Reading_Share.jpg) ![Reading_Category](./screenshot/Reading_Category.png)
-![Reading_IOS_Main](./screenshot/Reading_IOS_Main.png) ![Reading_IOS_Share](./screenshot/Reading_IOS_Share.jpeg)
+![iReading_Splash](./screenshot/Reading_Splash.jpg) ![iReading_Main](./screenshot/Reading_Main.png)
+![iReading_Drawer](./screenshot/Reading_Drawer.png) ![iReading_Article](./screenshot/Reading_Article.jpg)
+![iReading_Share](./screenshot/Reading_Share.jpg) ![iReading_Category](./screenshot/Reading_Category.png)
+![iReading_IOS_Main](./screenshot/Reading_IOS_Main.png) ![iReading_IOS_Share](./screenshot/Reading_IOS_Share.jpeg)
 
-## Download From Android Market
+## Download
 
-*From 360 Android Market:* [Download Reading](http://zhushou.360.cn/detail/index/soft_id/3217938?recrefer=SE_D_Reading)
+### From Android Market
 
-*From Wandou Labs:* [Download Reading](http://www.wandoujia.com/apps/com.reading)
+*360 Android Market:* [Download iReading](http://zhushou.360.cn/detail/index/soft_id/3217938?recrefer=SE_D_Reading)
+
+*Wandou Labs:* [Download iReading](http://www.wandoujia.com/apps/com.reading)
+
+### β Version
+
+*Android:* [Download iReading](http://fir.im/w7gu)
+
+*iOS:* :rocket: Coming soon!
 
 ## Application Architecture
 
