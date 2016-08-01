@@ -24,8 +24,8 @@ before_install:
 - if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then openssl aes-256-cbc -K $encrypted_549897007358_key -iv $encrypted_549897007358_iv
   -in .travis/secrets.tar.enc -out secrets.tar -d ; fi
 - if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then tar xvf secrets.tar ; fi
-- if [[ $TRAVIS_OS_NAME == 'linux' ]]; then mv gradle.properties android ; fi
-- if [[ $TRAVIS_OS_NAME == 'linux' ]]; then mv reading.keystore android/app ; fi
+- if [[ $TRAVIS_OS_NAME == 'linux' ]] && [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then mv gradle.properties android ; fi
+- if [[ $TRAVIS_OS_NAME == 'linux' ]] && [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then mv reading.keystore android/app ; fi
 - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then brew update ; fi
 - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then sudo apt-get update  ; fi
 - rvm get head
