@@ -31,7 +31,7 @@ import DeviceInfo from 'react-native-device-info';
 let API_STORE = 'http://apistore.baidu.com/';
 let READING_REPO = 'https://github.com/attentiveness/reading';
 
-const adoutLogo = require('../img/about_logo.png');
+const aboutLogo = require('../img/about_logo.png');
 
 class About extends React.Component {
   onPress(url) {
@@ -50,7 +50,7 @@ class About extends React.Component {
           <View style={{ flex: 1, alignItems: 'center' }}>
             <Image
               style={{ width: 110, height: 110, marginTop: 50 }}
-              source={adoutLogo}
+              source={aboutLogo}
             />
             <Text style={{ fontSize: 16, textAlign: 'center', color: '#aaaaaa', marginTop: 5 }}>
               {`v${DeviceInfo.getVersion()}`}
