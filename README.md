@@ -8,7 +8,7 @@
 
 iReading App Write In React-Native（Studying and Programing）
 
-**Support: Android 4.1 (API 16)+    IOS(7.0+)**
+**Support: Android 4.1 (API 16)+   IOS(7.0+)**
 
 > No Profit, No Advertisement, Only Feelings
 
@@ -58,19 +58,6 @@ react-native start
 ```
 npm test
 ```
-
-## Important Issue
->* if error like this:
-```
-/xxx/reading/node_modules/react-native-wechat/ios/RCTWeChat.h:xxx: 'RCTBridgeModule.h' file not found
-```
-try this to solve:
-```
-change RCTWebChat.xcodeproj → Build Settings → Search Paths → Header Search Paths to
-$(SRCROOT)/../../react-native/React and
-$(SRCROOT)/../../react-native/Libraries
-```
-
 ## Release Note
 
 [Reading Release Note](https://github.com/attentiveness/reading/releases)
