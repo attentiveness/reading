@@ -21,9 +21,9 @@ cache:
   directories:
   - reading/node_modules
 before_install:
-- openssl aes-256-cbc -K $encrypted_549897007358_key -iv $encrypted_549897007358_iv
-  -in .travis/secrets.tar.enc -out secrets.tar -d
-- tar xvf secrets.tar
+- if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then openssl aes-256-cbc -K $encrypted_549897007358_key -iv $encrypted_549897007358_iv
+  -in .travis/secrets.tar.enc -out secrets.tar -d ; fi
+- if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then tar xvf secrets.tar ; fi
 - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then mv gradle.properties android ; fi
 - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then mv reading.keystore android/app ; fi
 - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then brew update ; fi
@@ -31,15 +31,8 @@ before_install:
 - rvm get head
 - gem install fir-cli
 install:
-- if [[ $TRAVIS_OS_NAME == 'osx' ]]; then brew reinstall watchman  ; fi
-- if [[ $TRAVIS_OS_NAME == 'osx' ]]; then mkdir -p /Users/travis/build/reading/.nvm
-  ; fi
-- if [[ $TRAVIS_OS_NAME == 'osx' ]]; then export NVM_DIR="/Users/travis/build/reading/.nvm"
-  ; fi
-- if [[ $TRAVIS_OS_NAME == 'osx' ]]; then brew install nvm ; fi
-- if [[ $TRAVIS_OS_NAME == 'osx' ]]; then source $(brew --prefix nvm)/nvm.sh ; fi
-- if [[ $TRAVIS_OS_NAME == 'linux' ]]; then curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.0/install.sh | bash ; fi
-- if [[ $TRAVIS_OS_NAME == 'linux' ]]; then source ~/.bashrc ; fi
+- curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.0/install.sh | bash
+- source ~/.bashrc
 - nvm install 5
 - npm config set spin=false
 - npm config set progress=false
@@ -55,8 +48,9 @@ script:
 # been resolved.
 - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then xcodebuild -project ios/$PROJECT_MOBILE.xcodeproj
   -scheme $PROJECT_MOBILE -sdk iphonesimulator9.3 -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean build ; fi
-- if [[ $TRAVIS_OS_NAME == 'linux' ]]; then cd android && ./gradlew clean && ./gradlew resguard --stacktrace
-  ; fi
+- if [ $TRAVIS_OS_NAME = 'linux' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then cd android && ./gradlew clean && ./gradlew resguard --stacktrace ; fi
+- if [ $TRAVIS_OS_NAME = 'linux' ] && [ $TRAVIS_PULL_REQUEST = 'true' ]; then cd android && ./gradlew clean && ./gradlew assembleDebug --stacktrace ; fi
 after_success:
-- if [[ $TRAVIS_OS_NAME == 'linux' ]]; then fir p /home/travis/build/attentiveness/reading/android/app/build/outputs/apk/AndResGuard_app-armeabi-v7a-release/app-armeabi-v7a-release_signed_7zip_aligned.apk
+- if [ $TRAVIS_OS_NAME = 'linux' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then fir p 
+  /home/travis/build/attentiveness/reading/android/app/build/outputs/apk/AndResGuard_app-armeabi-v7a-release/app-armeabi-v7a-release_signed_7zip_aligned.apk
   -T $FIR_TOKEN -c "$TRAVIS_TAG" ; fi

@@ -6,7 +6,7 @@
 [![Join the chat at https://gitter.im/attentiveness/reading](https://badges.gitter.im/attentiveness/reading.svg)](https://gitter.im/attentiveness/reading)
 [![License Apache2.0](https://img.shields.io/hexpm/l/plug.svg)](https://raw.githubusercontent.com/attentiveness/reading/master/LICENSE)
 
-Reading App Write In React-Native（Studying and Programing）
+iReading App Write In React-Native（Studying and Programing）
 
 **Support: Android 4.1 (API 16)+    IOS(7.0+)**
 
@@ -70,17 +70,6 @@ change RCTWebChat.xcodeproj → Build Settings → Search Paths → Header Searc
 $(SRCROOT)/../../react-native/React and
 $(SRCROOT)/../../react-native/Libraries
 ```
-
->* if error like this:
-```
-ld: warning: directory not found for option '-F/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulatorx.x.sdk/Developer/Library/Frameworks'
-ld: file not found: /xxx/Library/Developer/Xcode/DerivedData/reading-evusolphipkzgrgghdzjodzlcllk/Build/Products/Debug-iphonesimulator/reading.app/reading
-clang: error: linker command failed with exit code 1 (use -v to see invocation)
-```
-try this to solve:
-[directory-not-found-for-option-f-applications-xcode-app-developer-library-f](http://stackoverflow.com/questions/35234373/directory-not-found-for-option-f-applications-xcode-app-developer-library-f)
-
-
 
 ## Release Note
 
