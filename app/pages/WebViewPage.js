@@ -210,7 +210,6 @@ class WebViewPage extends React.Component {
           startInLoadingState
           scalesPageToFit
           decelerationRate="normal"
-          startInLoadingState
           onShouldStartLoadWithRequest={() => {
             const shouldStartLoad = true;
             return shouldStartLoad;
