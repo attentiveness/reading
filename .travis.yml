@@ -17,15 +17,20 @@ matrix:
 env:
   global:
   - PROJECT_MOBILE=reading
+before_cache:
+- rm -rf android/.gradle/caches
+- rm -rf node_modules
 cache:
   directories:
-  - reading/node_modules
+  - node_modules
+  - android/.gradle/caches
+  - android/.gradle/wrapper
 before_install:
 - if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then openssl aes-256-cbc -K $encrypted_549897007358_key -iv $encrypted_549897007358_iv
   -in .travis/secrets.tar.enc -out secrets.tar -d ; fi
 - if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then tar xvf secrets.tar ; fi
-- if [[ $TRAVIS_OS_NAME == 'linux' ]]; then mv gradle.properties android ; fi
-- if [[ $TRAVIS_OS_NAME == 'linux' ]]; then mv reading.keystore android/app ; fi
+- if [[ $TRAVIS_OS_NAME == 'linux' ]] && [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then mv gradle.properties android ; fi
+- if [[ $TRAVIS_OS_NAME == 'linux' ]] && [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then mv reading.keystore android/app ; fi
 - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then brew update ; fi
 - if [[ $TRAVIS_OS_NAME == 'linux' ]]; then sudo apt-get update  ; fi
 - rvm get head
@@ -52,5 +57,5 @@ script:
 - if [ $TRAVIS_OS_NAME = 'linux' ] && [ $TRAVIS_PULL_REQUEST = 'true' ]; then cd android && ./gradlew clean && ./gradlew assembleDebug --stacktrace ; fi
 after_success:
 - if [ $TRAVIS_OS_NAME = 'linux' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then fir p 
-  /home/travis/build/attentiveness/reading/android/app/build/outputs/apk/AndResGuard_app-armeabi-v7a-release/app-armeabi-v7a-release_signed_7zip_aligned.apk
+  $HOME/build/attentiveness/reading/android/app/build/outputs/apk/AndResGuard_app-armeabi-v7a-release/app-armeabi-v7a-release_signed_7zip_aligned.apk
   -T $FIR_TOKEN -c "$TRAVIS_TAG" ; fi
