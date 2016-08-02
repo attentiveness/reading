@@ -24,9 +24,9 @@ import {
   View
 } from 'react-native';
 
+import DeviceInfo from 'react-native-device-info';
 import ReadingToolbar from '../components/ReadingToolbar';
 import Button from '../components/Button';
-import DeviceInfo from 'react-native-device-info';
 
 let API_STORE = 'http://apistore.baidu.com/';
 let READING_REPO = 'https://github.com/attentiveness/reading';

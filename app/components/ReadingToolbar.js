@@ -52,10 +52,8 @@ const ReadingToolbar = ({
   const handleIconClicked = () => {
     if (onIconClicked) {
       onIconClicked();
-    } else {
-      if (navigator) {
-        naviGoBack(navigator);
-      }
+    } else if (navigator) {
+      naviGoBack(navigator);
     }
   };
 

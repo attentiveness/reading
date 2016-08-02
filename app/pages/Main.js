@@ -32,11 +32,13 @@ import {
   View,
   DeviceEventEmitter
 } from 'react-native';
-import LoadingView from '../components/LoadingView';
+
 import DrawerLayout from 'react-native-drawer-layout';
-import { fetchArticles } from '../actions/read';
-import ReadingToolbar from '../components/ReadingToolbar';
+import TimeAgo from 'react-native-timeago';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
+import * as readAction from '../actions/read';
+import LoadingView from '../components/LoadingView';
+import ReadingToolbar from '../components/ReadingToolbar';
 import About from '../pages/About';
 import Feedback from '../pages/Feedback';
 import CategoryContainer from '../containers/CategoryContainer';
@@ -45,7 +47,7 @@ import Storage from '../utils/Storage';
 import { CATEGORIES } from '../constants/Alias';
 import WebViewPage from '../pages/WebViewPage';
 import { formatStringWithHtml } from '../utils/FormatUtil';
-import TimeAgo from 'react-native-timeago';
+
 require('moment/locale/zh-cn');
 
 const homeImg = require('../img/home.png');
@@ -53,6 +55,7 @@ const categoryImg = require('../img/category.png');
 const inspectionImg = require('../img/inspection.png');
 const infoImg = require('../img/info.png');
 const menuImg = require('../img/menu.png');
+
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
   read: PropTypes.object.isRequired
@@ -83,7 +86,7 @@ class Main extends React.Component {
     const { dispatch } = this.props;
     DeviceEventEmitter.addListener('changeCategory', (typeIds) => {
       typeIds.forEach((typeId) => {
-        dispatch(fetchArticles(false, true, typeId));
+        dispatch(readAction.fetchArticles(false, true, typeId));
       });
       this.setState({
         typeIds
@@ -96,7 +99,7 @@ class Main extends React.Component {
             typeIds = [0, 12, 9, 2];
           }
           typeIds.forEach((typeId) => {
-            dispatch(fetchArticles(false, true, typeId));
+            dispatch(readAction.fetchArticles(false, true, typeId));
           });
           this.setState({
             typeIds
@@ -121,7 +124,7 @@ class Main extends React.Component {
   onRefresh(typeId) {
     const { dispatch } = this.props;
     canLoadMore = false;
-    dispatch(fetchArticles(true, false, typeId));
+    dispatch(readAction.fetchArticles(true, false, typeId));
   }
 
   onPress(article) {
@@ -135,7 +138,7 @@ class Main extends React.Component {
 
   onPressDrawerItem(index) {
     const { navigator } = this.props;
-    this.refs.drawer.closeDrawer();
+    this.drawer.closeDrawer();
     switch (index) {
       case 1:
         navigator.push({
@@ -162,7 +165,7 @@ class Main extends React.Component {
   }
 
   onIconClicked() {
-    this.refs.drawer.openDrawer();
+    this.drawer.openDrawer();
   }
 
   onScroll() {
@@ -176,7 +179,7 @@ class Main extends React.Component {
     if (canLoadMore && time - loadMoreTime > 1) {
       page++;
       const { dispatch } = this.props;
-      dispatch(fetchArticles(false, false, typeId, true, page));
+      dispatch(readAction.fetchArticles(false, false, typeId, true, page));
       canLoadMore = false;
       loadMoreTime = Date.parse(new Date()) / 1000;
     }
@@ -352,7 +355,7 @@ class Main extends React.Component {
     const { read, navigator } = this.props;
     return (
       <DrawerLayout
-        ref="drawer"
+        ref={(ref) => { this.drawer = ref; }}
         drawerWidth={Dimensions.get('window').width / 5 * 3}
         drawerPosition={Platform.OS === 'android' ? DrawerLayoutAndroid.positions.Left : 'left'}
         renderNavigationView={this.renderNavigationView}

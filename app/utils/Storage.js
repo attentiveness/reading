@@ -16,9 +16,8 @@
  *
  */
 import React from 'react-native';
-const {
-	AsyncStorage
-} = React;
+
+const { AsyncStorage } = React;
 
 class DeviceStorage {
   static get(key) {

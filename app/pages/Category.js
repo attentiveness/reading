@@ -33,6 +33,7 @@ import { toastShort } from '../utils/ToastUtil';
 import { CATEGORIES } from '../constants/Alias';
 
 const checkIno = require('../img/check.png');
+
 let toolbarActions = [
   { title: '提交', icon: checkIno, show: 'always' }
 ];
