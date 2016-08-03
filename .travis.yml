@@ -54,7 +54,7 @@ script:
 - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then xcodebuild -project ios/$PROJECT_MOBILE.xcodeproj
   -scheme $PROJECT_MOBILE -sdk iphonesimulator9.3 -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean build ; fi
 - if [ $TRAVIS_OS_NAME = 'linux' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then cd android && ./gradlew clean && ./gradlew resguard --stacktrace ; fi
-- if [ $TRAVIS_OS_NAME = 'linux' ] && [ $TRAVIS_PULL_REQUEST = 'true' ]; then cd android && ./gradlew clean && ./gradlew assembleDebug --stacktrace ; fi
+- if [ $TRAVIS_OS_NAME = 'linux' ] && [ $TRAVIS_PULL_REQUEST != 'false' ]; then cd android && ./gradlew clean && ./gradlew assembleDebug --stacktrace ; fi
 after_success:
 - if [ $TRAVIS_OS_NAME = 'linux' ] && [ $TRAVIS_PULL_REQUEST = 'false' ]; then fir p 
   $HOME/build/attentiveness/reading/android/app/build/outputs/apk/AndResGuard_app-armeabi-v7a-release/app-armeabi-v7a-release_signed_7zip_aligned.apk
