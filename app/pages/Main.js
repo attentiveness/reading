@@ -289,8 +289,7 @@ class Main extends React.Component {
     return (
       <View style={[styles.container, { backgroundColor: '#fcfcfc' }]}>
         <View
-          style={{ width: Dimensions.get('window').width / 5 * 3, height: 120,
-            justifyContent: 'flex-end', paddingBottom: 10, backgroundColor: '#3e9ce9' }}
+          style={{height: 120, justifyContent: 'flex-end', paddingBottom: 10, backgroundColor: '#3e9ce9' }}
         >
           <Text style={{ fontSize: 20, textAlign: 'left', color: '#fcfcfc', marginLeft: 10 }}>
             iReading
