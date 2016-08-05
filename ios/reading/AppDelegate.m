@@ -12,6 +12,7 @@
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
 #import "CodePush.h"
+#import <Bugly/Bugly.h>
 
 @implementation AppDelegate
 
@@ -23,6 +24,7 @@
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 #else
   jsCodeLocation = [CodePush bundleURL];
+  [Bugly startWithAppId:@"b0c9343009"];
 #endif
   
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
