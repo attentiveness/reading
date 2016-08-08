@@ -34,6 +34,7 @@ import ReadingToolbar from '../components/ReadingToolbar';
 import { toastShort } from '../utils/ToastUtil';
 import LoadingView from '../components/LoadingView';
 import { naviGoBack } from '../utils/CommonUtil';
+import { formatStringWithHtml } from '../utils/FormatUtil';
 
 const shareImg = require('../img/share.png');
 const shareIconWechat = require('../img/share_icon_wechat.png');
@@ -116,8 +117,8 @@ class WebViewPage extends React.Component {
                     .then((isInstalled) => {
                       if (isInstalled) {
                         WeChat.shareToSession({
-                          title: route.article.title,
-                          description: '分享自：Reading',
+                          title: formatStringWithHtml(route.article.title),
+                          description: '分享自：iReading',
                           thumbImage: route.article.contentImg,
                           type: 'news',
                           webpageUrl: route.article.url
@@ -148,7 +149,7 @@ class WebViewPage extends React.Component {
                     .then((isInstalled) => {
                       if (isInstalled) {
                         WeChat.shareToTimeline({
-                          title: `[@Reading]${route.article.title}`,
+                          title: formatStringWithHtml(`[@iReading]${route.article.title}`),
                           thumbImage: route.article.contentImg,
                           type: 'news',
                           webpageUrl: route.article.url
