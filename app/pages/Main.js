@@ -285,12 +285,29 @@ class Main extends React.Component {
     );
   }
 
+  renderNavigationViewItem(image, title, index) {
+    return (
+      <TouchableOpacity
+        style={styles.drawerContent}
+        onPress={() => this.onPressDrawerItem(index)}
+      >
+        <Image
+          style={styles.drawerIcon}
+          source={image}
+        />
+        <Text style={styles.drawerText}>
+          {title}
+        </Text>
+      </TouchableOpacity>
+    );
+  }
+
   renderNavigationView() {
     return (
       <View style={[styles.container, { backgroundColor: '#fcfcfc' }]}>
         <View
-          style={{ width: Dimensions.get('window').width / 5 * 3, height: 120,
-            justifyContent: 'flex-end', paddingBottom: 10, backgroundColor: '#3e9ce9' }}
+          style={{ height: 120, justifyContent: 'flex-end',
+            paddingBottom: 10, backgroundColor: '#3e9ce9' }}
         >
           <Text style={{ fontSize: 20, textAlign: 'left', color: '#fcfcfc', marginLeft: 10 }}>
             iReading
@@ -299,54 +316,10 @@ class Main extends React.Component {
             让生活更精彩
           </Text>
         </View>
-        <TouchableOpacity
-          style={styles.drawerContent}
-          onPress={() => this.onPressDrawerItem(0)}
-        >
-          <Image
-            style={styles.drawerIcon}
-            source={homeImg}
-          />
-          <Text style={styles.drawerText}>
-            首页
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.drawerContent}
-          onPress={() => this.onPressDrawerItem(1)}
-        >
-          <Image
-            style={styles.drawerIcon}
-            source={categoryImg}
-          />
-          <Text style={styles.drawerText}>
-            分类
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.drawerContent}
-          onPress={() => this.onPressDrawerItem(2)}
-        >
-          <Image
-            style={styles.drawerIcon}
-            source={inspectionImg}
-          />
-          <Text style={styles.drawerText}>
-            建议
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.drawerContent}
-          onPress={() => this.onPressDrawerItem(3)}
-        >
-          <Image
-            style={styles.drawerIcon}
-            source={infoImg}
-          />
-          <Text style={styles.drawerText}>
-            关于
-          </Text>
-        </TouchableOpacity>
+        {this.renderNavigationViewItem(homeImg, '首页', 0)}
+        {this.renderNavigationViewItem(categoryImg, '分类', 1)}
+        {this.renderNavigationViewItem(inspectionImg, '建议', 2)}
+        {this.renderNavigationViewItem(infoImg, '关于', 3)}
       </View>
     );
   }
