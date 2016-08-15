@@ -30,33 +30,17 @@ const propTypes = {
   text: PropTypes.string
 };
 
-class Button extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.onPress = this.onPress.bind(this);
-  }
-
-  onPress() {
-    if (this.props.disabled) {
-      return;
-    }
-    this.props.onPress();
-  }
-
-  render() {
-    return (
-      <TouchableOpacity
-        style={this.props.containerStyle}
-        onPress={this.onPress}
-      >
-        <Text style={this.props.style}>
-          {this.props.text}
-        </Text>
-      </TouchableOpacity>
-    );
-  }
-}
+const Button = ({ onPress, disabled, style, containerStyle, text }) => (
+  <TouchableOpacity
+    style={containerStyle}
+    onPress={onPress}
+    disabled={disabled}
+  >
+    <Text style={style}>
+      {text}
+    </Text>
+  </TouchableOpacity>
+);
 
 Button.propTypes = propTypes;
 

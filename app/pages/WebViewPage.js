@@ -29,15 +29,17 @@ import {
   Modal
 } from 'react-native';
 
+import * as WeChat from 'react-native-wechat';
 import ReadingToolbar from '../components/ReadingToolbar';
 import { toastShort } from '../utils/ToastUtil';
 import LoadingView from '../components/LoadingView';
 import { naviGoBack } from '../utils/CommonUtil';
-import * as WeChat from 'react-native-wechat';
+import { formatStringWithHtml } from '../utils/FormatUtil';
 
 const shareImg = require('../img/share.png');
 const shareIconWechat = require('../img/share_icon_wechat.png');
 const shareIconMoments = require('../img/share_icon_moments.png');
+
 let toolbarActions = [
   { title: '分享', icon: shareImg, show: 'always' }
 ];
@@ -79,7 +81,7 @@ class WebViewPage extends React.Component {
       });
       return true;
     } else if (canGoBack) {
-      this.refs.webview.goBack();
+      this.webview.goBack();
       return true;
     }
     return naviGoBack(this.props.navigator);
@@ -115,8 +117,8 @@ class WebViewPage extends React.Component {
                     .then((isInstalled) => {
                       if (isInstalled) {
                         WeChat.shareToSession({
-                          title: route.article.title,
-                          description: '分享自：Reading',
+                          title: formatStringWithHtml(route.article.title),
+                          description: '分享自：iReading',
                           thumbImage: route.article.contentImg,
                           type: 'news',
                           webpageUrl: route.article.url
@@ -147,7 +149,7 @@ class WebViewPage extends React.Component {
                     .then((isInstalled) => {
                       if (isInstalled) {
                         WeChat.shareToTimeline({
-                          title: `[@Reading]${route.article.title}`,
+                          title: formatStringWithHtml(`[@iReading]${route.article.title}`),
                           thumbImage: route.article.contentImg,
                           type: 'news',
                           webpageUrl: route.article.url
@@ -201,7 +203,7 @@ class WebViewPage extends React.Component {
           {this.renderSpinner()}
         </Modal>
         <WebView
-          ref="webview"
+          ref={(ref) => { this.webview = ref; }}
           automaticallyAdjustContentInsets={false}
           style={{ flex: 1 }}
           source={{ uri: route.article.url }}
@@ -210,7 +212,6 @@ class WebViewPage extends React.Component {
           startInLoadingState
           scalesPageToFit
           decelerationRate="normal"
-          startInLoadingState
           onShouldStartLoadWithRequest={() => {
             const shouldStartLoad = true;
             return shouldStartLoad;

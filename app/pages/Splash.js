@@ -18,8 +18,7 @@
 import React from 'react';
 import {
   Dimensions,
-  Image,
-  InteractionManager
+  Image
 } from 'react-native';
 
 import MainContainer from '../containers/MainContainer';
@@ -32,11 +31,9 @@ class Splash extends React.Component {
   componentDidMount() {
     const { navigator } = this.props;
     this.timer = setTimeout(() => {
-      InteractionManager.runAfterInteractions(() => {
-        navigator.resetTo({
-          component: MainContainer,
-          name: 'Main'
-        });
+      navigator.resetTo({
+        component: MainContainer,
+        name: 'Main'
       });
     }, 2000);
   }

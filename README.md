@@ -1,28 +1,37 @@
-# Reading
+# iReading
 
-![Reading_Logo](./Reading_Logo.png)
+![iReading_Logo](./Reading_Logo.png)
 
+[![Build Status](https://travis-ci.org/attentiveness/reading.svg?branch=master)](https://travis-ci.org/attentiveness/reading)
 [![Join the chat at https://gitter.im/attentiveness/reading](https://badges.gitter.im/attentiveness/reading.svg)](https://gitter.im/attentiveness/reading)
 [![License Apache2.0](https://img.shields.io/hexpm/l/plug.svg)](https://raw.githubusercontent.com/attentiveness/reading/master/LICENSE)
 
-Reading App Write In React-Native（Studying and Programing）
+iReading App Write In React-Native（Studying and Programing）
 
-**Support: Android 4.1 (API 16)+    IOS(7.0+)**
+**Support: Android 4.1 (API 16)+   IOS(7.0+)**
 
 > No Profit, No Advertisement, Only Feelings
 
 ## Screenshot
 
-![Reading_Splash](./screenshot/Reading_Splash.jpg) ![Reading_Main](./screenshot/Reading_Main.jpg)
-![Reading_Drawer](./screenshot/Reading_Drawer.jpg) ![Reading_Article](./screenshot/Reading_Article.jpg)
-![Reading_Share](./screenshot/Reading_Share.jpg) ![Reading_About](./screenshot/Reading_About.jpg)
-![Reading_IOS_Main](./screenshot/Reading_IOS_Main.jpeg) ![Reading_IOS_Share](./screenshot/Reading_IOS_Share.jpeg)
+![iReading_Splash](./screenshot/Reading_Splash.jpg) ![iReading_Main](./screenshot/Reading_Main.png)
+![iReading_Drawer](./screenshot/Reading_Drawer.png) ![iReading_Article](./screenshot/Reading_Article.jpg)
+![iReading_Share](./screenshot/Reading_Share.jpg) ![iReading_Category](./screenshot/Reading_Category.png)
+![iReading_IOS_Main](./screenshot/Reading_IOS_Main.png) ![iReading_IOS_Share](./screenshot/Reading_IOS_Share.jpeg)
 
-## Download From Android Market
+## Download
 
-*From 360 Android Market:* [Download Reading](http://zhushou.360.cn/detail/index/soft_id/3217938?recrefer=SE_D_Reading)
+### From Android Market
 
-*From Wandou Labs:* [Download Reading](http://www.wandoujia.com/apps/com.reading)
+*360 Android Market:* [Download iReading](http://zhushou.360.cn/detail/index/soft_id/3217938?recrefer=SE_D_Reading)
+
+*Wandou Labs:* [Download iReading](http://www.wandoujia.com/apps/com.reading)
+
+### β Version
+
+*Android:* [Download iReading](http://fir.im/w7gu)
+
+*iOS:* :rocket: Coming soon!
 
 ## Application Architecture
 
@@ -49,7 +58,6 @@ react-native start
 ```
 npm test
 ```
-
 ## Release Note
 
 [Reading Release Note](https://github.com/attentiveness/reading/releases)

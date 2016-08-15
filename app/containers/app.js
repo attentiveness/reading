@@ -24,8 +24,8 @@ import {
   View
 } from 'react-native';
 
-import Splash from '../pages/Splash';
 import { registerApp } from 'react-native-wechat';
+import Splash from '../pages/Splash';
 import { naviGoBack } from '../utils/CommonUtil';
 
 let tempNavigator;
@@ -54,10 +54,8 @@ class App extends React.Component {
     if (route.name === 'WebViewPage') {
       BackAndroid.removeEventListener('hardwareBackPress', this.goBack);
       isRemoved = true;
-    } else {
-      if (isRemoved) {
-        BackAndroid.addEventListener('hardwareBackPress', this.goBack);
-      }
+    } else if (isRemoved) {
+      BackAndroid.addEventListener('hardwareBackPress', this.goBack);
     }
     return (
       <Component navigator={navigator} route={route} />
@@ -72,7 +70,6 @@ class App extends React.Component {
           barStyle="default"
         />
         <Navigator
-          ref="navigator"
           style={styles.navigator}
           configureScene={this.configureScene}
           renderScene={this.renderScene}

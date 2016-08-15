@@ -32,11 +32,13 @@ import {
   View,
   DeviceEventEmitter
 } from 'react-native';
-import LoadingView from '../components/LoadingView';
+
 import DrawerLayout from 'react-native-drawer-layout';
-import { fetchArticles } from '../actions/read';
-import ReadingToolbar from '../components/ReadingToolbar';
+import TimeAgo from 'react-native-timeago';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
+import * as readAction from '../actions/read';
+import LoadingView from '../components/LoadingView';
+import ReadingToolbar from '../components/ReadingToolbar';
 import About from '../pages/About';
 import Feedback from '../pages/Feedback';
 import CategoryContainer from '../containers/CategoryContainer';
@@ -45,7 +47,7 @@ import Storage from '../utils/Storage';
 import { CATEGORIES } from '../constants/Alias';
 import WebViewPage from '../pages/WebViewPage';
 import { formatStringWithHtml } from '../utils/FormatUtil';
-import TimeAgo from 'react-native-timeago';
+
 require('moment/locale/zh-cn');
 
 const homeImg = require('../img/home.png');
@@ -53,6 +55,7 @@ const categoryImg = require('../img/category.png');
 const inspectionImg = require('../img/inspection.png');
 const infoImg = require('../img/info.png');
 const menuImg = require('../img/menu.png');
+
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
   read: PropTypes.object.isRequired
@@ -83,7 +86,7 @@ class Main extends React.Component {
     const { dispatch } = this.props;
     DeviceEventEmitter.addListener('changeCategory', (typeIds) => {
       typeIds.forEach((typeId) => {
-        dispatch(fetchArticles(false, true, typeId));
+        dispatch(readAction.fetchArticles(false, true, typeId));
       });
       this.setState({
         typeIds
@@ -96,7 +99,7 @@ class Main extends React.Component {
             typeIds = [0, 12, 9, 2];
           }
           typeIds.forEach((typeId) => {
-            dispatch(fetchArticles(false, true, typeId));
+            dispatch(readAction.fetchArticles(false, true, typeId));
           });
           this.setState({
             typeIds
@@ -121,46 +124,39 @@ class Main extends React.Component {
   onRefresh(typeId) {
     const { dispatch } = this.props;
     canLoadMore = false;
-    dispatch(fetchArticles(true, false, typeId));
+    dispatch(readAction.fetchArticles(true, false, typeId));
   }
 
   onPress(article) {
     const { navigator } = this.props;
-    InteractionManager.runAfterInteractions(() => {
-      navigator.push({
-        component: WebViewPage,
-        name: 'WebViewPage',
-        article
-      });
+    navigator.push({
+      component: WebViewPage,
+      name: 'WebViewPage',
+      article
     });
   }
 
   onPressDrawerItem(index) {
     const { navigator } = this.props;
-    this.refs.drawer.closeDrawer();
+    this.drawer.closeDrawer();
     switch (index) {
       case 1:
-        InteractionManager.runAfterInteractions(() => {
-          navigator.push({
-            component: CategoryContainer,
-            name: 'Category'
-          });
+        navigator.push({
+          component: CategoryContainer,
+          name: 'Category'
         });
+
         break;
       case 2:
-        InteractionManager.runAfterInteractions(() => {
-          navigator.push({
-            component: Feedback,
-            name: 'Feedback'
-          });
+        navigator.push({
+          component: Feedback,
+          name: 'Feedback'
         });
         break;
       case 3:
-        InteractionManager.runAfterInteractions(() => {
-          navigator.push({
-            component: About,
-            name: 'About'
-          });
+        navigator.push({
+          component: About,
+          name: 'About'
         });
         break;
       default:
@@ -169,7 +165,7 @@ class Main extends React.Component {
   }
 
   onIconClicked() {
-    this.refs.drawer.openDrawer();
+    this.drawer.openDrawer();
   }
 
   onScroll() {
@@ -183,7 +179,7 @@ class Main extends React.Component {
     if (canLoadMore && time - loadMoreTime > 1) {
       page++;
       const { dispatch } = this.props;
-      dispatch(fetchArticles(false, false, typeId, true, page));
+      dispatch(readAction.fetchArticles(false, false, typeId, true, page));
       canLoadMore = false;
       loadMoreTime = Date.parse(new Date()) / 1000;
     }
@@ -289,68 +285,41 @@ class Main extends React.Component {
     );
   }
 
+  renderNavigationViewItem(image, title, index) {
+    return (
+      <TouchableOpacity
+        style={styles.drawerContent}
+        onPress={() => this.onPressDrawerItem(index)}
+      >
+        <Image
+          style={styles.drawerIcon}
+          source={image}
+        />
+        <Text style={styles.drawerText}>
+          {title}
+        </Text>
+      </TouchableOpacity>
+    );
+  }
+
   renderNavigationView() {
     return (
       <View style={[styles.container, { backgroundColor: '#fcfcfc' }]}>
         <View
-          style={{ width: Dimensions.get('window').width / 5 * 3, height: 120,
-            justifyContent: 'flex-end', paddingBottom: 10, backgroundColor: '#3e9ce9' }}
+          style={{ height: 120, justifyContent: 'flex-end',
+            paddingBottom: 10, backgroundColor: '#3e9ce9' }}
         >
           <Text style={{ fontSize: 20, textAlign: 'left', color: '#fcfcfc', marginLeft: 10 }}>
-            Reading
+            iReading
           </Text>
           <Text style={{ fontSize: 20, textAlign: 'left', color: '#fcfcfc', marginLeft: 10 }}>
             让生活更精彩
           </Text>
         </View>
-        <TouchableOpacity
-          style={styles.drawerContent}
-          onPress={() => this.onPressDrawerItem(0)}
-        >
-          <Image
-            style={styles.drawerIcon}
-            source={homeImg}
-          />
-          <Text style={styles.drawerText}>
-            首页
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.drawerContent}
-          onPress={() => this.onPressDrawerItem(1)}
-        >
-          <Image
-            style={styles.drawerIcon}
-            source={categoryImg}
-          />
-          <Text style={styles.drawerText}>
-            分类
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.drawerContent}
-          onPress={() => this.onPressDrawerItem(2)}
-        >
-          <Image
-            style={styles.drawerIcon}
-            source={inspectionImg}
-          />
-          <Text style={styles.drawerText}>
-            建议
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.drawerContent}
-          onPress={() => this.onPressDrawerItem(3)}
-        >
-          <Image
-            style={styles.drawerIcon}
-            source={infoImg}
-          />
-          <Text style={styles.drawerText}>
-            关于
-          </Text>
-        </TouchableOpacity>
+        {this.renderNavigationViewItem(homeImg, '首页', 0)}
+        {this.renderNavigationViewItem(categoryImg, '分类', 1)}
+        {this.renderNavigationViewItem(inspectionImg, '建议', 2)}
+        {this.renderNavigationViewItem(infoImg, '关于', 3)}
       </View>
     );
   }
@@ -359,14 +328,14 @@ class Main extends React.Component {
     const { read, navigator } = this.props;
     return (
       <DrawerLayout
-        ref="drawer"
+        ref={(ref) => { this.drawer = ref; }}
         drawerWidth={Dimensions.get('window').width / 5 * 3}
         drawerPosition={Platform.OS === 'android' ? DrawerLayoutAndroid.positions.Left : 'left'}
         renderNavigationView={this.renderNavigationView}
       >
         <View style={styles.container}>
           <ReadingToolbar
-            title="Reading"
+            title="iReading"
             navigator={navigator}
             navIcon={menuImg}
             onIconClicked={this.onIconClicked}
@@ -375,7 +344,8 @@ class Main extends React.Component {
             renderTabBar={() =>
               <DefaultTabBar
                 underlineHeight={2}
-                textStyle={{ fontSize: 16, marginTop: 6 }}
+                tabStyle={{ paddingBottom: 0 }}
+                textStyle={{ fontSize: 16 }}
               />
             }
             tabBarBackgroundColor="#fcfcfc"

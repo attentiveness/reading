@@ -36,34 +36,18 @@ const propTypes = {
   containerStyle: View.propTypes.style
 };
 
-class ImageButton extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.onPress = this.onPress.bind(this);
-  }
-
-  onPress() {
-    if (this.props.disabled) {
-      return;
-    }
-    this.props.onPress();
-  }
-
-  render() {
-    return (
-      <TouchableOpacity
-        style={this.props.containerStyle}
-        onPress={this.onPress}
-      >
-        <Image
-          style={this.props.style}
-          source={this.props.source}
-        />
-      </TouchableOpacity>
-    );
-  }
-}
+const ImageButton = ({ onPress, disabled, source, style, containerStyle }) => (
+  <TouchableOpacity
+    style={containerStyle}
+    onPress={onPress}
+    disabled={disabled}
+  >
+    <Image
+      style={style}
+      source={source}
+    />
+  </TouchableOpacity>
+);
 
 ImageButton.propTypes = propTypes;
 

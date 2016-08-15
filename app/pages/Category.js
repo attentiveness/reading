@@ -33,6 +33,7 @@ import { toastShort } from '../utils/ToastUtil';
 import { CATEGORIES } from '../constants/Alias';
 
 const checkIno = require('../img/check.png');
+
 let toolbarActions = [
   { title: '提交', icon: checkIno, show: 'always' }
 ];
@@ -55,13 +56,15 @@ class Category extends React.Component {
   }
 
   componentWillMount() {
-    Storage.get('typeIds')
-      .then((typeIds) => {
-        tempTypeIds = typeIds;
-        this.setState({
-          typeIds
+    InteractionManager.runAfterInteractions(() => {
+      Storage.get('typeIds')
+        .then((typeIds) => {
+          tempTypeIds = typeIds;
+          this.setState({
+            typeIds
+          });
         });
-      });
+    });
   }
 
   componentDidMount() {
