@@ -27,6 +27,9 @@ iReading App Write In React-Native（Studying and Programing）
 
 *Wandou Labs:* [Download iReading](http://www.wandoujia.com/apps/com.reading)
 
+### From App Store
+[Download iReading](https://itunes.apple.com/us/app/ireading/id1135411121?l=zh&ls=1&mt=8)
+
 ### β Version
 
 *Android:* [Download iReading](http://fir.im/w7gu)
