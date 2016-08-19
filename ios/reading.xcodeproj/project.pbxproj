@@ -26,6 +26,10 @@
 		176D7AD01C61D31C004C465D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 176D7ACF1C61D31C004C465D /* libz.tbd */; };
 		179B10A91D210D7000405A2C /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 179B10A81D210D1F00405A2C /* libCodePush.a */; };
 		17B5769B1C84466D002717C9 /* libRCTWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 176D7AC51C61D2DB004C465D /* libRCTWeChat.a */; };
+		22DD0B041D67063100EC738E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22DD0B001D67063100EC738E /* Default-568h@2x.png */; };
+		22DD0B051D67063100EC738E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22DD0B011D67063100EC738E /* Default@2x.png */; };
+		22DD0B061D67063100EC738E /* launch_screen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22DD0B021D67063100EC738E /* launch_screen@2x.png */; };
+		22DD0B071D67063100EC738E /* launch_screen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22DD0B031D67063100EC738E /* launch_screen@3x.png */; };
 		7B04B1FBAEE24C5BB7332034 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 422C8C4F68F74EB2AABBA44D /* libRNDeviceInfo.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		A85175C81D54FCB600AEF15A /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A85175C71D54FCB600AEF15A /* Bugly.framework */; };
@@ -148,6 +152,10 @@
 		176D7ACD1C61D315004C465D /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		176D7ACF1C61D31C004C465D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		179B10A31D210D1F00405A2C /* CodePush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
+		22DD0B001D67063100EC738E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "reading/Images.xcassets/LaunchImage.launchimage/Default-568h@2x.png"; sourceTree = "<group>"; };
+		22DD0B011D67063100EC738E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "reading/Images.xcassets/LaunchImage.launchimage/Default@2x.png"; sourceTree = "<group>"; };
+		22DD0B021D67063100EC738E /* launch_screen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "launch_screen@2x.png"; path = "reading/Images.xcassets/LaunchImage.launchimage/launch_screen@2x.png"; sourceTree = "<group>"; };
+		22DD0B031D67063100EC738E /* launch_screen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "launch_screen@3x.png"; path = "reading/Images.xcassets/LaunchImage.launchimage/launch_screen@3x.png"; sourceTree = "<group>"; };
 		422C8C4F68F74EB2AABBA44D /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -247,6 +255,10 @@
 		13B07FAE1A68108700A75B9A /* reading */ = {
 			isa = PBXGroup;
 			children = (
+				22DD0B001D67063100EC738E /* Default-568h@2x.png */,
+				22DD0B011D67063100EC738E /* Default@2x.png */,
+				22DD0B021D67063100EC738E /* launch_screen@2x.png */,
+				22DD0B031D67063100EC738E /* launch_screen@3x.png */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -557,7 +569,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22DD0B051D67063100EC738E /* Default@2x.png in Resources */,
+				22DD0B071D67063100EC738E /* launch_screen@3x.png in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				22DD0B041D67063100EC738E /* Default-568h@2x.png in Resources */,
+				22DD0B061D67063100EC738E /* launch_screen@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
