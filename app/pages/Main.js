@@ -342,49 +342,40 @@ class Main extends React.Component {
             navIcon={menuImg}
             onIconClicked={this.onIconClicked}
           />
-          {this.state.typeIds.length === 0 ?
-            <View
-              key={this.state.typeIds.length - 1}
-              style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
-            >
-              <Text style={{ fontSize: 20, padding: 10, textAlign: 'center' }}>
-                没有分类信息，请打开侧滑菜单手动选择分类
-              </Text>
-            </View> :
-            <ScrollableTabView
-              renderTabBar={() =>
-                <DefaultTabBar
-                  underlineHeight={2}
-                  tabStyle={{ paddingBottom: 0 }}
-                  textStyle={{ fontSize: 16 }}
-                />
-              }
-              tabBarBackgroundColor="#fcfcfc"
-              tabBarUnderlineColor="#3e9ce9"
-              tabBarActiveTextColor="#3e9ce9"
-              tabBarInactiveTextColor="#aaaaaa"
-            >
-              {this.state.typeIds.map((typeId) => {
-                let name = '';
-                for (let i = 0, l = this.state.typeList.length; i < l; i++) {
-                  if (typeId.toString() === this.state.typeList[i].id) {
-                    name = this.state.typeList[i].name;
-                    break;
-                  }
+          <ScrollableTabView
+            renderTabBar={() =>
+              <DefaultTabBar
+                underlineHeight={2}
+                tabStyle={{ paddingBottom: 0 }}
+                textStyle={{ fontSize: 16 }}
+              />
+            }
+            tabBarBackgroundColor="#fcfcfc"
+            tabBarUnderlineColor="#3e9ce9"
+            tabBarActiveTextColor="#3e9ce9"
+            tabBarInactiveTextColor="#aaaaaa"
+          >
+            {this.state.typeIds.map((typeId) => {
+              let name = '';
+              for (let i = 0, l = this.state.typeList.length; i < l; i++) {
+                if (typeId.toString() === this.state.typeList[i].id) {
+                  name = this.state.typeList[i].name;
+                  break;
                 }
-                const typeView = (
-                  <View
-                    key={typeId}
-                    tabLabel={name}
-                    style={{ flex: 1 }}
-                  >
-                    {this.renderContent(this.state.dataSource.cloneWithRows(
-                      read.articleList[typeId] === undefined ? [] :
-                        read.articleList[typeId]), typeId) }
-                  </View>);
-                return typeView;
-              })}
-            </ScrollableTabView>}
+              }
+              const typeView = (
+                <View
+                  key={typeId}
+                  tabLabel={name}
+                  style={{ flex: 1 }}
+                >
+                  {this.renderContent(this.state.dataSource.cloneWithRows(
+                    read.articleList[typeId] === undefined ? [] :
+                      read.articleList[typeId]), typeId) }
+                </View>);
+              return typeView;
+            }) }
+          </ScrollableTabView>
         </View>
       </DrawerLayout>
     );

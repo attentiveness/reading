@@ -27,6 +27,7 @@ import {
   Alert
 } from 'react-native';
 
+import AV from 'leancloud-storage';
 import ReadingToolbar from '../components/ReadingToolbar';
 import { fetchTypes } from '../actions/category';
 import Storage from '../utils/Storage';
@@ -41,6 +42,7 @@ let toolbarActions = [
   { title: '提交', icon: checkIno, show: 'always' }
 ];
 let tempTypeIds = [];
+let maxCategory = 5; // 默认最多5个类别，远端可配置
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -77,6 +79,10 @@ class Category extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(fetchTypes());
+    const query = new AV.Query('Reading_Settings');
+    query.get('57b86e0ba633bd002a96436b').then((settings) => {
+      maxCategory = settings.get('max_category');
+    });
   }
 
   onRefresh() {
@@ -125,8 +131,8 @@ class Category extends React.Component {
   }
 
   onActionSelected() {
-    if (tempTypeIds.length > 5) {
-      toastShort('不要超过5个类别哦');
+    if (tempTypeIds.length > maxCategory) {
+      toastShort(`不要超过${maxCategory}个类别哦`);
       return;
     }
     if (tempTypeIds.length < 1) {

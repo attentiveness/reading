@@ -47,7 +47,7 @@ class Feedback extends React.Component {
 
   onActionSelected() {
     if (feedbackText === '') {
-      toastShort('建议内容为空！');
+      toastShort('请填写建议内容哦~');
     } else {
       const { navigator } = this.props;
       const feedback = AV.Object.new('Feedback');
@@ -75,7 +75,7 @@ class Feedback extends React.Component {
         />
         <TextInput
           style={{ flex: 1, fontSize: 18, padding: 15, textAlignVertical: 'top' }}
-          placeholder="请写下您宝贵的意见或建议，与Reading一起进步！"
+          placeholder="请写下您宝贵的意见或建议，与iReading一起进步！"
           placeholderTextColor="#aaaaaa"
           underlineColorAndroid="transparent"
           numberOfLines={200}
