@@ -21,7 +21,10 @@ import {
   StyleSheet,
   Text,
   View,
-  DeviceEventEmitter
+  DeviceEventEmitter,
+  ScrollView,
+  RefreshControl,
+  Alert
 } from 'react-native';
 
 import ReadingToolbar from '../components/ReadingToolbar';
@@ -30,7 +33,7 @@ import Storage from '../utils/Storage';
 import GridView from '../components/GridView';
 import Button from '../components/Button';
 import { toastShort } from '../utils/ToastUtil';
-import { CATEGORIES } from '../constants/Alias';
+import MainContainer from '../containers/MainContainer';
 
 const checkIno = require('../img/check.png');
 
@@ -50,24 +53,33 @@ class Category extends React.Component {
     this.renderItem = this.renderItem.bind(this);
     this.onActionSelected = this.onActionSelected.bind(this);
     this.resetRoute = this.resetRoute.bind(this);
+    this.onRefresh = this.onRefresh.bind(this);
     this.state = {
       typeIds: tempTypeIds
     };
   }
 
   componentWillMount() {
-    InteractionManager.runAfterInteractions(() => {
-      Storage.get('typeIds')
-        .then((typeIds) => {
-          tempTypeIds = typeIds;
-          this.setState({
-            typeIds
+    const { route } = this.props;
+    if (!route.isFirst) {
+      InteractionManager.runAfterInteractions(() => {
+        Storage.get('typeIds')
+          .then((typeIds) => {
+            tempTypeIds = typeIds;
+            this.setState({
+              typeIds
+            });
           });
-        });
-    });
+      });
+    }
   }
 
   componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(fetchTypes());
+  }
+
+  onRefresh() {
     const { dispatch } = this.props;
     dispatch(fetchTypes());
   }
@@ -84,13 +96,41 @@ class Category extends React.Component {
     });
   }
 
+  onSelectCatagory() {
+    const { navigator } = this.props;
+    if (this.state.typeIds.length === 0) {
+      Alert.alert(
+        '提示',
+        '您确定不选择任何分类吗？',
+        [
+          { text: '取消', style: 'cancel' },
+          {
+            text: '确定', onPress: () => {
+              Storage.save('typeIds', this.state.typeIds);
+              navigator.replace({
+                component: MainContainer,
+                name: 'Main'
+              });
+            }
+          },
+        ]
+      );
+    } else {
+      Storage.save('typeIds', this.state.typeIds);
+      navigator.replace({
+        component: MainContainer,
+        name: 'Main'
+      });
+    }
+  }
+
   onActionSelected() {
     if (tempTypeIds.length > 5) {
       toastShort('不要超过5个类别哦');
       return;
     }
-    if (tempTypeIds.length < 3) {
-      toastShort('不要少于3个类别哦');
+    if (tempTypeIds.length < 1) {
+      toastShort('不要少于1个类别哦');
       return;
     }
     const { navigator } = this.props;
@@ -123,14 +163,60 @@ class Category extends React.Component {
           isSelect ? { backgroundColor: '#3e9ce9' } : { backgroundColor: '#fcfcfc' }]}
         style={[{ fontSize: 16, textAlign: 'center' },
           isSelect ? { color: '#fcfcfc' } : { color: 'black' }]}
-        text={CATEGORIES[item.id]}
+        text={item.name}
         onPress={() => this.onPress(item)}
       />
     );
   }
 
+  renderGridView() {
+    const { category } = this.props;
+    return (
+      <ScrollView
+        automaticallyAdjustContentInsets={false}
+        horizontal={false}
+        contentContainerStyle={styles.no_data}
+        style={{ flex: 1 }}
+        refreshControl={
+          <RefreshControl
+            refreshing={category.loading}
+            onRefresh={this.onRefresh}
+            title="Loading..."
+            colors={['#ffaa66cc', '#ff00ddff', '#ffffbb33', '#ffff4444']}
+          />
+        }
+      >
+        <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#f2f2f2' }}>
+          <GridView
+            items={Array.from(category.typeList)}
+            itemsPerRow={3}
+            renderItem={this.renderItem}
+          />
+        </View>
+      </ScrollView>
+    );
+  }
+
   render() {
-    const { navigator, category } = this.props;
+    const { navigator, route } = this.props;
+    if (route.isFirst) {
+      return (
+        <View style={styles.container}>
+          <View style={{ padding: 10, backgroundColor: '#fcfcfc' }}>
+            <Text style={{ color: 'black', fontSize: 16 }}>
+              初次见面，请选择您感兴趣的1-5个类别
+            </Text>
+          </View>
+          {this.renderGridView()}
+          <Button
+            containerStyle={{ margin: 10, padding: 10, borderRadius: 10, backgroundColor: 'green' }}
+            style={{ fontSize: 16, textAlign: 'center', color: '#fff' }}
+            text={"确认"}
+            onPress={() => this.onSelectCatagory()}
+          />
+        </View>
+      );
+    }
     return (
       <View style={styles.container}>
         <ReadingToolbar
@@ -141,16 +227,10 @@ class Category extends React.Component {
         />
         <View style={{ padding: 10, backgroundColor: '#fcfcfc' }}>
           <Text style={{ color: 'black', fontSize: 16 }}>
-            选择您感兴趣的3-5个类别
+            请选择您感兴趣的1-5个类别
           </Text>
         </View>
-        <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#f2f2f2' }}>
-          <GridView
-            items={Array.from(category.typeList)}
-            itemsPerRow={4}
-            renderItem={this.renderItem}
-          />
-        </View>
+        {this.renderGridView()}
       </View>
     );
   }
@@ -159,7 +239,8 @@ class Category extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: '#FFF'
   }
 });
 

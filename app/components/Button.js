@@ -30,11 +30,12 @@ const propTypes = {
   text: PropTypes.string
 };
 
-const Button = ({ onPress, disabled, style, containerStyle, text }) => (
+const Button = ({ onPress, disabled, style, containerStyle, text, activeOpacity }) => (
   <TouchableOpacity
     style={containerStyle}
     onPress={onPress}
     disabled={disabled}
+    activeOpacity={activeOpacity}
   >
     <Text style={style}>
       {text}
@@ -46,7 +47,8 @@ Button.propTypes = propTypes;
 
 Button.defaultProps = {
   onPress() {},
-  disabled: false
+  disabled: false,
+  activeOpacity: 0.8
 };
 
 export default Button;

@@ -44,7 +44,6 @@ import Feedback from '../pages/Feedback';
 import CategoryContainer from '../containers/CategoryContainer';
 import { toastShort } from '../utils/ToastUtil';
 import Storage from '../utils/Storage';
-import { CATEGORIES } from '../constants/Alias';
 import WebViewPage from '../pages/WebViewPage';
 import { formatStringWithHtml } from '../utils/FormatUtil';
 
@@ -72,7 +71,8 @@ class Main extends React.Component {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
-      typeIds: []
+      typeIds: [],
+      typeList: {}
     };
     this.renderItem = this.renderItem.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
@@ -96,14 +96,17 @@ class Main extends React.Component {
       Storage.get('typeIds')
         .then((typeIds) => {
           if (!typeIds) {
-            typeIds = [0, 12, 9, 2];
+            return;
           }
           typeIds.forEach((typeId) => {
             dispatch(readAction.fetchArticles(false, true, typeId));
           });
-          this.setState({
-            typeIds
-          });
+          Storage.get('typeList').then((typeList) =>
+            this.setState({
+              typeIds,
+              typeList
+            })
+          );
         });
     });
   }
@@ -145,7 +148,6 @@ class Main extends React.Component {
           component: CategoryContainer,
           name: 'Category'
         });
-
         break;
       case 2:
         navigator.push({
@@ -340,32 +342,49 @@ class Main extends React.Component {
             navIcon={menuImg}
             onIconClicked={this.onIconClicked}
           />
-          <ScrollableTabView
-            renderTabBar={() =>
-              <DefaultTabBar
-                underlineHeight={2}
-                tabStyle={{ paddingBottom: 0 }}
-                textStyle={{ fontSize: 16 }}
-              />
-            }
-            tabBarBackgroundColor="#fcfcfc"
-            tabBarUnderlineColor="#3e9ce9"
-            tabBarActiveTextColor="#3e9ce9"
-            tabBarInactiveTextColor="#aaaaaa"
-          >
-          {this.state.typeIds.map((typeId) => {
-            const typeView = (
-              <View
-                key={typeId}
-                tabLabel={CATEGORIES[typeId]}
-                style={{ flex: 1 }}
-              >
-                {this.renderContent(this.state.dataSource.cloneWithRows(
-                  read.articleList[typeId] === undefined ? [] : read.articleList[typeId]), typeId)}
-              </View>);
-            return typeView;
-          })}
-          </ScrollableTabView>
+          {this.state.typeIds.length === 0 ?
+            <View
+              key={this.state.typeIds.length - 1}
+              style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+            >
+              <Text style={{ fontSize: 20, padding: 10, textAlign: 'center' }}>
+                没有分类信息，请打开侧滑菜单手动选择分类
+              </Text>
+            </View> :
+            <ScrollableTabView
+              renderTabBar={() =>
+                <DefaultTabBar
+                  underlineHeight={2}
+                  tabStyle={{ paddingBottom: 0 }}
+                  textStyle={{ fontSize: 16 }}
+                />
+              }
+              tabBarBackgroundColor="#fcfcfc"
+              tabBarUnderlineColor="#3e9ce9"
+              tabBarActiveTextColor="#3e9ce9"
+              tabBarInactiveTextColor="#aaaaaa"
+            >
+              {this.state.typeIds.map((typeId) => {
+                let name = '';
+                for (let i = 0, l = this.state.typeList.length; i < l; i++) {
+                  if (typeId.toString() === this.state.typeList[i].id) {
+                    name = this.state.typeList[i].name;
+                    break;
+                  }
+                }
+                const typeView = (
+                  <View
+                    key={typeId}
+                    tabLabel={name}
+                    style={{ flex: 1 }}
+                  >
+                    {this.renderContent(this.state.dataSource.cloneWithRows(
+                      read.articleList[typeId] === undefined ? [] :
+                        read.articleList[typeId]), typeId) }
+                  </View>);
+                return typeView;
+              })}
+            </ScrollableTabView>}
         </View>
       </DrawerLayout>
     );

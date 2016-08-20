@@ -25,8 +25,8 @@ import {
 } from 'react-native';
 
 import { registerApp } from 'react-native-wechat';
-import MainContainer from '../containers/MainContainer';
 import { naviGoBack } from '../utils/CommonUtil';
+import Splash from '../pages/Splash';
 
 let tempNavigator;
 let isRemoved = false;
@@ -74,8 +74,8 @@ class App extends React.Component {
           configureScene={this.configureScene}
           renderScene={this.renderScene}
           initialRoute={{
-            component: MainContainer,
-            name: 'Main'
+            component: Splash,
+            name: 'Splash'
           }}
         />
       </View>
