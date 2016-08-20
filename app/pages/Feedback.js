@@ -74,7 +74,7 @@ class Feedback extends React.Component {
           navigator={navigator}
         />
         <TextInput
-          style={{ flex: 1, fontSize: 18, textAlignVertical: 'top' }}
+          style={{ flex: 1, fontSize: 18, padding: 15, textAlignVertical: 'top' }}
           placeholder="请写下您宝贵的意见或建议，与Reading一起进步！"
           placeholderTextColor="#aaaaaa"
           underlineColorAndroid="transparent"

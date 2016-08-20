@@ -307,12 +307,12 @@ class Main extends React.Component {
       <View style={[styles.container, { backgroundColor: '#fcfcfc' }]}>
         <View
           style={{ height: 120, justifyContent: 'flex-end',
-            paddingBottom: 10, backgroundColor: '#3e9ce9' }}
+            padding: 20, backgroundColor: '#3e9ce9' }}
         >
-          <Text style={{ fontSize: 20, textAlign: 'left', color: '#fcfcfc', marginLeft: 10 }}>
+          <Text style={{ fontSize: 20, textAlign: 'left', color: '#fcfcfc' }}>
             iReading
           </Text>
-          <Text style={{ fontSize: 20, textAlign: 'left', color: '#fcfcfc', marginLeft: 10 }}>
+          <Text style={{ fontSize: 20, textAlign: 'left', color: '#fcfcfc' }}>
             让生活更精彩
           </Text>
         </View>
@@ -375,7 +375,8 @@ class Main extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: '#FFF'
   },
   containerItem: {
     flexDirection: 'row',

@@ -25,7 +25,7 @@ import {
 } from 'react-native';
 
 import { registerApp } from 'react-native-wechat';
-import Splash from '../pages/Splash';
+import MainContainer from '../containers/MainContainer';
 import { naviGoBack } from '../utils/CommonUtil';
 
 let tempNavigator;
@@ -67,15 +67,15 @@ class App extends React.Component {
       <View style={{ flex: 1 }}>
         <StatusBar
           backgroundColor="#3e9ce9"
-          barStyle="default"
+          barStyle="light-content"
         />
         <Navigator
           style={styles.navigator}
           configureScene={this.configureScene}
           renderScene={this.renderScene}
           initialRoute={{
-            component: Splash,
-            name: 'Splash'
+            component: MainContainer,
+            name: 'Main'
           }}
         />
       </View>
