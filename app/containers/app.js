@@ -25,6 +25,7 @@ import {
 } from 'react-native';
 
 import { registerApp } from 'react-native-wechat';
+import AV from 'leancloud-storage';
 import { naviGoBack } from '../utils/CommonUtil';
 import Splash from '../pages/Splash';
 
@@ -35,6 +36,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     registerApp('wxb24c445773822c79');
+    AV.init({
+      appId: 'Tfi1z7dN9sjMwSul8sYaTEvg-gzGzoHsz',
+      appKey: '57qmeEJonefntNqRe17dAgi4'
+    });
     this.renderScene = this.renderScene.bind(this);
     this.goBack = this.goBack.bind(this);
     BackAndroid.addEventListener('hardwareBackPress', this.goBack);

@@ -18,7 +18,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CodePush from 'react-native-code-push';
-import AV from 'leancloud-storage';
 import Main from '../pages/Main';
 
 class MainContainer extends React.Component {
@@ -32,10 +31,6 @@ class MainContainer extends React.Component {
         title: '更新提示'
       },
       installMode: CodePush.InstallMode.ON_NEXT_RESTART
-    });
-    AV.init({
-      appId: 'Tfi1z7dN9sjMwSul8sYaTEvg-gzGzoHsz',
-      appKey: '57qmeEJonefntNqRe17dAgi4'
     });
   }
 
