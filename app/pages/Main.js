@@ -250,6 +250,7 @@ class Main extends React.Component {
           style={{ flex: 1 }}
           refreshControl={
             <RefreshControl
+              style={{ backgroundColor: 'transparent' }}
               refreshing={read.isRefreshing}
               onRefresh={() => this.onRefresh(typeId)}
               title="Loading..."
@@ -277,6 +278,7 @@ class Main extends React.Component {
         renderFooter={this.renderFooter}
         refreshControl={
           <RefreshControl
+            style={{ backgroundColor: 'transparent' }}
             refreshing={read.isRefreshing}
             onRefresh={() => this.onRefresh(typeId)}
             title="Loading..."
