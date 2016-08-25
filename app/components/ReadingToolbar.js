@@ -43,7 +43,8 @@ const ReadingToolbar = ({
   actions,
   navigator,
   onActionSelected,
-  onIconClicked
+  onIconClicked,
+  navIconName
 }) => {
   const handleIconClicked = () => {
     if (onIconClicked) {
@@ -59,10 +60,10 @@ const ReadingToolbar = ({
       actions={actions}
       onActionSelected={onActionSelected}
       onIconClicked={handleIconClicked}
-      navIconName={navigator && navigator.getCurrentRoutes().length > 1 ?
-        'md-arrow-back' : 'md-menu'}
+      navIconName={navIconName === undefined ? 'md-arrow-back' : navIconName}
       titleColor="#fff"
       title={title}
+      overflowIconName="md-more"
     />
   );
 
@@ -72,7 +73,7 @@ const ReadingToolbar = ({
     return (
       <View style={styles.toolbar}>
         <Icon.Button
-          name={navigator && navigator.getCurrentRoutes().length > 1 ? 'ios-arrow-back' : 'md-menu'}
+          name={navIconName === undefined ? 'ios-arrow-back' : navIconName}
           iconStyle={styles.leftIOS}
           onPress={handleIconClicked}
           backgroundColor="transparent"

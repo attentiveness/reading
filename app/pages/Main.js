@@ -341,6 +341,7 @@ class Main extends React.Component {
             title="iReading"
             navigator={navigator}
             onIconClicked={this.onIconClicked}
+            navIconName="md-menu"
           />
           <ScrollableTabView
             renderTabBar={() =>
@@ -357,6 +358,9 @@ class Main extends React.Component {
           >
             {this.state.typeIds.map((typeId) => {
               let name = '';
+              if (this.state.typeList === null) {
+                return null;
+              }
               for (let i = 0, l = this.state.typeList.length; i < l; i++) {
                 if (typeId.toString() === this.state.typeList[i].id) {
                   name = this.state.typeList[i].name;
