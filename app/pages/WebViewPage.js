@@ -36,12 +36,11 @@ import LoadingView from '../components/LoadingView';
 import { naviGoBack } from '../utils/CommonUtil';
 import { formatStringWithHtml } from '../utils/FormatUtil';
 
-const shareImg = require('../img/share.png');
 const shareIconWechat = require('../img/share_icon_wechat.png');
 const shareIconMoments = require('../img/share_icon_moments.png');
 
 let toolbarActions = [
-  { title: '分享', icon: shareImg, show: 'always' }
+  { title: '分享', iconName: 'md-share', show: 'always' }
 ];
 let canGoBack = false;
 

@@ -19,6 +19,7 @@
     "react-native-root-toast": "^1.0.3",
     "react-native-scrollable-tab-view": "^0.5.4",
     "react-native-timeago": "^0.3.0",
+    "react-native-vector-icons": "^2.1.0",
     "react-native-wechat": "^1.5.5",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",

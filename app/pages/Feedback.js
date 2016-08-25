@@ -27,10 +27,8 @@ import DeviceInfo from 'react-native-device-info';
 import ReadingToolbar from '../components/ReadingToolbar';
 import { toastShort } from '../utils/ToastUtil';
 
-const checkIco = require('../img/check.png');
-
 let toolbarActions = [
-  { title: '提交', icon: checkIco, show: 'always' }
+  { title: '提交', iconName: 'md-checkmark', show: 'always' }
 ];
 
 let feedbackText;

@@ -68,6 +68,10 @@ import com.android.build.OutputFile
 
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
+project.ext.vectoricons = [
+        iconFontNames: [ 'Ionicons.ttf' ] // Name of the font files you want to copy
+]
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -176,6 +180,7 @@ dependencies {
     compile project(':RCTWeChat')
     compile project(':react-native-code-push')
     compile project(':RNDeviceInfo')
+    compile project(':react-native-vector-icons')
 }
 
 // Run this once to be able to run the application with BUCK

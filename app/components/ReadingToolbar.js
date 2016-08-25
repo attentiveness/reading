@@ -18,19 +18,16 @@
 import React, { PropTypes } from 'react';
 import {
 	StyleSheet,
-	ToolbarAndroid,
 	Platform,
 	View,
 	Text
 } from 'react-native';
 
+import Icon from 'react-native-vector-icons/Ionicons';
 import { naviGoBack } from '../utils/CommonUtil';
-import ImageButton from './ImageButton';
 import Button from './Button';
 
 let showActionButton = false;
-const iconLeft = require('../img/icon_left.png');
-const iconLeftIOS = require('../img/icon_left_ios.png');
 
 const propTypes = {
   title: PropTypes.string,
@@ -46,8 +43,7 @@ const ReadingToolbar = ({
   actions,
   navigator,
   onActionSelected,
-  onIconClicked,
-  navIcon
+  onIconClicked
 }) => {
   const handleIconClicked = () => {
     if (onIconClicked) {
@@ -58,12 +54,13 @@ const ReadingToolbar = ({
   };
 
   const renderToolbarAndroid = () => (
-    <ToolbarAndroid
+    <Icon.ToolbarAndroid
       style={styles.toolbar}
       actions={actions}
       onActionSelected={onActionSelected}
       onIconClicked={handleIconClicked}
-      navIcon={navIcon === undefined ? iconLeft : navIcon}
+      navIconName={navigator && navigator.getCurrentRoutes().length > 1 ?
+        'md-arrow-back' : 'md-menu'}
       titleColor="#fff"
       title={title}
     />
@@ -74,11 +71,13 @@ const ReadingToolbar = ({
     showActionButton = action !== undefined;
     return (
       <View style={styles.toolbar}>
-        <ImageButton
-          containerStyle={{ justifyContent: 'center', alignItems: 'center' }}
-          source={navIcon === undefined ? iconLeftIOS : navIcon}
-          style={styles.leftIOS}
+        <Icon.Button
+          name={navigator && navigator.getCurrentRoutes().length > 1 ? 'ios-arrow-back' : 'md-menu'}
+          iconStyle={styles.leftIOS}
           onPress={handleIconClicked}
+          backgroundColor="transparent"
+          underlayColor="transparent"
+          activeOpacity={0.8}
         />
         <Text
           style={[styles.titleIOS,
@@ -87,9 +86,12 @@ const ReadingToolbar = ({
           {title}
         </Text>
         {showActionButton && action.show === 'always' ?
-          <ImageButton
-            containerStyle={showActionButton ? styles.rightIOS : { height: 0, width: 0 }}
-            source={action.icon}
+          <Icon.Button
+            iconStyle={showActionButton ? styles.rightIOS : { height: 0, width: 0 }}
+            name={action.iconName}
+            backgroundColor="transparent"
+            underlayColor="transparent"
+            activeOpacity={0.8}
             onPress={onActionSelected}
           /> :
           <Button
@@ -122,21 +124,16 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
     color: '#fff',
-    fontWeight: 'bold',
     fontSize: 20,
     marginTop: 20
   },
   leftIOS: {
-    height: 15,
-    width: 25,
     marginTop: 20,
-    marginLeft: 10
+    marginLeft: 8
   },
   rightIOS: {
-    justifyContent: 'center',
-    alignItems: 'center',
     marginTop: 20,
-    marginRight: 10
+    marginRight: 8
   },
   rightText: {
     textAlign: 'center',

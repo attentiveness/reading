@@ -53,7 +53,6 @@ const homeImg = require('../img/home.png');
 const categoryImg = require('../img/category.png');
 const inspectionImg = require('../img/inspection.png');
 const infoImg = require('../img/info.png');
-const menuImg = require('../img/menu.png');
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -341,7 +340,6 @@ class Main extends React.Component {
           <ReadingToolbar
             title="iReading"
             navigator={navigator}
-            navIcon={menuImg}
             onIconClicked={this.onIconClicked}
           />
           <ScrollableTabView

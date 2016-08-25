@@ -24,6 +24,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.microsoft.codepush.react.CodePush;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.theweflex.react.WeChatPackage;
 
@@ -59,7 +60,8 @@ public class MainApplication extends Application implements ReactApplication {
                     new MainReactPackage(),
                     new WeChatPackage(),
                     new CodePush(BuildConfig.CODEPUSH_KEY, MainApplication.this, BuildConfig.DEBUG),
-                    new RNDeviceInfo());
+                    new RNDeviceInfo(),
+                    new VectorIconsPackage());
         }
     };
 

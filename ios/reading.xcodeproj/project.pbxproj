@@ -26,6 +26,8 @@
 		176D7AD01C61D31C004C465D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 176D7ACF1C61D31C004C465D /* libz.tbd */; };
 		179B10A91D210D7000405A2C /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 179B10A81D210D1F00405A2C /* libCodePush.a */; };
 		17B5769B1C84466D002717C9 /* libRCTWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 176D7AC51C61D2DB004C465D /* libRCTWeChat.a */; };
+		17EC86EF1D6EE93F006878BB /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17EC86EE1D6EE93F006878BB /* Ionicons.ttf */; };
+		17EC86F61D6EE9AB006878BB /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17EC86F51D6EE979006878BB /* libRNVectorIcons.a */; };
 		7B04B1FBAEE24C5BB7332034 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 422C8C4F68F74EB2AABBA44D /* libRNDeviceInfo.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		A85175C81D54FCB600AEF15A /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A85175C71D54FCB600AEF15A /* Bugly.framework */; };
@@ -110,6 +112,13 @@
 			remoteGlobalIDString = DA5891D81BA9A9FC002B4DB2;
 			remoteInfo = RNDeviceInfo;
 		};
+		17EC86F41D6EE979006878BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17EC86F01D6EE979006878BB /* RNVectorIcons.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
+			remoteInfo = RNVectorIcons;
+		};
 		78C398B81ACF4ADC00677621 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
@@ -148,6 +157,8 @@
 		176D7ACD1C61D315004C465D /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		176D7ACF1C61D31C004C465D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		179B10A31D210D1F00405A2C /* CodePush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
+		17EC86EE1D6EE93F006878BB /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		17EC86F01D6EE979006878BB /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		422C8C4F68F74EB2AABBA44D /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -162,6 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17EC86F61D6EE9AB006878BB /* libRNVectorIcons.a in Frameworks */,
 				A85175D71D54FD2000AEF15A /* Security.framework in Frameworks */,
 				176D7AD01C61D31C004C465D /* libz.tbd in Frameworks */,
 				179B10A91D210D7000405A2C /* libCodePush.a in Frameworks */,
@@ -289,6 +301,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		17EC86ED1D6EE93F006878BB /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				17EC86EE1D6EE93F006878BB /* Ionicons.ttf */,
+			);
+			name = Fonts;
+			path = reading/Fonts;
+			sourceTree = "<group>";
+		};
+		17EC86F11D6EE979006878BB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				17EC86F51D6EE979006878BB /* libRNVectorIcons.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +329,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				17EC86F01D6EE979006878BB /* RNVectorIcons.xcodeproj */,
 				179B10A31D210D1F00405A2C /* CodePush.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -328,6 +358,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				17EC86ED1D6EE93F006878BB /* Fonts */,
 				A85175D61D54FD2000AEF15A /* Security.framework */,
 				176D7ACF1C61D31C004C465D /* libz.tbd */,
 				176D7ACD1C61D315004C465D /* libc++.tbd */,
@@ -450,6 +481,10 @@
 					ProductGroup = 17B5768A1C844644002717C9 /* Products */;
 					ProjectRef = 928EEFD9BB9A429897093E1F /* RNDeviceInfo.xcodeproj */;
 				},
+				{
+					ProductGroup = 17EC86F11D6EE979006878BB /* Products */;
+					ProjectRef = 17EC86F01D6EE979006878BB /* RNVectorIcons.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -536,6 +571,13 @@
 			remoteRef = 17B576991C844644002717C9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		17EC86F51D6EE979006878BB /* libRNVectorIcons.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNVectorIcons.a;
+			remoteRef = 17EC86F41D6EE979006878BB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		78C398B91ACF4ADC00677621 /* libRCTLinking.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -557,6 +599,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17EC86EF1D6EE93F006878BB /* Ionicons.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

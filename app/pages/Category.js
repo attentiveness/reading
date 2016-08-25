@@ -36,10 +36,8 @@ import Button from '../components/Button';
 import { toastShort } from '../utils/ToastUtil';
 import MainContainer from '../containers/MainContainer';
 
-const checkIno = require('../img/check.png');
-
 let toolbarActions = [
-  { title: '提交', icon: checkIno, show: 'always' }
+  { title: '提交', iconName: 'md-checkmark', show: 'always' }
 ];
 let tempTypeIds = [];
 let maxCategory = 5; // 默认最多5个类别，远端可配置
