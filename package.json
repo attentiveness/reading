@@ -1,6 +1,6 @@
 {
   "name": "reading",
-  "version": "1.0.0-rc",
+  "version": "1.0.1-rc",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "immutable": "^3.7.6",
-    "leancloud-storage": "^1.3.3",
-    "react": "~15.2.1",
-    "react-native": "^0.31.0",
-    "react-native-code-push": "^1.14.2-beta",
+    "leancloud-storage": "^1.4.0-beta.0",
+    "react": "~15.3.0",
+    "react-native": "^0.32.0",
+    "react-native-code-push": "^1.14.5-beta",
     "react-native-device-info": "^0.9.4",
     "react-native-drawer-layout": "^1.1.0",
     "react-native-root-toast": "^1.0.3",
@@ -27,7 +27,7 @@
     "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
-    "babel-core": "^6.13.2",
+    "babel-core": "^6.14.0",
     "babel-eslint": "^6.1.2",
     "babel-preset-react-native": "^1.9.0",
     "chai": "^3.5.0",
@@ -35,11 +35,11 @@
     "eslint": "^3.3.1",
     "eslint-config-airbnb": "^10.0.1",
     "eslint-plugin-import": "^1.14.0",
-    "eslint-plugin-jsx-a11y": "^2.1.0",
+    "eslint-plugin-jsx-a11y": "^2.2.0",
     "eslint-plugin-react": "^6.1.2",
     "mocha": "^3.0.2",
-    "react-addons-test-utils": "~15.2.1",
-    "react-dom": "~15.2.1",
+    "react-addons-test-utils": "~15.3.0",
+    "react-dom": "~15.3.0",
     "react-native-mock": "^0.2.6",
     "redux-devtools": "^3.3.1"
   }

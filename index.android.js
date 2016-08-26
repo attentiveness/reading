@@ -15,8 +15,7 @@
  * limitations under the License.
  *
  */
-import Root from './app/root';
-
 import { AppRegistry } from 'react-native';
+import Root from './app/root';
 
 AppRegistry.registerComponent('reading', () => Root);
