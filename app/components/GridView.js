@@ -57,7 +57,7 @@ const GridView = ({
   };
 
   const renderGroup = (group) => {
-    let itemViews = group.map((item) => {
+    const itemViews = group.map((item) => {
       const i = renderItem(item);
       return i;
     });

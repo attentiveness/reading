@@ -28,8 +28,8 @@ import DeviceInfo from 'react-native-device-info';
 import ReadingToolbar from '../components/ReadingToolbar';
 import Button from '../components/Button';
 
-let API_STORE = 'http://apistore.baidu.com/';
-let READING_REPO = 'https://github.com/attentiveness/reading';
+const API_STORE = 'http://apistore.baidu.com/';
+const READING_REPO = 'https://github.com/attentiveness/reading';
 
 const aboutLogo = require('../img/about_logo.png');
 

@@ -39,7 +39,7 @@ import { formatStringWithHtml } from '../utils/FormatUtil';
 const shareIconWechat = require('../img/share_icon_wechat.png');
 const shareIconMoments = require('../img/share_icon_moments.png');
 
-let toolbarActions = [
+const toolbarActions = [
   { title: '分享', iconName: 'md-share', show: 'always' }
 ];
 let canGoBack = false;

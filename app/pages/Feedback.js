@@ -27,7 +27,7 @@ import DeviceInfo from 'react-native-device-info';
 import ReadingToolbar from '../components/ReadingToolbar';
 import { toastShort } from '../utils/ToastUtil';
 
-let toolbarActions = [
+const toolbarActions = [
   { title: '提交', iconName: 'md-checkmark', show: 'always' }
 ];
 

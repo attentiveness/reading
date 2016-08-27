@@ -54,7 +54,7 @@ class App extends React.Component {
   }
 
   renderScene(route, navigator) {
-    let Component = route.component;
+    const Component = route.component;
     tempNavigator = navigator;
     if (route.name === 'WebViewPage') {
       BackAndroid.removeEventListener('hardwareBackPress', this.goBack);
