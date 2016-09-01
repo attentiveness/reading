@@ -1,7 +1,12 @@
 {
   "name": "reading",
   "version": "1.0.1-rc",
-  "private": true,
+  "description": "iReading App Write In React-Native",
+  "license": "Apache License 2.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:attentiveness/reading.git"
+  },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "clear": "cd node_modules; find . -name .babelrc | grep -v packager | xargs rm",
@@ -10,11 +15,11 @@
   },
   "dependencies": {
     "immutable": "^3.7.6",
-    "leancloud-storage": "^1.4.0-beta.0",
+    "leancloud-storage": "^1.4.0",
     "react": "~15.3.0",
     "react-native": "^0.32.0",
-    "react-native-code-push": "^1.14.5-beta",
-    "react-native-device-info": "^0.9.4",
+    "react-native-code-push": "^1.14.6-beta",
+    "react-native-device-info": "^0.9.5",
     "react-native-drawer-layout": "^1.1.0",
     "react-native-root-toast": "^1.0.3",
     "react-native-scrollable-tab-view": "^0.5.5",
@@ -35,7 +40,7 @@
     "eslint": "^3.4.0",
     "eslint-config-airbnb": "^10.0.1",
     "eslint-plugin-import": "^1.14.0",
-    "eslint-plugin-jsx-a11y": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.1",
     "eslint-plugin-react": "^6.2.0",
     "mocha": "^3.0.2",
     "react-addons-test-utils": "~15.3.0",
