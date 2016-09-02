@@ -1,7 +1,9 @@
-import { helloSaga } from './helloSaga';
+import { fork } from 'redux-saga/effects';
+
+import { watchRequestTypeList } from './category';
 
 export default function* rootSaga() {
   yield [
-    helloSaga(),
+    fork(watchRequestTypeList),
   ];
 }
