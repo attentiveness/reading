@@ -24,7 +24,6 @@ import { WEXIN_ARTICLE_LIST } from '../constants/Urls';
 import { fetchArticleList, receiveArticleList } from '../actions/read';
 
 function* requestArticleList(isRefreshing, loading, typeId, isLoadMore, page) {
-  console.log(isRefreshing, loading, typeId, isLoadMore, page);
   try {
     yield put(fetchArticleList(isRefreshing, loading, isLoadMore));
     const articleList = yield call(request,

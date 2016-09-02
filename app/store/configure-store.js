@@ -17,11 +17,10 @@
  */
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware, { END } from 'redux-saga';
-import thunk from 'redux-thunk';
 
 import rootReducer from '../reducers/index';
 
-const middlewares = [thunk];
+const middlewares = [];
 const createLogger = require('redux-logger');
 
 // configuring saga middleware
