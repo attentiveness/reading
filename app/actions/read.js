@@ -38,7 +38,18 @@ export function fetchArticles(isRefreshing, loading, typeId, isLoadMore, page = 
   };
 }
 
-function fetchArticleList(isRefreshing, loading, isLoadMore = false) {
+export function requestArticleList(isRefreshing, loading, typeId, isLoadMore, page = 1) {
+  return {
+    type: types.REQUEST_ARTICLE_LIST,
+    isRefreshing,
+    loading,
+    isLoadMore,
+    typeId,
+    page,
+  };
+}
+
+export function fetchArticleList(isRefreshing, loading, isLoadMore = false) {
   return {
     type: types.FETCH_ARTICLE_LIST,
     isRefreshing,
@@ -47,7 +58,7 @@ function fetchArticleList(isRefreshing, loading, isLoadMore = false) {
   };
 }
 
-function receiveArticleList(articleList, typeId) {
+export function receiveArticleList(articleList, typeId) {
   return {
     type: types.RECEIVE_ARTICLE_LIST,
     articleList,

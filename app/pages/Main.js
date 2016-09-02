@@ -85,7 +85,7 @@ class Main extends React.Component {
     const { dispatch } = this.props;
     DeviceEventEmitter.addListener('changeCategory', (typeIds) => {
       typeIds.forEach((typeId) => {
-        dispatch(readAction.fetchArticles(false, true, typeId));
+        dispatch(readAction.requestArticleList(false, true, typeId));
       });
       this.setState({
         typeIds
@@ -98,7 +98,7 @@ class Main extends React.Component {
             return;
           }
           typeIds.forEach((typeId) => {
-            dispatch(readAction.fetchArticles(false, true, typeId));
+            dispatch(readAction.requestArticleList(false, true, typeId));
           });
           Storage.get('typeList').then((typeList) =>
             this.setState({
@@ -126,7 +126,7 @@ class Main extends React.Component {
   onRefresh(typeId) {
     const { dispatch } = this.props;
     canLoadMore = false;
-    dispatch(readAction.fetchArticles(true, false, typeId));
+    dispatch(readAction.requestArticleList(true, false, typeId));
   }
 
   onPress(article) {
@@ -180,7 +180,7 @@ class Main extends React.Component {
     if (canLoadMore && time - loadMoreTime > 1) {
       page++;
       const { dispatch } = this.props;
-      dispatch(readAction.fetchArticles(false, false, typeId, true, page));
+      dispatch(readAction.requestArticleList(false, false, typeId, true, page));
       canLoadMore = false;
       loadMoreTime = Date.parse(new Date()) / 1000;
     }
