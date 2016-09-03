@@ -1,0 +1,6 @@
+--require ./test/babel-register.js
+--require babel-polyfill
+--require react-native-mock/mock.js
+--compilers js:babel-core/register
+--recursive app/**/*/*.spec.js
+

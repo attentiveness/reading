@@ -10,7 +10,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "clear": "cd node_modules; find . -name .babelrc | grep -v packager | xargs rm",
-    "test": "mocha --require react-native-mock/mock.js --compilers js:babel-core/register --recursive app/**/*/*.spec.js",
+    "test": "mocha",
     "lint": "eslint"
   },
   "dependencies": {
@@ -34,6 +34,7 @@
   "devDependencies": {
     "babel-core": "^6.14.0",
     "babel-eslint": "^6.1.2",
+    "babel-polyfill": "^6.13.0",
     "babel-preset-react-native": "^1.9.0",
     "chai": "^3.5.0",
     "enzyme": "^2.4.1",
