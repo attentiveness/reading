@@ -29,7 +29,7 @@ export function* requestTypeList() {
     yield put(fetchTypeList());
     const typeList = yield call(request, WEXIN_ARTICLE_TYPE, 'get');
     yield put(receiveTypeList(typeList.showapi_res_body.typeList));
-    yield Storage.save('typeList', typeList.showapi_res_body.typeList);
+    yield call(Storage.save, 'typeList', typeList.showapi_res_body.typeList);
     const errorMessage = typeList.showapi_res_error;
     if (errorMessage && errorMessage !== '') {
       yield toastShort(errorMessage);
