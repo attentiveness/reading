@@ -24,7 +24,7 @@ import { WEXIN_ARTICLE_TYPE } from '../constants/Urls';
 import Storage from '../utils/Storage';
 import { fetchTypeList, receiveTypeList } from '../actions/category';
 
-function* requestTypeList() {
+export function* requestTypeList() {
   try {
     yield put(fetchTypeList());
     const typeList = yield call(request, WEXIN_ARTICLE_TYPE, 'get');
