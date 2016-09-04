@@ -66,7 +66,7 @@ describe('read saga tests', () => {
       'get'));
   });
 
-  it(`should put(receiveArticleList(articleList.showapi_res_body.pagebean.contentlist, ${typeId}))`, () => {
+  it(`should put(receiveArticleList(contentlist, ${typeId}))`, () => {
     const next = step(mockArticleList);
     expect(next).to.deep
       .equal(put(receiveArticleList(mockArticleList.showapi_res_body.pagebean.contentlist,

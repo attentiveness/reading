@@ -1,3 +1,4 @@
+/* eslint no-constant-condition: ["error", { "checkLoops": false }] */
 /**
  *
  * Copyright 2016-present reading
