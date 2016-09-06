@@ -2,7 +2,7 @@
   "name": "reading",
   "version": "1.0.1-rc",
   "description": "iReading App Write In React-Native",
-  "license": "Apache License 2.0",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "git@github.com:attentiveness/reading.git"
@@ -27,7 +27,7 @@
     "react-native-vector-icons": "^2.1.0",
     "react-native-wechat": "^1.5.5",
     "react-redux": "^4.4.5",
-    "redux": "^3.5.2",
+    "redux": "^3.6.0",
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.1.0"
   },
