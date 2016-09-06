@@ -22,7 +22,7 @@
     "react-native-device-info": "^0.9.5",
     "react-native-drawer-layout": "^1.1.0",
     "react-native-root-toast": "^1.0.3",
-    "react-native-scrollable-tab-view": "^0.5.5",
+    "react-native-scrollable-tab-view": "^0.6.0",
     "react-native-timeago": "^0.3.0",
     "react-native-vector-icons": "^2.1.0",
     "react-native-wechat": "^1.5.5",

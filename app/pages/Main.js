@@ -346,13 +346,12 @@ class Main extends React.Component {
           <ScrollableTabView
             renderTabBar={() =>
               <DefaultTabBar
-                underlineHeight={2}
                 tabStyle={{ paddingBottom: 0 }}
                 textStyle={{ fontSize: 16 }}
               />
             }
             tabBarBackgroundColor="#fcfcfc"
-            tabBarUnderlineColor="#3e9ce9"
+            tabBarUnderlineStyle={{ backgroundColor: '#3e9ce9', height: 2 }}
             tabBarActiveTextColor="#3e9ce9"
             tabBarInactiveTextColor="#aaaaaa"
           >
