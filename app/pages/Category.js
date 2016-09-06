@@ -29,7 +29,7 @@ import {
 
 import AV from 'leancloud-storage';
 import ReadingToolbar from '../components/ReadingToolbar';
-import { fetchTypes } from '../actions/category';
+import { requestTypeList as fetchTypes } from '../actions/category';
 import Storage from '../utils/Storage';
 import GridView from '../components/GridView';
 import Button from '../components/Button';

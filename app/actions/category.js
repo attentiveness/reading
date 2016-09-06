@@ -16,37 +16,20 @@
  *
  */
 import * as types from '../constants/ActionTypes';
-import { toastShort } from '../utils/ToastUtil';
-import { request } from '../utils/RequestUtil';
-import { WEXIN_ARTICLE_TYPE } from '../constants/Urls';
-import Storage from '../utils/Storage';
 
-export function fetchTypes() {
-  return dispatch => {
-    dispatch(fetchTypeList());
-    return request(WEXIN_ARTICLE_TYPE, 'get')
-      .then((typeList) => {
-        dispatch(receiveTypeList(typeList.showapi_res_body.typeList));
-        Storage.save('typeList', typeList.showapi_res_body.typeList);
-        const errorMessage = typeList.showapi_res_error;
-        if (errorMessage && errorMessage !== '') {
-          toastShort(errorMessage);
-        }
-      })
-      .catch(() => {
-        dispatch(receiveTypeList([]));
-        toastShort('网络发生错误，请重试');
-      });
+export function requestTypeList() {
+  return {
+    type: types.REQUEST_TYPE_LIST
   };
 }
 
-function fetchTypeList() {
+export function fetchTypeList() {
   return {
     type: types.FETCH_TYPE_LIST
   };
 }
 
-function receiveTypeList(typeList) {
+export function receiveTypeList(typeList) {
   return {
     type: types.RECEIVE_TYPE_LIST,
     typeList
