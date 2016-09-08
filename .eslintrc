@@ -20,6 +20,7 @@
         "no-mixed-operators": 0,
         "import/prefer-default-export": 0,
         "import/no-extraneous-dependencies": 0,
-        "no-plusplus": 0
+        "no-plusplus": 0,
+        "react/prefer-stateless-function": 0
     }
 }

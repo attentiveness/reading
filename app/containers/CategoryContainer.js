@@ -20,9 +20,13 @@ import { connect } from 'react-redux';
 
 import Category from '../pages/Category';
 
-const CategoryContainer = () => (
-  <Category {...this.props} />
-);
+class CategoryContainer extends React.Component {
+  render() {
+    return (
+      <Category {...this.props} />
+    );
+  }
+}
 
 function mapStateToProps(state) {
   const { category } = state;
