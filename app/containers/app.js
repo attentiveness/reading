@@ -33,6 +33,14 @@ let tempNavigator;
 let isRemoved = false;
 
 class App extends React.Component {
+  static goBack() {
+    return naviGoBack(tempNavigator);
+  }
+
+  static configureScene() {
+    return Navigator.SceneConfigs.PushFromRight;
+  }
+
   constructor(props) {
     super(props);
     registerApp('wxb24c445773822c79');
@@ -41,16 +49,7 @@ class App extends React.Component {
       appKey: '57qmeEJonefntNqRe17dAgi4'
     });
     this.renderScene = this.renderScene.bind(this);
-    this.goBack = this.goBack.bind(this);
     BackAndroid.addEventListener('hardwareBackPress', this.goBack);
-  }
-
-  goBack() {
-    return naviGoBack(tempNavigator);
-  }
-
-  configureScene() {
-    return Navigator.SceneConfigs.PushFromRight;
   }
 
   renderScene(route, navigator) {

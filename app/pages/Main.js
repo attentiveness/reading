@@ -64,6 +64,16 @@ let page = 1;
 let loadMoreTime = 0;
 
 class Main extends React.Component {
+  static componentWillUnmount() {
+    DeviceEventEmitter.removeAllListeners('changeCategory');
+  }
+
+  static onScroll() {
+    if (!canLoadMore) {
+      canLoadMore = true;
+    }
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -77,7 +87,6 @@ class Main extends React.Component {
     this.renderFooter = this.renderFooter.bind(this);
     this.renderNavigationView = this.renderNavigationView.bind(this);
     this.onIconClicked = this.onIconClicked.bind(this);
-    this.onScroll = this.onScroll.bind(this);
     canLoadMore = false;
   }
 
@@ -117,10 +126,6 @@ class Main extends React.Component {
         toastShort('没有更多数据了');
       }
     }
-  }
-
-  componentWillUnmount() {
-    DeviceEventEmitter.removeAllListeners('changeCategory');
   }
 
   onRefresh(typeId) {
@@ -169,16 +174,10 @@ class Main extends React.Component {
     this.drawer.openDrawer();
   }
 
-  onScroll() {
-    if (!canLoadMore) {
-      canLoadMore = true;
-    }
-  }
-
   onEndReached(typeId) {
     const time = Date.parse(new Date()) / 1000;
     if (canLoadMore && time - loadMoreTime > 1) {
-      page++;
+      page += 1;
       const { dispatch } = this.props;
       dispatch(readAction.requestArticleList(false, false, typeId, true, page));
       canLoadMore = false;

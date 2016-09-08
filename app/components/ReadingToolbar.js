@@ -17,10 +17,10 @@
  */
 import React, { PropTypes } from 'react';
 import {
-	StyleSheet,
-	Platform,
-	View,
-	Text
+  StyleSheet,
+  Platform,
+  View,
+  Text
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -35,7 +35,7 @@ const propTypes = {
   navigator: PropTypes.object,
   onActionSelected: PropTypes.func,
   onIconClicked: PropTypes.func,
-  navIcon: PropTypes.number
+  navIconName: PropTypes.string
 };
 
 const ReadingToolbar = ({

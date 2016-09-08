@@ -25,13 +25,7 @@ import {
 const propTypes = {
   onPress: PropTypes.func,
   disabled: PropTypes.bool,
-  source: PropTypes.oneOfType([
-    PropTypes.shape({
-      uri: PropTypes.string,
-    }),
-    // Opaque type returned by require('./image.jpg')
-    PropTypes.number,
-  ]),
+  source: PropTypes.object,
   style: View.propTypes.style,
   containerStyle: View.propTypes.style
 };

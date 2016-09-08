@@ -27,7 +27,8 @@ const propTypes = {
   disabled: PropTypes.bool,
   style: Text.propTypes.style,
   containerStyle: View.propTypes.style,
-  text: PropTypes.string
+  text: PropTypes.string,
+  activeOpacity: PropTypes.number
 };
 
 const Button = ({ onPress, disabled, style, containerStyle, text, activeOpacity }) => (

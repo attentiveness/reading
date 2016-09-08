@@ -21,7 +21,7 @@ import CodePush from 'react-native-code-push';
 import Main from '../pages/Main';
 
 class MainContainer extends React.Component {
-  componentDidMount() {
+  static componentDidMount() {
     CodePush.sync({
       deploymentKey: 'RGOUfyINiLicZnld67aD0nrbRvyLV1Ifekvul',
       updateDialog: {

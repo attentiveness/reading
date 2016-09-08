@@ -34,13 +34,13 @@ const toolbarActions = [
 let feedbackText;
 
 class Feedback extends React.Component {
+  static componentDidMount() {
+    feedbackText = '';
+  }
+
   constructor(props) {
     super(props);
     this.onActionSelected = this.onActionSelected.bind(this);
-  }
-
-  componentDidMount() {
-    feedbackText = '';
   }
 
   onActionSelected() {
