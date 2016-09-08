@@ -69,8 +69,9 @@ class Splash extends React.Component {
   render() {
     return (
       <Animated.Image
-        style={{ width: maxWidth, height: maxHeight,
-            transform: [{ scale: this.state.bounceValue }] }}
+        style={{ width: maxWidth,
+          height: maxHeight,
+          transform: [{ scale: this.state.bounceValue }] }}
         source={splashImg}
       />
     );

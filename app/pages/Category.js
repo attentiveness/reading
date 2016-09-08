@@ -109,7 +109,8 @@ class Category extends React.Component {
         [
           { text: '取消', style: 'cancel' },
           {
-            text: '确定', onPress: () => {
+            text: '确定',
+            onPress: () => {
               Storage.save('typeIds', this.state.typeIds);
               navigator.replace({
                 component: MainContainer,
@@ -162,8 +163,11 @@ class Category extends React.Component {
     return (
       <Button
         key={item.id}
-        containerStyle={[{ margin: 10, padding: 10, borderRadius: 10,
-          borderWidth: 1, borderColor: '#dddddd' },
+        containerStyle={[{ margin: 10,
+          padding: 10,
+          borderRadius: 10,
+          borderWidth: 1,
+          borderColor: '#dddddd' },
           isSelect ? { backgroundColor: '#3e9ce9' } : { backgroundColor: '#fcfcfc' }]}
         style={[{ fontSize: 16, textAlign: 'center' },
           isSelect ? { color: '#fcfcfc' } : { color: 'black' }]}

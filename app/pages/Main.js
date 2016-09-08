@@ -190,8 +190,11 @@ class Main extends React.Component {
     if (read.isLoadMore) {
       return (
         <View
-          style={{ flex: 1, flexDirection: 'row', justifyContent: 'center',
-            alignItems: 'center', padding: 5 }}
+          style={{ flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: 5 }}
         >
           <ActivityIndicator size="small" color="#3e9ce9" />
           <Text style={{ textAlign: 'center', fontSize: 16, marginLeft: 10 }}>
@@ -217,8 +220,11 @@ class Main extends React.Component {
             </Text>
             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }} >
               <Text
-                style={{ flex: 1, fontSize: 14, color: '#87CEFA',
-                  marginTop: 5, marginRight: 5 }}
+                style={{ flex: 1,
+                  fontSize: 14,
+                  color: '#87CEFA',
+                  marginTop: 5,
+                  marginRight: 5 }}
               >
                 {article.userName}
               </Text>
@@ -308,8 +314,10 @@ class Main extends React.Component {
     return (
       <View style={[styles.container, { backgroundColor: '#fcfcfc' }]}>
         <View
-          style={{ height: 120, justifyContent: 'flex-end',
-            padding: 20, backgroundColor: '#3e9ce9' }}
+          style={{ height: 120,
+            justifyContent: 'flex-end',
+            padding: 20,
+            backgroundColor: '#3e9ce9' }}
         >
           <Text style={{ fontSize: 20, textAlign: 'left', color: '#fcfcfc' }}>
             iReading
