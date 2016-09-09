@@ -39,9 +39,11 @@ iReading App Write In React-Native（Studying and Programing）
 ## Application Architecture
 
 * [Microsoft Code Push](https://github.com/Microsoft/react-native-code-push) for dynamic update
-* [Redux](https://github.com/reactjs/redux) is a predictable state container for reading app, together with [React Native](https://github.com/facebook/react-native)
-* [Mocha](https://mochajs.org/) for UT
-* [Enzyme](https://github.com/airbnb/enzyme) for testing UI components and mock
+* [Redux](https://github.com/reactjs/redux) is a predictable state container for reading application, together with [React Native](https://github.com/facebook/react-native)
+* [Redux-Saga](https://github.com/yelouafi/redux-saga/) is a library that aims to make side effects in reading application easier and better
+* [Mocha](https://mochajs.org/) and [Chai](http://chaijs.com/) for UT
+* [Enzyme](https://github.com/airbnb/enzyme) for testing [React Native](https://github.com/facebook/react-native) UI components and mock
+* [Eslint](https://github.com/eslint/eslint) is a tool for identifying and reporting on patterns found in reading application code
 
 ## Development Workflow
 
