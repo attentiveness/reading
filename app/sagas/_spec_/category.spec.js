@@ -26,7 +26,7 @@ import Storage from '../../utils/Storage';
 
 describe('category saga tests', () => {
   const generator = requestTypeList();
-  const step = (input) => generator.next(input).value;
+  const step = input => generator.next(input).value;
   const mockTypeList = {
     showapi_res_body: {
       typeList: [

@@ -99,7 +99,7 @@ class Main extends React.Component {
           typeIds.forEach((typeId) => {
             dispatch(readAction.requestArticleList(false, true, typeId));
           });
-          Storage.get('typeList').then((typeList) =>
+          Storage.get('typeList').then(typeList =>
             this.setState({
               typeIds,
               typeList

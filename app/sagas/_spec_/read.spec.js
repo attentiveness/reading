@@ -52,7 +52,7 @@ describe('read saga tests', () => {
       },
     },
   };
-  const step = (input) => generator.next(input).value;
+  const step = input => generator.next(input).value;
 
   it(`should put(fetchArticleList(${isRefreshing}, ${loading}, ${isLoadMore}))`, () => {
     const next = step();
