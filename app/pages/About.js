@@ -34,7 +34,7 @@ const READING_REPO = 'https://github.com/attentiveness/reading';
 const aboutLogo = require('../img/about_logo.png');
 
 class About extends React.Component {
-  static onPress(url) {
+  onPress(url) {
     Linking.openURL(url);
   }
 

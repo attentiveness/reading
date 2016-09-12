@@ -64,16 +64,6 @@ let page = 1;
 let loadMoreTime = 0;
 
 class Main extends React.Component {
-  static componentWillUnmount() {
-    DeviceEventEmitter.removeAllListeners('changeCategory');
-  }
-
-  static onScroll() {
-    if (!canLoadMore) {
-      canLoadMore = true;
-    }
-  }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -125,6 +115,16 @@ class Main extends React.Component {
       if (nextProps.read.noMore) {
         toastShort('没有更多数据了');
       }
+    }
+  }
+
+  componentWillUnmount() {
+    DeviceEventEmitter.removeAllListeners('changeCategory');
+  }
+
+  onScroll() {
+    if (!canLoadMore) {
+      canLoadMore = true;
     }
   }
 
