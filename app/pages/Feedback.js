@@ -44,7 +44,7 @@ class Feedback extends React.Component {
   }
 
   onActionSelected() {
-    if (feedbackText === '') {
+    if (feedbackText === undefined || feedbackText.replace(/\s+/g, '') === '') {
       toastShort('请填写建议内容哦~');
     } else {
       const { navigator } = this.props;

@@ -15,6 +15,9 @@
  * limitations under the License.
  *
  */
+import {
+  Platform
+} from 'react-native';
 import Toast from 'react-native-root-toast';
 
 let toast;
@@ -25,7 +28,7 @@ export const toastShort = (content) => {
   }
   toast = Toast.show(content.toString(), {
     duration: Toast.durations.SHORT,
-    position: Toast.positions.BOTTOM,
+    position: Platform.OS === 'android' ? Toast.positions.BOTTOM : Toast.positions.CENTER,
     shadow: true,
     animation: true,
     hideOnPress: true,
@@ -39,7 +42,7 @@ export const toastLong = (content) => {
   }
   toast = Toast.show(content.toString(), {
     duration: Toast.durations.LONG,
-    position: Toast.positions.BOTTOM,
+    position: Platform.OS === 'android' ? Toast.positions.BOTTOM : Toast.positions.CENTER,
     shadow: true,
     animation: true,
     hideOnPress: true,
