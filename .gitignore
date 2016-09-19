@@ -24,20 +24,16 @@ project.xcworkspace
 
 # Android/IJ
 #
+*.iml
 .idea
 .gradle
 local.properties
-app/app.iml
-app/reading.keystore
+android/app/reading.keystore
 
 # node.js
 #
 node_modules/
 npm-debug.log
-
-reading.keystore
-app.iml
-android.iml
 
 # BUCK
 buck-out/
