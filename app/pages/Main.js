@@ -26,6 +26,7 @@ import {
   InteractionManager,
   ActivityIndicator,
   DrawerLayoutAndroid,
+  RecyclerViewBackedScrollView,
   Image,
   Dimensions,
   Platform,
@@ -280,6 +281,7 @@ class Main extends React.Component {
         onEndReachedThreshold={10}
         onScroll={this.onScroll}
         renderFooter={this.renderFooter}
+        renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         refreshControl={
           <RefreshControl
             style={{ backgroundColor: 'transparent' }}
