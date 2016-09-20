@@ -72,7 +72,7 @@ class Feedback extends React.Component {
           navigator={navigator}
         />
         <TextInput
-          style={{ flex: 1, fontSize: 18, padding: 15, textAlignVertical: 'top' }}
+          style={styles.textInput}
           placeholder="请写下您宝贵的意见或建议，与iReading一起进步！"
           placeholderTextColor="#aaaaaa"
           underlineColorAndroid="transparent"
@@ -93,6 +93,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#fcfcfc'
+  },
+  textInput: {
+    flex: 1,
+    fontSize: 18,
+    padding: 15,
+    textAlignVertical: 'top'
   }
 });
 

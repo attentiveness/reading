@@ -88,7 +88,7 @@ const ReadingToolbar = ({
         </Text>
         {showActionButton && action.show === 'always' ?
           <Icon.Button
-            iconStyle={showActionButton ? styles.rightIOS : { height: 0, width: 0 }}
+            iconStyle={showActionButton ? styles.rightIOS : styles.zero}
             name={action.iconName}
             backgroundColor="transparent"
             underlayColor="transparent"
@@ -96,7 +96,7 @@ const ReadingToolbar = ({
             onPress={onActionSelected}
           /> :
           <Button
-            containerStyle={showActionButton ? styles.rightIOS : { height: 0, width: 0 }}
+            containerStyle={showActionButton ? styles.rightIOS : styles.zero}
             style={styles.rightText}
             text={showActionButton ? action.title : ''}
             onPress={onActionSelected}
@@ -140,6 +140,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#fff',
     fontSize: 18
+  },
+  zero: {
+    height: 0,
+    width: 0
   }
 });
 

@@ -163,14 +163,8 @@ class Category extends React.Component {
     return (
       <Button
         key={item.id}
-        containerStyle={[{ margin: 10,
-          padding: 10,
-          borderRadius: 10,
-          borderWidth: 1,
-          borderColor: '#dddddd' },
-          isSelect ? { backgroundColor: '#3e9ce9' } : { backgroundColor: '#fcfcfc' }]}
-        style={[{ fontSize: 16, textAlign: 'center' },
-          isSelect ? { color: '#fcfcfc' } : { color: 'black' }]}
+        containerStyle={[styles.categoryBtn, isSelect ? { backgroundColor: '#3e9ce9' } : { backgroundColor: '#fcfcfc' }]}
+        style={[styles.categoryText, isSelect ? { color: '#fcfcfc' } : { color: 'black' }]}
         text={item.name}
         onPress={() => this.onPress(item)}
       />
@@ -184,7 +178,7 @@ class Category extends React.Component {
         automaticallyAdjustContentInsets={false}
         horizontal={false}
         contentContainerStyle={styles.no_data}
-        style={{ flex: 1 }}
+        style={styles.base}
         refreshControl={
           <RefreshControl
             refreshing={category.loading}
@@ -194,7 +188,7 @@ class Category extends React.Component {
           />
         }
       >
-        <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#f2f2f2' }}>
+        <View style={styles.gridLayout}>
           <GridView
             items={Array.from(category.typeList)}
             itemsPerRow={3}
@@ -210,15 +204,15 @@ class Category extends React.Component {
     if (route.isFirst) {
       return (
         <View style={styles.container}>
-          <View style={{ padding: 10, backgroundColor: '#fcfcfc' }}>
-            <Text style={{ color: 'black', fontSize: 16 }}>
+          <View style={styles.header}>
+            <Text style={[styles.btnText, { color: 'black' }]}>
               初次见面，请选择您感兴趣的1-5个类别
             </Text>
           </View>
           {this.renderGridView()}
           <Button
-            containerStyle={{ margin: 10, padding: 10, borderRadius: 10, backgroundColor: 'green' }}
-            style={{ fontSize: 16, textAlign: 'center', color: '#fff' }}
+            containerStyle={styles.sureBtn}
+            style={styles.btnText}
             text={"确认"}
             onPress={() => this.onSelectCatagory()}
           />
@@ -233,8 +227,8 @@ class Category extends React.Component {
           navigator={navigator}
           onActionSelected={this.onActionSelected}
         />
-        <View style={{ padding: 10, backgroundColor: '#fcfcfc' }}>
-          <Text style={{ color: 'black', fontSize: 16 }}>
+        <View style={styles.header}>
+          <Text style={[styles.btnText, { color: 'black' }]}>
             请选择您感兴趣的1-5个类别
           </Text>
         </View>
@@ -245,10 +239,44 @@ class Category extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  base: {
+    flex: 1
+  },
   container: {
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#FFF'
+  },
+  categoryBtn: {
+    margin: 10,
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#dddddd'
+  },
+  categoryText: {
+    fontSize: 16,
+    textAlign: 'center'
+  },
+  gridLayout: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#f2f2f2'
+  },
+  sureBtn: {
+    margin: 10,
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: 'green'
+  },
+  btnText: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: '#fff'
+  },
+  header: {
+    padding: 10,
+    backgroundColor: '#fcfcfc'
   }
 });
 

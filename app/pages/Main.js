@@ -190,21 +190,15 @@ class Main extends React.Component {
     const { read } = this.props;
     if (read.isLoadMore) {
       return (
-        <View
-          style={{ flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: 5 }}
-        >
+        <View style={styles.footerContainer} >
           <ActivityIndicator size="small" color="#3e9ce9" />
-          <Text style={{ textAlign: 'center', fontSize: 16, marginLeft: 10 }}>
+          <Text style={styles.footerText}>
             数据加载中……
           </Text>
         </View>
       );
     }
-    return null;
+    return <View />;
   }
 
   renderItem(article) {
@@ -212,25 +206,19 @@ class Main extends React.Component {
       <TouchableOpacity onPress={() => this.onPress(article)}>
         <View style={styles.containerItem}>
           <Image
-            style={{ width: 88, height: 66, marginRight: 10 }}
+            style={styles.itemImg}
             source={{ uri: article.contentImg }}
           />
-          <View style={{ flex: 1, flexDirection: 'column' }} >
+          <View style={styles.itemRightContent} >
             <Text style={styles.title}>
               {formatStringWithHtml(article.title)}
             </Text>
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }} >
-              <Text
-                style={{ flex: 1,
-                  fontSize: 14,
-                  color: '#87CEFA',
-                  marginTop: 5,
-                  marginRight: 5 }}
-              >
+            <View style={styles.itemRightBottom} >
+              <Text style={styles.userName} >
                 {article.userName}
               </Text>
               <TimeAgo
-                style={{ fontSize: 14, color: '#aaaaaa', marginTop: 5 }}
+                style={styles.timeAgo}
                 time={article.date}
               />
             </View>
@@ -252,10 +240,10 @@ class Main extends React.Component {
           automaticallyAdjustContentInsets={false}
           horizontal={false}
           contentContainerStyle={styles.no_data}
-          style={{ flex: 1 }}
+          style={styles.base}
           refreshControl={
             <RefreshControl
-              style={{ backgroundColor: 'transparent' }}
+              style={styles.refreshControlBase}
               refreshing={read.isRefreshing}
               onRefresh={() => this.onRefresh(typeId)}
               title="Loading..."
@@ -284,7 +272,7 @@ class Main extends React.Component {
         renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         refreshControl={
           <RefreshControl
-            style={{ backgroundColor: 'transparent' }}
+            style={styles.refreshControlBase}
             refreshing={read.isRefreshing}
             onRefresh={() => this.onRefresh(typeId)}
             title="Loading..."
@@ -315,16 +303,11 @@ class Main extends React.Component {
   renderNavigationView() {
     return (
       <View style={[styles.container, { backgroundColor: '#fcfcfc' }]}>
-        <View
-          style={{ height: 120,
-            justifyContent: 'flex-end',
-            padding: 20,
-            backgroundColor: '#3e9ce9' }}
-        >
-          <Text style={{ fontSize: 20, textAlign: 'left', color: '#fcfcfc' }}>
+        <View style={styles.drawerTitleContent} >
+          <Text style={styles.drawerTitle}>
             iReading
           </Text>
-          <Text style={{ fontSize: 20, textAlign: 'left', color: '#fcfcfc' }}>
+          <Text style={styles.drawerTitle}>
             让生活更精彩
           </Text>
         </View>
@@ -355,12 +338,12 @@ class Main extends React.Component {
           <ScrollableTabView
             renderTabBar={() =>
               <DefaultTabBar
-                tabStyle={{ paddingBottom: 0 }}
-                textStyle={{ fontSize: 16 }}
+                tabStyle={styles.tab}
+                textStyle={styles.tabText}
               />
             }
             tabBarBackgroundColor="#fcfcfc"
-            tabBarUnderlineStyle={{ backgroundColor: '#3e9ce9', height: 2 }}
+            tabBarUnderlineStyle={styles.tabBarUnderline}
             tabBarActiveTextColor="#3e9ce9"
             tabBarInactiveTextColor="#aaaaaa"
           >
@@ -379,7 +362,7 @@ class Main extends React.Component {
                 <View
                   key={typeId}
                   tabLabel={name}
-                  style={{ flex: 1 }}
+                  style={styles.base}
                 >
                   {this.renderContent(this.state.dataSource.cloneWithRows(
                     read.articleList[typeId] === undefined ? [] :
@@ -395,6 +378,9 @@ class Main extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  base: {
+    flex: 1
+  },
   container: {
     flex: 1,
     flexDirection: 'column',
@@ -430,16 +416,78 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#ddd'
   },
+  drawerTitleContent: {
+    height: 120,
+    justifyContent: 'flex-end',
+    padding: 20,
+    backgroundColor: '#3e9ce9'
+  },
   drawerIcon: {
     width: 30,
     height: 30,
     marginLeft: 5
+  },
+  drawerTitle: {
+    fontSize: 20,
+    textAlign: 'left',
+    color: '#fcfcfc'
   },
   drawerText: {
     fontSize: 18,
     marginLeft: 15,
     textAlign: 'center',
     color: 'black'
+  },
+  footerContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 5
+  },
+  footerText: {
+    textAlign: 'center',
+    fontSize: 16,
+    marginLeft: 10
+  },
+  itemImg: {
+    width: 88,
+    height: 66,
+    marginRight: 10
+  },
+  itemRightContent: {
+    flex: 1,
+    flexDirection: 'column'
+  },
+  itemRightBottom: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  userName: {
+    flex: 1,
+    fontSize: 14,
+    color: '#87CEFA',
+    marginTop: 5,
+    marginRight: 5
+  },
+  timeAgo: {
+    fontSize: 14,
+    color: '#aaaaaa',
+    marginTop: 5
+  },
+  refreshControlBase: {
+    backgroundColor: 'transparent'
+  },
+  tab: {
+    paddingBottom: 0
+  },
+  tabText: {
+    fontSize: 16
+  },
+  tabBarUnderline: {
+    backgroundColor: '#3e9ce9',
+    height: 2
   }
 });
 

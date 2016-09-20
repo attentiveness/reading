@@ -47,38 +47,38 @@ class About extends React.Component {
           navigator={navigator}
         />
         <View style={styles.content}>
-          <View style={{ flex: 1, alignItems: 'center' }}>
+          <View style={styles.center}>
             <Image
-              style={{ width: 110, height: 110, marginTop: 50 }}
+              style={styles.logo}
               source={aboutLogo}
             />
-            <Text style={{ fontSize: 16, textAlign: 'center', color: '#aaaaaa', marginTop: 5 }}>
+            <Text style={styles.version}>
               {`v${DeviceInfo.getVersion()}`}
             </Text>
-            <Text style={{ fontSize: 28, textAlign: 'center', color: '#313131', marginTop: 10 }}>
+            <Text style={styles.title}>
               iReading
             </Text>
-            <Text style={{ fontSize: 18, textAlign: 'center', color: '#4e4e4e' }}>
+            <Text style={styles.subtitle}>
               让生活更精彩
             </Text>
           </View>
-          <View style={{ alignItems: 'center' }}>
-            <View style={{ flexDirection: 'column' }}>
-              <Text style={{ fontSize: 14, textAlign: 'center', color: '#999999' }}>
+          <View style={styles.bottomContainer}>
+            <View style={styles.disclaimerContent}>
+              <Text style={[styles.disclaimer, { color: '#999999' }]}>
                 免责声明：所有内容均来自——
               </Text>
               <Button
-                style={{ fontSize: 14, textAlign: 'center', color: '#3e9ce9' }}
+                style={[styles.disclaimer, { color: '#3e9ce9' }]}
                 text={API_STORE}
                 onPress={() => this.onPress(API_STORE)}
               />
             </View>
-            <View style={{ flexDirection: 'row', marginTop: 8 }}>
-              <Text style={{ fontSize: 12, textAlign: 'center', color: '#aaaaaa' }}>
+            <View style={styles.sourceContent}>
+              <Text style={[styles.source, { color: '#aaaaaa' }]}>
                 @Github：
               </Text>
               <Button
-                style={{ fontSize: 12, textAlign: 'center', color: '#3e9ce9' }}
+                style={[styles.source, { color: '#3e9ce9' }]}
                 text={READING_REPO}
                 onPress={() => this.onPress(READING_REPO)}
               />
@@ -100,6 +100,50 @@ const styles = StyleSheet.create({
     backgroundColor: '#fcfcfc',
     justifyContent: 'center',
     paddingBottom: 10
+  },
+  center: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  logo: {
+    width: 110,
+    height: 110,
+    marginTop: 50
+  },
+  version: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: '#aaaaaa',
+    marginTop: 5
+  },
+  title: {
+    fontSize: 28,
+    textAlign: 'center',
+    color: '#313131',
+    marginTop: 10
+  },
+  subtitle: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: '#4e4e4e'
+  },
+  disclaimerContent: {
+    flexDirection: 'column'
+  },
+  disclaimer: {
+    fontSize: 14,
+    textAlign: 'center'
+  },
+  sourceContent: {
+    flexDirection: 'row',
+    marginTop: 8
+  },
+  source: {
+    fontSize: 12,
+    textAlign: 'center'
+  },
+  bottomContainer: {
+    alignItems: 'center'
   }
 });
 
