@@ -114,5 +114,11 @@ BLY_START_NONNULL
  */
 @property (nonatomic, copy) NSArray * excludeModuleFilter;
 
+/**
+ * 控制台日志上报开关，默认关闭
+ */
+@property (nonatomic, assign) BOOL  consolelogEnable;
+
+
 @end
 BLY_END_NONNULL
