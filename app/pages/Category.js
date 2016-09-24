@@ -213,7 +213,7 @@ class Category extends React.Component {
           <Button
             containerStyle={styles.sureBtn}
             style={styles.btnText}
-            text={"确认"}
+            text={'确认'}
             onPress={() => this.onSelectCatagory()}
           />
         </View>
