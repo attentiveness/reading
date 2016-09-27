@@ -29,7 +29,6 @@ import {
 
 import AV from 'leancloud-storage';
 import ReadingToolbar from '../components/ReadingToolbar';
-import { requestTypeList as fetchTypes } from '../actions/category';
 import Storage from '../utils/Storage';
 import GridView from '../components/GridView';
 import Button from '../components/Button';
@@ -43,7 +42,7 @@ let tempTypeIds = [];
 let maxCategory = 5; // 默认最多5个类别，远端可配置
 
 const propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  categoryActions: PropTypes.object,
   category: PropTypes.object.isRequired
 };
 
@@ -75,8 +74,8 @@ class Category extends React.Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchTypes());
+    const { categoryActions } = this.props;
+    categoryActions.requestTypeList();
     const query = new AV.Query('Reading_Settings');
     query.get('57b86e0ba633bd002a96436b').then((settings) => {
       maxCategory = settings.get('max_category');
@@ -84,8 +83,8 @@ class Category extends React.Component {
   }
 
   onRefresh() {
-    const { dispatch } = this.props;
-    dispatch(fetchTypes());
+    const { categoryActions } = this.props;
+    categoryActions.requestTypeList();
   }
 
   onPress(type) {

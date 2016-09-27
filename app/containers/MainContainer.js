@@ -18,7 +18,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CodePush from 'react-native-code-push';
+import { bindActionCreators } from 'redux';
 import Main from '../pages/Main';
+import * as readCreators from '../actions/read';
 
 class MainContainer extends React.Component {
   static componentDidMount() {
@@ -41,11 +43,18 @@ class MainContainer extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
   const { read } = state;
   return {
     read
   };
-}
+};
 
-export default connect(mapStateToProps)(MainContainer);
+const mapDispatchToProps = (dispatch) => {
+  const readActions = bindActionCreators(readCreators, dispatch);
+  return {
+    readActions
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

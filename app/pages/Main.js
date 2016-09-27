@@ -37,7 +37,6 @@ import {
 import DrawerLayout from 'react-native-drawer-layout';
 import TimeAgo from 'react-native-timeago';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
-import * as readAction from '../actions/read';
 import LoadingView from '../components/LoadingView';
 import ReadingToolbar from '../components/ReadingToolbar';
 import About from '../pages/About';
@@ -56,7 +55,7 @@ const inspectionImg = require('../img/inspection.png');
 const infoImg = require('../img/info.png');
 
 const propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  readActions: PropTypes.object,
   read: PropTypes.object.isRequired
 };
 
@@ -82,10 +81,10 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { readActions } = this.props;
     DeviceEventEmitter.addListener('changeCategory', (typeIds) => {
       typeIds.forEach((typeId) => {
-        dispatch(readAction.requestArticleList(false, true, typeId));
+        readActions.requestArticleList(false, true, typeId);
       });
       this.setState({
         typeIds
@@ -98,7 +97,7 @@ class Main extends React.Component {
             return;
           }
           typeIds.forEach((typeId) => {
-            dispatch(readAction.requestArticleList(false, true, typeId));
+            readActions.requestArticleList(false, true, typeId);
           });
           Storage.get('typeList').then(typeList =>
             this.setState({
@@ -130,9 +129,9 @@ class Main extends React.Component {
   }
 
   onRefresh(typeId) {
-    const { dispatch } = this.props;
+    const { readActions } = this.props;
     canLoadMore = false;
-    dispatch(readAction.requestArticleList(true, false, typeId));
+    readActions.requestArticleList(true, false, typeId);
   }
 
   onPress(article) {
@@ -179,8 +178,8 @@ class Main extends React.Component {
     const time = Date.parse(new Date()) / 1000;
     if (canLoadMore && time - loadMoreTime > 1) {
       page += 1;
-      const { dispatch } = this.props;
-      dispatch(readAction.requestArticleList(false, false, typeId, true, page));
+      const { readActions } = this.props;
+      readActions.requestArticleList(false, false, typeId, true, page);
       canLoadMore = false;
       loadMoreTime = Date.parse(new Date()) / 1000;
     }
