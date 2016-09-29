@@ -44,6 +44,7 @@ iReading App Write In React-Native（Studying and Programing）
 * [Mocha](https://mochajs.org/) and [Chai](http://chaijs.com/) for UT
 * [Enzyme](https://github.com/airbnb/enzyme) for testing [React Native](https://github.com/facebook/react-native) UI components and mock
 * [Eslint](https://github.com/eslint/eslint) is a tool for identifying and reporting on patterns found in reading application code
+* [react-native-exceptions-manager](https://github.com/Richard-Cao/react-native-exceptions-manager) for handler js crash in release version
 
 ## Development Workflow
 
