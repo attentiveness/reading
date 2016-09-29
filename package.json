@@ -20,7 +20,7 @@
     "react-native-code-push": "^1.14.6-beta",
     "react-native-device-info": "^0.9.5",
     "react-native-drawer-layout": "^1.1.0",
-    "react-native-exceptions-manager": "^0.1.3",
+    "react-native-exceptions-manager": "^0.1.4",
     "react-native-root-toast": "^1.0.3",
     "react-native-scrollable-tab-view": "^0.6.0",
     "react-native-timeago": "^0.3.0",
