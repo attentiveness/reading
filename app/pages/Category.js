@@ -121,6 +121,7 @@ class Category extends React.Component {
       );
     } else {
       Storage.save('typeIds', this.state.typeIds);
+      Storage.save('isInit', true);
       navigator.replace({
         component: MainContainer,
         name: 'Main'

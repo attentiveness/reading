@@ -1,7 +1,8 @@
 rootProject.name = 'reading'
 
-include ':app', ':RCTWeChat', ':react-native-code-push', ':RNDeviceInfo', ':react-native-vector-icons'
+include ':app', ':RCTWeChat', ':react-native-code-push', ':RNDeviceInfo', ':react-native-vector-icons', ':react-native-exceptions-manager'
 project(':RCTWeChat').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-wechat/android')
 project(':react-native-code-push').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-code-push/android/app')
 project(':RNDeviceInfo').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-device-info/android')
 project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
+project(':react-native-exceptions-manager').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-exceptions-manager/android')

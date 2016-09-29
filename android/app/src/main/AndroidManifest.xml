@@ -29,6 +29,12 @@
             android:exported="true"
             android:label="@string/app_name" />
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+        <!--react-native异常捕捉-->
+        <receiver android:name=".ReactNativeJSCrashReceiver">
+            <intent-filter>
+                <action android:name="com.richardcao.android.REACT_NATIVE_CRASH_REPORT_ACTION" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
