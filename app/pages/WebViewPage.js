@@ -45,14 +45,6 @@ const toolbarActions = [
 let canGoBack = false;
 
 class WebViewPage extends React.Component {
-  static onNavigationStateChange(navState) {
-    canGoBack = navState.canGoBack;
-  }
-
-  static renderLoading() {
-    return <LoadingView />;
-  }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -76,6 +68,10 @@ class WebViewPage extends React.Component {
     });
   }
 
+  onNavigationStateChange(navState) {
+    canGoBack = navState.canGoBack;
+  }
+
   goBack() {
     if (this.state.isShareModal) {
       this.setState({
@@ -87,6 +83,10 @@ class WebViewPage extends React.Component {
       return true;
     }
     return naviGoBack(this.props.navigator);
+  }
+
+  renderLoading() {
+    return <LoadingView />;
   }
 
   renderSpinner() {

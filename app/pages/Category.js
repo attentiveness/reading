@@ -205,7 +205,7 @@ class Category extends React.Component {
       return (
         <View style={styles.container}>
           <View style={styles.header}>
-            <Text style={[styles.btnText, { color: 'black' }]}>
+            <Text style={[styles.btnText, { color: 'black', padding: 5, fontSize: 18 }]}>
               初次见面，请选择您感兴趣的1-5个类别
             </Text>
           </View>
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
     margin: 10,
     padding: 10,
     borderRadius: 10,
-    backgroundColor: 'green'
+    backgroundColor: '#3e9ce9'
   },
   btnText: {
     fontSize: 16,
