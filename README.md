@@ -3,8 +3,11 @@
 ![iReading_Logo](./Reading_Logo.png)
 
 [![Build Status](https://travis-ci.org/attentiveness/reading.svg?branch=master)](https://travis-ci.org/attentiveness/reading)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0c70a6d2338348c982ba3336d31da478)](https://www.codacy.com/app/403164405/reading?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=attentiveness/reading&amp;utm_campaign=Badge_Grade)
 [![Join the chat at https://gitter.im/attentiveness/reading](https://badges.gitter.im/attentiveness/reading.svg)](https://gitter.im/attentiveness/reading)
 [![License Apache2.0](https://img.shields.io/hexpm/l/plug.svg)](https://raw.githubusercontent.com/attentiveness/reading/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/attentiveness/reading.svg?maxAge=2592000?style=flat-square)](https://github.com/attentiveness/reading/releases)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/attentiveness/reading/pulls)
 
 iReading App Write In React-Native（Studying and Programing）
 
