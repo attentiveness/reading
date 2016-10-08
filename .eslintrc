@@ -14,7 +14,7 @@
         "comma-dangle": 0,
         "react/prop-types": 0,
         "no-use-before-define": 0,
-        "radix": ["error", "as-needed"],
+        "radix": 0,
         "no-param-reassign": 0,
         "react/jsx-filename-extension": 0,
         "no-mixed-operators": 0,
