@@ -31,13 +31,12 @@ iReading App Write In React-Native（Studying and Programing）
 *Wandou Labs:* [Download iReading](http://www.wandoujia.com/apps/com.reading)
 
 ### From App Store
-[Download iReading](https://itunes.apple.com/us/app/ireading/id1135411121?l=zh&ls=1&mt=8)
+
+[Download iReading](https://itunes.apple.com/cn/app/ireading/id1135411121?l=zh&ls=1&mt=8)
 
 ### β Version
 
 *Android:* [Download iReading](http://fir.im/w7gu)
-
-*iOS:* :rocket: Coming soon!
 
 ## Application Architecture
 
@@ -52,18 +51,22 @@ iReading App Write In React-Native（Studying and Programing）
 ## Development Workflow
 
 ### Step One
+
 ```
 npm install -g react-native-cli
 ```
 ### Step Two
+
 ```
 npm install
 ```
 ### Step Three
+
 ```
 react-native start
 ```
 ### Run Test
+
 ```
 npm test
 ```
@@ -79,13 +82,6 @@ npm test
 ## OnLine Accident
 
 [Reading Online Accident](./Reading_OnLine_Accident.md)
-
-## Welcome
-
->* Star
->* Fork
->* PR
->* Issue
 
 ## Contributing
 
