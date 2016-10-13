@@ -122,10 +122,10 @@ class WebViewPage extends React.Component {
                           webpageUrl: route.article.url
                         })
                         .catch((error) => {
-                          toastShort(error.message);
+                          toastShort(error.message, true);
                         });
                       } else {
-                        toastShort('没有安装微信软件，请您安装微信之后再试');
+                        toastShort('没有安装微信软件，请您安装微信之后再试', true);
                       }
                     });
                 }}
@@ -153,10 +153,10 @@ class WebViewPage extends React.Component {
                           webpageUrl: route.article.url
                         })
                         .catch((error) => {
-                          toastShort(error.message);
+                          toastShort(error.message, true);
                         });
                       } else {
-                        toastShort('没有安装微信软件，请您安装微信之后再试');
+                        toastShort('没有安装微信软件，请您安装微信之后再试', true);
                       }
                     });
                 }}
