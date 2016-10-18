@@ -11,7 +11,7 @@
 
 iReading App Write In React-Native（Studying and Programing）
 
-**Support: Android 4.1 (API 16)+   IOS(7.0+)**
+**Support: Android 4.1 (API 16)+   IOS(8.0+)**
 
 > No Profit, No Advertisement, Only Feelings
 
