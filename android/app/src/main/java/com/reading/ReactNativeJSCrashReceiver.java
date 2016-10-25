@@ -14,8 +14,14 @@ public class ReactNativeJSCrashReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("com.richardcao.android.REACT_NATIVE_CRASH_REPORT_ACTION")) {
-            Throwable throwable = (Throwable) intent.getSerializableExtra("JavascriptException");
-            CrashReport.postCatchedException(throwable);
+            Throwable js = (Throwable) intent.getSerializableExtra("JavascriptException");
+            Throwable e = (Throwable) intent.getSerializableExtra("Exception");
+            if (js != null) {
+                CrashReport.postCatchedException(js);
+            }
+            if (e != null) {
+                CrashReport.postCatchedException(e);
+            }
         }
     }
 }

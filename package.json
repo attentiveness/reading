@@ -20,7 +20,7 @@
     "react-native-code-push": "^1.15.0-beta",
     "react-native-device-info": "^0.9.6",
     "react-native-drawer-layout": "^1.1.0",
-    "react-native-exceptions-manager": "^0.1.5",
+    "react-native-exceptions-manager": "^0.1.6",
     "react-native-root-toast": "^1.0.3",
     "react-native-scrollable-tab-view": "^0.6.0",
     "react-native-timeago": "^0.3.0",
@@ -32,7 +32,7 @@
     "redux-saga": "^0.12.0"
   },
   "devDependencies": {
-    "babel-core": "^6.17.0",
+    "babel-core": "^6.18.0",
     "babel-eslint": "^7.0.0",
     "babel-polyfill": "^6.16.0",
     "babel-preset-react-native": "^1.9.0",

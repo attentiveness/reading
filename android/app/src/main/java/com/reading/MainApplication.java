@@ -18,9 +18,12 @@ package com.reading;
 
 import android.app.Application;
 
+import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.ReactApplication;
+import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+import com.facebook.react.common.LifecycleState;
 import com.facebook.react.shell.MainReactPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.microsoft.codepush.react.CodePush;
@@ -45,6 +48,32 @@ public class MainApplication extends Application implements ReactApplication {
     }
 
     private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+
+        @Override
+        protected ReactInstanceManager createReactInstanceManager() {
+            ReactInstanceManager.Builder builder = ReactInstanceManager.builder()
+                    .setApplication(getApplication())
+                    .setJSMainModuleName(getJSMainModuleName())
+                    .setUseDeveloperSupport(getUseDeveloperSupport())
+                    .setRedBoxHandler(getRedBoxHandler())
+                    .setUIImplementationProvider(getUIImplementationProvider())
+                    .setInitialLifecycleState(LifecycleState.BEFORE_CREATE)
+                    .setNativeModuleCallExceptionHandler(
+                            new ReadingNativeModuleCallExceptionHandler());
+
+            for (ReactPackage reactPackage : getPackages()) {
+                builder.addPackage(reactPackage);
+            }
+
+            String jsBundleFile = getJSBundleFile();
+            if (jsBundleFile != null) {
+                builder.setJSBundleFile(jsBundleFile);
+            } else {
+                builder.setBundleAssetName(Assertions.assertNotNull(getBundleAssetName()));
+            }
+            return builder.build();
+        }
+
         @Override
         protected boolean getUseDeveloperSupport() {
             return BuildConfig.DEBUG;
