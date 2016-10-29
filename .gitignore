@@ -43,3 +43,5 @@ android/keystores/debug.keystore
 
 # Others
 .vscode/
+# Fix https://github.com/Microsoft/vscode-react-native/issues/315
+typings/

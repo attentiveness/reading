@@ -82,7 +82,7 @@ const ReadingToolbar = ({
         />
         <Text
           style={[styles.titleIOS,
-          showActionButton ? { paddingLeft: 0 } : { paddingLeft: -35 }]}
+            showActionButton ? { paddingLeft: 0 } : { paddingLeft: -35 }]}
         >
           {title}
         </Text>
