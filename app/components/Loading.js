@@ -56,7 +56,7 @@ const Loading = ({ visible, color, size, overlayColor, onRequestClose }) => (
           </View>
         </View>
       </View> :
-        <View key={'spinner'} />}
+      <View key={'spinner'} />}
   </Modal>
 );
 

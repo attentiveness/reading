@@ -95,12 +95,12 @@ const ReadingToolbar = ({
             activeOpacity={0.8}
             onPress={onActionSelected}
           /> :
-            <Button
-              containerStyle={showActionButton ? styles.rightIOS : styles.zero}
-              style={styles.rightText}
-              text={showActionButton ? action.title : ''}
-              onPress={onActionSelected}
-            />
+          <Button
+            containerStyle={showActionButton ? styles.rightIOS : styles.zero}
+            style={styles.rightText}
+            text={showActionButton ? action.title : ''}
+            onPress={onActionSelected}
+          />
         }
       </View>
     );
