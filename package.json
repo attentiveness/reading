@@ -14,6 +14,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "babel-plugin-transform-remove-console": "^6.8.0",
     "leancloud-storage": "^1.5.2",
     "react": "~15.3.1",
     "react-native": "^0.37.0",
@@ -32,7 +33,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.18.2",
-    "babel-eslint": "^7.1.0",
+    "babel-eslint": "^7.1.1",
     "babel-polyfill": "^6.16.0",
     "babel-preset-react-native": "^1.9.0",
     "chai": "^3.5.0",
