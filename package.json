@@ -14,7 +14,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "babel-plugin-transform-remove-console": "^6.8.0",
     "leancloud-storage": "^1.5.2",
     "react": "~15.3.1",
     "react-native": "^0.37.0",
