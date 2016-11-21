@@ -24,7 +24,7 @@
     "react-native-scrollable-tab-view": "^0.6.0",
     "react-native-timeago": "^0.3.0",
     "react-native-vector-icons": "^3.0.0",
-    "react-native-wechat": "^1.7.0",
+    "react-native-wechat": "^1.7.2",
     "react-redux": "^4.4.6",
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
@@ -45,7 +45,7 @@
     "mocha": "^3.1.2",
     "react-addons-test-utils": "~15.3.1",
     "react-dom": "~15.3.1",
-    "react-native-mock": "^0.2.7",
+    "react-native-mock": "^0.2.8",
     "redux-devtools": "^3.3.1"
   }
 }
