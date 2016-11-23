@@ -9,8 +9,7 @@
   },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "clear": "cd node_modules; find . -name .babelrc | grep -v packager | xargs rm",
-    "test": "mocha",
+    "test": "jest",
     "lint": "eslint"
   },
   "dependencies": {
@@ -30,22 +29,21 @@
     "redux-logger": "^2.7.4",
     "redux-saga": "^0.13.0"
   },
+  "jest": {
+    "preset": "jest-react-native"
+  },
   "devDependencies": {
-    "babel-core": "^6.18.2",
     "babel-eslint": "^7.1.1",
-    "babel-polyfill": "^6.16.0",
+    "babel-jest": "^17.0.2",
     "babel-preset-react-native": "^1.9.0",
-    "chai": "^3.5.0",
-    "enzyme": "^2.6.0",
     "eslint": "^3.10.2",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.7.1",
-    "mocha": "^3.1.2",
-    "react-addons-test-utils": "~15.4.1",
-    "react-dom": "~15.4.1",
-    "react-native-mock": "^0.2.8",
+    "jest": "^17.0.3",
+    "jest-react-native": "^17.0.3",
+    "react-test-renderer": "^15.4.1",
     "redux-devtools": "^3.3.1"
   }
 }

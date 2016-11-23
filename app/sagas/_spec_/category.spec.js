@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-import { expect } from 'chai';
 import { put, call } from 'redux-saga/effects';
 
 import { requestTypeList } from '../category';
@@ -24,6 +23,7 @@ import { request } from '../../utils/RequestUtil';
 import { WEXIN_ARTICLE_TYPE } from '../../constants/Urls';
 import Storage from '../../utils/Storage';
 
+/* global expect */
 describe('category saga tests', () => {
   const generator = requestTypeList();
   const step = input => generator.next(input).value;
@@ -44,28 +44,28 @@ describe('category saga tests', () => {
 
   it('should put(fetchTypeList())', () => {
     const next = step();
-    expect(next).to.deep.equal(put(fetchTypeList()));
+    expect(next).toEqual(put(fetchTypeList()));
   });
 
   it("should call(request, WEXIN_ARTICLE_TYPE, 'get')", () => {
     const next = step();
-    expect(next).to.deep.equal(call(request, WEXIN_ARTICLE_TYPE, 'get'));
+    expect(next).toEqual(call(request, WEXIN_ARTICLE_TYPE, 'get'));
   });
 
   it('should put(receiveTypeList(typeList.showapi_res_body.typeList))', () => {
     const next = step(mockTypeList);
-    expect(next).to.deep.equal(put(receiveTypeList(mockTypeList.showapi_res_body.typeList)));
+    expect(next).toEqual(put(receiveTypeList(mockTypeList.showapi_res_body.typeList)));
   });
 
   it("should call(Storage.save, 'typeList', typeList.showapi_res_body.typeList)", () => {
     const next = step(mockTypeList);
-    expect(next).to.deep.equal(call(Storage.save,
+    expect(next).toEqual(call(Storage.save,
       'typeList',
       mockTypeList.showapi_res_body.typeList));
   });
 
   it('should be done', () => {
     const next = generator.next();
-    expect(next.done).to.equal(true);
+    expect(next.done).toEqual(true);
   });
 });

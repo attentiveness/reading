@@ -15,7 +15,6 @@
  * limitations under the License.
  *
  */
-import { expect } from 'chai';
 import { put, call } from 'redux-saga/effects';
 
 import { requestArticleList } from '../read';
@@ -23,6 +22,7 @@ import { request } from '../../utils/RequestUtil';
 import { WEXIN_ARTICLE_LIST } from '../../constants/Urls';
 import { fetchArticleList, receiveArticleList } from '../../actions/read';
 
+/* global expect */
 describe('read saga tests', () => {
   const {
     isRefreshing,
@@ -56,25 +56,24 @@ describe('read saga tests', () => {
 
   it(`should put(fetchArticleList(${isRefreshing}, ${loading}, ${isLoadMore}))`, () => {
     const next = step();
-    expect(next).to.deep.equal(put(fetchArticleList(isRefreshing, loading, isLoadMore)));
+    expect(next).toEqual(put(fetchArticleList(isRefreshing, loading, isLoadMore)));
   });
 
   it(`should call(request, ${WEXIN_ARTICLE_LIST}?typeId=${typeId}&page=${page}, 'get')`, () => {
     const next = step();
-    expect(next).to.deep.equal(call(request,
+    expect(next).toEqual(call(request,
       `${WEXIN_ARTICLE_LIST}?typeId=${typeId}&page=${page}`,
       'get'));
   });
 
   it(`should put(receiveArticleList(contentlist, ${typeId}))`, () => {
     const next = step(mockArticleList);
-    expect(next).to.deep
-      .equal(put(receiveArticleList(mockArticleList.showapi_res_body.pagebean.contentlist,
-        typeId)));
+    expect(next).toEqual(
+      put(receiveArticleList(mockArticleList.showapi_res_body.pagebean.contentlist, typeId)));
   });
 
   it('should be done', () => {
     const done = generator.next().done;
-    expect(done).to.equal(true);
+    expect(done).toEqual(true);
   });
 });
