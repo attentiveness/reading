@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "leancloud-storage": "^1.5.2",
-    "react": "~15.3.1",
-    "react-native": "^0.37.0",
+    "react": "~15.4.1",
+    "react-native": "^0.38.0",
     "react-native-code-push": "^1.16.0-beta",
     "react-native-device-info": "^0.9.6",
     "react-native-drawer-layout": "^1.1.0",
@@ -43,8 +43,8 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.7.1",
     "mocha": "^3.1.2",
-    "react-addons-test-utils": "~15.3.1",
-    "react-dom": "~15.3.1",
+    "react-addons-test-utils": "~15.4.1",
+    "react-dom": "~15.4.1",
     "react-native-mock": "^0.2.8",
     "redux-devtools": "^3.3.1"
   }
