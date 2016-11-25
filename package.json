@@ -26,7 +26,7 @@
     "react-native-scrollable-tab-view": "^0.6.0",
     "react-native-timeago": "^0.3.0",
     "react-native-vector-icons": "^3.0.0",
-    "react-native-wechat": "^1.7.2",
+    "react-native-wechat": "^1.8.0",
     "react-redux": "^4.4.6",
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",

@@ -39,13 +39,16 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
+    this.renderScene = this.renderScene.bind(this);
+    BackAndroid.addEventListener('hardwareBackPress', this.goBack);
+  }
+
+  componentDidMount() {
     registerApp('wxb24c445773822c79');
     AV.init({
       appId: 'Tfi1z7dN9sjMwSul8sYaTEvg-gzGzoHsz',
       appKey: '57qmeEJonefntNqRe17dAgi4'
     });
-    this.renderScene = this.renderScene.bind(this);
-    BackAndroid.addEventListener('hardwareBackPress', this.goBack);
   }
 
   goBack() {
