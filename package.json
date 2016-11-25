@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git@github.com:attentiveness/reading.git"
   },
+  "engines": {
+    "node": ">=4"
+  },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
