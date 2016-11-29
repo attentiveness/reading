@@ -33,7 +33,7 @@
     "redux-saga": "^0.13.0"
   },
   "jest": {
-    "preset": "jest-react-native"
+    "preset": "react-native"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
@@ -45,7 +45,6 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.7.1",
     "jest": "^17.0.3",
-    "jest-react-native": "^17.0.3",
     "react-test-renderer": "^15.4.1",
     "redux-devtools": "^3.3.1"
   }
