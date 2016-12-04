@@ -16,10 +16,10 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "leancloud-storage": "^1.5.2",
+    "leancloud-storage": "^1.5.3",
     "react": "~15.4.1",
-    "react-native": "^0.38.0",
-    "react-native-code-push": "^1.16.0-beta",
+    "react-native": "^0.39.0",
+    "react-native-code-push": "^1.16.1-beta",
     "react-native-device-info": "^0.9.7",
     "react-native-drawer-layout": "^1.1.0",
     "react-native-exceptions-manager": "^0.1.8",
