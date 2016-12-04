@@ -10,6 +10,10 @@
         <item name="colorPrimaryDark">#3e9ce9</item>
     </style>
 
+    <style name="MainTheme" parent="AppTheme">
+        <item name="android:windowBackground">@android:drawable/screen_background_light</item>
+    </style>
+
     <style name="ReadingMenuTextStyle">
         <item name="android:textColor">#fcfcfc</item>
         <item name="android:textSize">18sp</item>

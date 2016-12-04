@@ -18,31 +18,46 @@
 import React from 'react';
 import {
   StyleSheet,
-  Navigator,
-  StatusBar,
-  BackAndroid,
-  View
+  Navigator
 } from 'react-native';
 
 import { registerApp } from 'react-native-wechat';
 import AV from 'leancloud-storage';
-import { naviGoBack } from '../utils/CommonUtil';
+import {
+  Router,
+  Scene,
+  ActionConst
+} from 'react-native-router-flux';
+import { connect } from 'react-redux';
 import Splash from '../pages/Splash';
+import CategoryContainer from '../containers/CategoryContainer';
+import MainContainer from '../containers/MainContainer';
+import WebViewPage from '../pages/WebViewPage';
+import Feedback from '../pages/Feedback';
+import About from '../pages/About';
+import TabIcon from '../components/TabIcon';
 
-let tempNavigator;
-let isRemoved = false;
+const RouterWithRedux = connect()(Router);
+const backButton = require('../img/arrow_left.png');
+
+const getSceneStyle = (props, computedProps) => {
+  const style = {
+    flex: 1,
+    backgroundColor: '#fff',
+    shadowColor: null,
+    shadowOffset: null,
+    shadowOpacity: null,
+    shadowRadius: null,
+  };
+  if (computedProps.isActive) {
+    style.marginTop = computedProps.hideNavBar ?
+      0 : Navigator.NavigationBar.Styles.General.TotalNavHeight;
+    style.marginBottom = computedProps.hideTabBar ? 0 : 50;
+  }
+  return style;
+};
 
 class App extends React.Component {
-  static configureScene() {
-    return Navigator.SceneConfigs.PushFromRight;
-  }
-
-  constructor(props) {
-    super(props);
-    this.renderScene = this.renderScene.bind(this);
-    BackAndroid.addEventListener('hardwareBackPress', this.goBack);
-  }
-
   componentDidMount() {
     registerApp('wxb24c445773822c79');
     AV.init({
@@ -51,48 +66,67 @@ class App extends React.Component {
     });
   }
 
-  goBack() {
-    return naviGoBack(tempNavigator);
-  }
-
-  renderScene(route, navigator) {
-    const Component = route.component;
-    tempNavigator = navigator;
-    if (route.name === 'WebViewPage') {
-      BackAndroid.removeEventListener('hardwareBackPress', this.goBack);
-      isRemoved = true;
-    } else if (isRemoved) {
-      BackAndroid.addEventListener('hardwareBackPress', this.goBack);
-    }
-    return (
-      <Component navigator={navigator} route={route} />
-    );
-  }
-
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <StatusBar
-          backgroundColor="#3e9ce9"
-          barStyle="light-content"
-        />
-        <Navigator
-          style={styles.navigator}
-          configureScene={this.configureScene}
-          renderScene={this.renderScene}
-          initialRoute={{
-            component: Splash,
-            name: 'Splash'
-          }}
-        />
-      </View>
+      <RouterWithRedux
+        getSceneStyle={getSceneStyle}
+        navigationBarStyle={styles.navBar}
+        titleStyle={styles.navBarTitle}
+        backButtonImage={backButton}
+      >
+        <Scene key="root">
+          <Scene key="splash" component={Splash} hideNavBar hideTabBar initial />
+          <Scene
+            key="initCategory"
+            component={CategoryContainer}
+            title="分类"
+            type={ActionConst.REPLACE}
+            hideTabBar
+          />
+          <Scene key="tabbar" tabs pressOpacity={0.8} type={ActionConst.REPLACE} >
+            <Scene
+              key="main"
+              component={MainContainer}
+              title="首页"
+              icon={TabIcon}
+              iconName="md-home"
+            />
+            <Scene
+              key="category"
+              component={CategoryContainer}
+              title="分类"
+              icon={TabIcon}
+              iconName="md-pricetags"
+            />
+            <Scene
+              key="feedback"
+              component={Feedback}
+              title="建议"
+              icon={TabIcon}
+              iconName="md-thumbs-up"
+            />
+            <Scene
+              key="about"
+              component={About}
+              title="关于"
+              icon={TabIcon}
+              iconName="md-information-circle"
+            />
+          </Scene>
+          <Scene key="web" component={WebViewPage} />
+        </Scene>
+      </RouterWithRedux>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  navigator: {
-    flex: 1
+  navBar: {
+    backgroundColor: '#3e9ce9'
+  },
+  navBarTitle: {
+    color: '#fff',
+    fontSize: 20,
   }
 });
 

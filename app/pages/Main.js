@@ -25,38 +25,28 @@ import {
   TouchableOpacity,
   InteractionManager,
   ActivityIndicator,
-  DrawerLayoutAndroid,
   RecyclerViewBackedScrollView,
   Image,
-  Dimensions,
-  Platform,
   View,
   DeviceEventEmitter
 } from 'react-native';
 
-import DrawerLayout from 'react-native-drawer-layout';
 import TimeAgo from 'react-native-timeago';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import LoadingView from '../components/LoadingView';
-import ReadingToolbar from '../components/ReadingToolbar';
-import About from '../pages/About';
-import Feedback from '../pages/Feedback';
-import CategoryContainer from '../containers/CategoryContainer';
 import { toastShort } from '../utils/ToastUtil';
 import Storage from '../utils/Storage';
-import WebViewPage from '../pages/WebViewPage';
 import { formatStringWithHtml } from '../utils/FormatUtil';
 
 require('moment/locale/zh-cn');
 
-const homeImg = require('../img/home.png');
-const categoryImg = require('../img/category.png');
-const inspectionImg = require('../img/inspection.png');
-const infoImg = require('../img/info.png');
-
 const propTypes = {
   readActions: PropTypes.object,
   read: PropTypes.object.isRequired
+};
+
+const contextTypes = {
+  routes: PropTypes.object.isRequired
 };
 
 let canLoadMore;
@@ -75,7 +65,6 @@ class Main extends React.Component {
     };
     this.renderItem = this.renderItem.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
-    this.renderNavigationView = this.renderNavigationView.bind(this);
     this.onIconClicked = this.onIconClicked.bind(this);
     canLoadMore = false;
   }
@@ -135,39 +124,8 @@ class Main extends React.Component {
   }
 
   onPress(article) {
-    const { navigator } = this.props;
-    navigator.push({
-      component: WebViewPage,
-      name: 'WebViewPage',
-      article
-    });
-  }
-
-  onPressDrawerItem(index) {
-    const { navigator } = this.props;
-    this.drawer.closeDrawer();
-    switch (index) {
-      case 1:
-        navigator.push({
-          component: CategoryContainer,
-          name: 'Category'
-        });
-        break;
-      case 2:
-        navigator.push({
-          component: Feedback,
-          name: 'Feedback'
-        });
-        break;
-      case 3:
-        navigator.push({
-          component: About,
-          name: 'About'
-        });
-        break;
-      default:
-        break;
-    }
+    const { routes } = this.context;
+    routes.web({ article });
   }
 
   onIconClicked() {
@@ -282,96 +240,47 @@ class Main extends React.Component {
     );
   }
 
-  renderNavigationViewItem(image, title, index) {
-    return (
-      <TouchableOpacity
-        style={styles.drawerContent}
-        onPress={() => this.onPressDrawerItem(index)}
-      >
-        <Image
-          style={styles.drawerIcon}
-          source={image}
-        />
-        <Text style={styles.drawerText}>
-          {title}
-        </Text>
-      </TouchableOpacity>
-    );
-  }
-
-  renderNavigationView() {
-    return (
-      <View style={[styles.container, { backgroundColor: '#fcfcfc' }]}>
-        <View style={styles.drawerTitleContent} >
-          <Text style={styles.drawerTitle}>
-            iReading
-          </Text>
-          <Text style={styles.drawerTitle}>
-            让生活更精彩
-          </Text>
-        </View>
-        {this.renderNavigationViewItem(homeImg, '首页', 0)}
-        {this.renderNavigationViewItem(categoryImg, '分类', 1)}
-        {this.renderNavigationViewItem(inspectionImg, '建议', 2)}
-        {this.renderNavigationViewItem(infoImg, '关于', 3)}
-      </View>
-    );
-  }
-
   render() {
-    const { read, navigator } = this.props;
+    const { read } = this.props;
     return (
-      <DrawerLayout
-        ref={(ref) => { this.drawer = ref; }}
-        drawerWidth={Dimensions.get('window').width / 5 * 3}
-        drawerPosition={Platform.OS === 'android' ? DrawerLayoutAndroid.positions.Left : 'left'}
-        renderNavigationView={this.renderNavigationView}
-      >
-        <View style={styles.container}>
-          <ReadingToolbar
-            title="iReading"
-            navigator={navigator}
-            onIconClicked={this.onIconClicked}
-            navIconName="md-menu"
-          />
-          <ScrollableTabView
-            renderTabBar={() =>
-              <DefaultTabBar
-                tabStyle={styles.tab}
-                textStyle={styles.tabText}
-              />
+      <View style={styles.container}>
+        <ScrollableTabView
+          renderTabBar={() =>
+            <DefaultTabBar
+              tabStyle={styles.tab}
+              textStyle={styles.tabText}
+            />
+          }
+          tabBarBackgroundColor="#fcfcfc"
+          tabBarUnderlineStyle={styles.tabBarUnderline}
+          tabBarActiveTextColor="#3e9ce9"
+          tabBarInactiveTextColor="#aaaaaa"
+        >
+          {this.state.typeIds.map((typeId) => {
+            let name = '';
+            if (this.state.typeList === null) {
+              return null;
             }
-            tabBarBackgroundColor="#fcfcfc"
-            tabBarUnderlineStyle={styles.tabBarUnderline}
-            tabBarActiveTextColor="#3e9ce9"
-            tabBarInactiveTextColor="#aaaaaa"
-          >
-            {this.state.typeIds.map((typeId) => {
-              let name = '';
-              if (this.state.typeList === null) {
-                return null;
+            for (let i = 0, l = this.state.typeList.length; i < l; i++) {
+              if (typeId.toString() === this.state.typeList[i].id) {
+                name = this.state.typeList[i].name;
+                break;
               }
-              for (let i = 0, l = this.state.typeList.length; i < l; i++) {
-                if (typeId.toString() === this.state.typeList[i].id) {
-                  name = this.state.typeList[i].name;
-                  break;
-                }
-              }
-              const typeView = (
-                <View
-                  key={typeId}
-                  tabLabel={name}
-                  style={styles.base}
-                >
-                  {this.renderContent(this.state.dataSource.cloneWithRows(
-                    read.articleList[typeId] === undefined ? [] :
-                      read.articleList[typeId]), typeId) }
-                </View>);
-              return typeView;
-            }) }
-          </ScrollableTabView>
-        </View>
-      </DrawerLayout>
+            }
+            const typeView = (
+              <View
+                key={typeId}
+                tabLabel={name}
+                style={styles.base}
+              >
+                {this.renderContent(this.state.dataSource.cloneWithRows(
+                  read.articleList[typeId] === undefined ? [] :
+                    read.articleList[typeId]), typeId)}
+              </View>);
+            return typeView;
+          })}
+        </ScrollableTabView>
+      </View>
     );
   }
 }
@@ -382,8 +291,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#FFF'
+    flexDirection: 'column'
   },
   containerItem: {
     flexDirection: 'row',
@@ -491,5 +399,6 @@ const styles = StyleSheet.create({
 });
 
 Main.propTypes = propTypes;
+Main.contextTypes = contextTypes;
 
 export default Main;

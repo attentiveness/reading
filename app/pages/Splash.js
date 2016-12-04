@@ -15,15 +15,16 @@
  * limitations under the License.
  *
  */
-import React from 'react';
+import React, { PropTypes } from 'react';
 import {
   Dimensions,
   Animated
 } from 'react-native';
-
-import MainContainer from '../containers/MainContainer';
-import CategoryContainer from '../containers/CategoryContainer';
 import Storage from '../utils/Storage';
+
+const contextTypes = {
+  routes: PropTypes.object.isRequired
+};
 
 const maxHeight = Dimensions.get('window').height;
 const maxWidth = Dimensions.get('window').width;
@@ -38,24 +39,17 @@ class Splash extends React.Component {
   }
 
   componentDidMount() {
+    const { routes } = this.context;
     Animated.timing(
       this.state.bounceValue, { toValue: 1.2, duration: 1000 }
     ).start();
     this.timer = setTimeout(() => {
-      const { navigator } = this.props;
       Storage.get('isInit')
       .then((isInit) => {
         if (!isInit) {
-          navigator.resetTo({
-            component: CategoryContainer,
-            name: 'Category',
-            isFirst: true
-          });
+          routes.initCategory({ isFirst: true });
         } else {
-          navigator.resetTo({
-            component: MainContainer,
-            name: 'Main'
-          });
+          routes.tabbar();
         }
       });
     }, 1000);
@@ -76,5 +70,7 @@ class Splash extends React.Component {
     );
   }
 }
+
+Splash.contextTypes = contextTypes;
 
 export default Splash;

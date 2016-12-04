@@ -28,22 +28,23 @@ import {
 } from 'react-native';
 
 import AV from 'leancloud-storage';
-import ReadingToolbar from '../components/ReadingToolbar';
+import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Storage from '../utils/Storage';
 import GridView from '../components/GridView';
 import Button from '../components/Button';
 import { toastShort } from '../utils/ToastUtil';
-import MainContainer from '../containers/MainContainer';
 
-const toolbarActions = [
-  { title: '提交', iconName: 'md-checkmark', show: 'always' }
-];
 let tempTypeIds = [];
 let maxCategory = 5; // 默认最多5个类别，远端可配置
 
 const propTypes = {
   categoryActions: PropTypes.object,
   category: PropTypes.object.isRequired
+};
+
+const contextTypes = {
+  routes: PropTypes.object.isRequired
 };
 
 class Category extends React.Component {
@@ -59,8 +60,7 @@ class Category extends React.Component {
   }
 
   componentWillMount() {
-    const { route } = this.props;
-    if (!route.isFirst) {
+    if (!this.props.isFirst) {
       InteractionManager.runAfterInteractions(() => {
         Storage.get('typeIds')
           .then((typeIds) => {
@@ -74,6 +74,9 @@ class Category extends React.Component {
   }
 
   componentDidMount() {
+    if (!this.props.isFirst) {
+      Actions.refresh({ renderRightButton: this.renderRightButton.bind(this) });
+    }
     const { categoryActions } = this.props;
     categoryActions.requestTypeList();
     const query = new AV.Query('Reading_Settings');
@@ -100,7 +103,7 @@ class Category extends React.Component {
   }
 
   onSelectCatagory() {
-    const { navigator } = this.props;
+    const { routes } = this.context;
     if (this.state.typeIds.length === 0) {
       Alert.alert(
         '提示',
@@ -111,10 +114,7 @@ class Category extends React.Component {
             text: '确定',
             onPress: () => {
               Storage.save('typeIds', this.state.typeIds);
-              navigator.replace({
-                component: MainContainer,
-                name: 'Main'
-              });
+              routes.tabbar();
             }
           },
         ]
@@ -122,10 +122,7 @@ class Category extends React.Component {
     } else {
       Storage.save('typeIds', this.state.typeIds);
       Storage.save('isInit', true);
-      navigator.replace({
-        component: MainContainer,
-        name: 'Main'
-      });
+      routes.tabbar();
     }
   }
 
@@ -138,12 +135,12 @@ class Category extends React.Component {
       toastShort('不要少于1个类别哦');
       return;
     }
-    const { navigator } = this.props;
+    const { routes } = this.context;
     InteractionManager.runAfterInteractions(() => {
       Storage.get('typeIds')
         .then((typeIds) => {
           if (typeIds.sort().toString() === Array.from(tempTypeIds).sort().toString()) {
-            navigator.pop();
+            routes.main();
             return;
           }
           Storage.save('typeIds', this.state.typeIds)
@@ -153,9 +150,21 @@ class Category extends React.Component {
   }
 
   resetRoute() {
-    const { navigator } = this.props;
+    const { routes } = this.context;
     DeviceEventEmitter.emit('changeCategory', this.state.typeIds);
-    navigator.pop();
+    routes.main();
+  }
+
+  renderRightButton() {
+    return (
+      <Icon.Button
+        name="md-checkmark"
+        backgroundColor="transparent"
+        underlayColor="transparent"
+        activeOpacity={0.8}
+        onPress={this.onActionSelected}
+      />
+    );
   }
 
   renderItem(item) {
@@ -200,8 +209,7 @@ class Category extends React.Component {
   }
 
   render() {
-    const { navigator, route } = this.props;
-    if (route.isFirst) {
+    if (this.props.isFirst) {
       return (
         <View style={styles.container}>
           <View style={styles.header}>
@@ -221,12 +229,6 @@ class Category extends React.Component {
     }
     return (
       <View style={styles.container}>
-        <ReadingToolbar
-          title="分类"
-          actions={toolbarActions}
-          navigator={navigator}
-          onActionSelected={this.onActionSelected}
-        />
         <View style={styles.header}>
           <Text style={[styles.btnText, { color: 'black' }]}>
             请选择您感兴趣的1-5个类别
@@ -244,8 +246,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#FFF'
+    flexDirection: 'column'
   },
   categoryBtn: {
     margin: 10,
@@ -281,5 +282,6 @@ const styles = StyleSheet.create({
 });
 
 Category.propTypes = propTypes;
+Category.contextTypes = contextTypes;
 
 export default Category;

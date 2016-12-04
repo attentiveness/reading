@@ -25,7 +25,8 @@ import {
 } from 'react-native';
 
 import DeviceInfo from 'react-native-device-info';
-import ReadingToolbar from '../components/ReadingToolbar';
+import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Button from '../components/Button';
 
 const API_STORE = 'http://apistore.baidu.com/';
@@ -34,18 +35,29 @@ const READING_REPO = 'https://github.com/attentiveness/reading';
 const aboutLogo = require('../img/about_logo.png');
 
 class About extends React.Component {
+  componentDidMount() {
+    Actions.refresh({ renderRightButton: this.renderRightButton.bind(this) });
+  }
+
   onPress(url) {
     Linking.openURL(url);
   }
 
+  renderRightButton() {
+    return (
+      <Icon.Button
+        name="logo-github"
+        backgroundColor="transparent"
+        underlayColor="transparent"
+        activeOpacity={0.8}
+        onPress={() => this.onPress(READING_REPO)}
+      />
+    );
+  }
+
   render() {
-    const { navigator } = this.props;
     return (
       <View style={styles.container}>
-        <ReadingToolbar
-          title="关于"
-          navigator={navigator}
-        />
         <View style={styles.content}>
           <View style={styles.center}>
             <Image
@@ -65,22 +77,12 @@ class About extends React.Component {
           <View style={styles.bottomContainer}>
             <View style={styles.disclaimerContent}>
               <Text style={[styles.disclaimer, { color: '#999999' }]}>
-                免责声明：所有内容均来自——
+                免责声明：所有内容均来自:
               </Text>
               <Button
                 style={[styles.disclaimer, { color: '#3e9ce9' }]}
                 text={API_STORE}
                 onPress={() => this.onPress(API_STORE)}
-              />
-            </View>
-            <View style={styles.sourceContent}>
-              <Text style={[styles.source, { color: '#aaaaaa' }]}>
-                @Github：
-              </Text>
-              <Button
-                style={[styles.source, { color: '#3e9ce9' }]}
-                text={READING_REPO}
-                onPress={() => this.onPress(READING_REPO)}
               />
             </View>
           </View>
@@ -97,7 +99,6 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    backgroundColor: '#fcfcfc',
     justifyContent: 'center',
     paddingBottom: 10
   },
@@ -132,14 +133,6 @@ const styles = StyleSheet.create({
   },
   disclaimer: {
     fontSize: 14,
-    textAlign: 'center'
-  },
-  sourceContent: {
-    flexDirection: 'row',
-    marginTop: 8
-  },
-  source: {
-    fontSize: 12,
     textAlign: 'center'
   },
   bottomContainer: {

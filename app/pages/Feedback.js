@@ -23,13 +23,10 @@ import {
 } from 'react-native';
 
 import AV from 'leancloud-storage';
+import { Actions } from 'react-native-router-flux';
 import DeviceInfo from 'react-native-device-info';
-import ReadingToolbar from '../components/ReadingToolbar';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { toastShort } from '../utils/ToastUtil';
-
-const toolbarActions = [
-  { title: '提交', iconName: 'md-checkmark', show: 'always' }
-];
 
 let feedbackText;
 
@@ -41,13 +38,13 @@ class Feedback extends React.Component {
 
   componentDidMount() {
     feedbackText = '';
+    Actions.refresh({ renderRightButton: this.renderRightButton.bind(this) });
   }
 
   onActionSelected() {
     if (feedbackText === undefined || feedbackText.replace(/\s+/g, '') === '') {
       toastShort('请填写建议内容哦~');
     } else {
-      const { navigator } = this.props;
       const feedback = AV.Object.new('Feedback');
       feedback.set('manufacturer', DeviceInfo.getManufacturer());
       feedback.set('system', DeviceInfo.getSystemName());
@@ -56,22 +53,28 @@ class Feedback extends React.Component {
       feedback.set('appVersion', DeviceInfo.getVersion());
       feedback.set('feedback', feedbackText);
       feedback.save();
-      navigator.pop();
       toastShort('您的问题已反馈，我们会及时跟进处理');
+      this.textInput.clear();
     }
   }
 
+  renderRightButton() {
+    return (
+      <Icon.Button
+        name="md-checkmark"
+        backgroundColor="transparent"
+        underlayColor="transparent"
+        activeOpacity={0.8}
+        onPress={this.onActionSelected}
+      />
+    );
+  }
+
   render() {
-    const { navigator } = this.props;
     return (
       <View style={styles.container}>
-        <ReadingToolbar
-          title="建议"
-          actions={toolbarActions}
-          onActionSelected={this.onActionSelected}
-          navigator={navigator}
-        />
         <TextInput
+          ref={(ref) => { this.textInput = ref; }}
           style={styles.textInput}
           placeholder="请写下您宝贵的意见或建议，与iReading一起进步！"
           placeholderTextColor="#aaaaaa"
@@ -91,8 +94,7 @@ class Feedback extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#fcfcfc'
+    flexDirection: 'column'
   },
   textInput: {
     flex: 1,

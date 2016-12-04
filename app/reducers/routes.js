@@ -1,6 +1,6 @@
 /**
  *
- * Copyright 2016-present reading
+ * Copyright 2015-present reading
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,19 @@
  * limitations under the License.
  *
  */
-export const naviGoBack = (navigator) => {
-  if (navigator && navigator.getCurrentRoutes().length > 1) {
-    navigator.pop();
-    return true;
-  }
-  return false;
+import { ActionConst } from 'react-native-router-flux';
+
+const initialState = {
+  scene: {},
 };
+
+export default function reducer(state = initialState, action = {}) {
+  switch (action.type) {
+    case ActionConst.FOCUS:
+      return Object.assign({}, state, {
+        scene: action.scene
+      });
+    default:
+      return state;
+  }
+}

@@ -30,19 +30,15 @@ import {
 } from 'react-native';
 
 import * as WeChat from 'react-native-wechat';
-import ReadingToolbar from '../components/ReadingToolbar';
+import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { toastShort } from '../utils/ToastUtil';
 import LoadingView from '../components/LoadingView';
-import { naviGoBack } from '../utils/CommonUtil';
 import { formatStringWithHtml } from '../utils/FormatUtil';
 
+let canGoBack = false;
 const shareIconWechat = require('../img/share_icon_wechat.png');
 const shareIconMoments = require('../img/share_icon_moments.png');
-
-const toolbarActions = [
-  { title: '分享', iconName: 'md-share', show: 'always' }
-];
-let canGoBack = false;
 
 class WebViewPage extends React.Component {
   constructor(props) {
@@ -51,10 +47,13 @@ class WebViewPage extends React.Component {
       isShareModal: false
     };
     this.onActionSelected = this.onActionSelected.bind(this);
+    this.renderSpinner = this.renderSpinner.bind(this);
     this.goBack = this.goBack.bind(this);
   }
 
   componentDidMount() {
+    Actions.refresh({ title: this.props.article.userName,
+      renderRightButton: this.renderRightButton.bind(this) });
     BackAndroid.addEventListener('hardwareBackPress', this.goBack);
   }
 
@@ -82,7 +81,19 @@ class WebViewPage extends React.Component {
       this.webview.goBack();
       return true;
     }
-    return naviGoBack(this.props.navigator);
+    return true;
+  }
+
+  renderRightButton() {
+    return (
+      <Icon.Button
+        name="md-share"
+        backgroundColor="transparent"
+        underlayColor="transparent"
+        activeOpacity={0.8}
+        onPress={this.onActionSelected}
+      />
+    );
   }
 
   renderLoading() {
@@ -90,7 +101,7 @@ class WebViewPage extends React.Component {
   }
 
   renderSpinner() {
-    const { route } = this.props;
+    const { article } = this.props;
     return (
       <TouchableWithoutFeedback
         onPress={() => {
@@ -115,11 +126,11 @@ class WebViewPage extends React.Component {
                     .then((isInstalled) => {
                       if (isInstalled) {
                         WeChat.shareToSession({
-                          title: formatStringWithHtml(route.article.title),
+                          title: formatStringWithHtml(article.title),
                           description: '分享自：iReading',
-                          thumbImage: route.article.contentImg,
+                          thumbImage: article.contentImg,
                           type: 'news',
-                          webpageUrl: route.article.url
+                          webpageUrl: article.url
                         })
                         .catch((error) => {
                           toastShort(error.message, true);
@@ -147,10 +158,10 @@ class WebViewPage extends React.Component {
                     .then((isInstalled) => {
                       if (isInstalled) {
                         WeChat.shareToTimeline({
-                          title: formatStringWithHtml(`[@iReading]${route.article.title}`),
-                          thumbImage: route.article.contentImg,
+                          title: formatStringWithHtml(`[@iReading]${article.title}`),
+                          thumbImage: article.contentImg,
                           type: 'news',
-                          webpageUrl: route.article.url
+                          webpageUrl: article.url
                         })
                         .catch((error) => {
                           toastShort(error.message, true);
@@ -179,15 +190,8 @@ class WebViewPage extends React.Component {
   }
 
   render() {
-    const { navigator, route } = this.props;
     return (
       <View style={styles.container}>
-        <ReadingToolbar
-          actions={toolbarActions}
-          onActionSelected={this.onActionSelected}
-          title={route.article.userName}
-          navigator={navigator}
-        />
         <Modal
           animationType="fade"
           visible={this.state.isShareModal}
@@ -204,7 +208,7 @@ class WebViewPage extends React.Component {
           ref={(ref) => { this.webview = ref; }}
           automaticallyAdjustContentInsets={false}
           style={styles.base}
-          source={{ uri: route.article.url }}
+          source={{ uri: this.props.article.url }}
           javaScriptEnabled
           domStorageEnabled
           startInLoadingState
