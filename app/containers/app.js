@@ -79,15 +79,16 @@ class App extends React.Component {
           <Scene
             key="initCategory"
             component={CategoryContainer}
-            title="分类"
-            type={ActionConst.REPLACE}
+            hideNavBar
             hideTabBar
+            type={ActionConst.REPLACE}
           />
           <Scene key="tabbar" tabs pressOpacity={0.8} type={ActionConst.REPLACE} >
             <Scene
               key="main"
               component={MainContainer}
-              title="首页"
+              hideNavBar
+              title="阅读"
               icon={TabIcon}
               iconName="md-home"
             />

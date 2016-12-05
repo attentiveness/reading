@@ -30,7 +30,7 @@ export default class TabIcon extends React.Component {
         <Icon
           color={this.props.selected ? '#3e9ce9' : '#999999'}
           name={this.props.iconName}
-          size={30}
+          size={25}
         />
         <Text style={[styles.title, { color: this.props.selected ? '#3e9ce9' : '#999999' }]}>
           {this.props.title}

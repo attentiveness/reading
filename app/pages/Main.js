@@ -28,7 +28,8 @@ import {
   RecyclerViewBackedScrollView,
   Image,
   View,
-  DeviceEventEmitter
+  DeviceEventEmitter,
+  Platform
 } from 'react-native';
 
 import TimeAgo from 'react-native-timeago';
@@ -291,7 +292,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    paddingTop: Platform.OS === 'ios' ? 10 : 0
   },
   containerItem: {
     flexDirection: 'row',
