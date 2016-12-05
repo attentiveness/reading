@@ -19,7 +19,8 @@ import React from 'react';
 import {
   StyleSheet,
   TextInput,
-  View
+  View,
+  Keyboard
 } from 'react-native';
 
 import AV from 'leancloud-storage';
@@ -55,6 +56,7 @@ class Feedback extends React.Component {
       feedback.save();
       toastShort('您的问题已反馈，我们会及时跟进处理');
       this.textInput.clear();
+      Keyboard.dismiss();
     }
   }
 

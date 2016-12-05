@@ -81,7 +81,7 @@ class WebViewPage extends React.Component {
       this.webview.goBack();
       return true;
     }
-    return true;
+    return false;
   }
 
   renderRightButton() {
