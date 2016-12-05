@@ -114,7 +114,7 @@ class App extends React.Component {
               iconName="md-information-circle"
             />
           </Scene>
-          <Scene key="web" component={WebViewPage} />
+          <Scene key="web" hideTabBar component={WebViewPage} />
         </Scene>
       </RouterWithRedux>
     );
