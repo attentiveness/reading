@@ -17,10 +17,11 @@ iReading App Write In React-Native（Studying and Programing）
 
 ## Screenshot
 
-![iReading_Splash](./screenshot/Reading_Splash.jpg) ![iReading_Main](./screenshot/Reading_Main.png)
-![iReading_Drawer](./screenshot/Reading_Drawer.png) ![iReading_Article](./screenshot/Reading_Article.jpg)
-![iReading_Share](./screenshot/Reading_Share.jpg) ![iReading_Category](./screenshot/Reading_Category.png)
-![iReading_IOS_Main](./screenshot/Reading_IOS_Main.png) ![iReading_IOS_Share](./screenshot/Reading_IOS_Share.jpeg)
+![iReading_Main](./screenshot/iReading_Main.png)
+![iReading_Article](./screenshot/iReading_Article.png)
+![iReading_Category](./screenshot/iReading_Category.png)
+![iReading_IOS_Main](./screenshot/iReading_iOS_Main.png)
+![iReading_IOS_Share](./screenshot/iReading_iOS_Share.png)
 
 ## Download
 
