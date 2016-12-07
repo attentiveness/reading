@@ -24,6 +24,9 @@ matrix:
 env:
   global:
   - PROJECT_MOBILE=reading
+addons:
+  code_climate:
+    repo_token: $CODE_CLIMATE_TOKEN
 before_cache:
 - rm -rf android/.gradle/caches
 - rm -rf node_modules
@@ -65,3 +68,4 @@ after_success:
 - if [ $TEST_TYPE == 'android' ] && [ $TRAVIS_PULL_REQUEST == 'false' ]; then fir p 
   $HOME/build/attentiveness/reading/android/app/build/outputs/apk/AndResGuard_app-armeabi-v7a-release/app-armeabi-v7a-release_signed_7zip_aligned.apk
   -T $FIR_TOKEN -c "$TRAVIS_TAG" ; fi
+- codeclimate-test-reporter < lcov.info
