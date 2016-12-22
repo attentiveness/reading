@@ -50,9 +50,9 @@ const contextTypes = {
   routes: PropTypes.object.isRequired
 };
 
-let canLoadMore;
-let page = 1;
+const pages = [];
 let loadMoreTime = 0;
+let currentLoadMoreTypeId;
 
 class Main extends React.Component {
   constructor(props) {
@@ -67,7 +67,6 @@ class Main extends React.Component {
     this.renderItem = this.renderItem.bind(this);
     this.renderFooter = this.renderFooter.bind(this);
     this.onIconClicked = this.onIconClicked.bind(this);
-    canLoadMore = false;
   }
 
   componentDidMount() {
@@ -75,6 +74,7 @@ class Main extends React.Component {
     DeviceEventEmitter.addListener('changeCategory', (typeIds) => {
       typeIds.forEach((typeId) => {
         readActions.requestArticleList(false, true, typeId);
+        pages.push(1);
       });
       this.setState({
         typeIds
@@ -88,6 +88,7 @@ class Main extends React.Component {
           }
           typeIds.forEach((typeId) => {
             readActions.requestArticleList(false, true, typeId);
+            pages.push(1);
           });
           Storage.get('typeList').then(typeList =>
             this.setState({
@@ -104,6 +105,10 @@ class Main extends React.Component {
     if (read.isLoadMore && !nextProps.read.isLoadMore && !nextProps.read.isRefreshing) {
       if (nextProps.read.noMore) {
         toastShort('没有更多数据了');
+        const index = this.state.typeIds.indexOf(currentLoadMoreTypeId);
+        if (index >= 0) {
+          pages[index] -= 1;
+        }
       }
     }
   }
@@ -112,16 +117,13 @@ class Main extends React.Component {
     DeviceEventEmitter.removeAllListeners('changeCategory');
   }
 
-  onScroll() {
-    if (!canLoadMore) {
-      canLoadMore = true;
-    }
-  }
-
   onRefresh(typeId) {
     const { readActions } = this.props;
-    canLoadMore = false;
     readActions.requestArticleList(true, false, typeId);
+    const index = this.state.typeIds.indexOf(typeId);
+    if (index >= 0) {
+      pages[index] = 1;
+    }
   }
 
   onPress(article) {
@@ -134,12 +136,16 @@ class Main extends React.Component {
   }
 
   onEndReached(typeId) {
+    currentLoadMoreTypeId = typeId;
     const time = Date.parse(new Date()) / 1000;
-    if (canLoadMore && time - loadMoreTime > 1) {
-      page += 1;
+    const index = this.state.typeIds.indexOf(typeId);
+    if (index < 0) {
+      return;
+    }
+    if (time - loadMoreTime > 1) {
+      pages[index] += 1;
       const { readActions } = this.props;
-      readActions.requestArticleList(false, false, typeId, true, page);
-      canLoadMore = false;
+      readActions.requestArticleList(false, false, typeId, true, pages[index]);
       loadMoreTime = Date.parse(new Date()) / 1000;
     }
   }
@@ -225,7 +231,6 @@ class Main extends React.Component {
         style={styles.listView}
         onEndReached={() => this.onEndReached(typeId)}
         onEndReachedThreshold={10}
-        onScroll={this.onScroll}
         renderFooter={this.renderFooter}
         renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         refreshControl={
