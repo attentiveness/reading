@@ -30,7 +30,7 @@
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
-    "redux-saga": "^0.13.0"
+    "redux-saga": "^0.14.0"
   },
   "jest": {
     "preset": "react-native"
@@ -44,7 +44,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
-    "jest": "^18.0.0",
+    "jest": "^18.1.0",
     "react-test-renderer": "^15.4.1",
     "redux-devtools": "^3.3.1"
   }
