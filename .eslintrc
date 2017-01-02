@@ -3,7 +3,7 @@
     "env": {
         "browser": true,
         "node": true,
-        "mocha": true
+        "jest": true
     },
     "ecmaFeatures": {
         "forOf": true,

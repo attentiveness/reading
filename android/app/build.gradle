@@ -90,7 +90,7 @@ def enableProguardInReleaseBuilds = true
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.3"
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
@@ -166,7 +166,7 @@ andResGuard {   // ./gradlew resguard
             "resources.arsc"
     ]
     sevenzip {
-        artifact = 'com.tencent.mm:SevenZip:1.1.9'
+        artifact = 'com.tencent.mm:SevenZip:1.1.16'
         //在设置sevenzip时, 你只需设置artifact或path. 支持同时设置,总以path的值为优先
         //path = "/usr/local/bin/7za"
     }
