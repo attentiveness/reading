@@ -62,7 +62,7 @@ script:
 # been resolved.
 - if [[ $TEST_TYPE == 'ios' ]]; then xcodebuild -project ios/$PROJECT_MOBILE.xcodeproj
   -scheme $PROJECT_MOBILE -sdk iphonesimulator9.3 -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean build ; fi
-- if [ $TEST_TYPE == 'android' ] && [ $TRAVIS_PULL_REQUEST == 'false' ]; then cd android && ./gradlew clean && ./gradlew resguard --stacktrace ; fi
+- if [ $TEST_TYPE == 'android' ] && [ $TRAVIS_PULL_REQUEST == 'false' ]; then cd android && ./gradlew clean && ./gradlew resguardRelease --stacktrace ; fi
 - if [ $TEST_TYPE == 'android' ] && [ $TRAVIS_PULL_REQUEST != 'false' ]; then cd android && ./gradlew clean && ./gradlew assembleDebug --stacktrace ; fi
 after_success:
 - if [ $TEST_TYPE == 'android' ] && [ $TRAVIS_PULL_REQUEST == 'false' ]; then fir p 

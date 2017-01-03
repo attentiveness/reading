@@ -90,7 +90,7 @@ def enableProguardInReleaseBuilds = true
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    buildToolsVersion "23.0.1"
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
@@ -147,7 +147,7 @@ android {
     }
 }
 
-andResGuard {   // ./gradlew resguard
+andResGuard {   // ./gradlew resguard[BuildType | Flavor]
     mappingFile = null
     use7zip = true
     useSign = true
