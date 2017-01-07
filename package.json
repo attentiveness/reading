@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "leancloud-storage": "^1.5.3",
-    "react": "~15.4.1",
+    "react": "~15.4.2",
     "react-native": "^0.39.2",
     "react-native-code-push": "^1.16.1-beta",
     "react-native-device-info": "^0.9.7",
@@ -30,7 +30,7 @@
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
-    "redux-saga": "^0.14.0"
+    "redux-saga": "^0.14.1"
   },
   "jest": {
     "preset": "react-native"
@@ -39,13 +39,13 @@
     "babel-eslint": "^7.1.1",
     "babel-jest": "^18.0.0",
     "babel-preset-react-native": "^1.9.1",
-    "eslint": "^3.12.2",
+    "eslint": "^3.13.0",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
     "jest": "^18.1.0",
-    "react-test-renderer": "^15.4.1",
+    "react-test-renderer": "^15.4.2",
     "redux-devtools": "^3.3.1"
   }
 }
