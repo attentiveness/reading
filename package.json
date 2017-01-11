@@ -16,7 +16,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "leancloud-storage": "^1.5.3",
+    "leancloud-storage": "^2.0.0",
     "react": "~15.4.2",
     "react-native": "^0.39.2",
     "react-native-code-push": "^1.16.1-beta",
@@ -27,10 +27,10 @@
     "react-native-timeago": "^0.3.0",
     "react-native-vector-icons": "^3.0.0",
     "react-native-wechat": "^1.8.0",
-    "react-redux": "^5.0.1",
+    "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
-    "redux-saga": "^0.14.1"
+    "redux-saga": "^0.14.2"
   },
   "jest": {
     "preset": "react-native"
@@ -39,11 +39,11 @@
     "babel-eslint": "^7.1.1",
     "babel-jest": "^18.0.0",
     "babel-preset-react-native": "^1.9.1",
-    "eslint": "^3.13.0",
-    "eslint-config-airbnb": "^13.0.0",
+    "eslint": "^3.13.1",
+    "eslint-config-airbnb": "^14.0.0",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.8.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.9.0",
     "jest": "^18.1.0",
     "react-test-renderer": "^15.4.2",
     "redux-devtools": "^3.3.1"
