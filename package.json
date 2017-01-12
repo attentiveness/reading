@@ -16,7 +16,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "leancloud-storage": "^2.0.0",
+    "leancloud-storage": "^2.0.1",
     "react": "~15.4.2",
     "react-native": "^0.39.2",
     "react-native-code-push": "^1.16.1-beta",
