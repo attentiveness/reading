@@ -23,7 +23,7 @@
     "react-native-device-info": "^0.9.7",
     "react-native-exceptions-manager": "^0.1.8",
     "react-native-router-flux": "^3.37.0",
-    "react-native-scrollable-tab-view": "^0.7.0",
+    "react-native-scrollable-tab-view": "^0.7.1",
     "react-native-timeago": "^0.3.0",
     "react-native-vector-icons": "^3.0.0",
     "react-native-wechat": "^1.8.0",
@@ -46,6 +46,6 @@
     "eslint-plugin-react": "^6.9.0",
     "jest": "^18.1.0",
     "react-test-renderer": "^15.4.2",
-    "redux-devtools": "^3.3.1"
+    "redux-devtools": "^3.3.2"
   }
 }
