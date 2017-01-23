@@ -34,9 +34,9 @@ import {
 
 import TimeAgo from 'react-native-timeago';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
+import store from 'react-native-simple-store';
 import LoadingView from '../components/LoadingView';
 import { toastShort } from '../utils/ToastUtil';
-import Storage from '../utils/Storage';
 import { formatStringWithHtml } from '../utils/FormatUtil';
 
 require('moment/locale/zh-cn');
@@ -81,7 +81,7 @@ class Main extends React.Component {
       });
     });
     InteractionManager.runAfterInteractions(() => {
-      Storage.get('typeIds')
+      store.get('typeIds')
         .then((typeIds) => {
           if (!typeIds) {
             return;
@@ -90,7 +90,7 @@ class Main extends React.Component {
             readActions.requestArticleList(false, true, typeId);
             pages.push(1);
           });
-          Storage.get('typeList').then(typeList =>
+          store.get('typeList').then(typeList =>
             this.setState({
               typeIds,
               typeList

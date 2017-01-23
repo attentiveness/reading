@@ -78,8 +78,6 @@ npm test
 ## Known Issue
 [react-native-scrollable-tab-view: [Android]ScrollableTabBar Crash](https://github.com/skv-headless/react-native-scrollable-tab-view/issues/328)
 
-[react-native-vector-icons: [ToolbarAndroid] Important Warning!!](https://github.com/oblador/react-native-vector-icons/issues/278)
-
 ## OnLine Accident
 
 [Reading Online Accident](./Reading_OnLine_Accident.md)

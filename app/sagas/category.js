@@ -17,12 +17,11 @@
  *
  */
 import { put, take, call, fork } from 'redux-saga/effects';
-
+import store from 'react-native-simple-store';
 import * as types from '../constants/ActionTypes';
 import { toastShort } from '../utils/ToastUtil';
 import { request } from '../utils/RequestUtil';
 import { WEXIN_ARTICLE_TYPE } from '../constants/Urls';
-import Storage from '../utils/Storage';
 import { fetchTypeList, receiveTypeList } from '../actions/category';
 
 export function* requestTypeList() {
@@ -30,7 +29,7 @@ export function* requestTypeList() {
     yield put(fetchTypeList());
     const typeList = yield call(request, WEXIN_ARTICLE_TYPE, 'get');
     yield put(receiveTypeList(typeList.showapi_res_body.typeList));
-    yield call(Storage.save, 'typeList', typeList.showapi_res_body.typeList);
+    yield call(store.save, 'typeList', typeList.showapi_res_body.typeList);
     const errorMessage = typeList.showapi_res_error;
     if (errorMessage && errorMessage !== '') {
       yield toastShort(errorMessage);

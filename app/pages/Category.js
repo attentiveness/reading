@@ -30,7 +30,7 @@ import {
 import AV from 'leancloud-storage';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Storage from '../utils/Storage';
+import store from 'react-native-simple-store';
 import GridView from '../components/GridView';
 import Button from '../components/Button';
 import { toastShort } from '../utils/ToastUtil';
@@ -62,7 +62,7 @@ class Category extends React.Component {
   componentWillMount() {
     if (!this.props.isFirst) {
       InteractionManager.runAfterInteractions(() => {
-        Storage.get('typeIds')
+        store.get('typeIds')
           .then((typeIds) => {
             tempTypeIds = typeIds;
             this.setState({
@@ -113,15 +113,15 @@ class Category extends React.Component {
           {
             text: '确定',
             onPress: () => {
-              Storage.save('typeIds', this.state.typeIds);
+              store.save('typeIds', this.state.typeIds);
               routes.tabbar();
             }
           },
         ]
       );
     } else {
-      Storage.save('typeIds', this.state.typeIds);
-      Storage.save('isInit', true);
+      store.save('typeIds', this.state.typeIds);
+      store.save('isInit', true);
       routes.tabbar();
     }
   }
@@ -137,13 +137,13 @@ class Category extends React.Component {
     }
     const { routes } = this.context;
     InteractionManager.runAfterInteractions(() => {
-      Storage.get('typeIds')
+      store.get('typeIds')
         .then((typeIds) => {
           if (typeIds.sort().toString() === Array.from(tempTypeIds).sort().toString()) {
             routes.main();
             return;
           }
-          Storage.save('typeIds', this.state.typeIds)
+          store.save('typeIds', this.state.typeIds)
                   .then(this.resetRoute);
         });
     });

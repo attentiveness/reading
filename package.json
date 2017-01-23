@@ -16,7 +16,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "leancloud-storage": "^2.0.1",
+    "leancloud-storage": "^2.1.0",
     "react": "~15.4.2",
     "react-native": "^0.39.2",
     "react-native-code-push": "^1.16.1-beta",
@@ -24,6 +24,7 @@
     "react-native-exceptions-manager": "^0.1.8",
     "react-native-router-flux": "^3.37.0",
     "react-native-scrollable-tab-view": "^0.7.1",
+    "react-native-simple-store": "^1.1.0",
     "react-native-timeago": "^0.3.0",
     "react-native-vector-icons": "^3.0.0",
     "react-native-wechat": "^1.8.0",
@@ -39,7 +40,7 @@
     "babel-eslint": "^7.1.1",
     "babel-jest": "^18.0.0",
     "babel-preset-react-native": "^1.9.1",
-    "eslint": "^3.13.1",
+    "eslint": "^3.14.0",
     "eslint-config-airbnb": "^14.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",

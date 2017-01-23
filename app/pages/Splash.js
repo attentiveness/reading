@@ -20,7 +20,7 @@ import {
   Dimensions,
   Animated
 } from 'react-native';
-import Storage from '../utils/Storage';
+import store from 'react-native-simple-store';
 
 const contextTypes = {
   routes: PropTypes.object.isRequired
@@ -44,14 +44,14 @@ class Splash extends React.Component {
       this.state.bounceValue, { toValue: 1.2, duration: 1000 }
     ).start();
     this.timer = setTimeout(() => {
-      Storage.get('isInit')
-      .then((isInit) => {
-        if (!isInit) {
-          routes.initCategory({ isFirst: true });
-        } else {
-          routes.tabbar();
-        }
-      });
+      store.get('isInit')
+        .then((isInit) => {
+          if (!isInit) {
+            routes.initCategory({ isFirst: true });
+          } else {
+            routes.tabbar();
+          }
+        });
     }, 1000);
   }
 
