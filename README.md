@@ -11,6 +11,8 @@
 
 iReading App Write In React-Native（Studying and Programing）
 
+**The Apis failure, and now looking for new open Apis**
+
 **Support: Android 4.1 (API 16)+   IOS(8.0+)**
 
 > No Profit, No Advertisement, Only Feelings

@@ -16,22 +16,22 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "leancloud-storage": "^2.1.0",
+    "leancloud-storage": "^2.1.1",
     "react": "~15.4.2",
     "react-native": "^0.39.2",
     "react-native-code-push": "^1.16.1-beta",
-    "react-native-device-info": "^0.9.7",
+    "react-native-device-info": "^0.9.9",
     "react-native-exceptions-manager": "^0.1.8",
     "react-native-router-flux": "^3.37.0",
-    "react-native-scrollable-tab-view": "^0.7.1",
+    "react-native-scrollable-tab-view": "^0.7.2",
     "react-native-simple-store": "^1.1.0",
     "react-native-timeago": "^0.3.0",
     "react-native-vector-icons": "^3.0.0",
     "react-native-wechat": "^1.8.0",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
-    "redux-logger": "^2.7.4",
-    "redux-saga": "^0.14.2"
+    "redux-logger": "^2.8.1",
+    "redux-saga": "^0.14.3"
   },
   "jest": {
     "preset": "react-native"
@@ -40,10 +40,10 @@
     "babel-eslint": "^7.1.1",
     "babel-jest": "^18.0.0",
     "babel-preset-react-native": "^1.9.1",
-    "eslint": "^3.14.0",
-    "eslint-config-airbnb": "^14.0.0",
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.9.0",
     "jest": "^18.1.0",
     "react-test-renderer": "^15.4.2",
