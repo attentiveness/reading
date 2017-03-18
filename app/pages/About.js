@@ -25,32 +25,23 @@ import {
 } from 'react-native';
 
 import DeviceInfo from 'react-native-device-info';
-import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Button from '../components/Button';
 
-const API_STORE = 'http://apistore.baidu.com/';
+const SHOW_API = 'https://www.showapi.com';
 const READING_REPO = 'https://github.com/attentiveness/reading';
 
 const aboutLogo = require('../img/about_logo.png');
 
 class About extends React.Component {
-  componentDidMount() {
-    Actions.refresh({ renderRightButton: this.renderRightButton.bind(this) });
-  }
-
-  onPress(url) {
-    Linking.openURL(url);
-  }
-
-  renderRightButton() {
+  static renderRightButton() {
     return (
       <Icon.Button
         name="logo-github"
         backgroundColor="transparent"
         underlayColor="transparent"
         activeOpacity={0.8}
-        onPress={() => this.onPress(READING_REPO)}
+        onPress={() => Linking.openURL(READING_REPO)}
       />
     );
   }
@@ -81,8 +72,8 @@ class About extends React.Component {
               </Text>
               <Button
                 style={[styles.disclaimer, { color: '#3e9ce9' }]}
-                text={API_STORE}
-                onPress={() => this.onPress(API_STORE)}
+                text={SHOW_API}
+                onPress={() => this.onPress(SHOW_API)}
               />
             </View>
           </View>

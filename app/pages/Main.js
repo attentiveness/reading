@@ -25,7 +25,6 @@ import {
   TouchableOpacity,
   InteractionManager,
   ActivityIndicator,
-  RecyclerViewBackedScrollView,
   Image,
   View,
   DeviceEventEmitter,
@@ -232,7 +231,6 @@ class Main extends React.Component {
         onEndReached={() => this.onEndReached(typeId)}
         onEndReachedThreshold={10}
         renderFooter={this.renderFooter}
-        renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
         refreshControl={
           <RefreshControl
             style={styles.refreshControlBase}
