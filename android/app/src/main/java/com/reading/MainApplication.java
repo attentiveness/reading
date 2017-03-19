@@ -21,6 +21,7 @@ import android.app.Application;
 import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
+import com.facebook.react.ReactInstanceManagerBuilder;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.common.LifecycleState;
@@ -53,7 +54,7 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected ReactInstanceManager createReactInstanceManager() {
-            ReactInstanceManager.Builder builder = ReactInstanceManager.builder()
+            ReactInstanceManagerBuilder builder = ReactInstanceManager.builder()
                     .setApplication(getApplication())
                     .setJSMainModuleName(getJSMainModuleName())
                     .setUseDeveloperSupport(getUseDeveloperSupport())
@@ -77,7 +78,7 @@ public class MainApplication extends Application implements ReactApplication {
         }
 
         @Override
-        protected boolean getUseDeveloperSupport() {
+        public boolean getUseDeveloperSupport() {
             return BuildConfig.DEBUG;
         }
 

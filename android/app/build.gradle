@@ -89,8 +89,8 @@ def enableSeparateBuildPerCPUArchitecture = true
 def enableProguardInReleaseBuilds = true
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
@@ -166,7 +166,7 @@ andResGuard {   // ./gradlew resguard[BuildType | Flavor]
             "resources.arsc"
     ]
     sevenzip {
-        artifact = 'com.tencent.mm:SevenZip:1.1.16'
+        artifact = 'com.tencent.mm:SevenZip:1.2.0'
         //在设置sevenzip时, 你只需设置artifact或path. 支持同时设置,总以path的值为优先
         //path = "/usr/local/bin/7za"
     }
@@ -174,7 +174,8 @@ andResGuard {   // ./gradlew resguard[BuildType | Flavor]
 
 dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
-    compile "com.android.support:appcompat-v7:23.3.0"
+    //noinspection GradleCompatible
+    compile "com.android.support:appcompat-v7:25.2.0"
     compile "com.facebook.react:react-native:+" //From node_modules
     compile 'com.tencent.bugly:crashreport:latest.release'
     compile project(':RCTWeChat')

@@ -3,7 +3,7 @@ matrix:
   - os: osx
     language: objective-c
     sudo: false
-    osx_image: xcode7.3
+    osx_image: xcode8.2
     env: TEST_TYPE=ios
   - os: linux
     language: android
@@ -12,6 +12,10 @@ matrix:
     env: TEST_TYPE=android
     android:
       components:
+      - tools
+      - build-tools-25.0.2
+      - android-25
+      - tools
       - build-tools-23.0.1
       - android-23
       - extra-android-m2repository
@@ -46,7 +50,7 @@ before_install:
 install:
 - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.0/install.sh | bash
 - source ~/.bashrc
-- nvm install 5
+- nvm install 6
 - rm -Rf "${TMPDIR}/jest_preprocess_cache"
 - npm config set spin=false
 - npm config set progress=false
@@ -57,11 +61,8 @@ branches:
 script:
 - if [[ $TEST_TYPE == 'js' ]]; then npm run lint app ; fi
 - if [[ $TEST_TYPE == 'js' ]]; then npm test ; fi
-# TODO: We use xcodebuild because xctool would stall when collecting info about
-# the tests before running them. Switch back when this issue with xctool has
-# been resolved.
 - if [[ $TEST_TYPE == 'ios' ]]; then xcodebuild -project ios/$PROJECT_MOBILE.xcodeproj
-  -scheme $PROJECT_MOBILE -sdk iphonesimulator9.3 -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean build ; fi
+  -scheme $PROJECT_MOBILE -sdk iphonesimulator10.2 -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean build ; fi
 - if [ $TEST_TYPE == 'android' ] && [ $TRAVIS_PULL_REQUEST == 'false' ]; then cd android && ./gradlew clean && ./gradlew resguardRelease --stacktrace ; fi
 - if [ $TEST_TYPE == 'android' ] && [ $TRAVIS_PULL_REQUEST != 'false' ]; then cd android && ./gradlew clean && ./gradlew assembleDebug --stacktrace ; fi
 after_success:
