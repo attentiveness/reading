@@ -18,8 +18,8 @@
   "dependencies": {
     "leancloud-storage": "^2.1.3",
     "react": "~15.4.2",
-    "react-native": "^0.42.3",
-    "react-native-code-push": "^1.17.2-beta",
+    "react-native": "^0.41.0",
+    "react-native-code-push": "^1.17.1-beta",
     "react-native-device-info": "^0.10.1",
     "react-native-exceptions-manager": "^0.1.8",
     "react-native-router-flux": "^3.38.0",
