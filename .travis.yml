@@ -58,7 +58,7 @@ branches:
   only:
   - master
 script:
-- if [[ $TEST_TYPE == 'js' ]]; then npm run lint app ; fi
+- if [[ $TEST_TYPE == 'js' ]]; then npm run lint ; fi
 - if [[ $TEST_TYPE == 'js' ]]; then npm test ; fi
 - if [[ $TEST_TYPE == 'ios' ]]; then xcodebuild -project ios/$PROJECT_MOBILE.xcodeproj
   -scheme $PROJECT_MOBILE -sdk iphonesimulator10.2 -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean build ; fi

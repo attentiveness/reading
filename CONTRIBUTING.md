@@ -14,8 +14,9 @@ Please submit your pull request on the *master* branch.
 
 1. Fork the repo and create your branch from `master`.
 2. Add the copyright notice to the top of any new files you've added.
-3. **Make sure your code lints** (`npm run lint <files touched>`).
-4. Squash your commits (`git rebase -i`).
+3. **Format your code** (`npm run format`)
+4. **Make sure your code lints** (`npm run lint`).
+5. Squash your commits (`git rebase -i`).
 
 #### Copyright Notice for files
 

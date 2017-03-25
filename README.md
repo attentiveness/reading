@@ -71,6 +71,19 @@ react-native start
 ```
 npm test
 ```
+
+### Format Code
+
+```
+npm run format
+```
+
+### Run Lint
+
+```
+npm run lint
+```
+
 ## Release Note
 
 [Reading Release Note](https://github.com/attentiveness/reading/releases)
