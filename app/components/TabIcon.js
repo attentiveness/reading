@@ -16,11 +16,7 @@
  *
  */
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet
-} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class TabIcon extends React.Component {
@@ -32,7 +28,12 @@ export default class TabIcon extends React.Component {
           name={this.props.iconName}
           size={25}
         />
-        <Text style={[styles.title, { color: this.props.selected ? '#3e9ce9' : '#999999' }]}>
+        <Text
+          style={[
+            styles.title,
+            { color: this.props.selected ? '#3e9ce9' : '#999999' }
+          ]}
+        >
           {this.props.title}
         </Text>
       </View>

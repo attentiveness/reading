@@ -37,9 +37,7 @@ class MainContainer extends React.Component {
   }
 
   render() {
-    return (
-      <Main {...this.props} />
-    );
+    return <Main {...this.props} />;
   }
 }
 

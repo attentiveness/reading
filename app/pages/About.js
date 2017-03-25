@@ -16,13 +16,7 @@
  *
  */
 import React from 'react';
-import {
-  StyleSheet,
-  Image,
-  Text,
-  Linking,
-  View
-} from 'react-native';
+import { StyleSheet, Image, Text, Linking, View } from 'react-native';
 
 import DeviceInfo from 'react-native-device-info';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -51,10 +45,7 @@ class About extends React.Component {
       <View style={styles.container}>
         <View style={styles.content}>
           <View style={styles.center}>
-            <Image
-              style={styles.logo}
-              source={aboutLogo}
-            />
+            <Image style={styles.logo} source={aboutLogo} />
             <Text style={styles.version}>
               {`v${DeviceInfo.getVersion()}`}
             </Text>
@@ -86,7 +77,7 @@ class About extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'column'
   },
   content: {
     flex: 1,

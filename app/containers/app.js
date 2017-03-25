@@ -16,18 +16,11 @@
  *
  */
 import React from 'react';
-import {
-  StyleSheet,
-  Navigator
-} from 'react-native';
+import { StyleSheet, Navigator } from 'react-native';
 
 import { registerApp } from 'react-native-wechat';
 import AV from 'leancloud-storage';
-import {
-  Router,
-  Scene,
-  ActionConst
-} from 'react-native-router-flux';
+import { Router, Scene, ActionConst } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import Splash from '../pages/Splash';
 import CategoryContainer from '../containers/CategoryContainer';
@@ -47,11 +40,12 @@ const getSceneStyle = (props, computedProps) => {
     shadowColor: null,
     shadowOffset: null,
     shadowOpacity: null,
-    shadowRadius: null,
+    shadowRadius: null
   };
   if (computedProps.isActive) {
-    style.marginTop = computedProps.hideNavBar ?
-      0 : Navigator.NavigationBar.Styles.General.TotalNavHeight;
+    style.marginTop = computedProps.hideNavBar
+      ? 0
+      : Navigator.NavigationBar.Styles.General.TotalNavHeight;
     style.marginBottom = computedProps.hideTabBar ? 0 : 50;
   }
   return style;
@@ -75,7 +69,13 @@ class App extends React.Component {
         backButtonImage={backButton}
       >
         <Scene key="root">
-          <Scene key="splash" component={Splash} hideNavBar hideTabBar initial />
+          <Scene
+            key="splash"
+            component={Splash}
+            hideNavBar
+            hideTabBar
+            initial
+          />
           <Scene
             key="initCategory"
             component={CategoryContainer}
@@ -83,7 +83,12 @@ class App extends React.Component {
             hideTabBar
             type={ActionConst.REPLACE}
           />
-          <Scene key="tabbar" tabs pressOpacity={0.8} type={ActionConst.REPLACE} >
+          <Scene
+            key="tabbar"
+            tabs
+            pressOpacity={0.8}
+            type={ActionConst.REPLACE}
+          >
             <Scene
               key="main"
               component={MainContainer}
@@ -127,7 +132,7 @@ const styles = StyleSheet.create({
   },
   navBarTitle: {
     color: '#fff',
-    fontSize: 20,
+    fontSize: 20
   }
 });
 

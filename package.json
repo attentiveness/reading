@@ -13,7 +13,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "lint": "eslint app",
+    "lint": "eslint app --fix",
     "format": "find app -name '*.js' | xargs prettier --write --single-quote"
   },
   "dependencies": {

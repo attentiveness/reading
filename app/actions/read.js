@@ -17,14 +17,20 @@
  */
 import * as types from '../constants/ActionTypes';
 
-export function requestArticleList(isRefreshing, loading, typeId, isLoadMore, page = 1) {
+export function requestArticleList(
+  isRefreshing,
+  loading,
+  typeId,
+  isLoadMore,
+  page = 1
+) {
   return {
     type: types.REQUEST_ARTICLE_LIST,
     isRefreshing,
     loading,
     isLoadMore,
     typeId,
-    page,
+    page
   };
 }
 

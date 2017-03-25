@@ -62,13 +62,12 @@ class Category extends React.Component {
   componentWillMount() {
     if (!this.props.isFirst) {
       InteractionManager.runAfterInteractions(() => {
-        store.get('typeIds')
-          .then((typeIds) => {
-            tempTypeIds = typeIds;
-            this.setState({
-              typeIds
-            });
+        store.get('typeIds').then((typeIds) => {
+          tempTypeIds = typeIds;
+          this.setState({
+            typeIds
           });
+        });
       });
     }
   }
@@ -105,20 +104,16 @@ class Category extends React.Component {
   onSelectCatagory() {
     const { routes } = this.context;
     if (this.state.typeIds.length === 0) {
-      Alert.alert(
-        '提示',
-        '您确定不选择任何分类吗？',
-        [
-          { text: '取消', style: 'cancel' },
-          {
-            text: '确定',
-            onPress: () => {
-              store.save('typeIds', this.state.typeIds);
-              routes.tabbar();
-            }
-          },
-        ]
-      );
+      Alert.alert('提示', '您确定不选择任何分类吗？', [
+        { text: '取消', style: 'cancel' },
+        {
+          text: '确定',
+          onPress: () => {
+            store.save('typeIds', this.state.typeIds);
+            routes.tabbar();
+          }
+        }
+      ]);
     } else {
       store.save('typeIds', this.state.typeIds);
       store.save('isInit', true);
@@ -137,15 +132,16 @@ class Category extends React.Component {
     }
     const { routes } = this.context;
     InteractionManager.runAfterInteractions(() => {
-      store.get('typeIds')
-        .then((typeIds) => {
-          if (typeIds.sort().toString() === Array.from(tempTypeIds).sort().toString()) {
-            routes.main();
-            return;
-          }
-          store.save('typeIds', this.state.typeIds)
-                  .then(this.resetRoute);
-        });
+      store.get('typeIds').then((typeIds) => {
+        if (
+          typeIds.sort().toString() ===
+          Array.from(tempTypeIds).sort().toString()
+        ) {
+          routes.main();
+          return;
+        }
+        store.save('typeIds', this.state.typeIds).then(this.resetRoute);
+      });
     });
   }
 
@@ -168,12 +164,22 @@ class Category extends React.Component {
   }
 
   renderItem(item) {
-    const isSelect = Array.from(this.state.typeIds).indexOf(parseInt(item.id)) !== -1;
+    const isSelect = Array.from(this.state.typeIds).indexOf(
+      parseInt(item.id)
+    ) !== -1;
     return (
       <Button
         key={item.id}
-        containerStyle={[styles.categoryBtn, isSelect ? { backgroundColor: '#3e9ce9' } : { backgroundColor: '#fcfcfc' }]}
-        style={[styles.categoryText, isSelect ? { color: '#fcfcfc' } : { color: 'black' }]}
+        containerStyle={[
+          styles.categoryBtn,
+          isSelect
+            ? { backgroundColor: '#3e9ce9' }
+            : { backgroundColor: '#fcfcfc' }
+        ]}
+        style={[
+          styles.categoryText,
+          isSelect ? { color: '#fcfcfc' } : { color: 'black' }
+        ]}
         text={item.name}
         onPress={() => this.onPress(item)}
       />
@@ -213,7 +219,12 @@ class Category extends React.Component {
       return (
         <View style={styles.container}>
           <View style={styles.header}>
-            <Text style={[styles.btnText, { color: 'black', padding: 5, fontSize: 18 }]}>
+            <Text
+              style={[
+                styles.btnText,
+                { color: 'black', padding: 5, fontSize: 18 }
+              ]}
+            >
               初次见面，请选择您感兴趣的1-5个类别
             </Text>
           </View>

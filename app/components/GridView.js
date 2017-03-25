@@ -16,11 +16,7 @@
  *
  */
 import React, { PropTypes } from 'react';
-import {
-  View,
-  StyleSheet,
-  ListView
-} from 'react-native';
+import { View, StyleSheet, ListView } from 'react-native';
 
 const propTypes = {
   items: PropTypes.array,
@@ -32,15 +28,17 @@ const propTypes = {
   pageSize: PropTypes.number
 };
 
-const GridView = ({
-  items,
-  renderItem,
-  style,
-  itemsPerRow,
-  onEndReached,
-  scrollEnabled,
-  pageSize
-}) => {
+const GridView = (
+  {
+    items,
+    renderItem,
+    style,
+    itemsPerRow,
+    onEndReached,
+    scrollEnabled,
+    pageSize
+  }
+) => {
   const groupItems = (renderItems, renderItemsPerRow) => {
     const itemsGroups = [];
     let group = [];

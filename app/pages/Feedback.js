@@ -16,12 +16,7 @@
  *
  */
 import React from 'react';
-import {
-  StyleSheet,
-  TextInput,
-  View,
-  Keyboard
-} from 'react-native';
+import { StyleSheet, TextInput, View, Keyboard } from 'react-native';
 
 import AV from 'leancloud-storage';
 import { Actions } from 'react-native-router-flux';
@@ -76,7 +71,9 @@ class Feedback extends React.Component {
     return (
       <View style={styles.container}>
         <TextInput
-          ref={(ref) => { this.textInput = ref; }}
+          ref={(ref) => {
+            this.textInput = ref;
+          }}
           style={styles.textInput}
           placeholder="请写下您宝贵的意见或建议，与iReading一起进步！"
           placeholderTextColor="#aaaaaa"

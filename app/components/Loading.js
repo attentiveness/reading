@@ -36,27 +36,17 @@ const propTypes = {
 };
 
 const Loading = ({ visible, color, size, overlayColor, onRequestClose }) => (
-  <Modal
-    visible={visible}
-    transparent
-    onRequestClose={onRequestClose}
-  >
-    {visible ?
-      <View
-        key={'spinner'}
-        style={styles.container}
-      >
+  <Modal visible={visible} transparent onRequestClose={onRequestClose}>
+    {visible
+      ? <View key={'spinner'} style={styles.container}>
         <View style={[styles.background, { backgroundColor: overlayColor }]}>
           <View style={styles.loading}>
-            <ActivityIndicator
-              size={size}
-              color={color}
-            />
+            <ActivityIndicator size={size} color={color} />
             <Text style={styles.loadingText}>数据加载中...</Text>
           </View>
         </View>
-      </View> :
-      <View key={'spinner'} />}
+      </View>
+      : <View key={'spinner'} />}
   </Modal>
 );
 

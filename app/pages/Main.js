@@ -32,7 +32,9 @@ import {
 } from 'react-native';
 
 import TimeAgo from 'react-native-timeago';
-import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
+import ScrollableTabView, {
+  DefaultTabBar
+} from 'react-native-scrollable-tab-view';
 import store from 'react-native-simple-store';
 import LoadingView from '../components/LoadingView';
 import { toastShort } from '../utils/ToastUtil';
@@ -58,7 +60,7 @@ class Main extends React.Component {
     super(props);
     this.state = {
       dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
+        rowHasChanged: (row1, row2) => row1 !== row2
       }),
       typeIds: [],
       typeList: {}
@@ -80,28 +82,30 @@ class Main extends React.Component {
       });
     });
     InteractionManager.runAfterInteractions(() => {
-      store.get('typeIds')
-        .then((typeIds) => {
-          if (!typeIds) {
-            return;
-          }
-          typeIds.forEach((typeId) => {
-            readActions.requestArticleList(false, true, typeId);
-            pages.push(1);
-          });
-          store.get('typeList').then(typeList =>
-            this.setState({
-              typeIds,
-              typeList
-            })
-          );
+      store.get('typeIds').then((typeIds) => {
+        if (!typeIds) {
+          return;
+        }
+        typeIds.forEach((typeId) => {
+          readActions.requestArticleList(false, true, typeId);
+          pages.push(1);
         });
+        store.get('typeList').then(typeList =>
+          this.setState({
+            typeIds,
+            typeList
+          }));
+      });
     });
   }
 
   componentWillReceiveProps(nextProps) {
     const { read } = this.props;
-    if (read.isLoadMore && !nextProps.read.isLoadMore && !nextProps.read.isRefreshing) {
+    if (
+      read.isLoadMore &&
+      !nextProps.read.isLoadMore &&
+      !nextProps.read.isRefreshing
+    ) {
       if (nextProps.read.noMore) {
         toastShort('没有更多数据了');
         const index = this.state.typeIds.indexOf(currentLoadMoreTypeId);
@@ -153,7 +157,7 @@ class Main extends React.Component {
     const { read } = this.props;
     if (read.isLoadMore) {
       return (
-        <View style={styles.footerContainer} >
+        <View style={styles.footerContainer}>
           <ActivityIndicator size="small" color="#3e9ce9" />
           <Text style={styles.footerText}>
             数据加载中……
@@ -168,22 +172,16 @@ class Main extends React.Component {
     return (
       <TouchableOpacity onPress={() => this.onPress(article)}>
         <View style={styles.containerItem}>
-          <Image
-            style={styles.itemImg}
-            source={{ uri: article.contentImg }}
-          />
-          <View style={styles.itemRightContent} >
+          <Image style={styles.itemImg} source={{ uri: article.contentImg }} />
+          <View style={styles.itemRightContent}>
             <Text style={styles.title}>
               {formatStringWithHtml(article.title)}
             </Text>
-            <View style={styles.itemRightBottom} >
-              <Text style={styles.userName} >
+            <View style={styles.itemRightBottom}>
+              <Text style={styles.userName}>
                 {article.userName}
               </Text>
-              <TimeAgo
-                style={styles.timeAgo}
-                time={article.date}
-              />
+              <TimeAgo style={styles.timeAgo} time={article.date} />
             </View>
           </View>
         </View>
@@ -196,7 +194,8 @@ class Main extends React.Component {
     if (read.loading) {
       return <LoadingView />;
     }
-    const isEmpty = read.articleList[typeId] === undefined || read.articleList[typeId].length === 0;
+    const isEmpty = read.articleList[typeId] === undefined ||
+      read.articleList[typeId].length === 0;
     if (isEmpty) {
       return (
         <ScrollView
@@ -249,12 +248,9 @@ class Main extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollableTabView
-          renderTabBar={() =>
-            <DefaultTabBar
-              tabStyle={styles.tab}
-              textStyle={styles.tabText}
-            />
-          }
+          renderTabBar={() => (
+            <DefaultTabBar tabStyle={styles.tab} textStyle={styles.tabText} />
+          )}
           tabBarBackgroundColor="#fcfcfc"
           tabBarUnderlineStyle={styles.tabBarUnderline}
           tabBarActiveTextColor="#3e9ce9"
@@ -272,15 +268,17 @@ class Main extends React.Component {
               }
             }
             const typeView = (
-              <View
-                key={typeId}
-                tabLabel={name}
-                style={styles.base}
-              >
-                {this.renderContent(this.state.dataSource.cloneWithRows(
-                  read.articleList[typeId] === undefined ? [] :
-                    read.articleList[typeId]), typeId)}
-              </View>);
+              <View key={typeId} tabLabel={name} style={styles.base}>
+                {this.renderContent(
+                  this.state.dataSource.cloneWithRows(
+                    read.articleList[typeId] === undefined
+                      ? []
+                      : read.articleList[typeId]
+                  ),
+                  typeId
+                )}
+              </View>
+            );
             return typeView;
           })}
         </ScrollableTabView>

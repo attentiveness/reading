@@ -52,8 +52,10 @@ class WebViewPage extends React.Component {
   }
 
   componentDidMount() {
-    Actions.refresh({ title: this.props.article.userName,
-      renderRightButton: this.renderRightButton.bind(this) });
+    Actions.refresh({
+      title: this.props.article.userName,
+      renderRightButton: this.renderRightButton.bind(this)
+    });
     BackAndroid.addEventListener('hardwareBackPress', this.goBack);
   }
 
@@ -110,42 +112,36 @@ class WebViewPage extends React.Component {
           });
         }}
       >
-        <View
-          key={'spinner'}
-          style={styles.spinner}
-        >
+        <View key={'spinner'} style={styles.spinner}>
           <View style={styles.spinnerContent}>
-            <Text style={[styles.spinnerTitle, { fontSize: 20, color: 'black' }]}>
+            <Text
+              style={[styles.spinnerTitle, { fontSize: 20, color: 'black' }]}
+            >
               分享到
             </Text>
             <View style={styles.shareParent}>
               <TouchableOpacity
                 style={styles.base}
                 onPress={() => {
-                  WeChat.isWXAppInstalled()
-                    .then((isInstalled) => {
-                      if (isInstalled) {
-                        WeChat.shareToSession({
-                          title: formatStringWithHtml(article.title),
-                          description: '分享自：iReading',
-                          thumbImage: article.contentImg,
-                          type: 'news',
-                          webpageUrl: article.url
-                        })
-                        .catch((error) => {
-                          toastShort(error.message, true);
-                        });
-                      } else {
-                        toastShort('没有安装微信软件，请您安装微信之后再试', true);
-                      }
-                    });
+                  WeChat.isWXAppInstalled().then((isInstalled) => {
+                    if (isInstalled) {
+                      WeChat.shareToSession({
+                        title: formatStringWithHtml(article.title),
+                        description: '分享自：iReading',
+                        thumbImage: article.contentImg,
+                        type: 'news',
+                        webpageUrl: article.url
+                      }).catch((error) => {
+                        toastShort(error.message, true);
+                      });
+                    } else {
+                      toastShort('没有安装微信软件，请您安装微信之后再试', true);
+                    }
+                  });
                 }}
               >
                 <View style={styles.shareContent}>
-                  <Image
-                    style={styles.shareIcon}
-                    source={shareIconWechat}
-                  />
+                  <Image style={styles.shareIcon} source={shareIconWechat} />
                   <Text style={styles.spinnerTitle}>
                     微信
                   </Text>
@@ -154,29 +150,26 @@ class WebViewPage extends React.Component {
               <TouchableOpacity
                 style={styles.base}
                 onPress={() => {
-                  WeChat.isWXAppInstalled()
-                    .then((isInstalled) => {
-                      if (isInstalled) {
-                        WeChat.shareToTimeline({
-                          title: formatStringWithHtml(`[@iReading]${article.title}`),
-                          thumbImage: article.contentImg,
-                          type: 'news',
-                          webpageUrl: article.url
-                        })
-                        .catch((error) => {
-                          toastShort(error.message, true);
-                        });
-                      } else {
-                        toastShort('没有安装微信软件，请您安装微信之后再试', true);
-                      }
-                    });
+                  WeChat.isWXAppInstalled().then((isInstalled) => {
+                    if (isInstalled) {
+                      WeChat.shareToTimeline({
+                        title: formatStringWithHtml(
+                          `[@iReading]${article.title}`
+                        ),
+                        thumbImage: article.contentImg,
+                        type: 'news',
+                        webpageUrl: article.url
+                      }).catch((error) => {
+                        toastShort(error.message, true);
+                      });
+                    } else {
+                      toastShort('没有安装微信软件，请您安装微信之后再试', true);
+                    }
+                  });
                 }}
               >
                 <View style={styles.shareContent}>
-                  <Image
-                    style={styles.shareIcon}
-                    source={shareIconMoments}
-                  />
+                  <Image style={styles.shareIcon} source={shareIconMoments} />
                   <Text style={styles.spinnerTitle}>
                     朋友圈
                   </Text>
@@ -205,7 +198,9 @@ class WebViewPage extends React.Component {
           {this.renderSpinner()}
         </Modal>
         <WebView
-          ref={(ref) => { this.webview = ref; }}
+          ref={(ref) => {
+            this.webview = ref;
+          }}
           automaticallyAdjustContentInsets={false}
           style={styles.base}
           source={{ uri: this.props.article.url }}

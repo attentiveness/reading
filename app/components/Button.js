@@ -16,11 +16,7 @@
  *
  */
 import React, { PropTypes } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity
-} from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 const propTypes = {
   onPress: PropTypes.func,
@@ -31,7 +27,9 @@ const propTypes = {
   activeOpacity: PropTypes.number
 };
 
-const Button = ({ onPress, disabled, style, containerStyle, text, activeOpacity }) => (
+const Button = (
+  { onPress, disabled, style, containerStyle, text, activeOpacity }
+) => (
   <TouchableOpacity
     style={containerStyle}
     onPress={onPress}

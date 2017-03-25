@@ -31,14 +31,14 @@ describe('category saga tests', () => {
       typeList: [
         {
           id: '19',
-          name: 'Sports',
+          name: 'Sports'
         },
         {
           id: '2',
-          name: 'Entertainment',
-        },
-      ],
-    },
+          name: 'Entertainment'
+        }
+      ]
+    }
   };
 
   it('should put(fetchTypeList())', () => {
@@ -53,14 +53,16 @@ describe('category saga tests', () => {
 
   it('should put(receiveTypeList(typeList.showapi_res_body.typeList))', () => {
     const next = step(mockTypeList);
-    expect(next).toEqual(put(receiveTypeList(mockTypeList.showapi_res_body.typeList)));
+    expect(next).toEqual(
+      put(receiveTypeList(mockTypeList.showapi_res_body.typeList))
+    );
   });
 
   it("should call(store.save, 'typeList', typeList.showapi_res_body.typeList)", () => {
     const next = step(mockTypeList);
-    expect(next).toEqual(call(store.save,
-      'typeList',
-      mockTypeList.showapi_res_body.typeList));
+    expect(next).toEqual(
+      call(store.save, 'typeList', mockTypeList.showapi_res_body.typeList)
+    );
   });
 
   it('should be done', () => {

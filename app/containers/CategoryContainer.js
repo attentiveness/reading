@@ -24,9 +24,7 @@ import Category from '../pages/Category';
 
 class CategoryContainer extends React.Component {
   render() {
-    return (
-      <Category {...this.props} />
-    );
+    return <Category {...this.props} />;
   }
 }
 

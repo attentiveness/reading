@@ -38,7 +38,9 @@ export default function read(state = initialState, action) {
         isRefreshing: false,
         isLoadMore: false,
         noMore: action.articleList.length === 0,
-        articleList: state.isLoadMore ? loadMore(state, action) : combine(state, action),
+        articleList: state.isLoadMore
+          ? loadMore(state, action)
+          : combine(state, action),
         loading: state.articleList[action.typeId] === undefined
       });
     default:
@@ -52,6 +54,8 @@ function combine(state, action) {
 }
 
 function loadMore(state, action) {
-  state.articleList[action.typeId] = state.articleList[action.typeId].concat(action.articleList);
+  state.articleList[action.typeId] = state.articleList[action.typeId].concat(
+    action.articleList
+  );
   return state.articleList;
 }

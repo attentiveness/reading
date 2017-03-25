@@ -16,11 +16,7 @@
  *
  */
 import React, { PropTypes } from 'react';
-import {
-  View,
-  Image,
-  TouchableOpacity
-} from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 
 const propTypes = {
   onPress: PropTypes.func,
@@ -36,10 +32,7 @@ const ImageButton = ({ onPress, disabled, source, style, containerStyle }) => (
     onPress={onPress}
     disabled={disabled}
   >
-    <Image
-      style={style}
-      source={source}
-    />
+    <Image style={style} source={source} />
   </TouchableOpacity>
 );
 

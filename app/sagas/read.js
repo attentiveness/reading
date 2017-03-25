@@ -24,13 +24,26 @@ import { request } from '../utils/RequestUtil';
 import { WEXIN_ARTICLE_LIST } from '../constants/Urls';
 import { fetchArticleList, receiveArticleList } from '../actions/read';
 
-export function* requestArticleList(isRefreshing, loading, typeId, isLoadMore, page) {
+export function* requestArticleList(
+  isRefreshing,
+  loading,
+  typeId,
+  isLoadMore,
+  page
+) {
   try {
     yield put(fetchArticleList(isRefreshing, loading, isLoadMore));
-    const articleList = yield call(request,
+    const articleList = yield call(
+      request,
       `${WEXIN_ARTICLE_LIST}?typeId=${typeId}&page=${page}`,
-      'get');
-    yield put(receiveArticleList(articleList.showapi_res_body.pagebean.contentlist, typeId));
+      'get'
+    );
+    yield put(
+      receiveArticleList(
+        articleList.showapi_res_body.pagebean.contentlist,
+        typeId
+      )
+    );
     const errorMessage = articleList.showapi_res_error;
     if (errorMessage && errorMessage !== '') {
       yield toastShort(errorMessage);
@@ -50,6 +63,13 @@ export function* watchRequestArticleList() {
       isLoadMore,
       page
     } = yield take(types.REQUEST_ARTICLE_LIST);
-    yield fork(requestArticleList, isRefreshing, loading, typeId, isLoadMore, page);
+    yield fork(
+      requestArticleList,
+      isRefreshing,
+      loading,
+      typeId,
+      isLoadMore,
+      page
+    );
   }
 }
