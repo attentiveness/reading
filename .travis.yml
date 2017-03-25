@@ -66,6 +66,6 @@ script:
 - if [ $TEST_TYPE == 'android' ] && [ $TRAVIS_PULL_REQUEST != 'false' ]; then cd android && ./gradlew clean && ./gradlew assembleDebug --stacktrace ; fi
 after_success:
 - if [ $TEST_TYPE == 'android' ] && [ $TRAVIS_PULL_REQUEST == 'false' ]; then fir p 
-  $HOME/build/attentiveness/reading/android/app/build/outputs/apk/AndResGuard_app-armeabi-v7a-release/app-armeabi-v7a-release_signed_7zip_aligned.apk
+  $HOME/build/attentiveness/reading/android/app/build/outputs/apk/AndResGuard_app-armeabi-v7a-release/app-armeabi-v7a-release_aligned_signed.apk
   -T $FIR_TOKEN -c "$TRAVIS_TAG" ; fi
   
