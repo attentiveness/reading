@@ -28,7 +28,6 @@ import {
 } from 'react-native';
 
 import AV from 'leancloud-storage';
-import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import store from 'react-native-simple-store';
 import GridView from '../components/GridView';
@@ -41,10 +40,6 @@ let maxCategory = 5; // 默认最多5个类别，远端可配置
 const propTypes = {
   categoryActions: PropTypes.object,
   category: PropTypes.object.isRequired
-};
-
-const contextTypes = {
-  routes: PropTypes.object.isRequired
 };
 
 class Category extends React.Component {
@@ -73,9 +68,9 @@ class Category extends React.Component {
   }
 
   componentDidMount() {
-    if (!this.props.isFirst) {
-      Actions.refresh({ renderRightButton: this.renderRightButton.bind(this) });
-    }
+    // if (!this.props.isFirst) {
+    //   Actions.refresh({ renderRightButton: this.renderRightButton.bind(this) });
+    // }
     const { categoryActions } = this.props;
     categoryActions.requestTypeList();
     const query = new AV.Query('Reading_Settings');
@@ -102,23 +97,23 @@ class Category extends React.Component {
   }
 
   onSelectCatagory() {
-    const { routes } = this.context;
-    if (this.state.typeIds.length === 0) {
-      Alert.alert('提示', '您确定不选择任何分类吗？', [
-        { text: '取消', style: 'cancel' },
-        {
-          text: '确定',
-          onPress: () => {
-            store.save('typeIds', this.state.typeIds);
-            routes.tabbar();
-          }
-        }
-      ]);
-    } else {
-      store.save('typeIds', this.state.typeIds);
-      store.save('isInit', true);
-      routes.tabbar();
-    }
+    // const { routes } = this.context;
+    // if (this.state.typeIds.length === 0) {
+    //   Alert.alert('提示', '您确定不选择任何分类吗？', [
+    //     { text: '取消', style: 'cancel' },
+    //     {
+    //       text: '确定',
+    //       onPress: () => {
+    //         store.save('typeIds', this.state.typeIds);
+    //         routes.tabbar();
+    //       }
+    //     }
+    //   ]);
+    // } else {
+    //   store.save('typeIds', this.state.typeIds);
+    //   store.save('isInit', true);
+    //   routes.tabbar();
+    // }
   }
 
   onActionSelected() {
@@ -130,28 +125,28 @@ class Category extends React.Component {
       toastShort('不要少于1个类别哦');
       return;
     }
-    const { routes } = this.context;
-    InteractionManager.runAfterInteractions(() => {
-      store.get('typeIds').then((typeIds) => {
-        if (
-          typeIds.sort().toString() ===
-          Array.from(tempTypeIds).sort().toString()
-        ) {
-          routes.main();
-          return;
-        }
-        store.save('typeIds', this.state.typeIds).then(this.resetRoute);
-      });
-    });
+    // const { routes } = this.context;
+    // InteractionManager.runAfterInteractions(() => {
+    //   store.get('typeIds').then((typeIds) => {
+    //     if (
+    //       typeIds.sort().toString() ===
+    //       Array.from(tempTypeIds).sort().toString()
+    //     ) {
+    //       routes.main();
+    //       return;
+    //     }
+    //     store.save('typeIds', this.state.typeIds).then(this.resetRoute);
+    //   });
+    // });
   }
 
   resetRoute() {
-    const { routes } = this.context;
-    DeviceEventEmitter.emit('changeCategory', this.state.typeIds);
-    routes.main();
+    // const { routes } = this.context;
+    // DeviceEventEmitter.emit('changeCategory', this.state.typeIds);
+    // routes.main();
   }
 
-  renderRightButton() {
+  /** renderRightButton() {
     return (
       <Icon.Button
         name="md-checkmark"
@@ -161,7 +156,7 @@ class Category extends React.Component {
         onPress={this.onActionSelected}
       />
     );
-  }
+  }*/
 
   renderItem(item) {
     const isSelect =
@@ -256,7 +251,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: '#fff'
   },
   categoryBtn: {
     margin: 10,
@@ -292,6 +288,5 @@ const styles = StyleSheet.create({
 });
 
 Category.propTypes = propTypes;
-Category.contextTypes = contextTypes;
 
 export default Category;

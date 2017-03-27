@@ -15,41 +15,53 @@
  * limitations under the License.
  *
  */
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Dimensions, Animated } from 'react-native';
 import store from 'react-native-simple-store';
-
-const contextTypes = {
-  routes: PropTypes.object.isRequired
-};
+import { registerApp } from 'react-native-wechat';
+import AV from 'leancloud-storage';
 
 const maxHeight = Dimensions.get('window').height;
 const maxWidth = Dimensions.get('window').width;
 const splashImg = require('../img/splash.png');
 
 class Splash extends React.Component {
+  static navigationOptions = {
+    header: {
+      visible: false
+    }
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       bounceValue: new Animated.Value(1)
     };
+    registerApp('wxb24c445773822c79');
+    AV.init({
+      appId: 'Tfi1z7dN9sjMwSul8sYaTEvg-gzGzoHsz',
+      appKey: '57qmeEJonefntNqRe17dAgi4'
+    });
   }
 
   componentDidMount() {
-    const { routes } = this.context;
+    const { navigate } = this.props.navigation;
     Animated.timing(this.state.bounceValue, {
       toValue: 1.2,
       duration: 1000
     }).start();
-    this.timer = setTimeout(() => {
-      store.get('isInit').then((isInit) => {
-        if (!isInit) {
-          routes.initCategory({ isFirst: true });
-        } else {
-          routes.tabbar();
-        }
-      });
-    }, 1000);
+    this.timer = setTimeout(
+      () => {
+        store.get('isInit').then((isInit) => {
+          if (!isInit) {
+            navigate('Category', { isFirst: true });
+          } else {
+            navigate('Home');
+          }
+        });
+      },
+      1000
+    );
   }
 
   componentWillUnmount() {
@@ -69,7 +81,5 @@ class Splash extends React.Component {
     );
   }
 }
-
-Splash.contextTypes = contextTypes;
 
 export default Splash;

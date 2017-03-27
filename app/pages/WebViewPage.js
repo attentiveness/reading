@@ -30,7 +30,6 @@ import {
 } from 'react-native';
 
 import * as WeChat from 'react-native-wechat';
-import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { toastShort } from '../utils/ToastUtil';
 import LoadingView from '../components/LoadingView';
@@ -41,6 +40,19 @@ const shareIconWechat = require('../img/share_icon_wechat.png');
 const shareIconMoments = require('../img/share_icon_moments.png');
 
 class WebViewPage extends React.Component {
+  static navigationOptions = {
+    title: ({ state }) => state.params.article.userName,
+    tabBar: {
+      icon: ({ tintColor }) => (
+        <Icon
+          name="md-home"
+          size={25}
+          color={tintColor}
+        />
+      )
+    }
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -52,10 +64,10 @@ class WebViewPage extends React.Component {
   }
 
   componentDidMount() {
-    Actions.refresh({
-      title: this.props.article.userName,
-      renderRightButton: this.renderRightButton.bind(this)
-    });
+    // Actions.refresh({
+    //   title: this.props.article.userName,
+    //   renderRightButton: this.renderRightButton.bind(this)
+    // });
     BackAndroid.addEventListener('hardwareBackPress', this.goBack);
   }
 
@@ -86,7 +98,7 @@ class WebViewPage extends React.Component {
     return false;
   }
 
-  renderRightButton() {
+  /** renderRightButton() {
     return (
       <Icon.Button
         name="md-share"
@@ -96,14 +108,14 @@ class WebViewPage extends React.Component {
         onPress={this.onActionSelected}
       />
     );
-  }
+  }*/
 
   renderLoading() {
     return <LoadingView />;
   }
 
   renderSpinner() {
-    const { article } = this.props;
+    const { params } = this.props.navigation.state;
     return (
       <TouchableWithoutFeedback
         onPress={() => {
@@ -126,11 +138,11 @@ class WebViewPage extends React.Component {
                   WeChat.isWXAppInstalled().then((isInstalled) => {
                     if (isInstalled) {
                       WeChat.shareToSession({
-                        title: formatStringWithHtml(article.title),
+                        title: formatStringWithHtml(params.article.title),
                         description: '分享自：iReading',
-                        thumbImage: article.contentImg,
+                        thumbImage: params.article.contentImg,
                         type: 'news',
-                        webpageUrl: article.url
+                        webpageUrl: params.article.url
                       }).catch((error) => {
                         toastShort(error.message, true);
                       });
@@ -153,10 +165,12 @@ class WebViewPage extends React.Component {
                   WeChat.isWXAppInstalled().then((isInstalled) => {
                     if (isInstalled) {
                       WeChat.shareToTimeline({
-                        title: formatStringWithHtml(`[@iReading]${article.title}`),
-                        thumbImage: article.contentImg,
+                        title: formatStringWithHtml(
+                          `[@iReading]${params.article.title}`
+                        ),
+                        thumbImage: params.article.contentImg,
                         type: 'news',
-                        webpageUrl: article.url
+                        webpageUrl: params.article.url
                       }).catch((error) => {
                         toastShort(error.message, true);
                       });
@@ -181,6 +195,7 @@ class WebViewPage extends React.Component {
   }
 
   render() {
+    const { params } = this.props.navigation.state;
     return (
       <View style={styles.container}>
         <Modal
@@ -201,7 +216,7 @@ class WebViewPage extends React.Component {
           }}
           automaticallyAdjustContentInsets={false}
           style={styles.base}
-          source={{ uri: this.props.article.url }}
+          source={{ uri: params.article.url }}
           javaScriptEnabled
           domStorageEnabled
           startInLoadingState

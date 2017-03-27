@@ -27,8 +27,7 @@ import {
   ActivityIndicator,
   Image,
   View,
-  DeviceEventEmitter,
-  Platform
+  DeviceEventEmitter
 } from 'react-native';
 
 import TimeAgo from 'react-native-timeago';
@@ -45,10 +44,6 @@ require('moment/locale/zh-cn');
 const propTypes = {
   readActions: PropTypes.object,
   read: PropTypes.object.isRequired
-};
-
-const contextTypes = {
-  routes: PropTypes.object.isRequired
 };
 
 const pages = [];
@@ -131,8 +126,8 @@ class Main extends React.Component {
   }
 
   onPress(article) {
-    const { routes } = this.context;
-    routes.web({ article });
+    const { navigate } = this.props.navigation;
+    navigate('Web', { article });
   }
 
   onIconClicked() {
@@ -296,7 +291,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    paddingTop: Platform.OS === 'ios' ? 10 : 0
+    backgroundColor: '#fff'
   },
   containerItem: {
     flexDirection: 'row',
@@ -404,6 +399,5 @@ const styles = StyleSheet.create({
 });
 
 Main.propTypes = propTypes;
-Main.contextTypes = contextTypes;
 
 export default Main;

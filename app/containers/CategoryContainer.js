@@ -18,11 +18,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Icon from 'react-native-vector-icons/Ionicons';
 import * as categoryCreators from '../actions/category';
 
 import Category from '../pages/Category';
 
 class CategoryContainer extends React.Component {
+  static navigationOptions = {
+    title: '分类',
+    tabBar: {
+      icon: ({ tintColor }) => (
+        <Icon
+          name="md-pricetags"
+          size={25}
+          color={tintColor}
+        />
+      ),
+    }
+  }
+
   render() {
     return <Category {...this.props} />;
   }

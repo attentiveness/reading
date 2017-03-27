@@ -28,7 +28,7 @@ const READING_REPO = 'https://github.com/attentiveness/reading';
 const aboutLogo = require('../img/about_logo.png');
 
 class About extends React.Component {
-  static renderRightButton() {
+  /** static renderRightButton() {
     return (
       <Icon.Button
         name="logo-github"
@@ -38,6 +38,18 @@ class About extends React.Component {
         onPress={() => Linking.openURL(READING_REPO)}
       />
     );
+  }*/
+  static navigationOptions = {
+    title: '关于',
+    tabBar: {
+      icon: ({ tintColor }) => (
+        <Icon
+          name="md-information-circle"
+          size={25}
+          color={tintColor}
+        />
+      )
+    }
   }
 
   render() {
@@ -77,7 +89,8 @@ class About extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: '#fff'
   },
   content: {
     flex: 1,

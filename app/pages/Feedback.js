@@ -19,7 +19,6 @@ import React from 'react';
 import { StyleSheet, TextInput, View, Keyboard } from 'react-native';
 
 import AV from 'leancloud-storage';
-import { Actions } from 'react-native-router-flux';
 import DeviceInfo from 'react-native-device-info';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { toastShort } from '../utils/ToastUtil';
@@ -27,6 +26,19 @@ import { toastShort } from '../utils/ToastUtil';
 let feedbackText;
 
 class Feedback extends React.Component {
+  static navigationOptions = {
+    title: '建议',
+    tabBar: {
+      icon: ({ tintColor }) => (
+        <Icon
+          name="md-thumbs-up"
+          size={25}
+          color={tintColor}
+        />
+      )
+    }
+  }
+
   constructor(props) {
     super(props);
     this.onActionSelected = this.onActionSelected.bind(this);
@@ -34,7 +46,7 @@ class Feedback extends React.Component {
 
   componentDidMount() {
     feedbackText = '';
-    Actions.refresh({ renderRightButton: this.renderRightButton.bind(this) });
+    // Actions.refresh({ renderRightButton: this.renderRightButton.bind(this) });
   }
 
   onActionSelected() {
@@ -55,7 +67,7 @@ class Feedback extends React.Component {
     }
   }
 
-  renderRightButton() {
+  /** renderRightButton() {
     return (
       <Icon.Button
         name="md-checkmark"
@@ -65,7 +77,7 @@ class Feedback extends React.Component {
         onPress={this.onActionSelected}
       />
     );
-  }
+  }*/
 
   render() {
     return (
@@ -93,7 +105,8 @@ class Feedback extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: '#fff'
   },
   textInput: {
     flex: 1,
