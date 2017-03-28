@@ -21,7 +21,7 @@ import createSagaMiddleware, { END } from 'redux-saga';
 import rootReducer from '../reducers/index';
 
 const middlewares = [];
-const createLogger = require('redux-logger');
+const { logger } = require('redux-logger');
 
 // configuring saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -29,7 +29,6 @@ const sagaMiddleware = createSagaMiddleware();
 middlewares.push(sagaMiddleware);
 /* global __DEV__  */
 if (__DEV__) {
-  const logger = createLogger();
   middlewares.push(logger);
 }
 const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);

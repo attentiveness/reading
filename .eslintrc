@@ -5,6 +5,7 @@
         "node": true,
         "jest": true
     },
+    "parser": "babel-eslint",
     "ecmaFeatures": {
         "forOf": true,
         "jsx": true,
