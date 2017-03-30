@@ -69,7 +69,7 @@ import com.android.build.OutputFile
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
 project.ext.vectoricons = [
-        iconFontNames: [ 'Ionicons.ttf' ] // Name of the font files you want to copy
+        iconFontNames: ['Ionicons.ttf'] // Name of the font files you want to copy
 ]
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
@@ -156,7 +156,9 @@ andResGuard {   // ./gradlew resguard[BuildType | Flavor]
     whiteList = [
             "com.reading.R.drawable.ic_launcher",
             "com.reading.R.drawable.app_img*",
-            "com.reading.R.drawable.node_modules*"
+            "com.reading.R.drawable.node_modules*",
+            // for react-native-code-push
+            "R.string.CODE_PUSH_APK_BUILD_TIME"
     ]
     compressFilePattern = [
             "*.png",
