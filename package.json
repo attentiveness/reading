@@ -19,26 +19,26 @@
   "dependencies": {
     "leancloud-storage": "^2.1.4",
     "react": "16.0.0-alpha.6",
-    "react-native": "0.43.2",
-    "react-native-code-push": "^2.0.1-beta",
+    "react-native": "0.43.4",
+    "react-native-code-push": "^2.0.2-beta",
     "react-native-device-info": "^0.10.2",
     "react-native-exceptions-manager": "^0.1.8",
-    "react-native-router-flux": "^3.38.0",
+    "react-native-router-flux": "3.38.0",
     "react-native-scrollable-tab-view": "^0.7.4",
     "react-native-simple-store": "^1.1.0",
     "react-native-timeago": "^0.3.0",
     "react-native-vector-icons": "^4.0.1",
     "react-native-wechat": "^1.9.2",
-    "react-redux": "^5.0.3",
+    "react-redux": "^5.0.4",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1",
-    "redux-saga": "^0.14.6"
+    "redux-saga": "^0.14.7"
   },
   "jest": {
     "preset": "react-native"
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.1",
+    "babel-eslint": "^7.2.3",
     "babel-jest": "^19.0.0",
     "babel-preset-react-native": "^1.9.1",
     "eslint": "^3.19.0",
@@ -47,7 +47,7 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
     "jest": "^19.0.2",
-    "prettier": "^0.22.0",
+    "prettier": "^1.2.2",
     "react-test-renderer": "16.0.0-alpha.6",
     "redux-devtools": "^3.3.2"
   }
