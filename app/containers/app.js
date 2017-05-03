@@ -31,11 +31,13 @@ const TabContainer = TabNavigator(
     About: { screen: About }
   },
   {
+    lazy: true,
     tabBarOptions: {
       activeTintColor: '#3e9ce9',
       inactiveTintColor: '#999999'
     }
-  });
+  }
+);
 
 const App = StackNavigator(
   {
@@ -43,28 +45,24 @@ const App = StackNavigator(
     Home: {
       screen: TabContainer,
       navigationOptions: {
-        header: (navigation, defaultHeader) => ({
-          ...defaultHeader,
-          left: null
-        })
+        headerLeft: null
       }
     },
-    Web: { screen: WebViewPage },
+    Web: { screen: WebViewPage }
   },
   {
     headerMode: 'screen',
     navigationOptions: {
-      header: {
-        style: {
-          backgroundColor: '#3e9ce9'
-        },
-        titleStyle: {
-          color: '#fff',
-          fontSize: 20
-        },
-        tintColor: '#fff'
-      }
+      headerStyle: {
+        backgroundColor: '#3e9ce9'
+      },
+      headerTitleStyle: {
+        color: '#fff',
+        fontSize: 20
+      },
+      headerTintColor: '#fff'
     }
-  });
+  }
+);
 
 export default App;

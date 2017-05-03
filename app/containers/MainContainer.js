@@ -26,16 +26,10 @@ import * as readCreators from '../actions/read';
 class MainContainer extends React.Component {
   static navigationOptions = {
     title: '首页',
-    tabBar: {
-      icon: ({ tintColor }) => (
-        <Icon
-          name="md-home"
-          size={25}
-          color={tintColor}
-        />
-      )
-    }
-  }
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="md-home" size={25} color={tintColor} />
+    )
+  };
 
   static componentDidMount() {
     CodePush.sync({

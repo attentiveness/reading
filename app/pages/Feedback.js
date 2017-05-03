@@ -26,18 +26,21 @@ import { toastShort } from '../utils/ToastUtil';
 let feedbackText;
 
 class Feedback extends React.Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     title: '建议',
-    tabBar: {
-      icon: ({ tintColor }) => (
-        <Icon
-          name="md-thumbs-up"
-          size={25}
-          color={tintColor}
-        />
-      )
-    }
-  }
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="md-thumbs-up" size={25} color={tintColor} />
+    ),
+    headerRight: (
+      <Icon.Button
+        name="md-checkmark"
+        backgroundColor="transparent"
+        underlayColor="transparent"
+        activeOpacity={0.8}
+        onPress={this.onActionSelected}
+      />
+    )
+  });
 
   constructor(props) {
     super(props);
@@ -46,7 +49,6 @@ class Feedback extends React.Component {
 
   componentDidMount() {
     feedbackText = '';
-    // Actions.refresh({ renderRightButton: this.renderRightButton.bind(this) });
   }
 
   onActionSelected() {
@@ -66,18 +68,6 @@ class Feedback extends React.Component {
       Keyboard.dismiss();
     }
   }
-
-  /** renderRightButton() {
-    return (
-      <Icon.Button
-        name="md-checkmark"
-        backgroundColor="transparent"
-        underlayColor="transparent"
-        activeOpacity={0.8}
-        onPress={this.onActionSelected}
-      />
-    );
-  }*/
 
   render() {
     return (

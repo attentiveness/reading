@@ -27,10 +27,8 @@ const splashImg = require('../img/splash.png');
 
 class Splash extends React.Component {
   static navigationOptions = {
-    header: {
-      visible: false
-    }
-  }
+    header: null
+  };
 
   constructor(props) {
     super(props);
@@ -50,18 +48,15 @@ class Splash extends React.Component {
       toValue: 1.2,
       duration: 1000
     }).start();
-    this.timer = setTimeout(
-      () => {
-        store.get('isInit').then((isInit) => {
-          if (!isInit) {
-            navigate('Category', { isFirst: true });
-          } else {
-            navigate('Home');
-          }
-        });
-      },
-      1000
-    );
+    this.timer = setTimeout(() => {
+      store.get('isInit').then((isInit) => {
+        if (!isInit) {
+          navigate('Category', { isFirst: true });
+        } else {
+          navigate('Home');
+        }
+      });
+    }, 1000);
   }
 
   componentWillUnmount() {

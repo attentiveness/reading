@@ -43,6 +43,18 @@ const propTypes = {
 };
 
 class Category extends React.Component {
+  static navigationOptions = {
+    headerRight: (
+      <Icon.Button
+        name="md-checkmark"
+        backgroundColor="transparent"
+        underlayColor="transparent"
+        activeOpacity={0.8}
+        onPress={() => this.onActionSelected()}
+      />
+    )
+  };
+
   constructor(props) {
     super(props);
     this.renderItem = this.renderItem.bind(this);
@@ -123,7 +135,6 @@ class Category extends React.Component {
     }
     if (tempTypeIds.length < 1) {
       toastShort('不要少于1个类别哦');
-      return;
     }
     // const { routes } = this.context;
     // InteractionManager.runAfterInteractions(() => {

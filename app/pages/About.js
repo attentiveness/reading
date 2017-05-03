@@ -28,8 +28,12 @@ const READING_REPO = 'https://github.com/attentiveness/reading';
 const aboutLogo = require('../img/about_logo.png');
 
 class About extends React.Component {
-  /** static renderRightButton() {
-    return (
+  static navigationOptions = {
+    title: '关于',
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="md-information-circle" size={25} color={tintColor} />
+    ),
+    headerRight: (
       <Icon.Button
         name="logo-github"
         backgroundColor="transparent"
@@ -37,20 +41,8 @@ class About extends React.Component {
         activeOpacity={0.8}
         onPress={() => Linking.openURL(READING_REPO)}
       />
-    );
-  }*/
-  static navigationOptions = {
-    title: '关于',
-    tabBar: {
-      icon: ({ tintColor }) => (
-        <Icon
-          name="md-information-circle"
-          size={25}
-          color={tintColor}
-        />
-      )
-    }
-  }
+    )
+  };
 
   render() {
     return (
