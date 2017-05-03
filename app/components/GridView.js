@@ -28,17 +28,15 @@ const propTypes = {
   pageSize: PropTypes.number
 };
 
-const GridView = (
-  {
-    items,
-    renderItem,
-    style,
-    itemsPerRow,
-    onEndReached,
-    scrollEnabled,
-    pageSize
-  }
-) => {
+const GridView = ({
+  items,
+  renderItem,
+  style,
+  itemsPerRow,
+  onEndReached,
+  scrollEnabled,
+  pageSize
+}) => {
   const groupItems = (renderItems, renderItemsPerRow) => {
     const itemsGroups = [];
     let group = [];

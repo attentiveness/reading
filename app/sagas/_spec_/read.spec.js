@@ -24,13 +24,7 @@ import { fetchArticleList, receiveArticleList } from '../../actions/read';
 
 /* global expect */
 describe('read saga tests', () => {
-  const {
-    isRefreshing,
-    loading,
-    typeId,
-    isLoadMore,
-    page
-  } = {
+  const { isRefreshing, loading, typeId, isLoadMore, page } = {
     isRefreshing: false,
     loading: false,
     typeId: 2,

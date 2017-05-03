@@ -164,9 +164,8 @@ class Category extends React.Component {
   }
 
   renderItem(item) {
-    const isSelect = Array.from(this.state.typeIds).indexOf(
-      parseInt(item.id)
-    ) !== -1;
+    const isSelect =
+      Array.from(this.state.typeIds).indexOf(parseInt(item.id)) !== -1;
     return (
       <Button
         key={item.id}

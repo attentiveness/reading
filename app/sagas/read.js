@@ -56,13 +56,9 @@ export function* requestArticleList(
 
 export function* watchRequestArticleList() {
   while (true) {
-    const {
-      isRefreshing,
-      loading,
-      typeId,
-      isLoadMore,
-      page
-    } = yield take(types.REQUEST_ARTICLE_LIST);
+    const { isRefreshing, loading, typeId, isLoadMore, page } = yield take(
+      types.REQUEST_ARTICLE_LIST
+    );
     yield fork(
       requestArticleList,
       isRefreshing,

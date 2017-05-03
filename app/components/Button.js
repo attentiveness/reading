@@ -27,9 +27,14 @@ const propTypes = {
   activeOpacity: PropTypes.number
 };
 
-const Button = (
-  { onPress, disabled, style, containerStyle, text, activeOpacity }
-) => (
+const Button = ({
+  onPress,
+  disabled,
+  style,
+  containerStyle,
+  text,
+  activeOpacity
+}) => (
   <TouchableOpacity
     style={containerStyle}
     onPress={onPress}

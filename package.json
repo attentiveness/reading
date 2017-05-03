@@ -17,10 +17,10 @@
     "format": "find app -name '*.js' | xargs prettier --write --single-quote"
   },
   "dependencies": {
-    "leancloud-storage": "^2.1.4",
+    "leancloud-storage": "^2.2.1",
     "react": "16.0.0-alpha.6",
-    "react-native": "0.43.4",
-    "react-native-code-push": "^2.0.2-beta",
+    "react-native": "0.44.0",
+    "react-native-code-push": "^2.0.3-beta",
     "react-native-device-info": "^0.10.2",
     "react-native-exceptions-manager": "^0.1.8",
     "react-native-router-flux": "3.38.0",
@@ -32,7 +32,7 @@
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1",
-    "redux-saga": "^0.14.7"
+    "redux-saga": "^0.15.1"
   },
   "jest": {
     "preset": "react-native"
@@ -47,8 +47,8 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
     "jest": "^19.0.2",
-    "prettier": "^1.2.2",
+    "prettier": "^1.3.0",
     "react-test-renderer": "16.0.0-alpha.6",
-    "redux-devtools": "^3.3.2"
+    "redux-devtools": "^3.4.0"
   }
 }

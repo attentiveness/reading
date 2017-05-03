@@ -153,9 +153,7 @@ class WebViewPage extends React.Component {
                   WeChat.isWXAppInstalled().then((isInstalled) => {
                     if (isInstalled) {
                       WeChat.shareToTimeline({
-                        title: formatStringWithHtml(
-                          `[@iReading]${article.title}`
-                        ),
+                        title: formatStringWithHtml(`[@iReading]${article.title}`),
                         thumbImage: article.contentImg,
                         type: 'news',
                         webpageUrl: article.url

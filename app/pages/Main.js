@@ -94,7 +94,8 @@ class Main extends React.Component {
           this.setState({
             typeIds,
             typeList
-          }));
+          })
+        );
       });
     });
   }
@@ -194,7 +195,8 @@ class Main extends React.Component {
     if (read.loading) {
       return <LoadingView />;
     }
-    const isEmpty = read.articleList[typeId] === undefined ||
+    const isEmpty =
+      read.articleList[typeId] === undefined ||
       read.articleList[typeId].length === 0;
     if (isEmpty) {
       return (

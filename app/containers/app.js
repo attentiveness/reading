@@ -16,7 +16,7 @@
  *
  */
 import React from 'react';
-import { StyleSheet, Navigator } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { registerApp } from 'react-native-wechat';
 import AV from 'leancloud-storage';
@@ -43,9 +43,7 @@ const getSceneStyle = (props, computedProps) => {
     shadowRadius: null
   };
   if (computedProps.isActive) {
-    style.marginTop = computedProps.hideNavBar
-      ? 0
-      : Navigator.NavigationBar.Styles.General.TotalNavHeight;
+    style.marginTop = computedProps.hideNavBar ? 0 : 64;
     style.marginBottom = computedProps.hideTabBar ? 0 : 50;
   }
   return style;

@@ -41,18 +41,15 @@ class Splash extends React.Component {
       toValue: 1.2,
       duration: 1000
     }).start();
-    this.timer = setTimeout(
-      () => {
-        store.get('isInit').then((isInit) => {
-          if (!isInit) {
-            routes.initCategory({ isFirst: true });
-          } else {
-            routes.tabbar();
-          }
-        });
-      },
-      1000
-    );
+    this.timer = setTimeout(() => {
+      store.get('isInit').then((isInit) => {
+        if (!isInit) {
+          routes.initCategory({ isFirst: true });
+        } else {
+          routes.tabbar();
+        }
+      });
+    }, 1000);
   }
 
   componentWillUnmount() {
