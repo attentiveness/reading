@@ -37,7 +37,9 @@ class Feedback extends React.Component {
         backgroundColor="transparent"
         underlayColor="transparent"
         activeOpacity={0.8}
-        onPress={() => { navigation.state.params.handleCheck(); }}
+        onPress={() => {
+          navigation.state.params.handleCheck();
+        }}
       />
     )
   });

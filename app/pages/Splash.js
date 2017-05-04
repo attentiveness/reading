@@ -54,7 +54,11 @@ class Splash extends React.Component {
         if (!isInit) {
           navigate('Category', { isFirst: true });
         } else {
-          navigate('Home', { isFirst: false });
+          const resetAction = NavigationActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: 'Home' })]
+          });
+          this.props.navigation.dispatch(resetAction);
         }
       });
     }, 1000);

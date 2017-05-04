@@ -55,7 +55,7 @@ class Category extends React.Component {
 
   componentWillMount() {
     const { params } = this.props.navigation.state;
-    if (!params.isFirst) {
+    if (params === undefined || !params.isFirst) {
       InteractionManager.runAfterInteractions(() => {
         store.get('typeIds').then((typeIds) => {
           tempTypeIds = typeIds;
@@ -75,7 +75,7 @@ class Category extends React.Component {
       maxCategory = settings.get('max_category');
     });
     const { params } = this.props.navigation.state;
-    if (!params.isFirst) {
+    if (params === undefined || !params.isFirst) {
       this.props.navigation.setParams({ handleCheck: this.onActionSelected });
     }
   }
@@ -106,14 +106,14 @@ class Category extends React.Component {
           text: '确定',
           onPress: () => {
             store.save('typeIds', this.state.typeIds);
-            navigate('Home', { isFirst: false });
+            navigate('Home');
           }
         }
       ]);
     } else {
       store.save('typeIds', this.state.typeIds);
       store.save('isInit', true);
-      navigate('Home', { isFirst: false });
+      navigate('Home');
     }
   }
 
@@ -198,7 +198,7 @@ class Category extends React.Component {
 
   render() {
     const { params } = this.props.navigation.state;
-    if (params.isFirst) {
+    if (params !== undefined && params.isFirst) {
       return (
         <View style={styles.container}>
           <View style={styles.header}>

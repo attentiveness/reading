@@ -51,7 +51,9 @@ class WebViewPage extends React.Component {
         backgroundColor="transparent"
         underlayColor="transparent"
         activeOpacity={0.8}
-        onPress={() => { navigation.state.params.handleShare(); }}
+        onPress={() => {
+          navigation.state.params.handleShare();
+        }}
       />
     )
   });
@@ -153,7 +155,9 @@ class WebViewPage extends React.Component {
                   WeChat.isWXAppInstalled().then((isInstalled) => {
                     if (isInstalled) {
                       WeChat.shareToTimeline({
-                        title: formatStringWithHtml(`[@iReading]${params.article.title}`),
+                        title: formatStringWithHtml(
+                          `[@iReading]${params.article.title}`
+                        ),
                         thumbImage: params.article.contentImg,
                         type: 'news',
                         webpageUrl: params.article.url
