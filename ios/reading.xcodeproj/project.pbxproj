@@ -408,7 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				179261C21E1BAC230033E8C9 /* libRCTAnimation.a */,
-				179261C41E1BAC230033E8C9 /* libRCTAnimation-tvOS.a */,
+				179261C41E1BAC230033E8C9 /* libRCTAnimation.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -699,10 +699,10 @@
 			remoteRef = 179261C11E1BAC230033E8C9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		179261C41E1BAC230033E8C9 /* libRCTAnimation-tvOS.a */ = {
+		179261C41E1BAC230033E8C9 /* libRCTAnimation.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libRCTAnimation-tvOS.a";
+			path = libRCTAnimation.a;
 			remoteRef = 179261C31E1BAC230033E8C9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
