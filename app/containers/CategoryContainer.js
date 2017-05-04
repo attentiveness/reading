@@ -18,11 +18,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Icon from 'react-native-vector-icons/Ionicons';
 import * as categoryCreators from '../actions/category';
 
 import Category from '../pages/Category';
 
 class CategoryContainer extends React.Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: '分类',
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="md-pricetags" size={25} color={tintColor} />
+    ),
+    headerRight: navigation.state.params !== undefined &&
+      navigation.state.params.isFirst
+      ? null
+      : <Icon.Button
+        name="md-checkmark"
+        backgroundColor="transparent"
+        underlayColor="transparent"
+        activeOpacity={0.8}
+        onPress={() => {
+          navigation.state.params.handleCheck();
+        }}
+      />
+  });
+
   render() {
     return <Category {...this.props} />;
   }

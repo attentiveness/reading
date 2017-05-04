@@ -16,14 +16,14 @@
  *
  */
 import React, { PropTypes } from 'react';
-import { View, Image, TouchableOpacity } from 'react-native';
+import { ViewPropTypes, Image, TouchableOpacity } from 'react-native';
 
 const propTypes = {
   onPress: PropTypes.func,
   disabled: PropTypes.bool,
   source: PropTypes.object,
-  style: View.propTypes.style,
-  containerStyle: View.propTypes.style
+  style: ViewPropTypes.style,
+  containerStyle: ViewPropTypes.style
 };
 
 const ImageButton = ({ onPress, disabled, source, style, containerStyle }) => (

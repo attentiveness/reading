@@ -28,8 +28,6 @@ import {
 } from 'react-native';
 
 import AV from 'leancloud-storage';
-import { Actions } from 'react-native-router-flux';
-import Icon from 'react-native-vector-icons/Ionicons';
 import store from 'react-native-simple-store';
 import GridView from '../components/GridView';
 import Button from '../components/Button';
@@ -41,10 +39,6 @@ let maxCategory = 5; // 默认最多5个类别，远端可配置
 const propTypes = {
   categoryActions: PropTypes.object,
   category: PropTypes.object.isRequired
-};
-
-const contextTypes = {
-  routes: PropTypes.object.isRequired
 };
 
 class Category extends React.Component {
@@ -60,7 +54,8 @@ class Category extends React.Component {
   }
 
   componentWillMount() {
-    if (!this.props.isFirst) {
+    const { params } = this.props.navigation.state;
+    if (params === undefined || !params.isFirst) {
       InteractionManager.runAfterInteractions(() => {
         store.get('typeIds').then((typeIds) => {
           tempTypeIds = typeIds;
@@ -73,15 +68,16 @@ class Category extends React.Component {
   }
 
   componentDidMount() {
-    if (!this.props.isFirst) {
-      Actions.refresh({ renderRightButton: this.renderRightButton.bind(this) });
-    }
     const { categoryActions } = this.props;
     categoryActions.requestTypeList();
     const query = new AV.Query('Reading_Settings');
     query.get('57b86e0ba633bd002a96436b').then((settings) => {
       maxCategory = settings.get('max_category');
     });
+    const { params } = this.props.navigation.state;
+    if (params === undefined || !params.isFirst) {
+      this.props.navigation.setParams({ handleCheck: this.onActionSelected });
+    }
   }
 
   onRefresh() {
@@ -102,7 +98,7 @@ class Category extends React.Component {
   }
 
   onSelectCatagory() {
-    const { routes } = this.context;
+    const { navigate } = this.props.navigation;
     if (this.state.typeIds.length === 0) {
       Alert.alert('提示', '您确定不选择任何分类吗？', [
         { text: '取消', style: 'cancel' },
@@ -110,14 +106,14 @@ class Category extends React.Component {
           text: '确定',
           onPress: () => {
             store.save('typeIds', this.state.typeIds);
-            routes.tabbar();
+            navigate('Home');
           }
         }
       ]);
     } else {
       store.save('typeIds', this.state.typeIds);
       store.save('isInit', true);
-      routes.tabbar();
+      navigate('Home');
     }
   }
 
@@ -128,16 +124,15 @@ class Category extends React.Component {
     }
     if (tempTypeIds.length < 1) {
       toastShort('不要少于1个类别哦');
-      return;
     }
-    const { routes } = this.context;
+    const { navigate } = this.props.navigation;
     InteractionManager.runAfterInteractions(() => {
       store.get('typeIds').then((typeIds) => {
         if (
           typeIds.sort().toString() ===
           Array.from(tempTypeIds).sort().toString()
         ) {
-          routes.main();
+          navigate('Main');
           return;
         }
         store.save('typeIds', this.state.typeIds).then(this.resetRoute);
@@ -146,21 +141,9 @@ class Category extends React.Component {
   }
 
   resetRoute() {
-    const { routes } = this.context;
+    const { navigate } = this.props.navigation;
     DeviceEventEmitter.emit('changeCategory', this.state.typeIds);
-    routes.main();
-  }
-
-  renderRightButton() {
-    return (
-      <Icon.Button
-        name="md-checkmark"
-        backgroundColor="transparent"
-        underlayColor="transparent"
-        activeOpacity={0.8}
-        onPress={this.onActionSelected}
-      />
-    );
+    navigate('Main');
   }
 
   renderItem(item) {
@@ -214,7 +197,8 @@ class Category extends React.Component {
   }
 
   render() {
-    if (this.props.isFirst) {
+    const { params } = this.props.navigation.state;
+    if (params !== undefined && params.isFirst) {
       return (
         <View style={styles.container}>
           <View style={styles.header}>
@@ -256,7 +240,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: '#fff'
   },
   categoryBtn: {
     margin: 10,
@@ -292,6 +277,5 @@ const styles = StyleSheet.create({
 });
 
 Category.propTypes = propTypes;
-Category.contextTypes = contextTypes;
 
 export default Category;
