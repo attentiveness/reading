@@ -51,7 +51,7 @@ class WebViewPage extends React.Component {
         backgroundColor="transparent"
         underlayColor="transparent"
         activeOpacity={0.8}
-        onPress={this.onActionSelected}
+        onPress={() => { navigation.state.params.handleShare(); }}
       />
     )
   });
@@ -67,6 +67,7 @@ class WebViewPage extends React.Component {
   }
 
   componentDidMount() {
+    this.props.navigation.setParams({ handleShare: this.onActionSelected });
     BackAndroid.addEventListener('hardwareBackPress', this.goBack);
   }
 

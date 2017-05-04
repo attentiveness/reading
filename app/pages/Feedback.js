@@ -37,7 +37,7 @@ class Feedback extends React.Component {
         backgroundColor="transparent"
         underlayColor="transparent"
         activeOpacity={0.8}
-        onPress={this.onActionSelected}
+        onPress={() => { navigation.state.params.handleCheck(); }}
       />
     )
   });
@@ -49,6 +49,7 @@ class Feedback extends React.Component {
 
   componentDidMount() {
     feedbackText = '';
+    this.props.navigation.setParams({ handleCheck: this.onActionSelected });
   }
 
   onActionSelected() {

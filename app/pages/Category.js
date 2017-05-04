@@ -28,7 +28,6 @@ import {
 } from 'react-native';
 
 import AV from 'leancloud-storage';
-import Icon from 'react-native-vector-icons/Ionicons';
 import store from 'react-native-simple-store';
 import GridView from '../components/GridView';
 import Button from '../components/Button';
@@ -43,18 +42,6 @@ const propTypes = {
 };
 
 class Category extends React.Component {
-  static navigationOptions = {
-    headerRight: (
-      <Icon.Button
-        name="md-checkmark"
-        backgroundColor="transparent"
-        underlayColor="transparent"
-        activeOpacity={0.8}
-        onPress={() => this.onActionSelected()}
-      />
-    )
-  };
-
   constructor(props) {
     super(props);
     this.renderItem = this.renderItem.bind(this);
@@ -67,7 +54,8 @@ class Category extends React.Component {
   }
 
   componentWillMount() {
-    if (!this.props.isFirst) {
+    const { params } = this.props.navigation.state;
+    if (!params.isFirst) {
       InteractionManager.runAfterInteractions(() => {
         store.get('typeIds').then((typeIds) => {
           tempTypeIds = typeIds;
@@ -80,15 +68,16 @@ class Category extends React.Component {
   }
 
   componentDidMount() {
-    // if (!this.props.isFirst) {
-    //   Actions.refresh({ renderRightButton: this.renderRightButton.bind(this) });
-    // }
     const { categoryActions } = this.props;
     categoryActions.requestTypeList();
     const query = new AV.Query('Reading_Settings');
     query.get('57b86e0ba633bd002a96436b').then((settings) => {
       maxCategory = settings.get('max_category');
     });
+    const { params } = this.props.navigation.state;
+    if (!params.isFirst) {
+      this.props.navigation.setParams({ handleCheck: this.onActionSelected });
+    }
   }
 
   onRefresh() {
@@ -109,23 +98,23 @@ class Category extends React.Component {
   }
 
   onSelectCatagory() {
-    // const { routes } = this.context;
-    // if (this.state.typeIds.length === 0) {
-    //   Alert.alert('提示', '您确定不选择任何分类吗？', [
-    //     { text: '取消', style: 'cancel' },
-    //     {
-    //       text: '确定',
-    //       onPress: () => {
-    //         store.save('typeIds', this.state.typeIds);
-    //         routes.tabbar();
-    //       }
-    //     }
-    //   ]);
-    // } else {
-    //   store.save('typeIds', this.state.typeIds);
-    //   store.save('isInit', true);
-    //   routes.tabbar();
-    // }
+    const { navigate } = this.props.navigation;
+    if (this.state.typeIds.length === 0) {
+      Alert.alert('提示', '您确定不选择任何分类吗？', [
+        { text: '取消', style: 'cancel' },
+        {
+          text: '确定',
+          onPress: () => {
+            store.save('typeIds', this.state.typeIds);
+            navigate('Home', { isFirst: false });
+          }
+        }
+      ]);
+    } else {
+      store.save('typeIds', this.state.typeIds);
+      store.save('isInit', true);
+      navigate('Home', { isFirst: false });
+    }
   }
 
   onActionSelected() {
@@ -136,38 +125,26 @@ class Category extends React.Component {
     if (tempTypeIds.length < 1) {
       toastShort('不要少于1个类别哦');
     }
-    // const { routes } = this.context;
-    // InteractionManager.runAfterInteractions(() => {
-    //   store.get('typeIds').then((typeIds) => {
-    //     if (
-    //       typeIds.sort().toString() ===
-    //       Array.from(tempTypeIds).sort().toString()
-    //     ) {
-    //       routes.main();
-    //       return;
-    //     }
-    //     store.save('typeIds', this.state.typeIds).then(this.resetRoute);
-    //   });
-    // });
+    const { navigate } = this.props.navigation;
+    InteractionManager.runAfterInteractions(() => {
+      store.get('typeIds').then((typeIds) => {
+        if (
+          typeIds.sort().toString() ===
+          Array.from(tempTypeIds).sort().toString()
+        ) {
+          navigate('Main');
+          return;
+        }
+        store.save('typeIds', this.state.typeIds).then(this.resetRoute);
+      });
+    });
   }
 
   resetRoute() {
-    // const { routes } = this.context;
-    // DeviceEventEmitter.emit('changeCategory', this.state.typeIds);
-    // routes.main();
+    const { navigate } = this.props.navigation;
+    DeviceEventEmitter.emit('changeCategory', this.state.typeIds);
+    navigate('Main');
   }
-
-  /** renderRightButton() {
-    return (
-      <Icon.Button
-        name="md-checkmark"
-        backgroundColor="transparent"
-        underlayColor="transparent"
-        activeOpacity={0.8}
-        onPress={this.onActionSelected}
-      />
-    );
-  }*/
 
   renderItem(item) {
     const isSelect =
@@ -220,7 +197,8 @@ class Category extends React.Component {
   }
 
   render() {
-    if (this.props.isFirst) {
+    const { params } = this.props.navigation.state;
+    if (params.isFirst) {
       return (
         <View style={styles.container}>
           <View style={styles.header}>
