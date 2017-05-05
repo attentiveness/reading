@@ -19,7 +19,7 @@ import React from 'react';
 import {
   StyleSheet,
   WebView,
-  BackAndroid,
+  BackHandler,
   Dimensions,
   Text,
   Image,
@@ -31,7 +31,7 @@ import {
 
 import * as WeChat from 'react-native-wechat';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { toastShort } from '../utils/ToastUtil';
+import ToastUtil from '../utils/ToastUtil';
 import LoadingView from '../components/LoadingView';
 import { formatStringWithHtml } from '../utils/FormatUtil';
 
@@ -70,11 +70,11 @@ class WebViewPage extends React.Component {
 
   componentDidMount() {
     this.props.navigation.setParams({ handleShare: this.onActionSelected });
-    BackAndroid.addEventListener('hardwareBackPress', this.goBack);
+    BackHandler.addEventListener('hardwareBackPress', this.goBack);
   }
 
   componentWillUnmount() {
-    BackAndroid.removeEventListener('hardwareBackPress', this.goBack);
+    BackHandler.removeEventListener('hardwareBackPress', this.goBack);
   }
 
   onActionSelected() {
@@ -134,10 +134,10 @@ class WebViewPage extends React.Component {
                         type: 'news',
                         webpageUrl: params.article.url
                       }).catch((error) => {
-                        toastShort(error.message, true);
+                        ToastUtil.showShort(error.message, true);
                       });
                     } else {
-                      toastShort('没有安装微信软件，请您安装微信之后再试', true);
+                      ToastUtil.showShort('没有安装微信软件，请您安装微信之后再试', true);
                     }
                   });
                 }}
@@ -162,10 +162,10 @@ class WebViewPage extends React.Component {
                         type: 'news',
                         webpageUrl: params.article.url
                       }).catch((error) => {
-                        toastShort(error.message, true);
+                        ToastUtil.showShort(error.message, true);
                       });
                     } else {
-                      toastShort('没有安装微信软件，请您安装微信之后再试', true);
+                      ToastUtil.showShort('没有安装微信软件，请您安装微信之后再试', true);
                     }
                   });
                 }}
@@ -204,7 +204,6 @@ class WebViewPage extends React.Component {
           ref={(ref) => {
             this.webview = ref;
           }}
-          automaticallyAdjustContentInsets={false}
           style={styles.base}
           source={{ uri: params.article.url }}
           javaScriptEnabled

@@ -20,7 +20,7 @@ import { Dimensions, Animated } from 'react-native';
 import store from 'react-native-simple-store';
 import { registerApp } from 'react-native-wechat';
 import AV from 'leancloud-storage';
-import { NavigationActions } from 'react-navigation';
+import NavigationUtil from '../utils/NavigationUtil';
 
 const maxHeight = Dimensions.get('window').height;
 const maxWidth = Dimensions.get('window').width;
@@ -54,11 +54,7 @@ class Splash extends React.Component {
         if (!isInit) {
           navigate('Category', { isFirst: true });
         } else {
-          const resetAction = NavigationActions.reset({
-            index: 0,
-            actions: [NavigationActions.navigate({ routeName: 'Home' })]
-          });
-          this.props.navigation.dispatch(resetAction);
+          NavigationUtil.reset(this.props.navigation, 'Home');
         }
       });
     }, 1000);

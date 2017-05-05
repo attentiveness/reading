@@ -15,28 +15,16 @@
  * limitations under the License.
  *
  */
-import { Alert, ToastAndroid, Platform } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 
-const showShort = (content, isAlert) => {
-  if (!content) {
-    return;
-  }
-  if (isAlert || Platform.OS === 'ios') {
-    Alert.alert('提示', content.toString());
-  } else {
-    ToastAndroid.show(content.toString(), ToastAndroid.SHORT);
-  }
-};
-
-const showLong = (content, isAlert) => {
-  if (isAlert || Platform.OS === 'ios') {
-    Alert.alert('提示', content.toString());
-  } else {
-    ToastAndroid.show(content.toString(), ToastAndroid.LONG);
-  }
+const reset = (navigation, routeName) => {
+  const resetAction = NavigationActions.reset({
+    index: 0,
+    actions: [NavigationActions.navigate({ routeName })]
+  });
+  navigation.dispatch(resetAction);
 };
 
 export default {
-  showShort,
-  showLong
+  reset
 };

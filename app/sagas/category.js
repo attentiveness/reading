@@ -19,7 +19,7 @@
 import { put, take, call, fork } from 'redux-saga/effects';
 import store from 'react-native-simple-store';
 import * as types from '../constants/ActionTypes';
-import { toastShort } from '../utils/ToastUtil';
+import ToastUtil from '../utils/ToastUtil';
 import { request } from '../utils/RequestUtil';
 import { WEXIN_ARTICLE_TYPE } from '../constants/Urls';
 import { fetchTypeList, receiveTypeList } from '../actions/category';
@@ -32,11 +32,11 @@ export function* requestTypeList() {
     yield call(store.save, 'typeList', typeList.showapi_res_body.typeList);
     const errorMessage = typeList.showapi_res_error;
     if (errorMessage && errorMessage !== '') {
-      yield toastShort(errorMessage);
+      yield ToastUtil.showShort(errorMessage);
     }
   } catch (error) {
     yield put(receiveTypeList([]));
-    yield toastShort('网络发生错误，请重试');
+    yield ToastUtil.showShort('网络发生错误，请重试');
   }
 }
 

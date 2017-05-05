@@ -19,7 +19,7 @@
 import { put, take, call, fork } from 'redux-saga/effects';
 
 import * as types from '../constants/ActionTypes';
-import { toastShort } from '../utils/ToastUtil';
+import ToastUtil from '../utils/ToastUtil';
 import { request } from '../utils/RequestUtil';
 import { WEXIN_ARTICLE_LIST } from '../constants/Urls';
 import { fetchArticleList, receiveArticleList } from '../actions/read';
@@ -46,11 +46,11 @@ export function* requestArticleList(
     );
     const errorMessage = articleList.showapi_res_error;
     if (errorMessage && errorMessage !== '') {
-      yield toastShort(errorMessage);
+      yield ToastUtil.showShort(errorMessage);
     }
   } catch (error) {
     yield put(receiveArticleList([], typeId));
-    toastShort('网络发生错误，请重试');
+    ToastUtil.showShort('网络发生错误，请重试');
   }
 }
 

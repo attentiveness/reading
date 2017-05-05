@@ -21,7 +21,7 @@ import { StyleSheet, TextInput, View, Keyboard } from 'react-native';
 import AV from 'leancloud-storage';
 import DeviceInfo from 'react-native-device-info';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { toastShort } from '../utils/ToastUtil';
+import ToastUtil from '../utils/ToastUtil';
 
 let feedbackText;
 
@@ -56,7 +56,7 @@ class Feedback extends React.Component {
 
   onActionSelected() {
     if (feedbackText === undefined || feedbackText.replace(/\s+/g, '') === '') {
-      toastShort('请填写建议内容哦~');
+      ToastUtil.showShort('请填写建议内容哦~');
     } else {
       const feedback = AV.Object.new('Feedback');
       feedback.set('manufacturer', DeviceInfo.getManufacturer());
@@ -66,7 +66,7 @@ class Feedback extends React.Component {
       feedback.set('appVersion', DeviceInfo.getVersion());
       feedback.set('feedback', feedbackText);
       feedback.save();
-      toastShort('您的问题已反馈，我们会及时跟进处理');
+      ToastUtil.showShort('您的问题已反馈，我们会及时跟进处理');
       this.textInput.clear();
       Keyboard.dismiss();
     }

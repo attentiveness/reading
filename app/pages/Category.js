@@ -31,7 +31,8 @@ import AV from 'leancloud-storage';
 import store from 'react-native-simple-store';
 import GridView from '../components/GridView';
 import Button from '../components/Button';
-import { toastShort } from '../utils/ToastUtil';
+import ToastUtil from '../utils/ToastUtil';
+import NavigationUtil from '../utils/NavigationUtil';
 
 let tempTypeIds = [];
 let maxCategory = 5; // 默认最多5个类别，远端可配置
@@ -46,7 +47,7 @@ class Category extends React.Component {
     super(props);
     this.renderItem = this.renderItem.bind(this);
     this.onActionSelected = this.onActionSelected.bind(this);
-    this.resetRoute = this.resetRoute.bind(this);
+    this.routeMain = this.routeMain.bind(this);
     this.onRefresh = this.onRefresh.bind(this);
     this.state = {
       typeIds: tempTypeIds
@@ -98,7 +99,6 @@ class Category extends React.Component {
   }
 
   onSelectCatagory() {
-    const { navigate } = this.props.navigation;
     if (this.state.typeIds.length === 0) {
       Alert.alert('提示', '您确定不选择任何分类吗？', [
         { text: '取消', style: 'cancel' },
@@ -106,24 +106,24 @@ class Category extends React.Component {
           text: '确定',
           onPress: () => {
             store.save('typeIds', this.state.typeIds);
-            navigate('Home');
+            NavigationUtil.reset(this.props.navigation, 'Home');
           }
         }
       ]);
     } else {
       store.save('typeIds', this.state.typeIds);
       store.save('isInit', true);
-      navigate('Home');
+      NavigationUtil.reset(this.props.navigation, 'Home');
     }
   }
 
   onActionSelected() {
     if (tempTypeIds.length > maxCategory) {
-      toastShort(`不要超过${maxCategory}个类别哦`);
+      ToastUtil.showShort(`不要超过${maxCategory}个类别哦`);
       return;
     }
     if (tempTypeIds.length < 1) {
-      toastShort('不要少于1个类别哦');
+      ToastUtil.showShort('不要少于1个类别哦');
     }
     const { navigate } = this.props.navigation;
     InteractionManager.runAfterInteractions(() => {
@@ -135,12 +135,12 @@ class Category extends React.Component {
           navigate('Main');
           return;
         }
-        store.save('typeIds', this.state.typeIds).then(this.resetRoute);
+        store.save('typeIds', this.state.typeIds).then(this.routeMain);
       });
     });
   }
 
-  resetRoute() {
+  routeMain() {
     const { navigate } = this.props.navigation;
     DeviceEventEmitter.emit('changeCategory', this.state.typeIds);
     navigate('Main');

@@ -36,7 +36,7 @@ import ScrollableTabView, {
 } from 'react-native-scrollable-tab-view';
 import store from 'react-native-simple-store';
 import LoadingView from '../components/LoadingView';
-import { toastShort } from '../utils/ToastUtil';
+import ToastUtil from '../utils/ToastUtil';
 import { formatStringWithHtml } from '../utils/FormatUtil';
 
 require('moment/locale/zh-cn');
@@ -103,7 +103,7 @@ class Main extends React.Component {
       !nextProps.read.isRefreshing
     ) {
       if (nextProps.read.noMore) {
-        toastShort('没有更多数据了');
+        ToastUtil.showShort('没有更多数据了');
         const index = this.state.typeIds.indexOf(currentLoadMoreTypeId);
         if (index >= 0) {
           pages[index] -= 1;
