@@ -2,7 +2,7 @@
 //  Bugly.h
 //  Bugly
 //
-//  Version: 2.4(7)
+//  Version: 2.4(8)
 //
 //  Copyright (c) 2016年 Bugly. All rights reserved.
 //
@@ -134,6 +134,8 @@ BLY_START_NONNULL
  *  @return 是否连续闪退
  */
 + (BOOL)isAppCrashedOnStartUpExceedTheLimit;
+
++ (void)setComponentIdentifier:(NSString *)componentId version:(NSString *)version;
 
 BLY_END_NONNULL
 

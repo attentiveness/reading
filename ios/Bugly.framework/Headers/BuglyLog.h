@@ -1,7 +1,7 @@
 //
 //  BuglyLog.h
 //
-//  Copyright © 2016年 tencent.com. All rights reserved.
+//  Copyright © 2017 tencent.com. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -17,9 +17,9 @@ typedef NS_ENUM(NSUInteger, BuglyLogLevel) {
 };
 #pragma mark -
 
-FOUNDATION_EXPORT void BLYLog(BuglyLogLevel level, NSString *format, ...);
+OBJC_EXTERN void BLYLog(BuglyLogLevel level, NSString *format, ...) NS_FORMAT_FUNCTION(2, 3);
 
-FOUNDATION_EXPORT void BLYLogv(BuglyLogLevel level, NSString *format, va_list args);
+OBJC_EXTERN void BLYLogv(BuglyLogLevel level, NSString *format, va_list args) NS_FORMAT_FUNCTION(2, 0);
 
 #pragma mark -
 #define BUGLY_LOG_MACRO(_level, fmt, ...) [BuglyLog level:_level tag:nil log:fmt, ##__VA_ARGS__]
@@ -40,14 +40,14 @@ FOUNDATION_EXPORT void BLYLogv(BuglyLogLevel level, NSString *format, va_list ar
  *
  *    @param printConsole 是否打印到控制台，默认NO
  */
-+ (void)initLogger:(BuglyLogLevel) level consolePrint:(BOOL) printConsole;
++ (void)initLogger:(BuglyLogLevel) level consolePrint:(BOOL)printConsole;
 
 /**
  *    @brief 打印BLYLogLevelInfo日志
  *
  *    @param format   日志内容 总日志大小限制为：字符串长度30k，条数200
  */
-+ (void)log:(NSString *)format, ...;
++ (void)log:(NSString *)format, ... NS_FORMAT_FUNCTION(1, 2);
 
 /**
  *    @brief  打印日志
@@ -63,7 +63,7 @@ FOUNDATION_EXPORT void BLYLogv(BuglyLogLevel level, NSString *format, va_list ar
  *    @param level 日志级别
  *    @param format   日志内容 总日志大小限制为：字符串长度30k，条数200
  */
-+ (void)level:(BuglyLogLevel) level log:(NSString *)format, ...;
++ (void)level:(BuglyLogLevel) level log:(NSString *)format, ... NS_FORMAT_FUNCTION(2, 3);
 
 /**
  *    @brief  打印日志
@@ -72,6 +72,6 @@ FOUNDATION_EXPORT void BLYLogv(BuglyLogLevel level, NSString *format, va_list ar
  *    @param tag    日志模块分类
  *    @param format   日志内容 总日志大小限制为：字符串长度30k，条数200
  */
-+ (void)level:(BuglyLogLevel) level tag:(NSString *) tag log:(NSString *)format, ...;
++ (void)level:(BuglyLogLevel) level tag:(NSString *) tag log:(NSString *)format, ... NS_FORMAT_FUNCTION(3, 4);
 
 @end
