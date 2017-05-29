@@ -17,9 +17,9 @@
     "format": "find app -name '*.js' | xargs prettier --write --single-quote"
   },
   "dependencies": {
-    "leancloud-storage": "^2.3.2",
+    "leancloud-storage": "^2.4.0",
     "react": "16.0.0-alpha.6",
-    "react-native": "0.44.0",
+    "react-native": "0.44.2",
     "react-native-code-push": "^2.0.3-beta",
     "react-native-device-info": "^0.10.2",
     "react-native-exceptions-manager": "^0.1.8",
@@ -29,7 +29,7 @@
     "react-native-vector-icons": "^4.1.1",
     "react-native-wechat": "^1.9.2",
     "react-redux": "^5.0.5",
-    "react-navigation": "^1.0.0-beta.9",
+    "react-navigation": "^1.0.0-beta.11",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.15.3"
@@ -43,10 +43,10 @@
     "babel-preset-react-native": "^1.9.2",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.1",
-    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.0.1",
-    "jest": "^20.0.3",
+    "jest": "^20.0.4",
     "prettier": "^1.3.0",
     "react-test-renderer": "16.0.0-alpha.6",
     "redux-devtools": "^3.4.0"
