@@ -35,8 +35,8 @@ const propTypes = {
   onRequestClose: React.PropTypes.func
 };
 
-const Loading = ({ visible, color, size, overlayColor, onRequestClose }) => (
-  <Modal visible={visible} transparent onRequestClose={onRequestClose}>
+const Loading = ({ visible, color, size, overlayColor, onRequestClose }) =>
+  (<Modal visible={visible} transparent onRequestClose={onRequestClose}>
     {visible
       ? <View key={'spinner'} style={styles.container}>
         <View style={[styles.background, { backgroundColor: overlayColor }]}>
@@ -47,8 +47,7 @@ const Loading = ({ visible, color, size, overlayColor, onRequestClose }) => (
         </View>
       </View>
       : <View key={'spinner'} />}
-  </Modal>
-);
+  </Modal>);
 
 const styles = StyleSheet.create({
   container: {

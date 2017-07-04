@@ -26,10 +26,9 @@ const store = configureStore();
 // run root saga
 store.runSaga(rootSaga);
 
-const Root = () => (
-  <Provider store={store}>
+const Root = () =>
+  (<Provider store={store}>
     <App />
-  </Provider>
-);
+  </Provider>);
 
 export default Root;

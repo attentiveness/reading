@@ -155,9 +155,7 @@ class Main extends React.Component {
       return (
         <View style={styles.footerContainer}>
           <ActivityIndicator size="small" color="#3e9ce9" />
-          <Text style={styles.footerText}>
-            数据加载中……
-          </Text>
+          <Text style={styles.footerText}>数据加载中……</Text>
         </View>
       );
     }
@@ -211,9 +209,7 @@ class Main extends React.Component {
           }
         >
           <View style={{ alignItems: 'center' }}>
-            <Text style={{ fontSize: 16 }}>
-              目前没有数据，请刷新重试……
-            </Text>
+            <Text style={{ fontSize: 16 }}>目前没有数据，请刷新重试……</Text>
           </View>
         </ScrollView>
       );
@@ -245,9 +241,8 @@ class Main extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollableTabView
-          renderTabBar={() => (
-            <DefaultTabBar tabStyle={styles.tab} textStyle={styles.tabText} />
-          )}
+          renderTabBar={() =>
+            <DefaultTabBar tabStyle={styles.tab} textStyle={styles.tabText} />}
           tabBarBackgroundColor="#fcfcfc"
           tabBarUnderlineStyle={styles.tabBarUnderline}
           tabBarActiveTextColor="#3e9ce9"

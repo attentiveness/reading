@@ -26,15 +26,14 @@ const propTypes = {
   containerStyle: ViewPropTypes.style
 };
 
-const ImageButton = ({ onPress, disabled, source, style, containerStyle }) => (
-  <TouchableOpacity
+const ImageButton = ({ onPress, disabled, source, style, containerStyle }) =>
+  (<TouchableOpacity
     style={containerStyle}
     onPress={onPress}
     disabled={disabled}
   >
     <Image style={style} source={source} />
-  </TouchableOpacity>
-);
+  </TouchableOpacity>);
 
 ImageButton.propTypes = propTypes;
 

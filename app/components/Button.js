@@ -34,8 +34,8 @@ const Button = ({
   containerStyle,
   text,
   activeOpacity
-}) => (
-  <TouchableOpacity
+}) =>
+  (<TouchableOpacity
     style={containerStyle}
     onPress={onPress}
     disabled={disabled}
@@ -44,8 +44,7 @@ const Button = ({
     <Text style={style}>
       {text}
     </Text>
-  </TouchableOpacity>
-);
+  </TouchableOpacity>);
 
 Button.propTypes = propTypes;
 
