@@ -42,9 +42,8 @@ const shareIconMoments = require('../img/share_icon_moments.png');
 class WebViewPage extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.article.userName,
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="md-home" size={25} color={tintColor} />
-    ),
+    tabBarIcon: ({ tintColor }) =>
+      <Icon name="md-home" size={25} color={tintColor} />,
     headerRight: (
       <Icon.Button
         name="md-share"
@@ -144,9 +143,7 @@ class WebViewPage extends React.Component {
               >
                 <View style={styles.shareContent}>
                   <Image style={styles.shareIcon} source={shareIconWechat} />
-                  <Text style={styles.spinnerTitle}>
-                    微信
-                  </Text>
+                  <Text style={styles.spinnerTitle}>微信</Text>
                 </View>
               </TouchableOpacity>
               <TouchableOpacity
@@ -172,9 +169,7 @@ class WebViewPage extends React.Component {
               >
                 <View style={styles.shareContent}>
                   <Image style={styles.shareIcon} source={shareIconMoments} />
-                  <Text style={styles.spinnerTitle}>
-                    朋友圈
-                  </Text>
+                  <Text style={styles.spinnerTitle}>朋友圈</Text>
                 </View>
               </TouchableOpacity>
             </View>

@@ -30,9 +30,8 @@ const aboutLogo = require('../img/about_logo.png');
 class About extends React.Component {
   static navigationOptions = {
     title: '关于',
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="md-information-circle" size={25} color={tintColor} />
-    ),
+    tabBarIcon: ({ tintColor }) =>
+      <Icon name="md-information-circle" size={25} color={tintColor} />,
     headerRight: (
       <Icon.Button
         name="logo-github"
@@ -53,12 +52,8 @@ class About extends React.Component {
             <Text style={styles.version}>
               {`v${DeviceInfo.getVersion()}`}
             </Text>
-            <Text style={styles.title}>
-              iReading
-            </Text>
-            <Text style={styles.subtitle}>
-              让生活更精彩
-            </Text>
+            <Text style={styles.title}>iReading</Text>
+            <Text style={styles.subtitle}>让生活更精彩</Text>
           </View>
           <View style={styles.bottomContainer}>
             <View style={styles.disclaimerContent}>
