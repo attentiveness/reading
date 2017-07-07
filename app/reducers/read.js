@@ -54,13 +54,15 @@ function combine(state, action) {
 }
 
 function loadMore(state, action) {
-  state.articleList[action.typeId] = concatFilterDuplicate(state.articleList[action.typeId],
-  action.articleList);
+  state.articleList[action.typeId] = concatFilterDuplicate(
+    state.articleList[action.typeId],
+    action.articleList
+  );
   return state.articleList;
 }
 
-/*
-  filter duplicate data when loading more.
+/**
+ * filter duplicate data when loading more.
 */
 function concatFilterDuplicate(list1, list2) {
   const set = new Set(list1.map(item => item.id));
