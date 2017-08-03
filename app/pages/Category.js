@@ -110,6 +110,8 @@ class Category extends React.Component {
           }
         }
       ]);
+    } else if (this.state.typeIds.length > maxCategory) {
+      ToastUtil.showShort(`不要超过${maxCategory}个类别哦`);
     } else {
       store.save('typeIds', this.state.typeIds);
       store.save('isInit', true);
