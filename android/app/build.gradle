@@ -175,7 +175,7 @@ andResGuard {   // ./gradlew resguard[BuildType | Flavor]
             "resources.arsc"
     ]
     sevenzip {
-        artifact = 'com.tencent.mm:SevenZip:1.2.0'
+        artifact = 'com.tencent.mm:SevenZip:1.2.3'
         //在设置sevenzip时, 你只需设置artifact或path. 支持同时设置,总以path的值为优先
         //path = "/usr/local/bin/7za"
     }
