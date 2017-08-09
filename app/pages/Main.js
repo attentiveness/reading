@@ -60,9 +60,6 @@ class Main extends React.Component {
       typeIds: [],
       typeList: {}
     };
-    this.renderItem = this.renderItem.bind(this);
-    this.renderFooter = this.renderFooter.bind(this);
-    this.onIconClicked = this.onIconClicked.bind(this);
   }
 
   componentDidMount() {
@@ -116,25 +113,25 @@ class Main extends React.Component {
     DeviceEventEmitter.removeAllListeners('changeCategory');
   }
 
-  onRefresh(typeId) {
+  onRefresh = (typeId) => {
     const { readActions } = this.props;
     readActions.requestArticleList(true, false, typeId);
     const index = this.state.typeIds.indexOf(typeId);
     if (index >= 0) {
       pages[index] = 1;
     }
-  }
+  };
 
-  onPress(article) {
+  onPress = (article) => {
     const { navigate } = this.props.navigation;
     navigate('Web', { article });
-  }
+  };
 
-  onIconClicked() {
+  onIconClicked = () => {
     this.drawer.openDrawer();
-  }
+  };
 
-  onEndReached(typeId) {
+  onEndReached = (typeId) => {
     currentLoadMoreTypeId = typeId;
     const time = Date.parse(new Date()) / 1000;
     const index = this.state.typeIds.indexOf(typeId);
@@ -147,9 +144,9 @@ class Main extends React.Component {
       readActions.requestArticleList(false, false, typeId, true, pages[index]);
       loadMoreTime = Date.parse(new Date()) / 1000;
     }
-  }
+  };
 
-  renderFooter() {
+  renderFooter = () => {
     const { read } = this.props;
     if (read.isLoadMore) {
       return (
@@ -160,30 +157,28 @@ class Main extends React.Component {
       );
     }
     return <View />;
-  }
+  };
 
-  renderItem(article) {
-    return (
-      <TouchableOpacity onPress={() => this.onPress(article)}>
-        <View style={styles.containerItem}>
-          <Image style={styles.itemImg} source={{ uri: article.contentImg }} />
-          <View style={styles.itemRightContent}>
-            <Text style={styles.title}>
-              {formatStringWithHtml(article.title)}
+  renderItem = article => (
+    <TouchableOpacity onPress={() => this.onPress(article)}>
+      <View style={styles.containerItem}>
+        <Image style={styles.itemImg} source={{ uri: article.contentImg }} />
+        <View style={styles.itemRightContent}>
+          <Text style={styles.title}>
+            {formatStringWithHtml(article.title)}
+          </Text>
+          <View style={styles.itemRightBottom}>
+            <Text style={styles.userName}>
+              {article.userName}
             </Text>
-            <View style={styles.itemRightBottom}>
-              <Text style={styles.userName}>
-                {article.userName}
-              </Text>
-              <TimeAgo style={styles.timeAgo} time={article.date} />
-            </View>
+            <TimeAgo style={styles.timeAgo} time={article.date} />
           </View>
         </View>
-      </TouchableOpacity>
+      </View>
+    </TouchableOpacity>
     );
-  }
 
-  renderContent(dataSource, typeId) {
+  renderContent = (dataSource, typeId) => {
     const { read } = this.props;
     if (read.loading) {
       return <LoadingView />;
@@ -234,7 +229,7 @@ class Main extends React.Component {
         }
       />
     );
-  }
+  };
 
   render() {
     const { read } = this.props;
