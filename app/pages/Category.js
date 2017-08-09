@@ -94,7 +94,7 @@ class Category extends React.Component {
     });
   };
 
-  onSelectCatagory = () => {
+  onSelectCategory = () => {
     if (this.state.typeIds.length === 0) {
       Alert.alert('提示', '您确定不选择任何分类吗？', [
         { text: '取消', style: 'cancel' },
@@ -214,7 +214,7 @@ class Category extends React.Component {
             containerStyle={styles.sureBtn}
             style={styles.btnText}
             text={'确认'}
-            onPress={() => this.onSelectCatagory()}
+            onPress={() => this.onSelectCategory()}
           />
         </View>
       );
