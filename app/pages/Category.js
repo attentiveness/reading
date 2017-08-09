@@ -45,10 +45,6 @@ const propTypes = {
 class Category extends React.Component {
   constructor(props) {
     super(props);
-    this.renderItem = this.renderItem.bind(this);
-    this.onActionSelected = this.onActionSelected.bind(this);
-    this.routeMain = this.routeMain.bind(this);
-    this.onRefresh = this.onRefresh.bind(this);
     this.state = {
       typeIds: tempTypeIds
     };
@@ -81,12 +77,12 @@ class Category extends React.Component {
     }
   }
 
-  onRefresh() {
+  onRefresh = () => {
     const { categoryActions } = this.props;
     categoryActions.requestTypeList();
-  }
+  };
 
-  onPress(type) {
+  onPress = (type) => {
     const pos = tempTypeIds.indexOf(parseInt(type.id));
     if (pos === -1) {
       tempTypeIds.push(parseInt(type.id));
@@ -96,9 +92,9 @@ class Category extends React.Component {
     this.setState({
       typeIds: tempTypeIds
     });
-  }
+  };
 
-  onSelectCatagory() {
+  onSelectCategory = () => {
     if (this.state.typeIds.length === 0) {
       Alert.alert('提示', '您确定不选择任何分类吗？', [
         { text: '取消', style: 'cancel' },
@@ -117,9 +113,9 @@ class Category extends React.Component {
       store.save('isInit', true);
       NavigationUtil.reset(this.props.navigation, 'Home');
     }
-  }
+  };
 
-  onActionSelected() {
+  onActionSelected = () => {
     if (tempTypeIds.length > maxCategory) {
       ToastUtil.showShort(`不要超过${maxCategory}个类别哦`);
       return;
@@ -140,15 +136,15 @@ class Category extends React.Component {
         store.save('typeIds', this.state.typeIds).then(this.routeMain);
       });
     });
-  }
+  };
 
-  routeMain() {
+  routeMain = () => {
     const { navigate } = this.props.navigation;
     DeviceEventEmitter.emit('changeCategory', this.state.typeIds);
     navigate('Main');
-  }
+  };
 
-  renderItem(item) {
+  renderItem = (item) => {
     const isSelect =
       Array.from(this.state.typeIds).indexOf(parseInt(item.id)) !== -1;
     return (
@@ -168,9 +164,9 @@ class Category extends React.Component {
         onPress={() => this.onPress(item)}
       />
     );
-  }
+  };
 
-  renderGridView() {
+  renderGridView = () => {
     const { category } = this.props;
     return (
       <ScrollView
@@ -196,7 +192,7 @@ class Category extends React.Component {
         </View>
       </ScrollView>
     );
-  }
+  };
 
   render() {
     const { params } = this.props.navigation.state;
@@ -218,7 +214,7 @@ class Category extends React.Component {
             containerStyle={styles.sureBtn}
             style={styles.btnText}
             text={'确认'}
-            onPress={() => this.onSelectCatagory()}
+            onPress={() => this.onSelectCategory()}
           />
         </View>
       );

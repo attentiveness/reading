@@ -42,18 +42,12 @@ class Feedback extends React.Component {
       />
     )
   });
-
-  constructor(props) {
-    super(props);
-    this.onActionSelected = this.onActionSelected.bind(this);
-  }
-
   componentDidMount() {
     feedbackText = '';
     this.props.navigation.setParams({ handleCheck: this.onActionSelected });
   }
 
-  onActionSelected() {
+  onActionSelected = () => {
     if (feedbackText === undefined || feedbackText.replace(/\s+/g, '') === '') {
       ToastUtil.showShort('请填写建议内容哦~');
     } else {
@@ -69,7 +63,7 @@ class Feedback extends React.Component {
       this.textInput.clear();
       Keyboard.dismiss();
     }
-  }
+  };
 
   render() {
     return (

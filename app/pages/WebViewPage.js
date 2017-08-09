@@ -62,9 +62,6 @@ class WebViewPage extends React.Component {
     this.state = {
       isShareModal: false
     };
-    this.onActionSelected = this.onActionSelected.bind(this);
-    this.renderSpinner = this.renderSpinner.bind(this);
-    this.goBack = this.goBack.bind(this);
   }
 
   componentDidMount() {
@@ -76,17 +73,17 @@ class WebViewPage extends React.Component {
     BackHandler.removeEventListener('hardwareBackPress', this.goBack);
   }
 
-  onActionSelected() {
+  onActionSelected = () => {
     this.setState({
       isShareModal: true
     });
-  }
+  };
 
-  onNavigationStateChange(navState) {
+  onNavigationStateChange = (navState) => {
     canGoBack = navState.canGoBack;
-  }
+  };
 
-  goBack() {
+  goBack = () => {
     if (this.state.isShareModal) {
       this.setState({
         isShareModal: false
@@ -97,13 +94,11 @@ class WebViewPage extends React.Component {
       return true;
     }
     return false;
-  }
+  };
 
-  renderLoading() {
-    return <LoadingView />;
-  }
+  renderLoading = () => <LoadingView />;
 
-  renderSpinner() {
+  renderSpinner = () => {
     const { params } = this.props.navigation.state;
     return (
       <TouchableWithoutFeedback
@@ -177,7 +172,7 @@ class WebViewPage extends React.Component {
         </View>
       </TouchableWithoutFeedback>
     );
-  }
+  };
 
   render() {
     const { params } = this.props.navigation.state;
