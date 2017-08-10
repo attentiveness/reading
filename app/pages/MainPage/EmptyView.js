@@ -25,7 +25,7 @@ import {
   View
 } from 'react-native';
 
-const EmptyContent = ({ read, typeId, onRefresh }) =>
+const EmptyView = ({ read, typeId, onRefresh }) =>
   (<ScrollView
     automaticallyAdjustContentInsets={false}
     horizontal={false}
@@ -61,4 +61,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default EmptyContent;
+export default EmptyView;

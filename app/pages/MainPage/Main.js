@@ -30,12 +30,11 @@ import store from 'react-native-simple-store';
 
 import LoadingView from '../../components/LoadingView';
 import ToastUtil from '../../utils/ToastUtil';
+import { getArticleList, getTypeName } from '../../utils/ItemsUtil';
 import ItemCell from './ItemCell';
 import Footer from './Footer';
-import EmptyContent from './EmptyContent';
-import MainContent from './MainContent';
-
-const _ = require('lodash');
+import EmptyView from './EmptyView';
+import ItemListView from './ItemListView';
 
 require('moment/locale/zh-cn');
 
@@ -143,7 +142,6 @@ class Main extends React.Component {
       loadMoreTime = Date.parse(new Date()) / 1000;
     }
   };
-
   renderFooter = () => {
     const { read } = this.props;
     return read.isLoadMore ? <Footer /> : <View />;
@@ -155,11 +153,6 @@ class Main extends React.Component {
       onPressHandler={this.onPress}
     />);
 
-  removeExpiredItem = (articleList) => {
-    _.remove(articleList, fruit => fruit.expire);
-    return articleList || [];
-  };
-
   renderContent = (dataSource, typeId) => {
     const { read } = this.props;
     if (read.loading) {
@@ -170,7 +163,7 @@ class Main extends React.Component {
             read.articleList[typeId].length === 0;
     if (isEmpty) {
       return (
-        <EmptyContent
+        <EmptyView
           read={read}
           tyepId={typeId}
           onRefresh={this.onRefresh}
@@ -178,7 +171,7 @@ class Main extends React.Component {
       );
     }
     return (
-      <MainContent
+      <ItemListView
         dataSource={dataSource}
         typeId={typeId}
         isRefreshing={read.isRefreshing}
@@ -192,6 +185,23 @@ class Main extends React.Component {
 
   render() {
     const { read } = this.props;
+    const content = this.state.typeIds.map((typeId) => {
+      if (this.state.typeList === null) {
+        return null;
+      }
+      const name = getTypeName(this.state.typeList, typeId);
+      const typeView = (
+        <View key={typeId} tabLabel={name} style={styles.base}>
+          {this.renderContent(
+                      this.state.dataSource.cloneWithRows(
+                          getArticleList(read.articleList[typeId])
+                      ),
+                      typeId
+                  )}
+        </View>
+          );
+      return typeView;
+    });
     return (
       <View style={styles.container}>
         <ScrollableTabView
@@ -202,26 +212,7 @@ class Main extends React.Component {
           tabBarActiveTextColor="#3e9ce9"
           tabBarInactiveTextColor="#aaaaaa"
         >
-          {this.state.typeIds.map((typeId) => {
-            let name;
-            if (this.state.typeList === null) {
-              return null;
-            }
-            name = _.head(_.filter(this.state.typeList, o => o.id === typeId.toString())).name;
-            const typeView = (
-              <View key={typeId} tabLabel={name} style={styles.base}>
-                {this.renderContent(
-                                  this.state.dataSource.cloneWithRows(
-                                      read.articleList[typeId] === undefined
-                                          ? []
-                                          : this.removeExpiredItem(read.articleList[typeId])
-                                  ),
-                                  typeId
-                              )}
-              </View>
-                      );
-            return typeView;
-          })}
+          {content}
         </ScrollableTabView>
       </View>
     );
