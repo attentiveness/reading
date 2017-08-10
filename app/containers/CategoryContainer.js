@@ -21,7 +21,7 @@ import { bindActionCreators } from 'redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as categoryCreators from '../actions/category';
 
-import Category from '../pages/Category';
+import Category from '../pages/Category/Category';
 
 class CategoryContainer extends React.Component {
   static navigationOptions = ({ navigation }) => ({

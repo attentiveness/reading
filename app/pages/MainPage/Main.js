@@ -35,9 +35,9 @@ import ScrollableTabView, {
   DefaultTabBar
 } from 'react-native-scrollable-tab-view';
 import store from 'react-native-simple-store';
-import LoadingView from '../components/LoadingView';
-import ToastUtil from '../utils/ToastUtil';
-import { formatStringWithHtml } from '../utils/FormatUtil';
+import LoadingView from '../../components/LoadingView';
+import ToastUtil from '../../utils/ToastUtil';
+import { formatStringWithHtml } from '../../utils/FormatUtil';
 
 require('moment/locale/zh-cn');
 
@@ -159,24 +159,26 @@ class Main extends React.Component {
     return <View />;
   };
 
-  renderItem = article => (
-    <TouchableOpacity onPress={() => this.onPress(article)}>
-      <View style={styles.containerItem}>
-        <Image style={styles.itemImg} source={{ uri: article.contentImg }} />
-        <View style={styles.itemRightContent}>
-          <Text style={styles.title}>
-            {formatStringWithHtml(article.title)}
-          </Text>
-          <View style={styles.itemRightBottom}>
-            <Text style={styles.userName}>
-              {article.userName}
+  renderItem = (article) => {
+    console.log('article', article);
+    return (
+      <TouchableOpacity onPress={() => this.onPress(article)}>
+        <View style={styles.containerItem}>
+          <Image style={styles.itemImg} source={{ uri: article.contentImg }} />
+          <View style={styles.itemRightContent}>
+            <Text style={styles.title}>
+              {formatStringWithHtml(article.title)}
             </Text>
-            <TimeAgo style={styles.timeAgo} time={article.date} />
+            <View style={styles.itemRightBottom}>
+              <Text style={styles.userName}>
+                {article.userName}
+              </Text>
+              <TimeAgo style={styles.timeAgo} time={article.date} />
+            </View>
           </View>
         </View>
-      </View>
-    </TouchableOpacity>
-    );
+      </TouchableOpacity>);
+  };
 
   renderContent = (dataSource, typeId) => {
     const { read } = this.props;

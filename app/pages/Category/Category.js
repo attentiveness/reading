@@ -29,10 +29,10 @@ import {
 
 import AV from 'leancloud-storage';
 import store from 'react-native-simple-store';
-import GridView from '../components/GridView';
-import Button from '../components/Button';
-import ToastUtil from '../utils/ToastUtil';
-import NavigationUtil from '../utils/NavigationUtil';
+import GridView from '../../components/GridView';
+import Button from '../../components/Button';
+import ToastUtil from '../../utils/ToastUtil';
+import NavigationUtil from '../../utils/NavigationUtil';
 
 let tempTypeIds = [];
 let maxCategory = 5; // 默认最多5个类别，远端可配置
