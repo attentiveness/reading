@@ -27,12 +27,15 @@ import ScrollableTabView, {
     DefaultTabBar
 } from 'react-native-scrollable-tab-view';
 import store from 'react-native-simple-store';
+
 import LoadingView from '../../components/LoadingView';
 import ToastUtil from '../../utils/ToastUtil';
 import ItemCell from './ItemCell';
 import Footer from './Footer';
 import EmptyContent from './EmptyContent';
 import MainContent from './MainContent';
+
+const _ = require('lodash');
 
 require('moment/locale/zh-cn');
 
@@ -152,6 +155,11 @@ class Main extends React.Component {
       onPressHandler={this.onPress}
     />);
 
+  removeExpiredItem = (articleList) => {
+    _.remove(articleList, fruit => fruit.expire);
+    return articleList || [];
+  };
+
   renderContent = (dataSource, typeId) => {
     const { read } = this.props;
     if (read.loading) {
@@ -195,23 +203,18 @@ class Main extends React.Component {
           tabBarInactiveTextColor="#aaaaaa"
         >
           {this.state.typeIds.map((typeId) => {
-            let name = '';
+            let name;
             if (this.state.typeList === null) {
               return null;
             }
-            for (let i = 0, l = this.state.typeList.length; i < l; i++) {
-              if (typeId.toString() === this.state.typeList[i].id) {
-                name = this.state.typeList[i].name;
-                break;
-              }
-            }
+            name = _.head(_.filter(this.state.typeList, o => o.id === typeId.toString())).name;
             const typeView = (
               <View key={typeId} tabLabel={name} style={styles.base}>
                 {this.renderContent(
                                   this.state.dataSource.cloneWithRows(
                                       read.articleList[typeId] === undefined
                                           ? []
-                                          : read.articleList[typeId]
+                                          : this.removeExpiredItem(read.articleList[typeId])
                                   ),
                                   typeId
                               )}
