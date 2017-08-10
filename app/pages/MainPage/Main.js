@@ -17,27 +17,22 @@
  */
 import React, { PropTypes } from 'react';
 import {
-  StyleSheet,
-  ListView,
-  RefreshControl,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  InteractionManager,
-  ActivityIndicator,
-  Image,
-  View,
-  DeviceEventEmitter
+    DeviceEventEmitter,
+    InteractionManager,
+    ListView,
+    StyleSheet,
+    View
 } from 'react-native';
-
-import TimeAgo from 'react-native-timeago';
 import ScrollableTabView, {
-  DefaultTabBar
+    DefaultTabBar
 } from 'react-native-scrollable-tab-view';
 import store from 'react-native-simple-store';
 import LoadingView from '../../components/LoadingView';
 import ToastUtil from '../../utils/ToastUtil';
-import { formatStringWithHtml } from '../../utils/FormatUtil';
+import ItemCell from './ItemCell';
+import Footer from './Footer';
+import EmptyContent from './EmptyContent';
+import MainContent from './MainContent';
 
 require('moment/locale/zh-cn');
 
@@ -83,11 +78,11 @@ class Main extends React.Component {
           pages.push(1);
         });
         store.get('typeList').then(typeList =>
-          this.setState({
-            typeIds,
-            typeList
-          })
-        );
+                    this.setState({
+                      typeIds,
+                      typeList
+                    })
+                );
       });
     });
   }
@@ -95,10 +90,10 @@ class Main extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { read } = this.props;
     if (
-      read.isLoadMore &&
-      !nextProps.read.isLoadMore &&
-      !nextProps.read.isRefreshing
-    ) {
+            read.isLoadMore &&
+            !nextProps.read.isLoadMore &&
+            !nextProps.read.isRefreshing
+        ) {
       if (nextProps.read.noMore) {
         ToastUtil.showShort('没有更多数据了');
         const index = this.state.typeIds.indexOf(currentLoadMoreTypeId);
@@ -148,37 +143,14 @@ class Main extends React.Component {
 
   renderFooter = () => {
     const { read } = this.props;
-    if (read.isLoadMore) {
-      return (
-        <View style={styles.footerContainer}>
-          <ActivityIndicator size="small" color="#3e9ce9" />
-          <Text style={styles.footerText}>数据加载中……</Text>
-        </View>
-      );
-    }
-    return <View />;
+    return read.isLoadMore ? <Footer /> : <View />;
   };
 
-  renderItem = (article) => {
-    console.log('article', article);
-    return (
-      <TouchableOpacity onPress={() => this.onPress(article)}>
-        <View style={styles.containerItem}>
-          <Image style={styles.itemImg} source={{ uri: article.contentImg }} />
-          <View style={styles.itemRightContent}>
-            <Text style={styles.title}>
-              {formatStringWithHtml(article.title)}
-            </Text>
-            <View style={styles.itemRightBottom}>
-              <Text style={styles.userName}>
-                {article.userName}
-              </Text>
-              <TimeAgo style={styles.timeAgo} time={article.date} />
-            </View>
-          </View>
-        </View>
-      </TouchableOpacity>);
-  };
+  renderItem = article =>
+    (<ItemCell
+      article={article}
+      onPressHandler={this.onPress}
+    />);
 
   renderContent = (dataSource, typeId) => {
     const { read } = this.props;
@@ -186,49 +158,26 @@ class Main extends React.Component {
       return <LoadingView />;
     }
     const isEmpty =
-      read.articleList[typeId] === undefined ||
-      read.articleList[typeId].length === 0;
+            read.articleList[typeId] === undefined ||
+            read.articleList[typeId].length === 0;
     if (isEmpty) {
       return (
-        <ScrollView
-          automaticallyAdjustContentInsets={false}
-          horizontal={false}
-          contentContainerStyle={styles.no_data}
-          style={styles.base}
-          refreshControl={
-            <RefreshControl
-              style={styles.refreshControlBase}
-              refreshing={read.isRefreshing}
-              onRefresh={() => this.onRefresh(typeId)}
-              title="Loading..."
-              colors={['#ffaa66cc', '#ff00ddff', '#ffffbb33', '#ffff4444']}
-            />
-          }
-        >
-          <View style={{ alignItems: 'center' }}>
-            <Text style={{ fontSize: 16 }}>目前没有数据，请刷新重试……</Text>
-          </View>
-        </ScrollView>
+        <EmptyContent
+          read={read}
+          tyepId={typeId}
+          onRefresh={this.onRefresh}
+        />
       );
     }
     return (
-      <ListView
-        initialListSize={1}
+      <MainContent
         dataSource={dataSource}
-        renderRow={this.renderItem}
-        style={styles.listView}
-        onEndReached={() => this.onEndReached(typeId)}
-        onEndReachedThreshold={10}
+        typeId={typeId}
+        isRefreshing={read.isRefreshing}
+        onEndReached={this.onEndReached}
+        onRefresh={this.onRefresh}
         renderFooter={this.renderFooter}
-        refreshControl={
-          <RefreshControl
-            style={styles.refreshControlBase}
-            refreshing={read.isRefreshing}
-            onRefresh={() => this.onRefresh(typeId)}
-            title="Loading..."
-            colors={['#ffaa66cc', '#ff00ddff', '#ffffbb33', '#ffff4444']}
-          />
-        }
+        renderItem={this.renderItem}
       />
     );
   };
@@ -259,15 +208,15 @@ class Main extends React.Component {
             const typeView = (
               <View key={typeId} tabLabel={name} style={styles.base}>
                 {this.renderContent(
-                  this.state.dataSource.cloneWithRows(
-                    read.articleList[typeId] === undefined
-                      ? []
-                      : read.articleList[typeId]
-                  ),
-                  typeId
-                )}
+                                  this.state.dataSource.cloneWithRows(
+                                      read.articleList[typeId] === undefined
+                                          ? []
+                                          : read.articleList[typeId]
+                                  ),
+                                  typeId
+                              )}
               </View>
-            );
+                      );
             return typeView;
           })}
         </ScrollableTabView>
@@ -284,29 +233,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#fff'
-  },
-  containerItem: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fcfcfc',
-    padding: 10,
-    borderBottomColor: '#ddd',
-    borderBottomWidth: 1
-  },
-  title: {
-    fontSize: 18,
-    textAlign: 'left',
-    color: 'black'
-  },
-  listView: {
-    backgroundColor: '#eeeeec'
-  },
-  no_data: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingBottom: 100
   },
   drawerContent: {
     flexDirection: 'row',
@@ -336,39 +262,6 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     textAlign: 'center',
     color: 'black'
-  },
-  footerContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 5
-  },
-  footerText: {
-    textAlign: 'center',
-    fontSize: 16,
-    marginLeft: 10
-  },
-  itemImg: {
-    width: 88,
-    height: 66,
-    marginRight: 10
-  },
-  itemRightContent: {
-    flex: 1,
-    flexDirection: 'column'
-  },
-  itemRightBottom: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  userName: {
-    flex: 1,
-    fontSize: 14,
-    color: '#87CEFA',
-    marginTop: 5,
-    marginRight: 5
   },
   timeAgo: {
     fontSize: 14,
