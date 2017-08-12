@@ -20,7 +20,7 @@ import { connect } from 'react-redux';
 import CodePush from 'react-native-code-push';
 import { bindActionCreators } from 'redux';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Main from '../pages/Main';
+import Main from '../pages/MainPage/Main';
 import * as readCreators from '../actions/read';
 
 class MainContainer extends React.Component {

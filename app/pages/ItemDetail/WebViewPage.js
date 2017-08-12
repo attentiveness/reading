@@ -31,13 +31,13 @@ import {
 
 import * as WeChat from 'react-native-wechat';
 import Icon from 'react-native-vector-icons/Ionicons';
-import ToastUtil from '../utils/ToastUtil';
-import LoadingView from '../components/LoadingView';
-import { formatStringWithHtml } from '../utils/FormatUtil';
+import ToastUtil from '../../utils/ToastUtil';
+import LoadingView from '../../components/LoadingView';
+import { formatStringWithHtml } from '../../utils/FormatUtil';
 
 let canGoBack = false;
-const shareIconWechat = require('../img/share_icon_wechat.png');
-const shareIconMoments = require('../img/share_icon_moments.png');
+const shareIconWechat = require('../../img/share_icon_wechat.png');
+const shareIconMoments = require('../../img/share_icon_moments.png');
 
 class WebViewPage extends React.Component {
   static navigationOptions = ({ navigation }) => ({

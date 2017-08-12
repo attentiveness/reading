@@ -19,9 +19,9 @@ import { StackNavigator, TabNavigator } from 'react-navigation';
 import Splash from '../pages/Splash';
 import CategoryContainer from '../containers/CategoryContainer';
 import MainContainer from '../containers/MainContainer';
-import WebViewPage from '../pages/WebViewPage';
-import Feedback from '../pages/Feedback';
-import About from '../pages/About';
+import WebViewPage from '../pages/ItemDetail/WebViewPage';
+import Feedback from '../pages/Feedback/Feedback';
+import About from '../pages/About/About';
 
 const TabContainer = TabNavigator(
   {

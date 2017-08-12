@@ -17,27 +17,24 @@
  */
 import React, { PropTypes } from 'react';
 import {
-  StyleSheet,
-  ListView,
-  RefreshControl,
-  ScrollView,
-  Text,
-  TouchableOpacity,
+  DeviceEventEmitter,
   InteractionManager,
-  ActivityIndicator,
-  Image,
-  View,
-  DeviceEventEmitter
+  ListView,
+  StyleSheet,
+  View
 } from 'react-native';
-
-import TimeAgo from 'react-native-timeago';
 import ScrollableTabView, {
   DefaultTabBar
 } from 'react-native-scrollable-tab-view';
 import store from 'react-native-simple-store';
-import LoadingView from '../components/LoadingView';
-import ToastUtil from '../utils/ToastUtil';
-import { formatStringWithHtml } from '../utils/FormatUtil';
+
+import LoadingView from '../../components/LoadingView';
+import ToastUtil from '../../utils/ToastUtil';
+import { getArticleList, getTypeName } from '../../utils/ItemsUtil';
+import ItemCell from './ItemCell';
+import Footer from './Footer';
+import EmptyView from './EmptyView';
+import ItemListView from './ItemListView';
 
 require('moment/locale/zh-cn');
 
@@ -145,38 +142,13 @@ class Main extends React.Component {
       loadMoreTime = Date.parse(new Date()) / 1000;
     }
   };
-
   renderFooter = () => {
     const { read } = this.props;
-    if (read.isLoadMore) {
-      return (
-        <View style={styles.footerContainer}>
-          <ActivityIndicator size="small" color="#3e9ce9" />
-          <Text style={styles.footerText}>数据加载中……</Text>
-        </View>
-      );
-    }
-    return <View />;
+    return read.isLoadMore ? <Footer /> : <View />;
   };
 
-  renderItem = article => (
-    <TouchableOpacity onPress={() => this.onPress(article)}>
-      <View style={styles.containerItem}>
-        <Image style={styles.itemImg} source={{ uri: article.contentImg }} />
-        <View style={styles.itemRightContent}>
-          <Text style={styles.title}>
-            {formatStringWithHtml(article.title)}
-          </Text>
-          <View style={styles.itemRightBottom}>
-            <Text style={styles.userName}>
-              {article.userName}
-            </Text>
-            <TimeAgo style={styles.timeAgo} time={article.date} />
-          </View>
-        </View>
-      </View>
-    </TouchableOpacity>
-    );
+  renderItem = article =>
+    <ItemCell article={article} onPressHandler={this.onPress} />;
 
   renderContent = (dataSource, typeId) => {
     const { read } = this.props;
@@ -188,51 +160,41 @@ class Main extends React.Component {
       read.articleList[typeId].length === 0;
     if (isEmpty) {
       return (
-        <ScrollView
-          automaticallyAdjustContentInsets={false}
-          horizontal={false}
-          contentContainerStyle={styles.no_data}
-          style={styles.base}
-          refreshControl={
-            <RefreshControl
-              style={styles.refreshControlBase}
-              refreshing={read.isRefreshing}
-              onRefresh={() => this.onRefresh(typeId)}
-              title="Loading..."
-              colors={['#ffaa66cc', '#ff00ddff', '#ffffbb33', '#ffff4444']}
-            />
-          }
-        >
-          <View style={{ alignItems: 'center' }}>
-            <Text style={{ fontSize: 16 }}>目前没有数据，请刷新重试……</Text>
-          </View>
-        </ScrollView>
+        <EmptyView read={read} tyepId={typeId} onRefresh={this.onRefresh} />
       );
     }
     return (
-      <ListView
-        initialListSize={1}
+      <ItemListView
         dataSource={dataSource}
-        renderRow={this.renderItem}
-        style={styles.listView}
-        onEndReached={() => this.onEndReached(typeId)}
-        onEndReachedThreshold={10}
+        typeId={typeId}
+        isRefreshing={read.isRefreshing}
+        onEndReached={this.onEndReached}
+        onRefresh={this.onRefresh}
         renderFooter={this.renderFooter}
-        refreshControl={
-          <RefreshControl
-            style={styles.refreshControlBase}
-            refreshing={read.isRefreshing}
-            onRefresh={() => this.onRefresh(typeId)}
-            title="Loading..."
-            colors={['#ffaa66cc', '#ff00ddff', '#ffffbb33', '#ffff4444']}
-          />
-        }
+        renderItem={this.renderItem}
       />
     );
   };
 
   render() {
     const { read } = this.props;
+    const content = this.state.typeIds.map((typeId) => {
+      if (this.state.typeList === null) {
+        return null;
+      }
+      const name = getTypeName(this.state.typeList, typeId);
+      const typeView = (
+        <View key={typeId} tabLabel={name} style={styles.base}>
+          {this.renderContent(
+            this.state.dataSource.cloneWithRows(
+              getArticleList(read.articleList[typeId])
+            ),
+            typeId
+          )}
+        </View>
+      );
+      return typeView;
+    });
     return (
       <View style={styles.container}>
         <ScrollableTabView
@@ -243,31 +205,7 @@ class Main extends React.Component {
           tabBarActiveTextColor="#3e9ce9"
           tabBarInactiveTextColor="#aaaaaa"
         >
-          {this.state.typeIds.map((typeId) => {
-            let name = '';
-            if (this.state.typeList === null) {
-              return null;
-            }
-            for (let i = 0, l = this.state.typeList.length; i < l; i++) {
-              if (typeId.toString() === this.state.typeList[i].id) {
-                name = this.state.typeList[i].name;
-                break;
-              }
-            }
-            const typeView = (
-              <View key={typeId} tabLabel={name} style={styles.base}>
-                {this.renderContent(
-                  this.state.dataSource.cloneWithRows(
-                    read.articleList[typeId] === undefined
-                      ? []
-                      : read.articleList[typeId]
-                  ),
-                  typeId
-                )}
-              </View>
-            );
-            return typeView;
-          })}
+          {content}
         </ScrollableTabView>
       </View>
     );
@@ -282,29 +220,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#fff'
-  },
-  containerItem: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fcfcfc',
-    padding: 10,
-    borderBottomColor: '#ddd',
-    borderBottomWidth: 1
-  },
-  title: {
-    fontSize: 18,
-    textAlign: 'left',
-    color: 'black'
-  },
-  listView: {
-    backgroundColor: '#eeeeec'
-  },
-  no_data: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingBottom: 100
   },
   drawerContent: {
     flexDirection: 'row',
@@ -334,39 +249,6 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     textAlign: 'center',
     color: 'black'
-  },
-  footerContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 5
-  },
-  footerText: {
-    textAlign: 'center',
-    fontSize: 16,
-    marginLeft: 10
-  },
-  itemImg: {
-    width: 88,
-    height: 66,
-    marginRight: 10
-  },
-  itemRightContent: {
-    flex: 1,
-    flexDirection: 'column'
-  },
-  itemRightBottom: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  userName: {
-    flex: 1,
-    fontSize: 14,
-    color: '#87CEFA',
-    marginTop: 5,
-    marginRight: 5
   },
   timeAgo: {
     fontSize: 14,

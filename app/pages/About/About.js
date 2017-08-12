@@ -20,12 +20,12 @@ import { StyleSheet, Image, Text, Linking, View } from 'react-native';
 
 import DeviceInfo from 'react-native-device-info';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Button from '../components/Button';
+import Button from '../../components/Button';
 
 const SHOW_API = 'https://www.showapi.com';
 const READING_REPO = 'https://github.com/attentiveness/reading';
 
-const aboutLogo = require('../img/about_logo.png');
+const aboutLogo = require('../../img/about_logo.png');
 
 class About extends React.Component {
   static navigationOptions = {
