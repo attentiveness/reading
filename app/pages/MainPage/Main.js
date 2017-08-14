@@ -16,15 +16,9 @@
  *
  */
 import React, { PropTypes } from 'react';
-import {
-    DeviceEventEmitter,
-    InteractionManager,
-    ListView,
-    StyleSheet,
-    View
-} from 'react-native';
+import { ListView, StyleSheet, View } from 'react-native';
 import ScrollableTabView, {
-    DefaultTabBar
+  DefaultTabBar
 } from 'react-native-scrollable-tab-view';
 import store from 'react-native-simple-store';
 
@@ -37,6 +31,7 @@ import EmptyView from './EmptyView';
 import ItemListView from './ItemListView';
 
 require('moment/locale/zh-cn');
+const _ = require('lodash');
 
 const propTypes = {
   readActions: PropTypes.object,
@@ -54,37 +49,23 @@ class Main extends React.Component {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
       }),
-      typeIds: [],
+      typeIds: props.selectedCategory,
       typeList: {}
     };
   }
 
   componentDidMount() {
     const { readActions } = this.props;
-    DeviceEventEmitter.addListener('changeCategory', (typeIds) => {
-      typeIds.forEach((typeId) => {
-        readActions.requestArticleList(false, true, typeId);
-        pages.push(1);
-      });
-      this.setState({
-        typeIds
-      });
+    const { selectedCategory } = this.props;
+
+    selectedCategory.forEach((typeId) => {
+      readActions.requestArticleList(false, true, typeId);
+      pages.push(1);
     });
-    InteractionManager.runAfterInteractions(() => {
-      store.get('typeIds').then((typeIds) => {
-        if (!typeIds) {
-          return;
-        }
-        typeIds.forEach((typeId) => {
-          readActions.requestArticleList(false, true, typeId);
-          pages.push(1);
-        });
-        store.get('typeList').then(typeList =>
-                    this.setState({
-                      typeIds,
-                      typeList
-                    })
-                );
+
+    store.get('typeList').then((typeList) => {
+      this.setState({
+        typeList
       });
     });
   }
@@ -92,10 +73,10 @@ class Main extends React.Component {
   componentWillReceiveProps(nextProps) {
     const { read } = this.props;
     if (
-            read.isLoadMore &&
-            !nextProps.read.isLoadMore &&
-            !nextProps.read.isRefreshing
-        ) {
+      read.isLoadMore &&
+      !nextProps.read.isLoadMore &&
+      !nextProps.read.isRefreshing
+    ) {
       if (nextProps.read.noMore) {
         ToastUtil.showShort('没有更多数据了');
         const index = this.state.typeIds.indexOf(currentLoadMoreTypeId);
@@ -106,9 +87,7 @@ class Main extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    DeviceEventEmitter.removeAllListeners('changeCategory');
-  }
+  componentWillUnmount() {}
 
   onRefresh = (typeId) => {
     const { readActions } = this.props;
@@ -148,10 +127,7 @@ class Main extends React.Component {
   };
 
   renderItem = article =>
-    (<ItemCell
-      article={article}
-      onPressHandler={this.onPress}
-    />);
+    <ItemCell article={article} onPressHandler={this.onPress} />;
 
   renderContent = (dataSource, typeId) => {
     const { read } = this.props;
@@ -159,15 +135,11 @@ class Main extends React.Component {
       return <LoadingView />;
     }
     const isEmpty =
-            read.articleList[typeId] === undefined ||
-            read.articleList[typeId].length === 0;
+      read.articleList[typeId] === undefined ||
+      read.articleList[typeId].length === 0;
     if (isEmpty) {
       return (
-        <EmptyView
-          read={read}
-          tyepId={typeId}
-          onRefresh={this.onRefresh}
-        />
+        <EmptyView read={read} tyepId={typeId} onRefresh={this.onRefresh} />
       );
     }
     return (
@@ -184,22 +156,22 @@ class Main extends React.Component {
   };
 
   render() {
-    const { read } = this.props;
-    const content = this.state.typeIds.map((typeId) => {
-      if (this.state.typeList === null) {
+    const { read, selectedCategory } = this.props;
+    const content = selectedCategory.map((typeId) => {
+      if (_.isEmpty(this.state.typeList)) {
         return null;
       }
       const name = getTypeName(this.state.typeList, typeId);
       const typeView = (
         <View key={typeId} tabLabel={name} style={styles.base}>
           {this.renderContent(
-                      this.state.dataSource.cloneWithRows(
-                          getArticleList(read.articleList[typeId])
-                      ),
-                      typeId
-                  )}
+            this.state.dataSource.cloneWithRows(
+              getArticleList(read.articleList[typeId])
+            ),
+            typeId
+          )}
         </View>
-          );
+      );
       return typeView;
     });
     return (

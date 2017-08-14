@@ -15,11 +15,16 @@
  * limitations under the License.
  *
  */
-export const REQUEST_ARTICLE_LIST = 'REQUEST_ARTICLE_LIST';
-export const FETCH_ARTICLE_LIST = 'FETCH_ARTICLE_LIST';
-export const RECEIVE_ARTICLE_LIST = 'RECEIVE_ARTICLE_LIST';
-export const REQUEST_TYPE_LIST = 'REQUEST_TYPE_LIST';
-export const FETCH_TYPE_LIST = 'FETCH_TYPE_LIST';
-export const RECEIVE_TYPE_LIST = 'RECEIVE_TYPE_LIST';
-export const CHANGE_CATEGORY = 'CHANGE_CATEGORY';
-export const PERSIST_REHYDRATE = 'persist/REHYDRATE';
+import * as types from '../constants/ActionTypes';
+
+export default function selectedCategory(state, action) {
+  switch (action.type) {
+    case types.CHANGE_CATEGORY:
+      return Object.assign([], action.data);
+    case types.PERSIST_REHYDRATE:
+      return Object.assign([], action.payload.selectedCategory);
+
+    default:
+      return state || [];
+  }
+}

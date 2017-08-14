@@ -35,3 +35,10 @@ export function receiveTypeList(typeList) {
     typeList
   };
 }
+
+export function changeCategory(categoryList) {
+  return {
+    type: types.CHANGE_CATEGORY,
+    data: categoryList
+  };
+}

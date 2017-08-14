@@ -18,10 +18,12 @@
 import { combineReducers } from 'redux';
 import read from './read';
 import category from './category';
+import selectedCategory from './selectedCategory';
 
 const rootReducer = combineReducers({
   read,
-  category
+  category,
+  selectedCategory
 });
 
 export default rootReducer;

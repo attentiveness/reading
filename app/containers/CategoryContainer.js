@@ -48,9 +48,10 @@ class CategoryContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { category } = state;
+  const { category, selectedCategory } = state;
   return {
-    category
+    category,
+    selectedCategory
   };
 };
 

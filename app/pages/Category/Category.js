@@ -34,7 +34,7 @@ import Button from '../../components/Button';
 import ToastUtil from '../../utils/ToastUtil';
 import NavigationUtil from '../../utils/NavigationUtil';
 
-let tempTypeIds = [];
+const tempTypeIds = [];
 let maxCategory = 5; // 默认最多5个类别，远端可配置
 
 const propTypes = {
@@ -46,22 +46,8 @@ class Category extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      typeIds: tempTypeIds
+      typeIds: props.selectedCategory
     };
-  }
-
-  componentWillMount() {
-    const { params } = this.props.navigation.state;
-    if (params === undefined || !params.isFirst) {
-      InteractionManager.runAfterInteractions(() => {
-        store.get('typeIds').then((typeIds) => {
-          tempTypeIds = typeIds;
-          this.setState({
-            typeIds
-          });
-        });
-      });
-    }
   }
 
   componentDidMount() {
@@ -83,6 +69,7 @@ class Category extends React.Component {
   };
 
   onPress = (type) => {
+    const { categoryActions } = this.props;
     const pos = tempTypeIds.indexOf(parseInt(type.id));
     if (pos === -1) {
       tempTypeIds.push(parseInt(type.id));
@@ -92,16 +79,19 @@ class Category extends React.Component {
     this.setState({
       typeIds: tempTypeIds
     });
+    categoryActions.changeCategory(this.state.typeIds);
   };
 
   onSelectCategory = () => {
+    const { categoryActions } = this.props;
     if (this.state.typeIds.length === 0) {
       Alert.alert('提示', '您确定不选择任何分类吗？', [
         { text: '取消', style: 'cancel' },
         {
           text: '确定',
           onPress: () => {
-            store.save('typeIds', this.state.typeIds);
+            categoryActions.changeCategory(this.state.typeIds);
+            // store.save('typeIds', this.state.typeIds);
             NavigationUtil.reset(this.props.navigation, 'Home');
           }
         }
@@ -109,13 +99,17 @@ class Category extends React.Component {
     } else if (this.state.typeIds.length > maxCategory) {
       ToastUtil.showShort(`不要超过${maxCategory}个类别哦`);
     } else {
-      store.save('typeIds', this.state.typeIds);
+      categoryActions.changeCategory(this.state.typeIds);
+
+      // store.save('typeIds', this.state.typeIds);
       store.save('isInit', true);
       NavigationUtil.reset(this.props.navigation, 'Home');
     }
   };
 
   onActionSelected = () => {
+    const { categoryActions } = this.props;
+
     if (tempTypeIds.length > maxCategory) {
       ToastUtil.showShort(`不要超过${maxCategory}个类别哦`);
       return;
@@ -125,22 +119,14 @@ class Category extends React.Component {
     }
     const { navigate } = this.props.navigation;
     InteractionManager.runAfterInteractions(() => {
-      store.get('typeIds').then((typeIds) => {
-        if (
-          typeIds.sort().toString() ===
-          Array.from(tempTypeIds).sort().toString()
-        ) {
-          navigate('Main');
-          return;
-        }
-        store.save('typeIds', this.state.typeIds).then(this.routeMain);
-      });
+      categoryActions.changeCategory(this.state.typeIds);
+      navigate('Main');
     });
   };
 
   routeMain = () => {
     const { navigate } = this.props.navigation;
-    DeviceEventEmitter.emit('changeCategory', this.state.typeIds);
+    DeviceEventEmitter.emit('CHANGE_CATEGORY', this.state.typeIds);
     navigate('Main');
   };
 
