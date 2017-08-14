@@ -22,7 +22,7 @@ import store from 'react-native-simple-store';
 
 import LoadingView from '../../components/LoadingView';
 import ToastUtil from '../../utils/ToastUtil';
-import { getArticleList, getTypeName } from '../../utils/ItemsUtil';
+import { getArticleList, getTypeName, isNotEmpty } from '../../utils/ItemsUtil';
 import ItemCell from './ItemCell';
 import Footer from './Footer';
 import EmptyView from './EmptyView';
@@ -52,7 +52,7 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
-    this.retrieveArticleList(this.props.selectedCategoryIds);
+    this.retrieveArticleLists(this.props.selectedCategoryIds);
 
     store.get('typeList').then((typeList) => {
       this.setState({
@@ -61,12 +61,10 @@ class Main extends React.Component {
     });
   }
 
-
   componentWillReceiveProps(nextProps) {
-    const { read, selectedCategoryIds } = this.props;
-    if (!_.isEqual(selectedCategoryIds, nextProps.selectedCategoryIds)) {
-      this.retrieveArticleList(nextProps.selectedCategoryIds);
-    }
+    const { read } = this.props;
+    this.retrieveArticleListsWhenNeeded(nextProps.selectedCategoryIds,
+        this.props.selectedCategoryIds);
     if (
       read.isLoadMore &&
       !nextProps.read.isLoadMore &&
@@ -81,8 +79,6 @@ class Main extends React.Component {
       }
     }
   }
-
-  componentWillUnmount() {}
 
 
   onRefresh = (typeId) => {
@@ -118,11 +114,17 @@ class Main extends React.Component {
     }
   };
 
-  retrieveArticleList = (typeIds) => {
+  retrieveArticleListsWhenNeeded(newSelectedCategoryIds, selectedCategoryIds) {
+    if (isNotEmpty(_.differenceBy(newSelectedCategoryIds, selectedCategoryIds))) {
+      this.retrieveArticleLists(_.differenceBy(newSelectedCategoryIds, selectedCategoryIds));
+    }
+  }
+
+  retrieveArticleLists = (categoryIds) => {
     const { readActions } = this.props;
-    if (!_.isEmpty(typeIds)) {
-      typeIds.forEach((typeId) => {
-        readActions.requestArticleList(false, true, typeId);
+    if (isNotEmpty(categoryIds)) {
+      categoryIds.forEach((categoryId) => {
+        readActions.requestArticleList(false, true, categoryId);
         pages.push(1);
       });
     }
@@ -141,10 +143,7 @@ class Main extends React.Component {
     if (read.loading) {
       return <LoadingView />;
     }
-    const isEmpty =
-      read.articleList[typeId] === undefined ||
-      read.articleList[typeId].length === 0;
-    if (isEmpty) {
+    if (_.isEmpty(read.articleList[typeId])) {
       return (
         <EmptyView read={read} tyepId={typeId} onRefresh={this.onRefresh} />
       );
@@ -163,8 +162,8 @@ class Main extends React.Component {
   };
 
   render() {
-    const { read, selectedCategoryIds } = this.props;
-    const content = selectedCategoryIds.map((typeId) => {
+    const { read } = this.props;
+    const content = this.props.selectedCategoryIds.map((typeId) => {
       if (_.isEmpty(this.state.typeList)) {
         return null;
       }
@@ -191,7 +190,7 @@ class Main extends React.Component {
           tabBarActiveTextColor="#3e9ce9"
           tabBarInactiveTextColor="#aaaaaa"
         >
-          {content}
+          {isNotEmpty(this.props.selectedCategoryIds) && content}
         </ScrollableTabView>
       </View>
     );
