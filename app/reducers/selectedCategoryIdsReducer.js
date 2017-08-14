@@ -17,7 +17,11 @@
  */
 import * as types from '../constants/ActionTypes';
 
-export default function selectedCategoryIds(state, action) {
+const initialState = {
+  selectedCategoryIds: [],
+};
+
+export default function selectedCategoryIds(state = initialState, action) {
   switch (action.type) {
     case types.CHANGE_CATEGORY:
       return Object.assign([], action.data);
