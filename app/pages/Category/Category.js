@@ -15,8 +15,16 @@
  * limitations under the License.
  *
  */
-import React, {PropTypes} from 'react';
-import {Alert, InteractionManager, RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, { PropTypes } from 'react';
+import {
+  Alert,
+  InteractionManager,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
 
 import AV from 'leancloud-storage';
 import store from 'react-native-simple-store';
@@ -34,7 +42,6 @@ const propTypes = {
 };
 
 class Category extends React.Component {
-
   componentDidMount() {
     const { categoryActions } = this.props;
     categoryActions.requestTypeList();
@@ -106,7 +113,8 @@ class Category extends React.Component {
 
   renderItem = (item) => {
     const isSelect =
-      Array.from(this.props.selectedCategoryIds).indexOf(parseInt(item.id)) !== -1;
+      Array.from(this.props.selectedCategoryIds).indexOf(parseInt(item.id)) !==
+      -1;
     return (
       <Button
         key={item.id}

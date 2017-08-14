@@ -17,7 +17,9 @@
  */
 import React, { PropTypes } from 'react';
 import { ListView, StyleSheet, View } from 'react-native';
-import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
+import ScrollableTabView, {
+  DefaultTabBar
+} from 'react-native-scrollable-tab-view';
 import store from 'react-native-simple-store';
 
 import LoadingView from '../../components/LoadingView';
@@ -63,8 +65,10 @@ class Main extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const { read } = this.props;
-    this.retrieveArticleListsWhenNeeded(nextProps.selectedCategoryIds,
-        this.props.selectedCategoryIds);
+    this.retrieveArticleListsWhenNeeded(
+      nextProps.selectedCategoryIds,
+      this.props.selectedCategoryIds
+    );
     if (
       read.isLoadMore &&
       !nextProps.read.isLoadMore &&
@@ -72,14 +76,15 @@ class Main extends React.Component {
     ) {
       if (nextProps.read.noMore) {
         ToastUtil.showShort('没有更多数据了');
-        const index = this.props.selectedCategoryIds.indexOf(currentLoadMoreTypeId);
+        const index = this.props.selectedCategoryIds.indexOf(
+          currentLoadMoreTypeId
+        );
         if (index >= 0) {
           pages[index] -= 1;
         }
       }
     }
   }
-
 
   onRefresh = (typeId) => {
     const { readActions } = this.props;
@@ -115,8 +120,12 @@ class Main extends React.Component {
   };
 
   retrieveArticleListsWhenNeeded(newSelectedCategoryIds, selectedCategoryIds) {
-    if (isNotEmpty(_.differenceBy(newSelectedCategoryIds, selectedCategoryIds))) {
-      this.retrieveArticleLists(_.differenceBy(newSelectedCategoryIds, selectedCategoryIds));
+    if (
+      isNotEmpty(_.differenceBy(newSelectedCategoryIds, selectedCategoryIds))
+    ) {
+      this.retrieveArticleLists(
+        _.differenceBy(newSelectedCategoryIds, selectedCategoryIds)
+      );
     }
   }
 
