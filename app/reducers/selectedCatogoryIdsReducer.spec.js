@@ -3,11 +3,7 @@ import * as types from '../constants/ActionTypes';
 
 describe('selectedCategoryIds reducer', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual(
-      {
-        selectedCategoryIds: []
-      }
-    );
+    expect(reducer(undefined, {})).toEqual([]);
   });
 
   it('should handle CHANGE_CATEGORY ', () => {
@@ -27,6 +23,18 @@ describe('selectedCategoryIds reducer', () => {
                 data: newCategoryIds
               }
             )
+        ).toEqual(newCategoryIds);
+  });
+
+  it('should handle PERSIST_REHYDRATE from redux-persist ', () => {
+    const newCategoryIds = [3, 4];
+    expect(
+            reducer([], {
+              type: types.PERSIST_REHYDRATE,
+              payload: {
+                selectedCategoryIds: newCategoryIds
+              }
+            })
         ).toEqual(newCategoryIds);
   });
 });

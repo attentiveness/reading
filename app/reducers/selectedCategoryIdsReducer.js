@@ -17,9 +17,7 @@
  */
 import * as types from '../constants/ActionTypes';
 
-const initialState = {
-  selectedCategoryIds: [],
-};
+const initialState = [];
 
 export default function selectedCategoryIds(state = initialState, action) {
   switch (action.type) {

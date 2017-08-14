@@ -127,6 +127,7 @@ class Main extends React.Component {
         _.differenceBy(newSelectedCategoryIds, selectedCategoryIds)
       );
     }
+    pages.push(1);
   }
 
   retrieveArticleLists = (categoryIds) => {
