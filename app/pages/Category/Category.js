@@ -15,17 +15,8 @@
  * limitations under the License.
  *
  */
-import React, { PropTypes } from 'react';
-import {
-  InteractionManager,
-  StyleSheet,
-  Text,
-  View,
-  DeviceEventEmitter,
-  ScrollView,
-  RefreshControl,
-  Alert
-} from 'react-native';
+import React, {PropTypes} from 'react';
+import {Alert, InteractionManager, RefreshControl, ScrollView, StyleSheet, Text, View} from 'react-native';
 
 import AV from 'leancloud-storage';
 import store from 'react-native-simple-store';
@@ -43,12 +34,6 @@ const propTypes = {
 };
 
 class Category extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      typeIds: props.selectedCategory
-    };
-  }
 
   componentDidMount() {
     const { categoryActions } = this.props;
@@ -76,32 +61,27 @@ class Category extends React.Component {
     } else {
       tempTypeIds.splice(pos, 1);
     }
-    this.setState({
-      typeIds: tempTypeIds
-    });
-    categoryActions.changeCategory(this.state.typeIds);
+    categoryActions.changeCategory(tempTypeIds);
   };
 
   onSelectCategory = () => {
     const { categoryActions } = this.props;
-    if (this.state.typeIds.length === 0) {
+    if (this.props.selectedCategoryIds.length === 0) {
       Alert.alert('提示', '您确定不选择任何分类吗？', [
         { text: '取消', style: 'cancel' },
         {
           text: '确定',
           onPress: () => {
-            categoryActions.changeCategory(this.state.typeIds);
-            // store.save('typeIds', this.state.typeIds);
+            categoryActions.changeCategory(this.props.selectedCategoryIds);
             NavigationUtil.reset(this.props.navigation, 'Home');
           }
         }
       ]);
-    } else if (this.state.typeIds.length > maxCategory) {
+    } else if (this.props.selectedCategoryIds.length > maxCategory) {
       ToastUtil.showShort(`不要超过${maxCategory}个类别哦`);
     } else {
-      categoryActions.changeCategory(this.state.typeIds);
+      categoryActions.changeCategory(this.props.selectedCategoryIds);
 
-      // store.save('typeIds', this.state.typeIds);
       store.save('isInit', true);
       NavigationUtil.reset(this.props.navigation, 'Home');
     }
@@ -119,20 +99,14 @@ class Category extends React.Component {
     }
     const { navigate } = this.props.navigation;
     InteractionManager.runAfterInteractions(() => {
-      categoryActions.changeCategory(this.state.typeIds);
+      categoryActions.changeCategory(this.props.selectedCategoryIds);
       navigate('Main');
     });
   };
 
-  routeMain = () => {
-    const { navigate } = this.props.navigation;
-    DeviceEventEmitter.emit('CHANGE_CATEGORY', this.state.typeIds);
-    navigate('Main');
-  };
-
   renderItem = (item) => {
     const isSelect =
-      Array.from(this.state.typeIds).indexOf(parseInt(item.id)) !== -1;
+      Array.from(this.props.selectedCategoryIds).indexOf(parseInt(item.id)) !== -1;
     return (
       <Button
         key={item.id}

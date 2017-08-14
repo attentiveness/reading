@@ -17,9 +17,7 @@
  */
 import React, { PropTypes } from 'react';
 import { ListView, StyleSheet, View } from 'react-native';
-import ScrollableTabView, {
-  DefaultTabBar
-} from 'react-native-scrollable-tab-view';
+import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import store from 'react-native-simple-store';
 
 import LoadingView from '../../components/LoadingView';
@@ -49,19 +47,12 @@ class Main extends React.Component {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2
       }),
-      typeIds: props.selectedCategory,
       typeList: {}
     };
   }
 
   componentDidMount() {
-    const { readActions } = this.props;
-    const { selectedCategory } = this.props;
-
-    selectedCategory.forEach((typeId) => {
-      readActions.requestArticleList(false, true, typeId);
-      pages.push(1);
-    });
+    this.retrieveArticleList(this.props.selectedCategoryIds);
 
     store.get('typeList').then((typeList) => {
       this.setState({
@@ -70,8 +61,12 @@ class Main extends React.Component {
     });
   }
 
+
   componentWillReceiveProps(nextProps) {
-    const { read } = this.props;
+    const { read, selectedCategoryIds } = this.props;
+    if (!_.isEqual(selectedCategoryIds, nextProps.selectedCategoryIds)) {
+      this.retrieveArticleList(nextProps.selectedCategoryIds);
+    }
     if (
       read.isLoadMore &&
       !nextProps.read.isLoadMore &&
@@ -79,7 +74,7 @@ class Main extends React.Component {
     ) {
       if (nextProps.read.noMore) {
         ToastUtil.showShort('没有更多数据了');
-        const index = this.state.typeIds.indexOf(currentLoadMoreTypeId);
+        const index = this.props.selectedCategoryIds.indexOf(currentLoadMoreTypeId);
         if (index >= 0) {
           pages[index] -= 1;
         }
@@ -89,10 +84,11 @@ class Main extends React.Component {
 
   componentWillUnmount() {}
 
+
   onRefresh = (typeId) => {
     const { readActions } = this.props;
     readActions.requestArticleList(true, false, typeId);
-    const index = this.state.typeIds.indexOf(typeId);
+    const index = this.props.selectedCategoryIds.indexOf(typeId);
     if (index >= 0) {
       pages[index] = 1;
     }
@@ -110,7 +106,7 @@ class Main extends React.Component {
   onEndReached = (typeId) => {
     currentLoadMoreTypeId = typeId;
     const time = Date.parse(new Date()) / 1000;
-    const index = this.state.typeIds.indexOf(typeId);
+    const index = this.props.selectedCategoryIds.indexOf(typeId);
     if (index < 0) {
       return;
     }
@@ -121,6 +117,17 @@ class Main extends React.Component {
       loadMoreTime = Date.parse(new Date()) / 1000;
     }
   };
+
+  retrieveArticleList = (typeIds) => {
+    const { readActions } = this.props;
+    if (!_.isEmpty(typeIds)) {
+      typeIds.forEach((typeId) => {
+        readActions.requestArticleList(false, true, typeId);
+        pages.push(1);
+      });
+    }
+  };
+
   renderFooter = () => {
     const { read } = this.props;
     return read.isLoadMore ? <Footer /> : <View />;
@@ -156,8 +163,8 @@ class Main extends React.Component {
   };
 
   render() {
-    const { read, selectedCategory } = this.props;
-    const content = selectedCategory.map((typeId) => {
+    const { read, selectedCategoryIds } = this.props;
+    const content = selectedCategoryIds.map((typeId) => {
       if (_.isEmpty(this.state.typeList)) {
         return null;
       }

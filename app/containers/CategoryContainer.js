@@ -48,10 +48,10 @@ class CategoryContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { category, selectedCategory } = state;
+  const { category, selectedCategoryIds } = state;
   return {
     category,
-    selectedCategory
+    selectedCategoryIds
   };
 };
 

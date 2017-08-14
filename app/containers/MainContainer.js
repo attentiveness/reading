@@ -49,10 +49,10 @@ class MainContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { read, selectedCategory } = state;
+  const { read, selectedCategoryIds } = state;
   return {
     read,
-    selectedCategory
+    selectedCategoryIds
   };
 };
 

@@ -17,12 +17,12 @@
  */
 import * as types from '../constants/ActionTypes';
 
-export default function selectedCategory(state, action) {
+export default function selectedCategoryIds(state, action) {
   switch (action.type) {
     case types.CHANGE_CATEGORY:
       return Object.assign([], action.data);
     case types.PERSIST_REHYDRATE:
-      return Object.assign([], action.payload.selectedCategory);
+      return Object.assign([], action.payload.selectedCategoryIds);
 
     default:
       return state || [];
