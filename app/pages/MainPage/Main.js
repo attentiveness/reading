@@ -16,7 +16,11 @@
  *
  */
 import React, { PropTypes } from 'react';
-import { ListView, StyleSheet, View } from 'react-native';
+import {
+  ListView,
+  StyleSheet,
+  View
+} from 'react-native';
 import ScrollableTabView, {
   DefaultTabBar
 } from 'react-native-scrollable-tab-view';
@@ -24,7 +28,11 @@ import store from 'react-native-simple-store';
 
 import LoadingView from '../../components/LoadingView';
 import ToastUtil from '../../utils/ToastUtil';
-import { getArticleList, getTypeName, isNotEmpty } from '../../utils/ItemsUtil';
+import {
+    getArticleList,
+    getTypeName,
+    isNotEmpty
+} from '../../utils/ItemsUtil';
 import ItemCell from './ItemCell';
 import Footer from './Footer';
 import EmptyView from './EmptyView';
