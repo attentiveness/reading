@@ -10,31 +10,28 @@ describe('selectedCategoryIds reducer', () => {
     const categoryIds = [1, 2];
     const newCategoryIds = [3, 4];
     expect(
-            reducer([], {
-              type: types.CHANGE_CATEGORY,
-              data: categoryIds
-            })
-        ).toEqual(categoryIds);
+      reducer([], {
+        type: types.CHANGE_CATEGORY,
+        data: categoryIds
+      })
+    ).toEqual(categoryIds);
     expect(
-            reducer(
-              categoryIds,
-              {
-                type: types.CHANGE_CATEGORY,
-                data: newCategoryIds
-              }
-            )
-        ).toEqual(newCategoryIds);
+      reducer(categoryIds, {
+        type: types.CHANGE_CATEGORY,
+        data: newCategoryIds
+      })
+    ).toEqual(newCategoryIds);
   });
 
   it('should handle PERSIST_REHYDRATE from redux-persist ', () => {
     const newCategoryIds = [3, 4];
     expect(
-            reducer([], {
-              type: types.PERSIST_REHYDRATE,
-              payload: {
-                selectedCategoryIds: newCategoryIds
-              }
-            })
-        ).toEqual(newCategoryIds);
+      reducer([], {
+        type: types.PERSIST_REHYDRATE,
+        payload: {
+          selectedCategoryIds: newCategoryIds
+        }
+      })
+    ).toEqual(newCategoryIds);
   });
 });
