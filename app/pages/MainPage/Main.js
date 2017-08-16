@@ -127,15 +127,12 @@ class Main extends React.Component {
     }
   };
 
-  retrieveArticleListsWhenNeeded = (newSelectedCategoryIds, selectedCategoryIds) => {
-    if (
-      isNotEmpty(_.differenceBy(newSelectedCategoryIds, selectedCategoryIds))
-    ) {
-      this.retrieveArticleLists(
-        _.differenceBy(newSelectedCategoryIds, selectedCategoryIds)
-      );
+  retrieveArticleListsWhenNeeded(newlySelectedCategoryIds, selectedCategoryIds) {
+    const difference = _.differenceBy(newlySelectedCategoryIds, selectedCategoryIds);
+    if (isNotEmpty(difference)) {
+      this.retrieveArticleLists(difference);
     }
-  };
+  }
 
   retrieveArticleLists = (categoryIds) => {
     const { readActions } = this.props;
