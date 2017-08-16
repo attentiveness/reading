@@ -16,19 +16,28 @@
  *
  */
 import React, { PropTypes } from 'react';
-import { ListView, StyleSheet, View } from 'react-native';
+import {
+    ListView,
+    StyleSheet,
+    View
+} from 'react-native';
 import ScrollableTabView, {
-  DefaultTabBar
+    DefaultTabBar
 } from 'react-native-scrollable-tab-view';
 import store from 'react-native-simple-store';
 
 import LoadingView from '../../components/LoadingView';
 import ToastUtil from '../../utils/ToastUtil';
-import { getArticleList, getTypeName, isNotEmpty } from '../../utils/ListUtil';
+import {
+    getArticleList,
+    getTypeName,
+    isNotEmpty
+} from '../../utils/ListUtil';
 import ItemCell from './ItemCell';
 import Footer from './Footer';
 import EmptyView from './EmptyView';
 import ItemListView from './ItemListView';
+
 
 require('moment/locale/zh-cn');
 const _ = require('lodash');
@@ -119,15 +128,11 @@ class Main extends React.Component {
     }
   };
 
-  retrieveArticleListsWhenNeeded(newSelectedCategoryIds, selectedCategoryIds) {
-    if (
-      isNotEmpty(_.differenceBy(newSelectedCategoryIds, selectedCategoryIds))
-    ) {
-      this.retrieveArticleLists(
-        _.differenceBy(newSelectedCategoryIds, selectedCategoryIds)
-      );
+  retrieveArticleListsWhenNeeded(newlySelectedCategoryIds, selectedCategoryIds) {
+    const difference = _.differenceBy(newlySelectedCategoryIds, selectedCategoryIds);
+    if (isNotEmpty(difference)) {
+      this.retrieveArticleLists(difference);
     }
-    pages.push(1);
   }
 
   retrieveArticleLists = (categoryIds) => {
@@ -138,6 +143,21 @@ class Main extends React.Component {
         pages.push(1);
       });
     }
+  };
+
+
+  generateAllArticlesListView = () => {
+    const { read } = this.props;
+    return this.props.selectedCategoryIds.map(typeId => (
+      <View key={typeId} tabLabel={getTypeName(this.state.typeList, typeId)} style={styles.base}>
+        {this.renderContent(
+                        this.state.dataSource.cloneWithRows(
+                            getArticleList(read.articleList[typeId])
+                        ),
+                        typeId
+                    )}
+      </View>
+      ));
   };
 
   renderFooter = () => {
@@ -172,24 +192,8 @@ class Main extends React.Component {
   };
 
   render() {
-    const { read } = this.props;
-    const content = this.props.selectedCategoryIds.map((typeId) => {
-      if (_.isEmpty(this.state.typeList)) {
-        return null;
-      }
-      const name = getTypeName(this.state.typeList, typeId);
-      const typeView = (
-        <View key={typeId} tabLabel={name} style={styles.base}>
-          {this.renderContent(
-            this.state.dataSource.cloneWithRows(
-              getArticleList(read.articleList[typeId])
-            ),
-            typeId
-          )}
-        </View>
-      );
-      return typeView;
-    });
+    const content = (_.isEmpty(this.state.typeList)) ? null :
+        this.generateAllArticlesListView();
     return (
       <View style={styles.container}>
         <ScrollableTabView
@@ -205,6 +209,7 @@ class Main extends React.Component {
       </View>
     );
   }
+
 }
 
 const styles = StyleSheet.create({
