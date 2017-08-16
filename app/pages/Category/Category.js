@@ -32,8 +32,8 @@ import GridView from '../../components/GridView';
 import Button from '../../components/Button';
 import ToastUtil from '../../utils/ToastUtil';
 import NavigationUtil from '../../utils/NavigationUtil';
+import { toggleItem } from '../../utils/ListUtil';
 
-const tempTypeIds = [];
 let maxCategory = 5; // 默认最多5个类别，远端可配置
 
 const propTypes = {
@@ -62,13 +62,9 @@ class Category extends React.Component {
 
   onPress = (type) => {
     const { categoryActions } = this.props;
-    const pos = tempTypeIds.indexOf(parseInt(type.id));
-    if (pos === -1) {
-      tempTypeIds.push(parseInt(type.id));
-    } else {
-      tempTypeIds.splice(pos, 1);
-    }
-    categoryActions.changeCategory(tempTypeIds);
+
+    const temp = this.props.selectedCategoryIds;
+    categoryActions.changeCategory(toggleItem(temp, parseInt(type.id)));
   };
 
   onSelectCategory = () => {
@@ -97,11 +93,11 @@ class Category extends React.Component {
   onActionSelected = () => {
     const { categoryActions } = this.props;
 
-    if (tempTypeIds.length > maxCategory) {
+    if (this.props.selectedCategoryIds.length > maxCategory) {
       ToastUtil.showShort(`不要超过${maxCategory}个类别哦`);
       return;
     }
-    if (tempTypeIds.length < 1) {
+    if (this.props.selectedCategoryIds.length < 1) {
       ToastUtil.showShort('不要少于1个类别哦');
     }
     const { navigate } = this.props.navigation;
