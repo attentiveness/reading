@@ -192,8 +192,7 @@ class Main extends React.Component {
   };
 
   render() {
-    const content = (_.isEmpty(this.state.typeList)) ? null :
-        this.generateAllArticlesListView();
+    const content = _.isEmpty(this.state.typeList) ? null : this.generateAllArticlesListView();
     return (
       <View style={styles.container}>
         <ScrollableTabView
@@ -204,7 +203,7 @@ class Main extends React.Component {
           tabBarActiveTextColor="#3e9ce9"
           tabBarInactiveTextColor="#aaaaaa"
         >
-          {isNotEmpty(this.props.selectedCategoryIds) && content}
+          {content}
         </ScrollableTabView>
       </View>
     );
