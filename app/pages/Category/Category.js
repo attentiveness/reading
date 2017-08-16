@@ -17,13 +17,13 @@
  */
 import React, { PropTypes } from 'react';
 import {
-  Alert,
   InteractionManager,
   RefreshControl,
   ScrollView,
   StyleSheet,
   Text,
-  View
+  View,
+  Alert
 } from 'react-native';
 
 import AV from 'leancloud-storage';
@@ -68,14 +68,12 @@ class Category extends React.Component {
   };
 
   onSelectCategory = () => {
-    const { categoryActions } = this.props;
     if (this.props.selectedCategoryIds.length === 0) {
       Alert.alert('提示', '您确定不选择任何分类吗？', [
         { text: '取消', style: 'cancel' },
         {
           text: '确定',
           onPress: () => {
-            categoryActions.changeCategory(this.props.selectedCategoryIds);
             NavigationUtil.reset(this.props.navigation, 'Home');
           }
         }
@@ -83,16 +81,12 @@ class Category extends React.Component {
     } else if (this.props.selectedCategoryIds.length > maxCategory) {
       ToastUtil.showShort(`不要超过${maxCategory}个类别哦`);
     } else {
-      categoryActions.changeCategory(this.props.selectedCategoryIds);
-
       store.save('isInit', true);
       NavigationUtil.reset(this.props.navigation, 'Home');
     }
   };
 
   onActionSelected = () => {
-    const { categoryActions } = this.props;
-
     if (this.props.selectedCategoryIds.length > maxCategory) {
       ToastUtil.showShort(`不要超过${maxCategory}个类别哦`);
       return;
@@ -102,7 +96,6 @@ class Category extends React.Component {
     }
     const { navigate } = this.props.navigation;
     InteractionManager.runAfterInteractions(() => {
-      categoryActions.changeCategory(this.props.selectedCategoryIds);
       navigate('Main');
     });
   };
