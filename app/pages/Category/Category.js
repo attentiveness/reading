@@ -17,7 +17,6 @@
  */
 import React, { PropTypes } from 'react';
 import {
-  InteractionManager,
   RefreshControl,
   ScrollView,
   StyleSheet,
@@ -42,6 +41,13 @@ const propTypes = {
 };
 
 class Category extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      typeIds: this.props.selectedCategoryIds
+    };
+  }
+
   componentDidMount() {
     const { categoryActions } = this.props;
     categoryActions.requestTypeList();
@@ -61,14 +67,13 @@ class Category extends React.Component {
   };
 
   onPress = (type) => {
-    const { categoryActions } = this.props;
-
-    const temp = this.props.selectedCategoryIds;
-    categoryActions.changeCategory(toggleItem(temp, parseInt(type.id)));
+    this.setState({
+      typeIds: toggleItem(this.state.typeIds, parseInt(type.id))
+    });
   };
 
   onSelectCategory = () => {
-    if (this.props.selectedCategoryIds.length === 0) {
+    if (this.state.typeIds.length === 0) {
       Alert.alert('提示', '您确定不选择任何分类吗？', [
         { text: '取消', style: 'cancel' },
         {
@@ -78,31 +83,37 @@ class Category extends React.Component {
           }
         }
       ]);
-    } else if (this.props.selectedCategoryIds.length > maxCategory) {
+    } else if (this.state.typeIds.length > maxCategory) {
       ToastUtil.showShort(`不要超过${maxCategory}个类别哦`);
     } else {
       store.save('isInit', true);
+      this.dispatchChangeCategory();
       NavigationUtil.reset(this.props.navigation, 'Home');
     }
   };
 
   onActionSelected = () => {
-    if (this.props.selectedCategoryIds.length > maxCategory) {
+    if (this.state.typeIds.length > maxCategory) {
       ToastUtil.showShort(`不要超过${maxCategory}个类别哦`);
       return;
     }
-    if (this.props.selectedCategoryIds.length < 1) {
+    if (this.state.typeIds.length < 1) {
       ToastUtil.showShort('不要少于1个类别哦');
     }
     const { navigate } = this.props.navigation;
-    InteractionManager.runAfterInteractions(() => {
-      navigate('Main');
-    });
+    this.dispatchChangeCategory();
+    navigate('Main');
   };
+
+  dispatchChangeCategory =() => {
+    const { categoryActions } = this.props;
+    categoryActions.changeCategory(this.state.typeIds);
+  };
+
 
   renderItem = (item) => {
     const isSelect =
-      Array.from(this.props.selectedCategoryIds).indexOf(parseInt(item.id)) !==
+      Array.from(this.state.typeIds).indexOf(parseInt(item.id)) !==
       -1;
     return (
       <Button
