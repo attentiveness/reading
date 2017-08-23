@@ -1,6 +1,7 @@
 const _ = require('lodash');
 
-export const getArticleList = list => (list === undefined ? [] : removeExpiredItem(list));
+export const getArticleList = list =>
+  (list === undefined ? [] : removeExpiredItem(list));
 
 export const removeExpiredItem = (list) => {
   _.remove(list, item => item.expire);
