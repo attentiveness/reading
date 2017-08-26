@@ -91,10 +91,6 @@ npm run lint
 ## Known Issue
 [react-native-scrollable-tab-view: [Android]ScrollableTabBar Crash](https://github.com/skv-headless/react-native-scrollable-tab-view/issues/328)
 
-## OnLine Accident
-
-[Reading Online Accident](./Reading_OnLine_Accident.md)
-
 ## Contributing
 
 **For more information about contributing PRs and issues, see our [Contribution Guidelines](https://github.com/attentiveness/reading/blob/master/CONTRIBUTING.md).**
