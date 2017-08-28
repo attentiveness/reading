@@ -50,11 +50,13 @@ export default function read(state = initialState, action) {
   }
 }
 
+// todo fix direct state mutation
 function replaceArticles(state, action) {
   state.articleList[action.typeId] = action.articleList;
   return state.articleList;
 }
 
+// todo fix direct state mutation
 function mergeArticles(state, action) {
   state.articleList[action.typeId] = _.unionBy(
     state.articleList[action.typeId],
