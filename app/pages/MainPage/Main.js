@@ -16,23 +16,15 @@
  *
  */
 import React, { PropTypes } from 'react';
-import {
-    ListView,
-    StyleSheet,
-    View,
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import ScrollableTabView, {
-    DefaultTabBar
+  DefaultTabBar
 } from 'react-native-scrollable-tab-view';
 import store from 'react-native-simple-store';
 
 import LoadingView from '../../components/LoadingView';
 import ToastUtil from '../../utils/ToastUtil';
-import {
-    getArticleList,
-    getTypeName,
-    isNotEmpty
-} from '../../utils/ListUtil';
+import { getArticleList, getTypeName } from '../../utils/ListUtil';
 import ItemCell from './ItemCell';
 import Footer from './Footer';
 import EmptyView from './EmptyView';
@@ -54,9 +46,6 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2
-      }),
       typeList: {}
     };
   }
@@ -127,16 +116,24 @@ class Main extends React.Component {
     }
   };
 
-  retrieveArticleListsWhenNeeded(newlySelectedCategoryIds, selectedCategoryIds) {
-    const difference = _.differenceBy(newlySelectedCategoryIds, selectedCategoryIds);
-    if (isNotEmpty(difference)) {
+  retrieveArticleListsWhenNeeded(
+    newlySelectedCategoryIds,
+    selectedCategoryIds
+  ) {
+    const difference = _.differenceBy(
+      newlySelectedCategoryIds,
+      selectedCategoryIds
+    );
+    if (!_.isEmpty(difference)) {
       this.retrieveArticleLists(difference);
     }
   }
 
+  keyExtractor = item => item.id;
+
   retrieveArticleLists = (categoryIds) => {
     const { readActions } = this.props;
-    if (isNotEmpty(categoryIds)) {
+    if (!_.isEmpty(categoryIds)) {
       categoryIds.forEach((categoryId) => {
         readActions.requestArticleList(false, true, categoryId);
         pages.push(1);
@@ -149,10 +146,11 @@ class Main extends React.Component {
     return read.isLoadMore ? <Footer /> : <View />;
   };
 
-  renderItem = article =>
-    <ItemCell article={article} onPressHandler={this.onPress} />;
+  renderItem = item =>
+    <ItemCell article={item.item} onPressHandler={this.onPress} />;
 
-  renderContent = (dataSource, typeId) => {
+
+  renderContent = (data, typeId) => {
     const { read } = this.props;
     if (read.loading) {
       return <LoadingView />;
@@ -164,13 +162,14 @@ class Main extends React.Component {
     }
     return (
       <ItemListView
-        dataSource={dataSource}
+        data={data}
         typeId={typeId}
         isRefreshing={read.isRefreshing}
         onEndReached={this.onEndReached}
         onRefresh={this.onRefresh}
         renderFooter={this.renderFooter}
         renderItem={this.renderItem}
+        keyExtractor={this.keyExtractor}
       />
     );
   };
@@ -182,17 +181,11 @@ class Main extends React.Component {
         return null;
       }
       const name = getTypeName(this.state.typeList, typeId);
-      const typeView = (
+      return (
         <View key={typeId} tabLabel={name} style={styles.base}>
-          {this.renderContent(
-            this.state.dataSource.cloneWithRows(
-              getArticleList(read.articleList[typeId])
-            ),
-            typeId
-          )}
+          {this.renderContent(getArticleList(read.articleList[typeId]), typeId)}
         </View>
       );
-      return typeView;
     });
     return (
       <View style={styles.container}>
@@ -204,7 +197,7 @@ class Main extends React.Component {
           tabBarActiveTextColor="#3e9ce9"
           tabBarInactiveTextColor="#aaaaaa"
         >
-          {isNotEmpty(this.props.selectedCategoryIds) && content}
+          {!_.isEmpty(this.props.selectedCategoryIds) && content}
         </ScrollableTabView>
       </View>
     );

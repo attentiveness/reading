@@ -20,11 +20,11 @@ import { Dimensions, Animated } from 'react-native';
 import store from 'react-native-simple-store';
 import { registerApp } from 'react-native-wechat';
 import AV from 'leancloud-storage';
-import NavigationUtil from '../utils/NavigationUtil';
+import NavigationUtil from '../../utils/NavigationUtil';
 
 const maxHeight = Dimensions.get('window').height;
 const maxWidth = Dimensions.get('window').width;
-const splashImg = require('../img/splash.png');
+const splashImg = require('../../img/splash.png');
 
 class Splash extends React.Component {
   static navigationOptions = {

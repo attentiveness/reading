@@ -11,6 +11,4 @@ export const removeExpiredItem = (list) => {
 export const getTypeName = (typeList, typeId) =>
   _.head(_.filter(typeList, o => o.id === typeId.toString())).name;
 
-export const isNotEmpty = list => !_.isEmpty(list);
-
 export const toggleItem = (list, el) => _.xor(list, [el]);

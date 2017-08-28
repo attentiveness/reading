@@ -16,7 +16,7 @@
  *
  */
 import { StackNavigator, TabNavigator } from 'react-navigation';
-import Splash from '../pages/Splash';
+import Splash from '../pages/StartPage/Splash';
 import CategoryContainer from '../containers/CategoryContainer';
 import MainContainer from '../containers/MainContainer';
 import WebViewPage from '../pages/ItemDetail/WebViewPage';

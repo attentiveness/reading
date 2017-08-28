@@ -105,16 +105,14 @@ class Category extends React.Component {
     navigate('Main');
   };
 
-  dispatchChangeCategory =() => {
+  dispatchChangeCategory = () => {
     const { categoryActions } = this.props;
     categoryActions.changeCategory(this.state.typeIds);
   };
 
-
   renderItem = (item) => {
     const isSelect =
-      Array.from(this.state.typeIds).indexOf(parseInt(item.id)) !==
-      -1;
+      Array.from(this.state.typeIds).indexOf(parseInt(item.id)) !== -1;
     return (
       <Button
         key={item.id}

@@ -15,8 +15,8 @@
  * limitations under the License.
  *
  */
-import reducer from './selectedCategoryIdsReducer';
-import * as types from '../constants/ActionTypes';
+import reducer from './../selectedCategoryIds';
+import * as types from '../../constants/ActionTypes';
 
 describe('selectedCategoryIds reducer', () => {
   it('should return the initial state', () => {

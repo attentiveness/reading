@@ -13,6 +13,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "lint": "eslint app --fix",
     "format": "find app -name '*.js' | xargs prettier --write --single-quote"
   },
@@ -46,6 +47,7 @@
     "babel-preset-react-native": "2.0.0",
     "eslint": "^4.5.0",
     "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-angular": "^3.1.0",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.3.0",

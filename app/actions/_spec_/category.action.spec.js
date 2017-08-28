@@ -15,8 +15,8 @@
  * limitations under the License.
  *
  */
-import * as actions from './category';
-import * as types from '../constants/ActionTypes';
+import * as actions from './../category';
+import * as types from '../../constants/ActionTypes';
 
 describe('actions', () => {
   it('should create an action to change currently selected category Ids', () => {
