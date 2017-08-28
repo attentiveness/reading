@@ -17,6 +17,8 @@
  */
 import * as types from '../constants/ActionTypes';
 
+const _ = require('lodash');
+
 const initialState = {
   isRefreshing: false,
   loading: false,
@@ -39,8 +41,8 @@ export default function read(state = initialState, action) {
         isLoadMore: false,
         noMore: action.articleList.length === 0,
         articleList: state.isLoadMore
-          ? loadMore(state, action)
-          : combine(state, action),
+          ? mergeArticles(state, action)
+          : replaceArticles(state, action),
         loading: state.articleList[action.typeId] === undefined
       });
     default:
@@ -48,30 +50,16 @@ export default function read(state = initialState, action) {
   }
 }
 
-function combine(state, action) {
+function replaceArticles(state, action) {
   state.articleList[action.typeId] = action.articleList;
   return state.articleList;
 }
 
-function loadMore(state, action) {
-  state.articleList[action.typeId] = concatFilterDuplicate(
+function mergeArticles(state, action) {
+  state.articleList[action.typeId] = _.unionBy(
     state.articleList[action.typeId],
-    action.articleList
+    action.articleList,
+    'id'
   );
   return state.articleList;
-}
-
-/**
- * filter duplicate data when loading more.
-*/
-function concatFilterDuplicate(list1, list2) {
-  const set = new Set(list1.map(item => item.id));
-  const filterList2 = [];
-  const length = list2.length;
-  for (let i = 0; i < length; i++) {
-    if (!set.has(list2[i].id)) {
-      filterList2.push(list2[i]);
-    }
-  }
-  return list1.concat(filterList2);
 }

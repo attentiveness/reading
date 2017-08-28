@@ -36,7 +36,7 @@ const ItemListView = ({
     keyExtractor={keyExtractor}
     renderItem={renderItem}
     onEndReached={() => onEndReached(typeId)}
-    onEndReachedThreshold={1}
+    onEndReachedThreshold={10}
     refreshing={isRefreshing}
     onRefresh={() => onRefresh(typeId)}
     ListFooterComponent={renderFooter}

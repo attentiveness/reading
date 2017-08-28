@@ -21,7 +21,6 @@ import ScrollableTabView, {
   DefaultTabBar
 } from 'react-native-scrollable-tab-view';
 import store from 'react-native-simple-store';
-
 import LoadingView from '../../components/LoadingView';
 import ToastUtil from '../../utils/ToastUtil';
 import { getArticleList, getTypeName } from '../../utils/ListUtil';
@@ -129,16 +128,14 @@ class Main extends React.Component {
     }
   }
 
-  keyExtractor = item => item.id;
+  keyExtractor = (item, index) => index;
 
   retrieveArticleLists = (categoryIds) => {
     const { readActions } = this.props;
-    if (!_.isEmpty(categoryIds)) {
-      categoryIds.forEach((categoryId) => {
-        readActions.requestArticleList(false, true, categoryId);
-        pages.push(1);
-      });
-    }
+    categoryIds.forEach((categoryId) => {
+      readActions.requestArticleList(false, true, categoryId);
+      pages.push(1);
+    });
   };
 
   renderFooter = () => {
@@ -148,7 +145,6 @@ class Main extends React.Component {
 
   renderItem = item =>
     <ItemCell article={item.item} onPressHandler={this.onPress} />;
-
 
   renderContent = (data, typeId) => {
     const { read } = this.props;
