@@ -17,12 +17,12 @@
     "format": "find app -name '*.js' | xargs prettier --write --single-quote"
   },
   "dependencies": {
-    "leancloud-storage": "3.0.4",
+    "leancloud-storage": "3.2.0",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
     "react": "16.0.0-alpha.12",
-    "react-native": "0.47.2",
-    "react-native-code-push": "^5.0.0-beta",
+    "react-native": "0.48.3",
+    "react-native-code-push": "^5.1.0-beta",
     "react-native-device-info": "^0.11.0",
     "react-native-exceptions-manager": "^0.2.0",
     "react-native-scrollable-tab-view": "0.7.4",
@@ -40,16 +40,16 @@
     "preset": "react-native"
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.3",
-    "babel-jest": "^20.0.3",
-    "babel-preset-react-native": "2.0.0",
-    "eslint": "^4.5.0",
+    "babel-eslint": "^8.0.0",
+    "babel-jest": "^21.0.2",
+    "babel-preset-react-native": "4.0.0",
+    "eslint": "^4.6.1",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.3.0",
-    "jest": "^20.0.4",
-    "prettier": "^1.5.3",
+    "jest": "^21.1.0",
+    "prettier": "^1.6.1",
     "react-test-renderer": "16.0.0-alpha.12",
     "redux-devtools": "^3.4.0"
   }
