@@ -155,9 +155,12 @@ android {
 }
 
 andResGuard {   // ./gradlew resguard[BuildType | Flavor]
+    // mappingFile = file("./resource_mapping.txt")
     mappingFile = null
+    // It will be invalid when you sign apk with schemeV2
     use7zip = true
     useSign = true
+    // it will keep the origin path of your resources when it's true
     keepRoot = false
     // add <yourpackagename>.R.drawable.icon into whitelist.
     whiteList = [
@@ -175,7 +178,7 @@ andResGuard {   // ./gradlew resguard[BuildType | Flavor]
             "resources.arsc"
     ]
     sevenzip {
-        artifact = 'com.tencent.mm:SevenZip:1.2.3'
+        artifact = 'com.tencent.mm:SevenZip:1.2.6'
         //在设置sevenzip时, 你只需设置artifact或path. 支持同时设置,总以path的值为优先
         //path = "/usr/local/bin/7za"
     }
@@ -184,7 +187,7 @@ andResGuard {   // ./gradlew resguard[BuildType | Flavor]
 dependencies {
     compile fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleCompatible
-    compile "com.android.support:appcompat-v7:25.2.0"
+    compile "com.android.support:appcompat-v7:25.3.1"
     compile "com.facebook.react:react-native:+" //From node_modules
     compile 'com.tencent.bugly:crashreport:latest.release'
     compile project(':RCTWeChat')

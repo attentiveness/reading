@@ -28,12 +28,18 @@ public class MainActivity extends ReactActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getReactNativeHost().getReactInstanceManager().addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener() {
-            @Override
-            public void onReactContextInitialized(ReactContext context) {
-                getWindow().getDecorView().setBackgroundColor(Color.WHITE);
-            }
-        });
+        getReactNativeHost().getReactInstanceManager().addReactInstanceEventListener(
+                new ReactInstanceManager.ReactInstanceEventListener() {
+                    @Override
+                    public void onReactContextInitialized(ReactContext context) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+                            }
+                        });
+                    }
+                });
     }
 
     /**
