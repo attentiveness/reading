@@ -30,8 +30,9 @@ const aboutLogo = require('../../img/about_logo.png');
 class About extends React.Component {
   static navigationOptions = {
     title: '关于',
-    tabBarIcon: ({ tintColor }) =>
-      <Icon name="md-information-circle" size={25} color={tintColor} />,
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="md-information-circle" size={25} color={tintColor} />
+    ),
     headerRight: (
       <Icon.Button
         name="logo-github"
@@ -49,9 +50,7 @@ class About extends React.Component {
         <View style={styles.content}>
           <View style={styles.center}>
             <Image style={styles.logo} source={aboutLogo} />
-            <Text style={styles.version}>
-              {`v${DeviceInfo.getVersion()}`}
-            </Text>
+            <Text style={styles.version}>{`v${DeviceInfo.getVersion()}`}</Text>
             <Text style={styles.title}>iReading</Text>
             <Text style={styles.subtitle}>让生活更精彩</Text>
           </View>
@@ -63,7 +62,7 @@ class About extends React.Component {
               <Button
                 style={[styles.disclaimer, { color: '#3e9ce9' }]}
                 text={SHOW_API}
-                onPress={() => this.onPress(SHOW_API)}
+                onPress={() => Linking.openURL(SHOW_API)}
               />
             </View>
           </View>

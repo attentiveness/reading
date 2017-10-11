@@ -56,7 +56,7 @@ public class MainApplication extends Application implements ReactApplication {
         protected ReactInstanceManager createReactInstanceManager() {
             ReactInstanceManagerBuilder builder = ReactInstanceManager.builder()
                     .setApplication(getApplication())
-                    .setJSMainModuleName(getJSMainModuleName())
+                    .setJSMainModulePath(getJSMainModuleName())
                     .setUseDeveloperSupport(getUseDeveloperSupport())
                     .setRedBoxHandler(getRedBoxHandler())
                     .setUIImplementationProvider(getUIImplementationProvider())
@@ -86,6 +86,11 @@ public class MainApplication extends Application implements ReactApplication {
         @Override
         protected String getJSBundleFile() {
             return CodePush.getJSBundleFile();
+        }
+
+        @Override
+        protected String getJSMainModuleName() {
+            return "index";
         }
 
         @Override

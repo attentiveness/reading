@@ -15,11 +15,11 @@
  * limitations under the License.
  *
  */
-import { fork } from 'redux-saga/effects';
+import { all, fork } from 'redux-saga/effects';
 
 import { watchRequestTypeList } from './category';
 import { watchRequestArticleList } from './read';
 
 export default function* rootSaga() {
-  yield [fork(watchRequestTypeList), fork(watchRequestArticleList)];
+  yield all([fork(watchRequestTypeList), fork(watchRequestArticleList)]);
 }

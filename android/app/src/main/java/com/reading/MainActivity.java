@@ -32,12 +32,7 @@ public class MainActivity extends ReactActivity {
                 new ReactInstanceManager.ReactInstanceEventListener() {
                     @Override
                     public void onReactContextInitialized(ReactContext context) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                getWindow().getDecorView().setBackgroundColor(Color.WHITE);
-                            }
-                        });
+                        getWindow().getDecorView().setBackgroundColor(Color.WHITE);
                     }
                 });
     }

@@ -24,7 +24,9 @@ import { fetchArticleList, receiveArticleList } from '../../actions/read';
 
 /* global expect */
 describe('read saga tests', () => {
-  const { isRefreshing, loading, typeId, isLoadMore, page } = {
+  const {
+    isRefreshing, loading, typeId, isLoadMore, page
+  } = {
     isRefreshing: false,
     loading: false,
     typeId: 2,
@@ -49,32 +51,24 @@ describe('read saga tests', () => {
 
   it(`should put(fetchArticleList(${isRefreshing}, ${loading}, ${isLoadMore}))`, () => {
     const next = step();
-    expect(next).toEqual(
-      put(fetchArticleList(isRefreshing, loading, isLoadMore))
-    );
+    expect(next).toEqual(put(fetchArticleList(isRefreshing, loading, isLoadMore)));
   });
 
   it(`should call(request, ${WEXIN_ARTICLE_LIST}?typeId=${typeId}&page=${page}, 'get')`, () => {
     const next = step();
-    expect(next).toEqual(
-      call(
-        request,
-        `${WEXIN_ARTICLE_LIST}?typeId=${typeId}&page=${page}`,
-        'get'
-      )
-    );
+    expect(next).toEqual(call(
+      request,
+      `${WEXIN_ARTICLE_LIST}?typeId=${typeId}&page=${page}`,
+      'get'
+    ));
   });
 
   it(`should put(receiveArticleList(contentlist, ${typeId}))`, () => {
     const next = step(mockArticleList);
-    expect(next).toEqual(
-      put(
-        receiveArticleList(
-          mockArticleList.showapi_res_body.pagebean.contentlist,
-          typeId
-        )
-      )
-    );
+    expect(next).toEqual(put(receiveArticleList(
+      mockArticleList.showapi_res_body.pagebean.contentlist,
+      typeId
+    )));
   });
 
   it('should be done', () => {

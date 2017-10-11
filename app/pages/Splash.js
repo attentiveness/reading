@@ -37,10 +37,12 @@ class Splash extends React.Component {
       bounceValue: new Animated.Value(1)
     };
     registerApp('wxb24c445773822c79');
-    AV.init({
-      appId: 'Tfi1z7dN9sjMwSul8sYaTEvg-gzGzoHsz',
-      appKey: '57qmeEJonefntNqRe17dAgi4'
-    });
+    if (!AV.applicationId) {
+      AV.init({
+        appId: 'Tfi1z7dN9sjMwSul8sYaTEvg-gzGzoHsz',
+        appKey: '57qmeEJonefntNqRe17dAgi4'
+      });
+    }
   }
 
   componentDidMount() {

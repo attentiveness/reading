@@ -17,27 +17,26 @@
  */
 import React from 'react';
 import { Image, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import moment from 'moment';
 
-import TimeAgo from 'react-native-timeago';
 import { formatStringWithHtml } from '../../utils/FormatUtil';
 
-const ItemCell = ({ article, onPressHandler }) =>
-  (<TouchableOpacity onPress={() => onPressHandler(article)}>
+require('moment/locale/zh-cn');
+
+const ItemCell = ({ article, onPressHandler }) => (
+  <TouchableOpacity onPress={() => onPressHandler(article)}>
     <View style={styles.containerItem}>
       <Image style={styles.itemImg} source={{ uri: article.contentImg }} />
       <View style={styles.itemRightContent}>
-        <Text style={styles.title}>
-          {formatStringWithHtml(article.title)}
-        </Text>
+        <Text style={styles.title}>{formatStringWithHtml(article.title)}</Text>
         <View style={styles.itemRightBottom}>
-          <Text style={styles.userName}>
-            {article.userName}
-          </Text>
-          <TimeAgo style={styles.timeAgo} time={article.date} />
+          <Text style={styles.userName}>{article.userName}</Text>
+          <Text style={styles.timeAgo}>{moment(article.date).fromNow()}</Text>
         </View>
       </View>
     </View>
-  </TouchableOpacity>);
+  </TouchableOpacity>
+);
 
 const styles = StyleSheet.create({
   containerItem: {

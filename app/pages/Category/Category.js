@@ -15,7 +15,8 @@
  * limitations under the License.
  *
  */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   InteractionManager,
   StyleSheet,
@@ -128,7 +129,9 @@ class Category extends React.Component {
       store.get('typeIds').then((typeIds) => {
         if (
           typeIds.sort().toString() ===
-          Array.from(tempTypeIds).sort().toString()
+          Array.from(tempTypeIds)
+            .sort()
+            .toString()
         ) {
           navigate('Main');
           return;
@@ -213,7 +216,7 @@ class Category extends React.Component {
           <Button
             containerStyle={styles.sureBtn}
             style={styles.btnText}
-            text={'确认'}
+            text="确认"
             onPress={() => this.onSelectCategory()}
           />
         </View>

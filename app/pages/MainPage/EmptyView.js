@@ -25,8 +25,8 @@ import {
   View
 } from 'react-native';
 
-const EmptyView = ({ read, typeId, onRefresh }) =>
-  (<ScrollView
+const EmptyView = ({ read, typeId, onRefresh }) => (
+  <ScrollView
     automaticallyAdjustContentInsets={false}
     horizontal={false}
     contentContainerStyle={styles.no_data}
@@ -44,7 +44,8 @@ const EmptyView = ({ read, typeId, onRefresh }) =>
     <View style={{ alignItems: 'center' }}>
       <Text style={{ fontSize: 16 }}>目前没有数据，请刷新重试……</Text>
     </View>
-  </ScrollView>);
+  </ScrollView>
+);
 
 const styles = StyleSheet.create({
   base: {

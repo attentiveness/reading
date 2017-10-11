@@ -38,12 +38,10 @@ export function* requestArticleList(
       `${WEXIN_ARTICLE_LIST}?typeId=${typeId}&page=${page}`,
       'get'
     );
-    yield put(
-      receiveArticleList(
-        articleList.showapi_res_body.pagebean.contentlist,
-        typeId
-      )
-    );
+    yield put(receiveArticleList(
+      articleList.showapi_res_body.pagebean.contentlist,
+      typeId
+    ));
     const errorMessage = articleList.showapi_res_error;
     if (errorMessage && errorMessage !== '') {
       yield ToastUtil.showShort(errorMessage);
@@ -56,9 +54,9 @@ export function* requestArticleList(
 
 export function* watchRequestArticleList() {
   while (true) {
-    const { isRefreshing, loading, typeId, isLoadMore, page } = yield take(
-      types.REQUEST_ARTICLE_LIST
-    );
+    const {
+      isRefreshing, loading, typeId, isLoadMore, page
+    } = yield take(types.REQUEST_ARTICLE_LIST);
     yield fork(
       requestArticleList,
       isRefreshing,

@@ -15,7 +15,8 @@
  * limitations under the License.
  *
  */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { View, StyleSheet, ListView, ViewPropTypes } from 'react-native';
 
 const propTypes = {
@@ -59,11 +60,7 @@ const GridView = ({
       const i = renderItem(item);
       return i;
     });
-    return (
-      <View style={styles.group}>
-        {itemViews}
-      </View>
-    );
+    return <View style={styles.group}>{itemViews}</View>;
   };
 
   const groups = groupItems(items, itemsPerRow);

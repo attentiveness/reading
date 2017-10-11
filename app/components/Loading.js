@@ -16,6 +16,7 @@
  *
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   StyleSheet,
   Dimensions,
@@ -28,17 +29,19 @@ import {
 const SIZES = ['small', 'large'];
 
 const propTypes = {
-  visible: React.PropTypes.bool,
-  color: React.PropTypes.string,
-  size: React.PropTypes.oneOf(SIZES),
-  overlayColor: React.PropTypes.string,
-  onRequestClose: React.PropTypes.func
+  visible: PropTypes.bool,
+  color: PropTypes.string,
+  size: PropTypes.oneOf(SIZES),
+  overlayColor: PropTypes.string,
+  onRequestClose: PropTypes.func
 };
 
-const Loading = ({ visible, color, size, overlayColor, onRequestClose }) =>
-  (<Modal visible={visible} transparent onRequestClose={onRequestClose}>
-    {visible
-      ? <View key={'spinner'} style={styles.container}>
+const Loading = ({
+  visible, color, size, overlayColor, onRequestClose
+}) => (
+  <Modal visible={visible} transparent onRequestClose={onRequestClose}>
+    {visible ? (
+      <View key="spinner" style={styles.container}>
         <View style={[styles.background, { backgroundColor: overlayColor }]}>
           <View style={styles.loading}>
             <ActivityIndicator size={size} color={color} />
@@ -46,8 +49,11 @@ const Loading = ({ visible, color, size, overlayColor, onRequestClose }) =>
           </View>
         </View>
       </View>
-      : <View key={'spinner'} />}
-  </Modal>);
+    ) : (
+      <View key="spinner" />
+    )}
+  </Modal>
+);
 
 const styles = StyleSheet.create({
   container: {

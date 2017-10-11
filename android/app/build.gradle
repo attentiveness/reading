@@ -74,6 +74,9 @@ import com.android.build.OutputFile
  */
 
 apply from: "../../node_modules/react-native/react.gradle"
+project.ext.react = [
+        entryFile: "index.js"
+]
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
 project.ext.vectoricons = [
         iconFontNames: ['Ionicons.ttf'] // Name of the font files you want to copy
@@ -103,7 +106,7 @@ android {
     defaultConfig {
         applicationId "com.reading"
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 25
         versionCode 6
         versionName "2.1.0"
         ndk {

@@ -27,8 +27,8 @@ const ItemListView = ({
   onRefresh,
   renderItem,
   renderFooter
-}) =>
-  (<ListView
+}) => (
+  <ListView
     initialListSize={1}
     dataSource={dataSource}
     renderRow={renderItem}
@@ -45,7 +45,8 @@ const ItemListView = ({
         colors={['#ffaa66cc', '#ff00ddff', '#ffffbb33', '#ffff4444']}
       />
     }
-  />);
+  />
+);
 
 const styles = StyleSheet.create({
   listView: {

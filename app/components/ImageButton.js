@@ -15,7 +15,8 @@
  * limitations under the License.
  *
  */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { ViewPropTypes, Image, TouchableOpacity } from 'react-native';
 
 const propTypes = {
@@ -26,14 +27,17 @@ const propTypes = {
   containerStyle: ViewPropTypes.style
 };
 
-const ImageButton = ({ onPress, disabled, source, style, containerStyle }) =>
-  (<TouchableOpacity
+const ImageButton = ({
+  onPress, disabled, source, style, containerStyle
+}) => (
+  <TouchableOpacity
     style={containerStyle}
     onPress={onPress}
     disabled={disabled}
   >
     <Image style={style} source={source} />
-  </TouchableOpacity>);
+  </TouchableOpacity>
+);
 
 ImageButton.propTypes = propTypes;
 

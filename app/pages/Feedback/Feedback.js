@@ -28,8 +28,9 @@ let feedbackText;
 class Feedback extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: '建议',
-    tabBarIcon: ({ tintColor }) =>
-      <Icon name="md-thumbs-up" size={25} color={tintColor} />,
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="md-thumbs-up" size={25} color={tintColor} />
+    ),
     headerRight: (
       <Icon.Button
         name="md-checkmark"

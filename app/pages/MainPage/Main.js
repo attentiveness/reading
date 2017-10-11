@@ -15,7 +15,8 @@
  * limitations under the License.
  *
  */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   DeviceEventEmitter,
   InteractionManager,
@@ -24,7 +25,7 @@ import {
   View
 } from 'react-native';
 import ScrollableTabView, {
-  DefaultTabBar
+  ScrollableTabBar
 } from 'react-native-scrollable-tab-view';
 import store from 'react-native-simple-store';
 
@@ -35,8 +36,6 @@ import ItemCell from './ItemCell';
 import Footer from './Footer';
 import EmptyView from './EmptyView';
 import ItemListView from './ItemListView';
-
-require('moment/locale/zh-cn');
 
 const propTypes = {
   readActions: PropTypes.object,
@@ -83,8 +82,7 @@ class Main extends React.Component {
           this.setState({
             typeIds,
             typeList
-          })
-        );
+          }));
       });
     });
   }
@@ -147,8 +145,9 @@ class Main extends React.Component {
     return read.isLoadMore ? <Footer /> : <View />;
   };
 
-  renderItem = article =>
-    <ItemCell article={article} onPressHandler={this.onPress} />;
+  renderItem = article => (
+    <ItemCell article={article} onPressHandler={this.onPress} />
+  );
 
   renderContent = (dataSource, typeId) => {
     const { read } = this.props;
@@ -186,9 +185,7 @@ class Main extends React.Component {
       const typeView = (
         <View key={typeId} tabLabel={name} style={styles.base}>
           {this.renderContent(
-            this.state.dataSource.cloneWithRows(
-              getArticleList(read.articleList[typeId])
-            ),
+            this.state.dataSource.cloneWithRows(getArticleList(read.articleList[typeId])),
             typeId
           )}
         </View>
@@ -198,8 +195,9 @@ class Main extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollableTabView
-          renderTabBar={() =>
-            <DefaultTabBar tabStyle={styles.tab} textStyle={styles.tabText} />}
+          renderTabBar={() => (
+            <ScrollableTabBar tabStyle={styles.tab} textStyle={styles.tabText} />
+          )}
           tabBarBackgroundColor="#fcfcfc"
           tabBarUnderlineStyle={styles.tabBarUnderline}
           tabBarActiveTextColor="#3e9ce9"
