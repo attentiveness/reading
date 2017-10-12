@@ -18,7 +18,7 @@
 
 import getUrl from './UrlUtil';
 
-export const request = (url, method, body) => {
+const request = (url, method, body) => {
   let isOk;
   return new Promise((resolve, reject) => {
     fetch(getUrl(url), {
@@ -47,4 +47,8 @@ export const request = (url, method, body) => {
         reject(error);
       });
   });
+};
+
+export default {
+  request
 };

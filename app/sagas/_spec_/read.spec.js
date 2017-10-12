@@ -18,7 +18,7 @@
 import { put, call } from 'redux-saga/effects';
 
 import { requestArticleList } from '../read';
-import { request } from '../../utils/RequestUtil';
+import RequestUtil from '../../utils/RequestUtil';
 import { WEXIN_ARTICLE_LIST } from '../../constants/Urls';
 import { fetchArticleList, receiveArticleList } from '../../actions/read';
 
@@ -57,7 +57,7 @@ describe('read saga tests', () => {
   it(`should call(request, ${WEXIN_ARTICLE_LIST}?typeId=${typeId}&page=${page}, 'get')`, () => {
     const next = step();
     expect(next).toEqual(call(
-      request,
+      RequestUtil.request,
       `${WEXIN_ARTICLE_LIST}?typeId=${typeId}&page=${page}`,
       'get'
     ));

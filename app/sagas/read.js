@@ -20,7 +20,7 @@ import { put, take, call, fork } from 'redux-saga/effects';
 
 import * as types from '../constants/ActionTypes';
 import ToastUtil from '../utils/ToastUtil';
-import { request } from '../utils/RequestUtil';
+import RequestUtil from '../utils/RequestUtil';
 import { WEXIN_ARTICLE_LIST } from '../constants/Urls';
 import { fetchArticleList, receiveArticleList } from '../actions/read';
 
@@ -34,7 +34,7 @@ export function* requestArticleList(
   try {
     yield put(fetchArticleList(isRefreshing, loading, isLoadMore));
     const articleList = yield call(
-      request,
+      RequestUtil.request,
       `${WEXIN_ARTICLE_LIST}?typeId=${typeId}&page=${page}`,
       'get'
     );

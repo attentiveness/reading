@@ -19,7 +19,7 @@ import { put, call } from 'redux-saga/effects';
 import store from 'react-native-simple-store';
 import { requestTypeList } from '../category';
 import { fetchTypeList, receiveTypeList } from '../../actions/category';
-import { request } from '../../utils/RequestUtil';
+import RequestUtil from '../../utils/RequestUtil';
 import { WEXIN_ARTICLE_TYPE } from '../../constants/Urls';
 
 /* global expect */
@@ -48,7 +48,7 @@ describe('category saga tests', () => {
 
   it("should call(request, WEXIN_ARTICLE_TYPE, 'get')", () => {
     const next = step();
-    expect(next).toEqual(call(request, WEXIN_ARTICLE_TYPE, 'get'));
+    expect(next).toEqual(call(RequestUtil.request, WEXIN_ARTICLE_TYPE, 'get'));
   });
 
   it('should put(receiveTypeList(typeList.showapi_res_body.typeList))', () => {

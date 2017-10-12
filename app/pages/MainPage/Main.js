@@ -196,7 +196,10 @@ class Main extends React.Component {
       <View style={styles.container}>
         <ScrollableTabView
           renderTabBar={() => (
-            <ScrollableTabBar tabStyle={styles.tab} textStyle={styles.tabText} />
+            <ScrollableTabBar
+              tabStyle={styles.tab}
+              textStyle={styles.tabText}
+            />
           )}
           tabBarBackgroundColor="#fcfcfc"
           tabBarUnderlineStyle={styles.tabBarUnderline}
