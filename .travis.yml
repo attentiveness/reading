@@ -49,7 +49,6 @@ before_install:
 - if [[ $TEST_TYPE == 'android' ]] && [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then mv gradle.properties android ; fi
 - if [[ $TEST_TYPE == 'android' ]] && [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then mv reading.keystore android/app ; fi
 - if [[ $TEST_TYPE == 'android' ]]; then gem install fir-cli ; fi
-- if [[ $TEST_TYPE == 'android' ]]; then android/gradlew -stop ; fi
 install:
 - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.0/install.sh | bash
 - source ~/.bashrc
