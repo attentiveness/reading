@@ -3,7 +3,7 @@ matrix:
   - os: osx
     language: objective-c
     sudo: false
-    osx_image: xcode8.2
+    osx_image: xcode9
     env: TEST_TYPE=ios
   - os: linux
     language: android
@@ -36,7 +36,7 @@ addons:
     repo_token: $CODE_CLIMATE_TOKEN
 before_cache:
 - rm -rf android/.gradle/caches
-- rm -rf node_modules
+- rm -rf node_modules/
 cache:
   directories:
   - node_modules
