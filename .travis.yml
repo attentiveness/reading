@@ -64,7 +64,7 @@ script:
 - if [[ $TEST_TYPE == 'js' ]]; then npm run lint ; fi
 - if [[ $TEST_TYPE == 'js' ]]; then npm test ; fi
 - if [[ $TEST_TYPE == 'ios' ]]; then xcodebuild -project ios/$PROJECT_MOBILE.xcodeproj
-  -scheme $PROJECT_MOBILE -sdk iphonesimulator10.2 -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean build ; fi
+  -scheme $PROJECT_MOBILE -sdk iphonesimulator11.0 -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean build ; fi
 - if [ $TEST_TYPE == 'android' ] && [ $TRAVIS_PULL_REQUEST == 'false' ]; then cd android && ./gradlew clean && ./gradlew resguardRelease --stacktrace ; fi
 - if [ $TEST_TYPE == 'android' ] && [ $TRAVIS_PULL_REQUEST != 'false' ]; then cd android && ./gradlew clean && ./gradlew assembleDebug --stacktrace ; fi
 after_success:
