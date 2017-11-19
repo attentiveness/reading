@@ -54,12 +54,12 @@ iReading App Write In React-Native（Studying and Programing）
 ### Step One
 
 ```
-npm install -g react-native-cli
+yarn(or npm) install -g react-native-cli
 ```
 ### Step Two
 
 ```
-npm install
+yarn(or npm) install
 ```
 ### Step Three
 
@@ -69,19 +69,19 @@ react-native start
 ### Run Test
 
 ```
-npm test
+yarn(or npm) test
 ```
 
 ### Format Code
 
 ```
-npm run format
+yarn(or npm run) format
 ```
 
 ### Run Lint
 
 ```
-npm run lint
+yarn(or npm run) lint
 ```
 
 ## Release Note

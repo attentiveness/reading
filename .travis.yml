@@ -38,6 +38,7 @@ before_cache:
 - rm -rf android/.gradle/caches
 - rm -rf node_modules/
 cache:
+  yarn: true
   directories:
   - node_modules
   - android/.gradle/caches
@@ -50,19 +51,19 @@ before_install:
 - if [[ $TEST_TYPE == 'android' ]] && [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then mv reading.keystore android/app ; fi
 - if [[ $TEST_TYPE == 'android' ]]; then gem install fir-cli ; fi
 install:
-- curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.0/install.sh | bash
+- curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
 - source ~/.bashrc
 - nvm install 6
 - rm -Rf "${TMPDIR}/jest_preprocess_cache"
-- npm config set spin=false
-- npm config set progress=false
-- travis_wait npm install
+- yarn config set spin=false
+- yarn config set progress=false
+- travis_wait yarn install
 branches:
   only:
   - master
 script:
-- if [[ $TEST_TYPE == 'js' ]]; then npm run lint ; fi
-- if [[ $TEST_TYPE == 'js' ]]; then npm test ; fi
+- if [[ $TEST_TYPE == 'js' ]]; then yarn lint ; fi
+- if [[ $TEST_TYPE == 'js' ]]; then yarn test ; fi
 - if [[ $TEST_TYPE == 'ios' ]]; then xcodebuild -project ios/$PROJECT_MOBILE.xcodeproj
   -scheme $PROJECT_MOBILE -sdk iphonesimulator11.0 -configuration Debug CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO clean build ; fi
 - if [ $TEST_TYPE == 'android' ] && [ $TRAVIS_PULL_REQUEST == 'false' ]; then cd android && ./gradlew clean && ./gradlew resguardRelease --stacktrace ; fi
