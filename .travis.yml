@@ -16,6 +16,8 @@ matrix:
       - build-tools-26.0.1
       - android-26
       - tools
+      - build-tools-25.0.3
+      - tools
       - build-tools-25.0.2
       - android-25
       - tools

@@ -20,6 +20,7 @@ import { Dimensions, Animated } from 'react-native';
 import store from 'react-native-simple-store';
 import { registerApp } from 'react-native-wechat';
 import AV from 'leancloud-storage';
+import SplashScreen from 'react-native-splash-screen';
 import NavigationUtil from '../utils/NavigationUtil';
 
 const maxHeight = Dimensions.get('window').height;
@@ -51,6 +52,7 @@ class Splash extends React.Component {
       toValue: 1.2,
       duration: 1000
     }).start();
+    SplashScreen.hide();
     this.timer = setTimeout(() => {
       store.get('isInit').then((isInit) => {
         if (!isInit) {

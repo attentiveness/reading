@@ -13,6 +13,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <Bugly/Bugly.h>
+#import "SplashScreen.h"
 
 @implementation AppDelegate
 
@@ -33,33 +34,13 @@
                                                    launchOptions:launchOptions];
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
   
-  NSString *launchImageName;
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    if ([UIScreen mainScreen].bounds.size.height == 480) launchImageName = @"Default@2x.png"; // iPhone 4/4s, 3.5 inch screen
-    if ([UIScreen mainScreen].bounds.size.height == 568) launchImageName = @"Default-568h@2x.png"; // iPhone 5/5s, 4.0 inch screen
-    if ([UIScreen mainScreen].bounds.size.height == 667) launchImageName = @"launch_screen@2x.png"; // iPhone 6, 4.7 inch screen
-    if ([UIScreen mainScreen].bounds.size.height == 736) launchImageName = @"launch_screen@3x.png"; // iPhone 6+, 5.5 inch screen
-  }
-  
-  UIImage *image = [UIImage imageNamed:launchImageName];
-  if (image) {
-    NSLog(@"launch -- launch");
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-    UIImageView *launchView = [[UIImageView alloc] initWithImage: image];
-    launchView.frame=CGRectMake(0, 0, screenWidth, screenHeight);
-    launchView.contentMode = UIViewContentModeScaleToFill;
-    launchView.image = image;
-    rootView.loadingView = launchView;
-  }
-  
   
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  [SplashScreen show];
   return YES;
 }
 

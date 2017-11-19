@@ -16,25 +16,18 @@
 
 package com.reading;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import com.facebook.react.ReactActivity;
-import com.facebook.react.ReactInstanceManager;
-import com.facebook.react.bridge.ReactContext;
+
+import org.devio.rn.splashscreen.SplashScreen;
 
 public class MainActivity extends ReactActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SplashScreen.show(this);
         super.onCreate(savedInstanceState);
-        getReactNativeHost().getReactInstanceManager().addReactInstanceEventListener(
-                new ReactInstanceManager.ReactInstanceEventListener() {
-                    @Override
-                    public void onReactContextInitialized(ReactContext context) {
-                        getWindow().getDecorView().setBackgroundColor(Color.WHITE);
-                    }
-                });
     }
 
     /**

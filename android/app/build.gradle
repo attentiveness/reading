@@ -188,6 +188,7 @@ andResGuard {   // ./gradlew resguard[BuildType | Flavor]
 }
 
 dependencies {
+    compile project(':react-native-splash-screen')
     compile fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleCompatible
     compile "com.android.support:appcompat-v7:26.1.0"
