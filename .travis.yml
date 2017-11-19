@@ -35,8 +35,8 @@ addons:
   code_climate:
     repo_token: $CODE_CLIMATE_TOKEN
 before_cache:
-- rm -rf android/.gradle/caches
-- rm -rf node_modules/
+- rm -f android/.gradle/caches/modules-2/modules-2.lock
+- rm -fr android/.gradle/caches/*/plugin-resolution/
 cache:
   yarn: true
   directories:
@@ -49,12 +49,13 @@ before_install:
 - if [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then tar xvf secrets.tar ; fi
 - if [[ $TEST_TYPE == 'android' ]] && [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then mv gradle.properties android ; fi
 - if [[ $TEST_TYPE == 'android' ]] && [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then mv reading.keystore android/app ; fi
-- if [[ $TEST_TYPE == 'android' ]]; then gem install fir-cli ; fi
-- if [[ $TEST_TYPE == 'ios' ]]; then brew install yarn --without-node ; fi
+- if [[ $TEST_TYPE != 'js' ]]; then curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash ; fi
+- if [[ $TEST_TYPE != 'js' ]]; then source ~/.bashrc ; fi
+- if [[ $TEST_TYPE != 'js' ]]; then nvm install 6 ; fi
+- if [[ $TEST_TYPE != 'js' ]]; then curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.3.2 ; fi
+- if [[ $TEST_TYPE != 'js' ]]; then export PATH=$HOME/.yarn/bin:$PATH ; fi
 install:
-- curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
-- source ~/.bashrc
-- nvm install 6
+- if [[ $TEST_TYPE == 'android' ]] && [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then gem install fir-cli ; fi
 - rm -Rf "${TMPDIR}/jest_preprocess_cache"
 - yarn config set spin=false
 - yarn config set progress=false
