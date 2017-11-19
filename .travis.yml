@@ -50,6 +50,7 @@ before_install:
 - if [[ $TEST_TYPE == 'android' ]] && [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then mv gradle.properties android ; fi
 - if [[ $TEST_TYPE == 'android' ]] && [[ $TRAVIS_PULL_REQUEST == 'false' ]]; then mv reading.keystore android/app ; fi
 - if [[ $TEST_TYPE == 'android' ]]; then gem install fir-cli ; fi
+- if [[ $TEST_TYPE == 'ios' ]]; then brew install yarn --without-node ; fi
 install:
 - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash
 - source ~/.bashrc
