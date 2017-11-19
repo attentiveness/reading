@@ -13,15 +13,15 @@ matrix:
     android:
       components:
       - tools
+      - tools
+      # The BuildTools version used by your project
       - build-tools-26.0.1
-      - android-26
-      - tools
       - build-tools-25.0.3
-      - tools
       - build-tools-25.0.2
-      - android-25
-      - tools
       - build-tools-23.0.1
+      # The SDK version used to compile your project
+      - android-26
+      - android-25
       - android-23
       - extra-android-m2repository
       - extra-android-support
