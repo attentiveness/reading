@@ -107,7 +107,7 @@ android {
         applicationId "com.reading"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 6
+        versionCode 7
         versionName "2.1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
