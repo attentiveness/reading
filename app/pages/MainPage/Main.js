@@ -159,7 +159,7 @@ class Main extends React.Component {
       read.articleList[typeId].length === 0;
     if (isEmpty) {
       return (
-        <EmptyView read={read} tyepId={typeId} onRefresh={this.onRefresh} />
+        <EmptyView read={read} typeId={typeId} onRefresh={this.onRefresh} />
       );
     }
     return (
