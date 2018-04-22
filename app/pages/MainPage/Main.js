@@ -24,9 +24,7 @@ import {
   StyleSheet,
   View
 } from 'react-native';
-import ScrollableTabView, {
-  ScrollableTabBar
-} from 'react-native-scrollable-tab-view';
+import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 import store from 'react-native-simple-store';
 
 import LoadingView from '../../components/LoadingView';
