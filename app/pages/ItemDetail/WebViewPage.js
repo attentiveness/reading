@@ -31,6 +31,7 @@ import {
 
 import * as WeChat from 'react-native-wechat';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { SafeAreaView } from 'react-navigation';
 import ToastUtil from '../../utils/ToastUtil';
 import LoadingView from '../../components/LoadingView';
 import { formatStringWithHtml } from '../../utils/FormatUtil';
@@ -176,7 +177,7 @@ class WebViewPage extends React.Component {
   render() {
     const { params } = this.props.navigation.state;
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <Modal
           animationType="fade"
           visible={this.state.isShareModal}
@@ -207,7 +208,7 @@ class WebViewPage extends React.Component {
           onNavigationStateChange={this.onNavigationStateChange}
           renderLoading={this.renderLoading}
         />
-      </View>
+      </SafeAreaView>
     );
   }
 }

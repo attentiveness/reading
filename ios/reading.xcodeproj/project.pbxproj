@@ -30,6 +30,7 @@
 		17EC86F61D6EE9AB006878BB /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17EC86F51D6EE979006878BB /* libRNVectorIcons.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		911E52ACA02445F0BD06A17D /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6162246D9CD4351A73DA780 /* libSplashScreen.a */; };
+		A8299A5920C6D1D100BACB55 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A872BED7208C7B240095D2C5 /* libRNDeviceInfo.a */; };
 		A85175D71D54FD2000AEF15A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A85175D61D54FD2000AEF15A /* Security.framework */; };
 		A864F2C91FC17881004C4765 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A864F2C81FC17881004C4765 /* Bugly.framework */; };
 		A892EC8E1E7D7FB400D98A95 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
@@ -379,6 +380,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8299A5920C6D1D100BACB55 /* libRNDeviceInfo.a in Frameworks */,
 				17A9C7461F8F7AF600E2F87D /* libCodePush.a in Frameworks */,
 				179261C51E1BAC370033E8C9 /* libRCTAnimation.a in Frameworks */,
 				17EC86F61D6EE9AB006878BB /* libRNVectorIcons.a in Frameworks */,

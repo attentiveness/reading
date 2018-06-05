@@ -26,6 +26,7 @@ import {
 } from 'react-native';
 import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 import store from 'react-native-simple-store';
+import { SafeAreaView } from 'react-navigation';
 
 import LoadingView from '../../components/LoadingView';
 import ToastUtil from '../../utils/ToastUtil';
@@ -191,7 +192,7 @@ class Main extends React.Component {
       return typeView;
     });
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <ScrollableTabView
           renderTabBar={() => (
             <ScrollableTabBar
@@ -206,7 +207,7 @@ class Main extends React.Component {
         >
           {content}
         </ScrollableTabView>
-      </View>
+      </SafeAreaView>
     );
   }
 }
