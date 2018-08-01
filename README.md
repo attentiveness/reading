@@ -84,6 +84,12 @@ yarn(or npm run) format
 yarn(or npm run) lint
 ```
 
+## Importance
+
+[ShowAPI](https://www.showapi.com/api/lookPoint/582/2) was used by iReading from free to charge, so my key doesn't work. You could apply for a new key and replace in [UrlUtil.js](https://github.com/attentiveness/reading/blob/master/app/utils/UrlUtil.js), it will work properly.
+Reference this issue: [Cannot convert undefined or null to object](https://github.com/attentiveness/reading/issues/127).
+I apologize to inconvenience you.
+
 ## Release Note
 
 [Reading Release Note](https://github.com/attentiveness/reading/releases)
